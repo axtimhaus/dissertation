@@ -1,10 +1,9 @@
-%! Author = maxwe
-%! Date = 03.01.23
+\documentclass[
+    DIV=13,
+    listof=totoc,
+    bibliography=totoc,
+]{scrreport}
 
-% Preamble
-\documentclass[DIV=13]{scrreport}
-
-% Packages
 \usepackage{amsmath}
 
 \usepackage{tabularray}
@@ -15,7 +14,8 @@
 \addbibresource{refs.bib}
 \usepackage{symbols}
 
-% Document
+\usepackage[hidelinks]{hyperref}
+
 \begin{document}
 
     \title{Microscopic Simulation of Solid State Sintering Regarding Irregularly Shaped Powder Particles}
@@ -24,10 +24,20 @@
 
     \maketitle
 
-    \section*{Symbols}
+    \tableofcontents
+
+    \input{preface}
+
+    \input{chapters/introduction/index}
+    \input{chapters/aim_and_scope/index}
+    \input{chapters/model_development/index}
+    \input{chapters/model_validation/index}
+    \input{chapters/summary_and_outlook/index}
 
     \input{symbol_index}
 
+    \listoffigures
+    \listoftables
     \printbibliography
 
 \end{document}
