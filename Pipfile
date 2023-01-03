@@ -11,6 +11,8 @@ matplotlib = "*"
 numpy = "*"
 scipy = "*"
 schemdraw = "*"
+jinja2 = "*"
+toml = "*"
 
 [dev-packages]
 

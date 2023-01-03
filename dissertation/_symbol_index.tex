@@ -1,0 +1,13 @@
+\begin{longtblr}[
+    caption = {},
+    label= none,
+    entry = none
+]{lX}
+    \toprule
+    Symbol & Description \\
+    \midrule
+    {% for s in symbols %}
+    ${{s["code"]}}$ & {{s["descr"]}}\\
+    {%  endfor %}
+    \bottomrule
+\end{longtblr}
