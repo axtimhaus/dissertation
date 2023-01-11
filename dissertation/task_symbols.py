@@ -6,16 +6,14 @@ import toml
 from dissertation.config import JINJA_ENV, ROOT_DIR
 
 
-@pytask.mark.depends_on({
-    "data": "symbols.toml",
-    "template": "_symbols.sty"
-})
+@pytask.mark.depends_on("symbols.toml")
 @pytask.mark.produces("symbols.sty")
-def task_symbols(depends_on: dict[str, Path], produces: Path):
-    template = JINJA_ENV.get_template(str(depends_on["template"].relative_to(ROOT_DIR)))
+def task_symbols(depends_on: Path, produces: Path):
+    data = toml.loads(depends_on.read_text())
 
-    symbols = toml.loads(depends_on["data"].read_text())["symbol"]
+    lines = [
+        rf"\newcommand{{\{s['name']}}}{{{{{s['code']}}}}}"
+        for s in data["symbol"]
+    ]
 
-    result = template.render(symbols=symbols)
-
-    produces.write_text(result)
+    produces.write_text("\n".join(lines))
