@@ -1,0 +1,2 @@
+[tool.pytask.ini_options]
+editor_url_scheme = "pycharm"
