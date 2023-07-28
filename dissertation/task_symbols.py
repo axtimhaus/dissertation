@@ -1,19 +1,28 @@
+import os
 from pathlib import Path
 
 import pytask
-import toml
+import tomlkit
 
-from dissertation.config import JINJA_ENV, ROOT_DIR
+
+def create_command_def(name: str, code: str):
+    if "#" in code:
+        par_count = code.count("#")
+        return rf"\newcommand{{\{name}}}[{par_count}]{{{{{code}}}}}"
+    else:
+        return rf"\newcommand{{\{name}}}{{{{{code}}}}}"
 
 
 @pytask.mark.depends_on("symbols.toml")
 @pytask.mark.produces("symbols.sty")
 def task_symbols(depends_on: Path, produces: Path):
-    data = toml.loads(depends_on.read_text())
+    input_text = depends_on.read_text()
+
+    data = tomlkit.loads(input_text)
 
     lines = [
-        rf"\newcommand{{\{s['name']}}}{{{{{s['code']}}}}}"
-        for s in data["symbol"]
+        create_command_def(n, c)
+        for n, c in data.items()
     ]
 
     produces.write_text("\n".join(lines))

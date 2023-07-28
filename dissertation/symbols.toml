@@ -1,14 +1,1 @@
-[[symbol]]
-name = "Time"
-code = 't'
-descr = "Time"
-
-[[symbol]]
-name = "Radius"
-code = 'r'
-descr = "Radius coordinate in polar systems"
-
-[[symbol]]
-name = "Angle"
-code = '\varphi'
-descr = "Angle coordinate in polar systems"
+Radius = 'r' # Radius coordinate
