@@ -4,6 +4,8 @@
     bibliography=totoc,
 ]{scrreport}
 
+%\usepackage{cmbright}
+
 \usepackage{amsmath}
 
 \usepackage{tabularray}
@@ -16,6 +18,9 @@
 
 \usepackage[hidelinks]{hyperref}
 
+\usepackage{glossaries}
+\usepackage{glossaries-extra}
+
 \begin{document}
 
     \title{Microscopic Simulation of Solid State Sintering Regarding Irregularly Shaped Powder Particles}
@@ -26,15 +31,16 @@
 
     \tableofcontents
 
-    \input{preface}
+    \input{tex/preface}
 
-    \input{chapters/introduction/index}
-    \input{chapters/aim_and_scope/index}
-    \input{chapters/model_development/index}
-    \input{chapters/model_validation/index}
-    \input{chapters/summary_and_outlook/index}
+    \input{tex/introduction}
+    \input{tex/aim_and_scope}
+    \input{tex/model_development}
+    \input{tex/implementation}
+    \input{tex/model_validation}
+    \input{tex/summary_and_outlook}
 
-    \input{symbol_index}
+    %\input{symbol_index}
 
     \listoffigures
     \listoftables

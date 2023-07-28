@@ -18,6 +18,5 @@
         <option value="XML" />
       </list>
     </option>
-    <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
   </component>
 </module>
