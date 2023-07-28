@@ -2,4 +2,52 @@
 
 \subsubsection{Classic Formulation}\label{subsubsec:extremal-priciple-classic}
 
+\begin{subequations}
+    \begin{align}
+        \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) = \frac{\partial\GibbsEnergy(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState)}{\partial \vect\InternalVariablesOfState} \cdot \vect{\dot{\InternalVariablesOfState}} &\rightarrow \max_{\vect{\dot{\InternalVariablesOfState}}} \\
+        \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) - \DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) &= 0
+    \end{align}
+\end{subequations}
+
+\begin{equation}
+    \LagrangeFunction = \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) + \LagrangeParameter \left( \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) - \DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) \right)
+\end{equation}
+
+\begin{subequations}
+    \begin{align}
+        \vect{\LagrangeFunction_{\dot\InternalVariablesOfState}} &= \left(1 + \LagrangeParameter \right) \frac{\partial\GibbsEnergy(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState)}{\partial \vect\InternalVariablesOfState} - \LagrangeParameter \frac{\partial\DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState})}{\partial \vect{\dot\InternalVariablesOfState}} \\
+        \LagrangeFunction_{\LagrangeParameter} &= \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) - \DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState})
+    \end{align}
+\end{subequations}
+
 \subsubsection{Generalized Formulation}\label{subsubsec:extremal-priciple-generalized}
+
+Acc.~to~\textcite{Hackl2020}
+
+\begin{subequations}
+    \begin{align}
+        \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) = \frac{\partial\GibbsEnergy(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState)}{\partial \vect\InternalVariablesOfState} \cdot \vect{\dot{\InternalVariablesOfState}} &\rightarrow \max_{\vect{\dot{\InternalVariablesOfState}}} \\
+        \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) - \DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\Flux}) &= 0 \\
+        \vect f(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux) &= 0 \\
+        \vect g(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux) &= 0
+    \end{align}
+\end{subequations}
+
+\begin{equation}
+    \LagrangeFunction = \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState})
+    + \LagrangeParameter_1 \left( \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) - \DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) \right)
+    + \vect{\LagrangeParameter_2} \cdot \vect f(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux)
+    + \vect{\LagrangeParameter_3} \cdot \vect g(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux)
+\end{equation}
+
+\begin{subequations}
+    \begin{align}
+        \vect{\LagrangeFunction_{\dot\InternalVariablesOfState}} &= \left(1 + \LagrangeParameter_1 \right) \frac{\partial\GibbsEnergy(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState)}{\partial \vect\InternalVariablesOfState}
+        - \LagrangeParameter_1 \frac{\partial\DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState})}{\partial \vect{\dot\InternalVariablesOfState}}
+        + \vect{\LagrangeParameter_2} \frac{\partial\vect f(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux)}{\partial \vect{\dot\InternalVariablesOfState}}
+        + \vect{\LagrangeParameter_3} \frac{\partial\vect g(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux)}{\partial \vect{\dot\InternalVariablesOfState}} \\
+        \LagrangeFunction_{\LagrangeParameter_1} &= \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) - \DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) \\
+        \vect{\LagrangeFunction_{\LagrangeParameter_2}} &= \vect f(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux) \\
+        \vect{\LagrangeFunction_{\LagrangeParameter_3}} &= \vect g(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux)
+    \end{align}
+\end{subequations}

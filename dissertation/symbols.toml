@@ -1,1 +1,50 @@
+# Maths
+diff = '\mathrm{d}'
+vect = '\boldsymbol{#1}'
+LagrangeFunction = '\mathcal{L}'
+LagrangeParameter = '\lambda'
+
+# Polar Coordinates
 Radius = 'r' # Radius coordinate
+Angle = '\phi'
+
+# Cartesian Coordinates
+X = 'x'
+Y = 'y'
+
+# Geomerty
+Curvature = '\kappa'
+Volume = 'V'
+Area = 'A'
+SurfaceDistance = 'a'
+Shift = '\diff\mspace{-1mu}s'
+
+# Thermodynamics
+Temperature = 'T'
+CelsiusTemperature = '\vartheta'
+GasConstant = 'R'
+BoltzmannConstant = 'k_\mathrm{B}'
+MolarVolume = 'V_\mathrm{m}'
+Flux = 'j'
+VacancyConcentration = '\xi'
+DiffusionCoefficient = 'D'
+InternalVariablesOfState = 'x'
+ExternalVariablesOfState = 'X'
+
+# Energy
+GibbsEnergy = 'G'
+InterfaceEnergy = '\gamma'
+Dissipation = '\mathcal{D}'
+DissipationFunction = '\mathcal{Q}'
+Potential = '\mu'
+
+# Indizes
+Surface = '#1_\mathrm{S}'
+GrainBoundary = '#1_\mathrm{GB}'
+Neck = '#1_\mathrm{N}'
+Upper = '#1_\mathrm{u}'
+Lower = '#1_\mathrm{l}'
+Normal = '#1_{\perp}'
+Tangential = '#1_{\|}'
+Particle = '#1_\mathrm{P}'
+Standard = '#1^{\circ}'
