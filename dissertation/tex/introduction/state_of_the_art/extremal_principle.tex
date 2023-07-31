@@ -10,19 +10,19 @@ The classic formulation of the principle was basically formulated by \textcite{S
 It is based on the assumption, that the dissipation in the system is always maximized with respect to thermodynamic and kinetic constraints.
 This is equivalent to the statement, that the system always tries to approach the equilibrium as fast as possible.
 
-The dissipation $\Dissipation$ can be formulated as in \autoref{eq:dissipation} in dependence on the vector of external state variables $\vect\ExternalVariablesOfState$, the vector of internal state variables $\vect\InternalVariablesOfState$ and the velocity vector of internal state variables $\vect{\dot\InternalVariablesOfState}$.
+The dissipation $\Dissipation$ can be formulated as in \autoref{eq:dissipation} in dependence on the vector of external state variables $\vect\ExternalStateVariable$, the vector of internal state variables $\vect\InternalStateVariable$ and the velocity vector of internal state variables $\vect{\InternalStateVelocity}$.
 It is a bilinear form in the velocity vector of internal state variables and the vector of thermodynamik forces.
-The latter can be expressed as $\partial\GibbsEnergy(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState)/\partial \vect\InternalVariablesOfState$, where $\GibbsEnergy$ is the Gibbs energy of the system.
-The Gibbs energy is as state function independent of $\vect{\dot\InternalVariablesOfState}$, thus the thermodynamic forces do not include any kinetic constraints.
-Since $\Dissipation$ is linear in $\vect{\dot\InternalVariablesOfState}$, maximizing without further constraints is not meaningful.
+The latter can be expressed as $\partial\GibbsEnergy(\vect\ExternalStateVariable, \vect\InternalStateVariable)/\partial \vect\InternalStateVariable$, where $\GibbsEnergy$ is the Gibbs energy of the system.
+The Gibbs energy is as state function independent of $\vect{\InternalStateVelocity}$, thus the thermodynamic forces do not include any kinetic constraints.
+Since $\Dissipation$ is linear in $\vect{\InternalStateVelocity}$, maximizing without further constraints is not meaningful.
 Therefore, an additional dissipation function $\DissipationFunction$ is introduced, which must be always equal to $\Dissipation$, since both describe the dissipation of the process (compare \autoref{eq:dissipation-function}).
-However, $\DissipationFunction$ is formulated in terms of the kinetic conditions of the process and is generally and non-linear form in $\vect{\dot\InternalVariablesOfState}$, often a quadratic form.
+However, $\DissipationFunction$ is formulated in terms of the kinetic conditions of the process and is generally and non-linear form in $\vect{\InternalStateVelocity}$, often a quadratic form.
 The actual form of $\DissipationFunction$ heavily depends on the regarded process, but it commonly includes empirical kinetic material parameters such as diffusion coefficients or mobilities.
 
 \begin{subequations}
     \begin{align}
-        \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) = \frac{\partial\GibbsEnergy(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState)}{\partial \vect\InternalVariablesOfState} \cdot \vect{\dot{\InternalVariablesOfState}} &\rightarrow \max_{\vect{\dot{\InternalVariablesOfState}}} \label{eq:dissipation} \\
-        \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) - \DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) &= 0 \label{eq:dissipation-function}
+        \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) = \frac{\partial\GibbsEnergy(\vect\ExternalStateVariable, \vect\InternalStateVariable)}{\partial \vect\InternalStateVariable} \cdot \vect{\InternalStateVelocity} &\rightarrow \max_{\vect{\InternalStateVelocity}} \label{eq:dissipation} \\
+        \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) - \DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) &= 0 \label{eq:dissipation-function}
     \end{align} \label{eq:tep-classic}
 \end{subequations}
 
@@ -30,50 +30,50 @@ The constrained optimization problem in \autoref{eq:tep-classic} can be solved u
 The problem is reformulated as the Lagrange functional $\LagrangeFunction$ in \autoref{eq:tep-classic-lagrange} with the additional parameter $\LagrangeParameter$.
 
 \begin{equation}
-    \LagrangeFunction = \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) + \LagrangeParameter \left( \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) - \DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) \right)
+    \LagrangeFunction = \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) + \LagrangeParameter \left( \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) - \DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) \right)
     \label{eq:tep-classic-lagrange}
 \end{equation}
 
-Setting the gradient of $\LagrangeFunction$ with respect to $\vect{\dot\InternalVariablesOfState}$ and $\LagrangeParameter$ equal zero gives the optimum of the dissipation $\Dissipation$ under the given constraints.
+Setting the gradient of $\LagrangeFunction$ with respect to $\vect{\InternalStateVelocity}$ and $\LagrangeParameter$ equal zero gives the optimum of the dissipation $\Dissipation$ under the given constraints.
 Note that the derivative with respect to $\LagrangeParameter$ is always identical to the constraint equation.
 
 \begin{subequations}
     \begin{align}
-        \vect{\LagrangeFunction_{\dot\InternalVariablesOfState}} &= \left(1 + \LagrangeParameter \right) \frac{\partial\GibbsEnergy(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState)}{\partial \vect\InternalVariablesOfState} - \LagrangeParameter \frac{\partial\DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState})}{\partial \vect{\dot\InternalVariablesOfState}} &\stackrel{!}{=} 0 \\
-        \LagrangeFunction_{\LagrangeParameter} &= \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) - \DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) &\stackrel{!}{=} 0
+        \vect{\LagrangeFunction_{\InternalStateVelocity}} &= \left(1 + \LagrangeParameter \right) \frac{\partial\GibbsEnergy(\vect\ExternalStateVariable, \vect\InternalStateVariable)}{\partial \vect\InternalStateVariable} - \LagrangeParameter \frac{\partial\DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity})}{\partial \vect{\InternalStateVelocity}} &\stackrel{!}{=} 0 \\
+        \LagrangeFunction_{\LagrangeParameter} &= \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) - \DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) &\stackrel{!}{=} 0
     \end{align}
 \end{subequations}
 
-For the simple case of $\DissipationFunction$ being quadratic in $\vect{\dot\InternalVariablesOfState}$ the solution of the system is given in \autoref{eq:tep-classic-solution}, which is a linear system of equations of the same size as $\vect{\dot\InternalVariablesOfState}$.
+For the simple case of $\DissipationFunction$ being quadratic in $\vect{\InternalStateVelocity}$ the solution of the system is given in \autoref{eq:tep-classic-solution}, which is a linear system of equations of the same size as $\vect{\InternalStateVelocity}$.
 Compare \textcite{Svoboda1991, Fischer2014} on this.
 
 \begin{equation}
-    - \frac{\partial\GibbsEnergy(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState)}{\partial \vect\InternalVariablesOfState} = \frac{1}{2} \frac{\partial\DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState})}{\partial \vect{\dot\InternalVariablesOfState}}
+    - \frac{\partial\GibbsEnergy(\vect\ExternalStateVariable, \vect\InternalStateVariable)}{\partial \vect\InternalStateVariable} = \frac{1}{2} \frac{\partial\DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity})}{\partial \vect{\InternalStateVelocity}}
     \label{eq:tep-classic-solution}
 \end{equation}
 
-Note, that for this formulation it is required, that the dissipation $\Dissipation$ and the dissipation function $\DissipationFunction$ must depend on the same kinetic variables $\vect{\dot\InternalVariablesOfState}$.
+Note, that for this formulation it is required, that the dissipation $\Dissipation$ and the dissipation function $\DissipationFunction$ must depend on the same kinetic variables $\vect{\InternalStateVelocity}$.
 Often the fluxes $\vect\Flux$ are used therein.
 
 \subsubsection{Generalized Formulation}\label{subsubsec:extremal-priciple-generalized}
 
 Recently, \textcite{Hackl2020a} published a generalized formulation of the principle breaking up the need to have the same kinetic variables in the dissipation $\Dissipation$ and the dissipation function $\DissipationFunction$.
 The following elaborations use a different notation than in the reference, which fits better to the needs of the application in \autoref{sec:extremal-principle-application}, but the meaning is generally equivalent.
-The dissipation $\Dissipation$ is defined in the same way as before, but the dissipation function $\DissipationFunction$ does not include the velocities of internal state $\vect{\dot\InternalVariablesOfState}$, but instead the fluxes $\vect\Flux$ as in \autoref{eq:dissipation-function-general}.
-Note, that the velocities $\vect{\dot\InternalVariablesOfState}$ are \emph{not} required to be identical to the fluxes $\vect\Flux$ here.
-The connections between the velocities $\vect{\dot\InternalVariablesOfState}$ and the fluxes $\vect\Flux$ are introduced by the constraints $\vect\RequiredConstraint$ as in \autoref{eq:required-constraints}.
+The dissipation $\Dissipation$ is defined in the same way as before, but the dissipation function $\DissipationFunction$ does not include the velocities of internal state $\vect{\InternalStateVelocity}$, but instead the fluxes $\vect\Flux$ as in \autoref{eq:dissipation-function-general}.
+Note, that the velocities $\vect{\InternalStateVelocity}$ are \emph{not} required to be identical to the fluxes $\vect\Flux$ here.
+The connections between the velocities $\vect{\InternalStateVelocity}$ and the fluxes $\vect\Flux$ are introduced by the constraints $\vect\RequiredConstraint$ as in \autoref{eq:required-constraints}.
 These are required to be able to solve the problem, so they shall be called \emph{required} constraints hereinafter.
-The sizes of $\vect{\dot\InternalVariablesOfState}$, $\vect\Flux$ and $\vect\RequiredConstraint$ must be equal.
+The sizes of $\vect{\InternalStateVelocity}$, $\vect\Flux$ and $\vect\RequiredConstraint$ must be equal.
 But it is also possible to include several \emph{additional} constraints $\vect\AddionalConstraint$.
 These may be used for other requirements on the validity of the model, for example geometric constraints.
 See \autoref{sec:extremal-principle-application} for details on their application.
 
 \begin{subequations}
     \begin{align}
-        \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) = \frac{\partial\GibbsEnergy(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState)}{\partial \vect\InternalVariablesOfState} \cdot \vect{\dot{\InternalVariablesOfState}} &\rightarrow \max_{\vect{\dot{\InternalVariablesOfState}}} \\
-        \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) - \DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\Flux}) &= 0 \label{eq:dissipation-function-general} \\
-        \vect\RequiredConstraint(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux) &= 0 \label{eq:required-constraints} \\
-        \vect\AddionalConstraint(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux) &= 0 \label{eq:additonal-constraints}
+        \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) = \frac{\partial\GibbsEnergy(\vect\ExternalStateVariable, \vect\InternalStateVariable)}{\partial \vect\InternalStateVariable} \cdot \vect{\InternalStateVelocity} &\rightarrow \max_{\vect{\InternalStateVelocity}} \\
+        \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) - \DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\Flux}) &= 0 \label{eq:dissipation-function-general} \\
+        \vect\RequiredConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux) &= 0 \label{eq:required-constraints} \\
+        \vect\AddionalConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux) &= 0 \label{eq:additonal-constraints}
     \end{align}
 \end{subequations}
 
@@ -83,10 +83,10 @@ $\LagrangeParameter_1$ is equivalent to the classic formulation.
 The vector parameters $\vect{\LagrangeParameter_2}$ and $\vect{\LagrangeParameter_3}$ for the required and additional constraints are of the same size as $\vect\RequiredConstraint$ resp. $\vect\AddionalConstraint$.
 
 \begin{equation}
-    \LagrangeFunction = \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState})
-    + \LagrangeParameter_1 \left( \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) - \DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) \right)
-    + \vect{\LagrangeParameter_2} \cdot \vect\RequiredConstraint(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux)
-    + \vect{\LagrangeParameter_3} \cdot \vect\AddionalConstraint(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux)
+    \LagrangeFunction = \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity})
+    + \LagrangeParameter_1 \left( \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) - \DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) \right)
+    + \vect{\LagrangeParameter_2} \cdot \vect\RequiredConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux)
+    + \vect{\LagrangeParameter_3} \cdot \vect\AddionalConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux)
     \label{eq:tep-general-lagrange}
 \end{equation}
 
@@ -95,12 +95,12 @@ Finding a simplified equation system as done above (\autoref{eq:tep-classic-solu
 
 \begin{subequations}
     \begin{align}
-        \vect{\LagrangeFunction_{\dot\InternalVariablesOfState}} &= \left(1 + \LagrangeParameter_1 \right) \frac{\partial\GibbsEnergy(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState)}{\partial \vect\InternalVariablesOfState}
-        - \LagrangeParameter_1 \frac{\partial\DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState})}{\partial \vect{\dot\InternalVariablesOfState}}
-        + \vect{\LagrangeParameter_2} \frac{\partial\vect\RequiredConstraint(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux)}{\partial \vect{\dot\InternalVariablesOfState}}
-        + \vect{\LagrangeParameter_3} \frac{\partial\vect\AddionalConstraint(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux)}{\partial \vect{\dot\InternalVariablesOfState}} &\stackrel{!}{=} 0 \\
-        \LagrangeFunction_{\LagrangeParameter_1} &= \Dissipation(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) - \DissipationFunction(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}) &\stackrel{!}{=} 0 \\
-        \vect{\LagrangeFunction_{\LagrangeParameter_2}} &= \vect\RequiredConstraint(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux) &\stackrel{!}{=} 0 \\
-        \vect{\LagrangeFunction_{\LagrangeParameter_3}} &= \vect\AddionalConstraint(\vect\ExternalVariablesOfState, \vect\InternalVariablesOfState, \vect{\dot\InternalVariablesOfState}, \vect\Flux) &\stackrel{!}{=} 0
+        \vect{\LagrangeFunction_{\InternalStateVelocity}} &= \left(1 + \LagrangeParameter_1 \right) \frac{\partial\GibbsEnergy(\vect\ExternalStateVariable, \vect\InternalStateVariable)}{\partial \vect\InternalStateVariable}
+        - \LagrangeParameter_1 \frac{\partial\DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity})}{\partial \vect{\InternalStateVelocity}}
+        + \vect{\LagrangeParameter_2} \frac{\partial\vect\RequiredConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux)}{\partial \vect{\InternalStateVelocity}}
+        + \vect{\LagrangeParameter_3} \frac{\partial\vect\AddionalConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux)}{\partial \vect{\InternalStateVelocity}} &\stackrel{!}{=} 0 \\
+        \LagrangeFunction_{\LagrangeParameter_1} &= \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) - \DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) &\stackrel{!}{=} 0 \\
+        \vect{\LagrangeFunction_{\LagrangeParameter_2}} &= \vect\RequiredConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux) &\stackrel{!}{=} 0 \\
+        \vect{\LagrangeFunction_{\LagrangeParameter_3}} &= \vect\AddionalConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux) &\stackrel{!}{=} 0
     \end{align}
 \end{subequations}
