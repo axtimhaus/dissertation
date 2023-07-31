@@ -6,22 +6,24 @@ LagrangeParameter = '\lambda'
 
 # Polar Coordinates
 Radius = 'r' # Radius coordinate
-Angle = '\phi'
+Angle = '\varphi'
 
 # Cartesian Coordinates
 X = 'x'
 Y = 'y'
 
-# Geomerty
+# Geometry
 Curvature = '\kappa'
 Volume = 'V'
 Area = 'A'
 SurfaceDistance = 'a'
-Shift = '\diff\mspace{-1mu}s'
+Shift = 's'
+RotationAngle = '\omega'
 
 # Thermodynamics
 Temperature = 'T'
 CelsiusTemperature = '\vartheta'
+Pressure = 'p'
 GasConstant = 'R'
 BoltzmannConstant = 'k_\mathrm{B}'
 MolarVolume = 'V_\mathrm{m}'
@@ -47,7 +49,13 @@ GrainBoundary = '#1_\mathrm{GB}'
 Neck = '#1_\mathrm{N}'
 Upper = '#1_\mathrm{u}'
 Lower = '#1_\mathrm{l}'
+Matrix = '#1_\mathrm{M}'
 Normal = '#1_{\perp}'
 Tangential = '#1_{\|}'
 Particle = '#1_\mathrm{P}'
 Standard = '#1^{\circ}'
+
+# Numerics
+TimeStep = '\Delta\mspace{-1mu} t'
+ShiftStep = '\Delta\mspace{-1mu} s'
+InternalStateStep = '\Delta\mspace{-0.5mu} \InternalStateVariable'

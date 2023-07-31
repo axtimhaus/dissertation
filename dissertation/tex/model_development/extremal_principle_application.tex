@@ -1,1 +1,53 @@
 \section{Application of the Thermodynamic Extremal Principle (TEP)}\label{sec:extremal-principle-application}
+
+In the following the generalized extremal principle is applied on the current model of particles and nodes, see \autoref{subsubsec:extremal-priciple-generalized} for details on the approach.
+As before, an index of the currently regarded particle or node is neglected where appropriate for brevity.
+The indizes $\Upper\square$ and $\Lower\square$ are used to denote the upper resp.~lower neighbor of a node.
+
+\subsection{Time Scale Definition}\label{subsec:time-scale-definition}
+
+The application of the TEP results in ordinary differential equations in time which can be solved analytically for simple problems.
+Here, however, the problem is to complex to be solved analytically, so numerical time integration is required.
+Usually, the transition from infinitesimal description to finite time steps would be performed as a last step, but doing this step at the beginning opens possibilities of simplifying the equations and clarifies the following elaborations.
+At this point, it does not matter if a simple Eulerian integration is used or more complex methods like Runge-Kutta.
+The key feature is, that we use a finite time step width $\TimeStep$, which is fixed in each time step calculation, but may change from step to step.
+So, the internal state velocities $\InternalStateVelocity$ are directly linked linearly to finite changes using the time step as follows:
+\begin{equation}
+    \InternalStateStep = \InternalStateVelocity \cdot \TimeStep
+\end{equation}
+
+\subsection{Choice of Variables}\label{subsec:choice-of-variables}
+
+First, the internal state variables $\vect\InternalStateVariable$, the internal state velocities $\vect\InternalStateVelocity$ and the fluxes $\vect\Flux$ must be chosen.
+The feasibility of the approach heavily depends on this choice.
+
+The choice of the fluxes is straightforward with the diffusional fluxes.
+One has two diffusional fluxes on each node $\Upper\Flux$ and $\Lower\Flux$, however the flux of the upper node to the lower and the flux from the lower to the upper are always equal due to constance of mass.
+Additional fluxes are to be found in the fluxes from the particle to the matrix $\Matrix\Flux$, if a matrix is present in the inter-particle spaces.
+
+The internal state variables are the coordinates of the particles $\left[ \Particle\Radius, \Particle\Angle, \Particle\RotationAngle \right]$ and their nodes $\left[ \Radius, \Angle \right]$ in space, since they determine the thermodynamic forces and the main aim of the simulation is to follow the time evolution of the particles and nodes.
+
+The straightforward choice of the internal state velocities are the finite changes of internal state variables (e.g. $\Delta\Radius$ and $\Delta\Angle$).
+However, for the changes in node coordinates this is not feasible, since they do not depend linearly on the fluxes due to triangular function relations.
+A more appropriate way is to define the node shifts $\Normal\ShiftStep$ and $\Tangential\ShiftStep$ as internal state velocities, so that the required constraints $\vect\RequiredConstraint$ become linear (see \autoref{subsec:required-constraints}).
+As they are determined, translation into new coordinates is directly possible using the relations obtained in the previous sections.
+
+The external state variables (such as temperature $\Temperature$ and pressure $\Pressure$) are not considered in the following, since they are considered constant.
+
+\subsection{Dissipation $\Dissipation$}\label{subsec:dissipation}
+
+The dissipation at one node is given by the product node shifts and the respective Gibbs energy derivatives as in \autoref{eq:dissipation-node}.
+The Gibbs energy derivatives were determined in previous sections for the different node types.
+The dissipation of the whole system is the sum of all node dissipations, since all thermodynamic forces occur at nodes.
+Shifting of particles alone does not follow a thermodynamic force, but is determined by the evolution of the related notes.
+
+\begin{equation}
+    \Dissipation = \frac{\partial \GibbsEnergy}{\partial \Normal\Shift} \Normal\ShiftStep + \frac{\partial \GibbsEnergy}{\partial \Tangential\Shift} \Tangential\ShiftStep
+    \label{eq:dissipation-node}
+\end{equation}
+
+\subsection{Dissipation Function $\DissipationFunction$}\label{subsec:dissipation-function}
+
+\subsection{Required Constraints $\vect\RequiredConstraint$}\label{subsec:required-constraints}
+
+\subsection{Additonal Constraints $\vect\AddionalConstraint$}\label{subsec:additonal-constraints}

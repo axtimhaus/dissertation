@@ -41,7 +41,7 @@ Note that the derivative with respect to $\LagrangeParameter$ is always identica
     \begin{align}
         \vect{\LagrangeFunction_{\InternalStateVelocity}} &= \left(1 + \LagrangeParameter \right) \frac{\partial\GibbsEnergy(\vect\ExternalStateVariable, \vect\InternalStateVariable)}{\partial \vect\InternalStateVariable} - \LagrangeParameter \frac{\partial\DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity})}{\partial \vect{\InternalStateVelocity}} &\stackrel{!}{=} 0 \\
         \LagrangeFunction_{\LagrangeParameter} &= \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) - \DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) &\stackrel{!}{=} 0
-    \end{align}
+    \end{align} \label{eq: tep-classic-gradient}
 \end{subequations}
 
 For the simple case of $\DissipationFunction$ being quadratic in $\vect{\InternalStateVelocity}$ the solution of the system is given in \autoref{eq:tep-classic-solution}, which is a linear system of equations of the same size as $\vect{\InternalStateVelocity}$.
@@ -60,10 +60,10 @@ Often the fluxes $\vect\Flux$ are used therein.
 Recently, \textcite{Hackl2020a} published a generalized formulation of the principle breaking up the need to have the same kinetic variables in the dissipation $\Dissipation$ and the dissipation function $\DissipationFunction$.
 The following elaborations use a different notation than in the reference, which fits better to the needs of the application in \autoref{sec:extremal-principle-application}, but the meaning is generally equivalent.
 The dissipation $\Dissipation$ is defined in the same way as before, but the dissipation function $\DissipationFunction$ does not include the velocities of internal state $\vect{\InternalStateVelocity}$, but instead the fluxes $\vect\Flux$ as in \autoref{eq:dissipation-function-general}.
-Note, that the velocities $\vect{\InternalStateVelocity}$ are \emph{not} required to be identical to the fluxes $\vect\Flux$ here.
+Note, that the velocities $\vect{\InternalStateVelocity}$ are \emph{not} required to be identical to the fluxes $\vect\Flux$ here, neither they must have the same size.
 The connections between the velocities $\vect{\InternalStateVelocity}$ and the fluxes $\vect\Flux$ are introduced by the constraints $\vect\RequiredConstraint$ as in \autoref{eq:required-constraints}.
 These are required to be able to solve the problem, so they shall be called \emph{required} constraints hereinafter.
-The sizes of $\vect{\InternalStateVelocity}$, $\vect\Flux$ and $\vect\RequiredConstraint$ must be equal.
+$\vect\RequiredConstraint$ and $\vect\Flux$ must be of same size.
 But it is also possible to include several \emph{additional} constraints $\vect\AddionalConstraint$.
 These may be used for other requirements on the validity of the model, for example geometric constraints.
 See \autoref{sec:extremal-principle-application} for details on their application.
