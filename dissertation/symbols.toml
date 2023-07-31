@@ -30,6 +30,8 @@ VacancyConcentration = '\xi'
 DiffusionCoefficient = 'D'
 InternalVariablesOfState = 'x'
 ExternalVariablesOfState = 'X'
+RequiredConstraint = 'f'
+AddionalConstraint = 'g'
 
 # Energy
 GibbsEnergy = 'G'
