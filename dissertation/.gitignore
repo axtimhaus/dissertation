@@ -1,6 +1,8 @@
 symbol_index.tex
 symbols.sty
 
+.build
+
 ### TeX template
 ## Core latex/pdflatex auxiliary files:
 *.aux
