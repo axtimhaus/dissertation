@@ -26,5 +26,13 @@ dependencies = [
 [tool.hatch.envs.default]
 path = ".venv"
 
+[tool.hatch.envs.default.scripts]
+build = "pytask build"
+clean = 'pytask clean --mode force'
+
 [tool.pytask.ini_options]
 editor_url_scheme = "pycharm"
+exclude = [
+    ".venv",
+    ".idea",
+]

@@ -1,1 +1,71 @@
 \section{Considerations on Sinter Necks}\label{sec:necks}
+
+\begin{figure}
+    \begin{subfigure}{0.5\linewidth}
+        \centering
+        \includegraphics{img/model_development/neck_normal}
+        \caption{Normal Direction}
+        \label{fig:model_development/neck_normal}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\linewidth}
+        \centering
+        \includegraphics{img/model_development/neck_tangential}
+        \caption{Tangential Direction}
+        \label{fig:model_development/neck_tangential}
+    \end{subfigure}
+    \caption{Shifting of Neck Nodes}
+    \label{fig:neck-node-shifting}
+\end{figure}
+
+\begin{equation}
+    \SurfaceNormalAngle = \frac{3}{2}\pi - \Upper\SurfaceRadiusAngle - \Lower\SurfaceRadiusAngle
+    \label{eq:delta-neck-normal}
+\end{equation}
+
+\begin{subequations}
+    \begin{equation}
+        \Normal\GibbsEnergyStep =
+        \left( \Upper\SurfaceDistance' - \Upper\SurfaceDistance \right) \Surface{\InterfaceEnergy} +
+        \left( \Lower\SurfaceDistance' - \Lower\SurfaceDistance \right) \GrainBoundary{\InterfaceEnergy}
+        \label{eq:gibbs-diff-neck-normal}
+    \end{equation}
+
+    with
+
+    \begin{align}
+        \Upper\SurfaceDistance' &= \sqrt{\Upper\SurfaceDistance^2 + \Normal\ShiftStep^2 - 2 \Upper\SurfaceDistance \Normal\ShiftStep \cos \SurfaceNormalAngle} \\
+        \Lower\SurfaceDistance' &= \sqrt{\Lower\SurfaceDistance^2 + \Normal\ShiftStep^2}
+    \end{align}
+\end{subequations}
+
+\begin{equation}
+    \frac{\partial \GibbsEnergy}{\partial\Normal\Shift} = \lim_{\Normal\ShiftStep \rightarrow 0} \frac{\Normal\GibbsEnergyStep}{\Normal{\ShiftStep}} =
+    - \Surface{\InterfaceEnergy} \cos \SurfaceNormalAngle
+    \label{eq:gibbs-partial-neck-normal}
+\end{equation}
+
+
+\begin{equation}
+    \SurfaceTangentAngle = \pi - \Upper\SurfaceRadiusAngle - \Lower\SurfaceRadiusAngle
+    \label{eq:delta-neck-tangential}
+\end{equation}
+
+\begin{subequations}
+    \begin{equation}
+        \Tangential\GibbsEnergyStep = \left( \Upper\SurfaceDistance' - \Upper\SurfaceDistance \right) \Surface{\InterfaceEnergy} + \frac{1}{2} \GrainBoundary{\InterfaceEnergy} \Tangential\ShiftStep
+        \label{eq:gibbs-diff-neck-tangential}
+    \end{equation}
+
+    with
+
+    \begin{align}
+        \Upper\SurfaceDistance' &= \sqrt{\Upper\SurfaceDistance^2 + \Tangential\ShiftStep^2 - 2 \Upper\SurfaceDistance \Tangential\ShiftStep \cos \SurfaceTangentAngle}
+    \end{align}
+\end{subequations}
+
+\begin{equation}
+    \frac{\partial \GibbsEnergy}{\partial\Tangential{\Shift}} = \lim_{\Tangential\ShiftStep \rightarrow 0} \frac{\Tangential\GibbsEnergyStep}{\Tangential\ShiftStep} = \frac{1}{2} \GrainBoundary{\InterfaceEnergy} - \Surface{\InterfaceEnergy} \cos \SurfaceTangentAngle
+    \label{eq:gibbs-partial-neck-tangential}
+\end{equation}
+
+Note that $\Tangential{\ShiftStep}$ points in the opposite direction if the free surface is at the lower side of the neck node.
