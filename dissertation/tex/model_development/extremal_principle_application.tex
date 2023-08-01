@@ -48,6 +48,35 @@ Shifting of particles alone does not follow a thermodynamic force, but is determ
 
 \subsection{Dissipation Function $\DissipationFunction$}\label{subsec:dissipation-function}
 
+\begin{equation}
+    \DissipationFunction = \frac{1}{2} \frac{\GasConstant\Temperature}{\MolarVolume\Standard\VacancyConcentration} \left( \Upper{\DiffusionCoefficient} \Upper\SurfaceDistance \Upper{\Flux}^2 + \Lower{\DiffusionCoefficient} \Lower{\SurfaceDistance} \Lower{\Flux}^2 \right) \TimeStep
+    \label{eq:dissipation-function-node}
+\end{equation}
+
 \subsection{Required Constraints $\vect\RequiredConstraint$}\label{subsec:required-constraints}
 
+Relation between fluxes resp.~volume change and shift.
+
+\begin{equation}
+    \frac{\partial\Volume}{\partial\Normal{\Shift}} \Normal{\ShiftStep} + \frac{\partial\Volume}{\partial\Tangential{\Shift}} \Tangential{\ShiftStep} = \VolumeStep = \left( \Upper{\Flux} + \Lower{\Flux} + \Matrix{\Flux} \right) \TimeStep
+    \label{eq:required-constraint-flux-shift}
+\end{equation}
+
 \subsection{Additonal Constraints $\vect\AddionalConstraint$}\label{subsec:additonal-constraints}
+
+Keeping contacted nodes together.
+
+\begin{subequations}
+    \begin{align}
+         \Left{\Normal{\ShiftStep}} + \Right{\Normal{\ShiftStep}} &= \frac{\partial \Normal{\Shift}}{\partial\Particle{\Radius}} \Particle{\RadiusStep} + \frac{\partial \Normal{\Shift}}{\partial\Particle{\Angle}} \Particle{\AngleStep} + \frac{\partial \Normal{\Shift}}{\partial\Particle{\RotationAngle}} \Particle{\RotationAngleStep} \label{eq:additional-constraint-contact-normal} \\
+         \Left{\Tangential{\ShiftStep}} + \Right{\Tangential{\ShiftStep}} &= \frac{\partial \Tangential{\Shift}}{\partial\Particle{\Radius}} \Particle{\RadiusStep} + \frac{\partial \Tangential{\Shift}}{\partial\Particle{\Angle}} \Particle{\AngleStep} + \frac{\partial \Tangential{\Shift}}{\partial\Particle{\RotationAngle}} \Particle{\RotationAngleStep} \label{eq:additional-constraint-contact-tangential}
+    \end{align}
+    \label{eq:additional-constraint-contact}
+\end{subequations}
+
+Constance of mass.
+
+\begin{equation}
+    \Upper{\Flux}_{i} = \Lower{\Flux}_{i+1}
+    \label{eq:flux-consistency}
+\end{equation}
