@@ -3,6 +3,7 @@ diff = '\mathrm{d}'
 vect = '\boldsymbol{#1}'
 LagrangeFunction = '\mathcal{L}'
 LagrangeParameter = '\lambda'
+Transposed = '#1^\mathrm{T}'
 
 # Polar Coordinates
 Radius = 'r' # Radius coordinate

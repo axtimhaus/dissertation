@@ -84,9 +84,9 @@ The vector parameters $\vect{\LagrangeParameter_2}$ and $\vect{\LagrangeParamete
 
 \begin{equation}
     \LagrangeFunction = \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity})
-    + \LagrangeParameter_1 \left( \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) - \DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\Flux}) \right)
-    + \vect{\LagrangeParameter_2} \cdot \vect\RequiredConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux)
-    + \vect{\LagrangeParameter_3} \cdot \vect\AddionalConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux)
+    + \left( \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) - \DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\Flux}) \right) \LagrangeParameter_1
+    + \Transposed{\vect\RequiredConstraint}(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux) \cdot \vect{\LagrangeParameter_2}
+    + \Transposed{\vect\AddionalConstraint}(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux) \cdot \vect{\LagrangeParameter_3}
     \label{eq:tep-general-lagrange}
 \end{equation}
 
@@ -96,13 +96,15 @@ Finding a simplified equation system as done above (\autoref{eq:tep-classic-solu
 \begin{subequations}
     \begin{align}
         \vect{\LagrangeFunction_{\InternalStateVelocity}} &=
-        \left(1 + \LagrangeParameter_1 \right) \frac{\partial\GibbsEnergy(\vect\ExternalStateVariable, \vect\InternalStateVariable)}{\partial \vect\InternalStateVariable}
-        + \vect{\LagrangeParameter_2} \frac{\partial\vect\RequiredConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux)}{\partial \vect{\InternalStateVelocity}}
-        + \vect{\LagrangeParameter_3} \frac{\partial\vect\AddionalConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux)}{\partial \vect{\InternalStateVelocity}} &\stackrel{!}{=} 0 \\
+        \frac{\partial\GibbsEnergy(\vect\ExternalStateVariable, \vect\InternalStateVariable)}{\partial \vect\InternalStateVariable} \left(1 + \LagrangeParameter_1 \right)
+        + \frac{\partial\Transposed{\vect\RequiredConstraint}(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux)}{\partial \vect{\InternalStateVelocity}} \cdot \vect{\LagrangeParameter_2}
+        + \frac{\partial\Transposed{\vect\AddionalConstraint}(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux)}{\partial \vect{\InternalStateVelocity}} \cdot \vect{\LagrangeParameter_3}
+        &\stackrel{!}{=} 0 \\
         \vect{\LagrangeFunction_{\Flux}} &=
-        - \LagrangeParameter_1 \frac{\partial\DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity})}{\partial \vect{\Flux}}
-        + \vect{\LagrangeParameter_2} \frac{\partial\vect\RequiredConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux)}{\partial \vect{\Flux}}
-        + \vect{\LagrangeParameter_3} \frac{\partial\vect\AddionalConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux)}{\partial \vect{\Flux}} &\stackrel{!}{=} 0 \\
+        - \frac{\partial\DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity})}{\partial \vect{\Flux}} \LagrangeParameter_1
+        + \frac{\partial\Transposed{\vect\RequiredConstraint}(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux)}{\partial \vect{\Flux}} \cdot \vect{\LagrangeParameter_2}
+        + \frac{\partial\Transposed{\vect\AddionalConstraint}(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux)}{\partial \vect{\Flux}} \cdot \vect{\LagrangeParameter_3}
+        &\stackrel{!}{=} 0 \\
         \LagrangeFunction_{\LagrangeParameter_1} &= \Dissipation(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) - \DissipationFunction(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}) &\stackrel{!}{=} 0 \\
         \vect{\LagrangeFunction_{\LagrangeParameter_2}} &= \vect\RequiredConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux) &\stackrel{!}{=} 0 \\
         \vect{\LagrangeFunction_{\LagrangeParameter_3}} &= \vect\AddionalConstraint(\vect\ExternalStateVariable, \vect\InternalStateVariable, \vect{\InternalStateVelocity}, \vect\Flux) &\stackrel{!}{=} 0
