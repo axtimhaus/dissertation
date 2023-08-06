@@ -6,4 +6,35 @@
     \item Multi-Scale Considerations, Matrix
 \end{itemize}
 
+Continuous description of the particle surface geometry is only possible for nearly ideal geometries.
+For complicated geometries a discretized approach is feasible.
+For the current work, the concept of a node shall be introduced.
+A node is here considered as a discrete point of the particle surface connected with its neighbors by straight lines.
+The spline of those lines is defining the surface of the particle.
+
+The location of each node in space is defined by a tuple of polar coordinates $(\Angle, \Radius)$, where $\Angle$ is the angle coordinate and $\Radius$ the radius reps.~distance from origin.
+The origin of the polar coordinates is distinct for each particle and is considered as the center of the particle, although it is generally not identical with the barycenter of the particle.
+With this concept the particle can be moved in space without translating the surface node coordinates and the description of node evolution is simplified, since only the local geometry must be regarded.
+
+In regard of sintering processes, the contact properties of multiple particles are investigated.
+The common interface of two particles in contact is commonly called a sinter neck.
+It consists of a grain boundary bounded by triple points of the grain boundary and the two adjacent free surfaces.
+Until here, three types of nodes can be identified:
+\begin{description}
+    \item[Surface Nodes] forming the free surface of a particle in contact to atmosphere or vacuum.
+    \item[Grain Boundary Nodes] forming the grain boundary in a particle contact.
+    \item[Neck Nodes] representing the triple point between grain boundary and two surfaces.
+\end{description}
+Details on the conditions at those nodes are given in the following sections.
+
+To locate particles in space a tree-like structure shall be used.
+In the center of the absolute space a single particle is located, which will not change its position and all other particles' locations are defined relative to that.
+This particle shall be called the \emph{root particle}\@.
+It's nearest neighbors in contact define their coordinates as polar coordinates $(\Particle\Angle, \Particle\Radius)$ with origin at the center of the root particle.
+In accordance to common nomenclature of such data structures, the involved particles shall be called \emph{parents} resp.~ \emph{children}.
+Each particle may have further children in this structure, which define their coordinates with respect to their parents center.
+The coordinate system of the children is identical to the coordinate system of the parent's nodes.
+Aside it's center location, a particle may be rotated around it's center point.
+This rotation angle is given as $\RotationAngle$.
+
 
