@@ -49,7 +49,7 @@ Shifting of particles alone does not follow a thermodynamic force, but is determ
 \subsection{Dissipation Function $\DissipationFunction$}\label{subsec:dissipation-function}
 
 \begin{equation}
-    \DissipationFunction = \frac{1}{2} \frac{\GasConstant\Temperature}{\MolarVolume\Standard\VacancyConcentration} \left( \Upper{\DiffusionCoefficient} \Upper\SurfaceDistance \Upper{\Flux}^2 + \Lower{\DiffusionCoefficient} \Lower{\SurfaceDistance} \Lower{\Flux}^2 \right) \TimeStep
+    \DissipationFunction = \frac{1}{2} \frac{\GasConstant\Temperature}{\MolarVolume\Standard\VacancyConcentration} \left( \frac{\Upper\SurfaceDistance \Upper{\Flux}^2}{\Upper{\DiffusionCoefficient}} + \frac{\Lower{\SurfaceDistance} \Lower{\Flux}^2}{\Lower{\DiffusionCoefficient}} \right) \TimeStep
     \label{eq:dissipation-function-node}
 \end{equation}
 
