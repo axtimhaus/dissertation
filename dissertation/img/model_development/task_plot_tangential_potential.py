@@ -3,9 +3,10 @@ from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 import pytask
-import matplotlib.lines as mlines
 
-from config import IMAGE_FILE_FORMATS
+from config import IMAGE_FILE_FORMATS, in_build_dir
+
+THIS_DIR = Path(__file__).parent
 
 AU = 1
 AL = 1
@@ -27,7 +28,7 @@ def dg_lin(ds, delta, gamma_u, gamma_l):
     return -(gamma_u - gamma_l) * np.cos(delta) * ds
 
 
-@pytask.mark.produces([f"plot_tangential_potential.{e}" for e in IMAGE_FILE_FORMATS])
+@pytask.mark.produces([in_build_dir(THIS_DIR / f"plot_tangential_potential.{e}") for e in IMAGE_FILE_FORMATS])
 def task_plot_tangential_potential(produces: dict[..., Path]):
     fig: plt.Figure = plt.figure(figsize=(6, 4), dpi=600)
     ax: plt.Axes = fig.subplots()

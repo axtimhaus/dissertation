@@ -72,3 +72,7 @@ RadiusStep = '\Delta\mspace{-1mu}\Radius'
 AngleStep = '\Delta\mspace{-1.5mu}\Angle'
 RotationAngleStep = '\Delta\mspace{-0.5mu}\RotationAngle'
 GibbsEnergyStep = '\Delta\mspace{-1mu}\GibbsEnergy'
+
+# Sets
+Nodes = '\mathbb{N}'
+Particles = '\mathbb{P}'
