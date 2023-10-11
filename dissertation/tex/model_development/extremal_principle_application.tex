@@ -42,14 +42,14 @@ The dissipation of the whole system is the sum of all node dissipations, since a
 Shifting of particles alone does not follow a thermodynamic force, but is determined by the evolution of the related notes.
 
 \begin{equation}
-    \Dissipation = \frac{\partial \GibbsEnergy}{\partial \Normal\Shift} \Normal\ShiftStep + \frac{\partial \GibbsEnergy}{\partial \Tangential\Shift} \Tangential\ShiftStep
+    \Dissipation = \sum^\Nodes \left[ \frac{\partial \GibbsEnergy}{\partial \Normal\Shift} \Normal\ShiftStep + \frac{\partial \GibbsEnergy}{\partial \Tangential\Shift} \Tangential\ShiftStep \right] + \sum^{\Particles} \left[  \right]
     \label{eq:dissipation-node}
 \end{equation}
 
 \subsection{Dissipation Function $\DissipationFunction$}\label{subsec:dissipation-function}
 
 \begin{equation}
-    \DissipationFunction = \frac{1}{2} \frac{\GasConstant\Temperature}{\MolarVolume\Standard\VacancyConcentration} \left( \frac{\Upper\SurfaceDistance \Upper{\Flux}^2}{\Upper{\DiffusionCoefficient}} + \frac{\Lower{\SurfaceDistance} \Lower{\Flux}^2}{\Lower{\DiffusionCoefficient}} \right) \TimeStep
+    \DissipationFunction = \sum^\Nodes \frac{1}{2} \frac{\GasConstant\Temperature}{\MolarVolume\Standard{\VacancyConcentration}} \left( \frac{\Upper\SurfaceDistance \Upper{\Flux}^2}{\Upper{\DiffusionCoefficient}} + \frac{\Lower{\SurfaceDistance} \Lower{\Flux}^2}{\Lower{\DiffusionCoefficient}} \right) \TimeStep
     \label{eq:dissipation-function-node}
 \end{equation}
 
