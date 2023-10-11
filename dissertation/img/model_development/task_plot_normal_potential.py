@@ -29,19 +29,18 @@ def dg_lin(ds, delta, gamma_u, gamma_l):
 
 @pytask.mark.produces([f"plot_normal_potential.{e}" for e in IMAGE_FILE_FORMATS])
 def task_plot_normal_potential(produces: dict[..., Path]):
-    fig: plt.Figure = plt.figure(dpi=600)
+    fig: plt.Figure = plt.figure(figsize=(6, 4), dpi=600)
     ax: plt.Axes = fig.subplots()
 
     ds = np.linspace(-0.1, 0.1, 50)
-
-    handles = []
 
     for i, (gamma_u, gamma_l, delta) in enumerate([
         (1, 1, 60),
         (2, 1, 60),
         (1, 1, 120),
+        (1, 1, 90),
     ]):
-        handles += ax.plot(
+        ax.plot(
             ds,
             dg(ds, np.deg2rad(delta), gamma_u, gamma_l),
             c=f"C{i}",
@@ -54,17 +53,12 @@ def task_plot_normal_potential(produces: dict[..., Path]):
             c=f"C{i}",
         )
 
-    handles+=[
-        mlines.Line2D([],[], color="k", ls="-", label="Exakt Solution"),
-        mlines.Line2D([], [], color="k", ls="--", label=r"Tangent in $\Normal\ShiftStep=0$"),
-    ]
-
     ax.set_xlabel(r"$\Normal\ShiftStep$ in \unit{\meter}")
     ax.set_ylabel(r"$\Normal\GibbsEnergyStep$ in \unit{\joule\per\meter}")
     ax.grid(True)
     ax.set_ylim(bottom=1.5 * ax.get_ylim()[0])
 
-    ax.legend(handles=handles, loc="lower left")
+    ax.legend(loc="lower left")
 
     for f in produces.values():
         fig.savefig(f)
