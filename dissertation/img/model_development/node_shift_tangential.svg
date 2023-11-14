@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="6.4000001in"
-   height="1.6in"
-   viewBox="0 0 162.56 40.64"
+   width="160mm"
+   height="40mm"
+   viewBox="0 0 160 40"
    version="1.1"
    id="svg1"
    inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
@@ -12,7 +12,9 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#">
   <sodipodi:namedview
      id="namedview1"
      pagecolor="#ffffff"
@@ -23,7 +25,7 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     showgrid="false"
+     showgrid="true"
      inkscape:zoom="2.8284271"
      inkscape:cx="219.55666"
      inkscape:cy="141.0678"
@@ -33,26 +35,22 @@
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="g48">
-    <sodipodi:guide
-       position="143.62696,18.758766"
-       orientation="55.385262,-15.797979"
-       id="guide11"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="18.744941,15.645232"
-       orientation="40.532456,8.1132721"
-       id="guide12"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="76.111614,34.624125"
-       orientation="103.06774,-2.3095898"
-       id="guide13"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="76.111393,34.624055"
-       orientation="7.4584945,-179.17579"
-       id="guide14"
-       inkscape:locked="false" />
+    <inkscape:grid
+       id="grid1"
+       units="mm"
+       originx="0"
+       originy="0"
+       spacingx="0.99999997"
+       spacingy="0.99999997"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       dotted="false"
+       gridanglex="30"
+       gridanglez="30"
+       visible="true" />
   </sodipodi:namedview>
   <defs
      id="defs1">
@@ -496,7 +494,7 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="mass"
-     transform="translate(1.31563,-2.39706)">
+     transform="translate(0.03541765,-2.7170605)">
     <path
        style="fill:none;stroke:#008000;stroke-width:0.3;marker-start:url(#marker115);marker-end:url(#Triangle)"
        id="path109"
@@ -930,24 +928,24 @@
      inkscape:groupmode="layer">
     <path
        style="fill:none;stroke:#008000;stroke-width:0.278968;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-mid:url(#Dot)"
-       d="m 31.063916,44.167014 19.007655,-9.864406 50.708789,8.308901"
+       d="m 30.349638,43.988474 19.007655,-9.864406 50.708787,8.308901"
        id="path22"
        sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;stroke:#008000;stroke-width:0.167381;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#DartArrow)"
-       d="M 50.071571,34.302608 63.11111,33.759815"
+       d="M 49.357293,34.124068 62.396832,33.581275"
        id="path113"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#008000;stroke-width:0.167381;stroke-dasharray:none"
-       d="M 63.111112,33.759815 36.661037,34.860844"
+       d="M 62.396834,33.581275 35.946759,34.682304"
        id="path114"
        sodipodi:nodetypes="cc" />
   </g>
   <g
      id="g42"
      inkscape:label="current"
-     transform="matrix(1.79232,0,0,1.79232,-37.0037,-54.4923)"
+     transform="matrix(1.79232,0,0,1.79232,-38.283912,-54.812301)"
      inkscape:groupmode="layer">
     <path
        style="fill:none;stroke:#000000;stroke-width:0.278968;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#ThreeDots);marker-mid:url(#marker7);marker-end:url(#ThreeDots)"
@@ -970,4 +968,23 @@
        id="path56"
        sodipodi:nodetypes="cc" />
   </g>
+  <metadata
+     id="metadata1">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
 </svg>

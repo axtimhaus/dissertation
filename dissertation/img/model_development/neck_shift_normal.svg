@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="6.4000001in"
-   height="4.8000002in"
-   viewBox="0 0 162.56 121.92"
+   width="160mm"
+   height="120mm"
+   viewBox="0 0 160 119.99998"
    version="1.1"
    id="svg1"
    inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
@@ -12,7 +12,9 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#">
   <sodipodi:namedview
      id="namedview1"
      pagecolor="#ffffff"
@@ -23,55 +25,32 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="3.2712121"
-     inkscape:cx="349.10607"
-     inkscape:cy="256.47985"
+     inkscape:zoom="2.3130963"
+     inkscape:cx="469.06824"
+     inkscape:cy="212.26959"
      inkscape:window-width="3840"
      inkscape:window-height="2082"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g54">
-    <sodipodi:guide
-       position="27.909919,60.960002"
-       orientation="0,95.11062"
-       id="guide2"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="81.28,58.32199"
-       orientation="93.381328,0"
-       id="guide3"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="86.142143,16.994624"
-       orientation="-7.2967181,242.36611"
-       id="guide24"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="81.279998,60.96"
-       orientation="31.527458,238.2113"
-       id="guide25"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="138.50801,103.20051"
-       orientation="22.58434,61.908321"
-       id="guide26"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="86.142143,16.994624"
-       orientation="22.661896,-226.12184"
-       id="guide27"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="81.279998,60.96"
-       orientation="64.113827,-218.3138"
-       id="guide28"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="21.481207,108.85961"
-       orientation="43.139565,-63.554039"
-       id="guide29"
-       inkscape:locked="false" />
+     inkscape:current-layer="g54"
+     showgrid="true">
+    <inkscape:grid
+       id="grid1"
+       units="mm"
+       originx="0"
+       originy="0"
+       spacingx="0.99999991"
+       spacingy="0.99999991"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       dotted="false"
+       gridanglex="30"
+       gridanglez="30"
+       visible="true" />
   </sodipodi:namedview>
   <defs
      id="defs1">
@@ -250,7 +229,7 @@
      style="display:inline">
     <g
        inkscape:label="gammaL"
-       transform="translate(47.39032,38.129046)"
+       transform="translate(46.088329,32.471955)"
        id="g74"
        style="display:inline">
       <g
@@ -282,7 +261,7 @@
     </g>
     <g
        inkscape:label="gammaR"
-       transform="translate(114.52267,37.562867)"
+       transform="translate(113.22068,31.905776)"
        id="g82"
        style="display:inline">
       <g
@@ -314,7 +293,7 @@
     </g>
     <g
        inkscape:label="gammaGB"
-       transform="translate(76.738361,86.574947)"
+       transform="translate(75.43637,80.917856)"
        id="g85"
        style="display:inline">
       <g
@@ -353,7 +332,7 @@
     </g>
     <g
        inkscape:label="ds"
-       transform="translate(95.36026,54.272106)"
+       transform="translate(94.058269,48.615015)"
        id="g16"
        style="fill:#008000">
       <g
@@ -407,7 +386,7 @@
     </g>
     <g
        inkscape:label="aL"
-       transform="translate(51.764671,41.492694)"
+       transform="translate(50.46268,35.835603)"
        id="g21">
       <g
          fill="#000000"
@@ -438,7 +417,7 @@
     </g>
     <g
        inkscape:label="aR"
-       transform="translate(109.67644,40.926517)"
+       transform="translate(108.37445,35.269426)"
        id="g26">
       <g
          fill="#000000"
@@ -469,7 +448,7 @@
     </g>
     <g
        inkscape:label="aGB"
-       transform="translate(76.433788,82.823577)"
+       transform="translate(75.131797,77.166486)"
        id="g32">
       <g
          fill="#000000"
@@ -507,7 +486,7 @@
     </g>
     <g
        inkscape:label="a'GB"
-       transform="translate(102.88232,81.61034)"
+       transform="translate(101.58033,75.953249)"
        id="g38"
        style="fill:#008000">
       <g
@@ -570,7 +549,7 @@
     </g>
     <g
        inkscape:label="a'R"
-       transform="translate(128.60291,39.389754)"
+       transform="translate(127.30092,33.732663)"
        id="g45"
        style="fill:#008000">
       <g
@@ -624,7 +603,7 @@
     </g>
     <g
        inkscape:label="a'L"
-       transform="translate(69.397023,29.791062)"
+       transform="translate(68.095032,24.133971)"
        id="g52"
        style="fill:#008000">
       <g
@@ -678,7 +657,8 @@
     </g>
     <g
        id="g53"
-       inkscape:label="right_angle">
+       inkscape:label="right_angle"
+       transform="translate(-1.3019915,-5.6570914)">
       <path
          style="fill:none;stroke:#008000;stroke-width:0.3;stroke-dasharray:none;marker-start:url(#Dot-5)"
          d="M 85.730926,64.614236"
@@ -700,22 +680,22 @@
     </g>
     <path
        style="fill:none;stroke:#008000;stroke-width:0.3;stroke-dasharray:none;marker-end:url(#DartArrow)"
-       d="M 81.279999,60.960002 119.58015,56.72438"
+       d="M 79.978008,55.302911 118.27816,51.067289"
        id="path4" />
   </g>
   <path
      style="fill:none;stroke:#008000;stroke-width:0.499999"
-     d="M 119.58015,56.72438 138.50802,18.719483"
+     d="M 118.27816,51.067289 137.20603,13.062392"
      id="path5"
      inkscape:label="surface_R'" />
   <path
      style="fill:none;stroke:#008000;stroke-width:0.499999"
-     d="M 119.58015,56.724375 21.481211,13.060388"
+     d="M 118.27816,51.067284 20.17922,7.4032966"
      id="path9"
      inkscape:label="surface_L'" />
   <path
      style="fill:none;stroke:#008000;stroke-width:0.499999;marker-start:url(#Dot)"
-     d="m 119.58015,56.72438 -33.438006,48.201"
+     d="m 118.27816,51.067289 -33.438007,48.201"
      id="path10"
      inkscape:label="grain_boundary'" />
   <g
@@ -725,7 +705,8 @@
     <g
        id="g54"
        inkscape:label="radii"
-       sodipodi:insensitive="true">
+       sodipodi:insensitive="true"
+       transform="translate(-1.3019915,-5.6570914)">
       <path
          style="display:inline;fill:#000000;stroke:#000000;stroke-width:0.3;stroke-dasharray:none;marker-end:url(#ThreeDots-3)"
          d="M 21.481208,13.060391 4.6658684,24.474401"
@@ -753,26 +734,45 @@
     </g>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;marker-mid:url(#Dot);marker-end:url(#ThreeDots)"
-       d="m 81.280001,60.960002 4.862145,43.965378 -2.911768,12.05147"
+       d="m 79.97801,55.302911 4.862145,43.965378 -2.911768,12.051471"
        id="path7"
        inkscape:label="grain_boundary"
        sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;marker-mid:url(#Dot);marker-end:url(#marker9)"
-       d="M 81.280001,60.960002 21.481211,13.060388 7.0393234,11.702225"
+       d="M 79.97801,55.302911 20.17922,7.4032966 5.7373319,6.0451336"
        id="path6"
        inkscape:label="surface_L"
        sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;marker-mid:url(#Dot);marker-end:url(#marker9)"
-       d="m 81.280001,60.960002 57.228019,-42.240519 17.8314,-3.692256"
+       d="m 79.97801,55.302911 57.22802,-42.240519 17.8314,-3.6922564"
        id="path8"
        inkscape:label="surface_R"
        sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;stroke:#800000;stroke-width:0.5;stroke-dasharray:none;marker-start:url(#Dot)"
-       d="M 81.280001,60.960002"
+       d="M 79.97801,55.302911"
        id="path14"
        inkscape:label="neck_node" />
   </g>
+  <metadata
+     id="metadata1">
+    <rdf:RDF>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+      <cc:Work
+         rdf:about="">
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
 </svg>
