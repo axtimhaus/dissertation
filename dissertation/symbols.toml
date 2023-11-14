@@ -41,6 +41,7 @@ InternalStateVelocity = '\dot{x}'
 ExternalStateVariable = 'X'
 RequiredConstraint = 'f'
 AddionalConstraint = 'g'
+AuxiliaryVariable = '\xi'
 
 # Energy
 GibbsEnergy = 'G'
