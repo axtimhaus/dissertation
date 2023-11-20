@@ -54,8 +54,8 @@ def task_plot_tangential_potential(produces: dict[..., Path]):
             c=f"C{i}",
         )
 
-    ax.set_xlabel(r"$\Tangential\ShiftStep$ in \unit{\meter}")
-    ax.set_ylabel(r"$\Tangential\GibbsEnergyStep$ in \unit{\joule\per\meter}")
+    ax.set_xlabel(r"$\Step\Tangential\Shift$ in \unit{\meter}")
+    ax.set_ylabel(r"$\Step\Tangential\GibbsEnergy$ in \unit{\joule\per\meter}")
     ax.grid(True)
     ax.set_ylim(bottom=1.5 * ax.get_ylim()[0])
 

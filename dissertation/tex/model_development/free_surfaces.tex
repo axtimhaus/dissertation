@@ -40,7 +40,7 @@ Since a 2D problem is regarded, the length of the surface line $\SurfaceDistance
 The change of Gibbs energy due to node shifting is described by \autoref{eq:gibbs-diff-surface-normal} with the prime values as measures after shifting.
 
 \begin{equation}
-    \Normal\GibbsEnergyStep = \left( \Upper\SurfaceDistance' - \Upper\SurfaceDistance + \Lower\SurfaceDistance' - \Lower\SurfaceDistance \right) \Surface{\InterfaceEnergy}
+    \Step\Normal\GibbsEnergy = \left( \Upper\SurfaceDistance' - \Upper\SurfaceDistance + \Lower\SurfaceDistance' - \Lower\SurfaceDistance \right) \Surface{\InterfaceEnergy}
     \label{eq:gibbs-diff-surface-normal}
 \end{equation}
 
@@ -52,22 +52,22 @@ The normal vector points under an angle of $\SurfaceNormalAngle$ acc.~to~\autore
     \label{eq:delta-surface-normal}
 \end{equation}
 
-With a certain normal shift $\Normal{\ShiftStep}$, the surface lengths after shifting are calculated by \autoref{eq:surface-distance-shifted-normal-upper} and \autoref{eq:surface-distance-shifted-normal-lower}.
+With a certain normal shift $\Normal{\Step\Shift}$, the surface lengths after shifting are calculated by \autoref{eq:surface-distance-shifted-normal-upper} and \autoref{eq:surface-distance-shifted-normal-lower}.
 
 \begin{align}
-    \Upper\SurfaceDistance' &= \sqrt{\Upper{\SurfaceDistance}^2 + \Normal{\ShiftStep}^2 - 2 \Upper{\SurfaceDistance} \Normal{\ShiftStep} \cos \SurfaceNormalAngle} \label{eq:surface-distance-shifted-normal-upper}\\
-    \Lower\SurfaceDistance' &= \sqrt{\Lower{\SurfaceDistance}^2 + \Normal{\ShiftStep}^2 - 2 \Lower{\SurfaceDistance} \Normal{\ShiftStep} \cos \SurfaceNormalAngle} \label{eq:surface-distance-shifted-normal-lower}
+    \Upper\SurfaceDistance' &= \sqrt{\Upper{\SurfaceDistance}^2 + \Normal{\Step\Shift}^2 - 2 \Upper{\SurfaceDistance} \Normal{\Step\Shift} \cos \SurfaceNormalAngle} \label{eq:surface-distance-shifted-normal-upper}\\
+    \Lower\SurfaceDistance' &= \sqrt{\Lower{\SurfaceDistance}^2 + \Normal{\Step\Shift}^2 - 2 \Lower{\SurfaceDistance} \Normal{\Step\Shift} \cos \SurfaceNormalAngle} \label{eq:surface-distance-shifted-normal-lower}
 \end{align}
 
-The slope of the tangent in $\Normal{\ShiftStep} = 0$ is calculated as in \autoref{eq:gibbs-partial-surface-normal}.
+The slope of the tangent in $\Normal{\Step\Shift} = 0$ is calculated as in \autoref{eq:gibbs-partial-surface-normal}.
 \autoref{fig:model_development/plot_normal_potential} shows the change in Gibbs energy due to normal shifting with different values of $\SurfaceNormalAngle$ and $\InterfaceEnergy$.
-A $\SurfaceNormalAngle > \qty{90}{\degree}$ means a convex surface, thus energy gain when inward shifting (negative $\Normal{\ShiftStep}$).
-A $\SurfaceNormalAngle < \qty{90}{\degree}$ means a concave surface, thus energy gain when outward shifting (positive $\Normal{\ShiftStep}$).
+A $\SurfaceNormalAngle > \qty{90}{\degree}$ means a convex surface, thus energy gain when inward shifting (negative $\Normal{\Step\Shift}$).
+A $\SurfaceNormalAngle < \qty{90}{\degree}$ means a concave surface, thus energy gain when outward shifting (positive $\Normal{\Step\Shift}$).
 A $\SurfaceNormalAngle = \qty{90}{\degree}$ means a even surface, thus energy loss in both shifting directions.
 Note, that the slope is dependent on the sum of $\Upper{\InterfaceEnergy}$ and $\Lower{\InterfaceEnergy}$, whereas the monotonicity depends on $\SurfaceNormalAngle$.
 
 \begin{equation}
-    \frac{\partial \GibbsEnergy}{\partial \Normal{\Shift}} = \lim_{\Normal\ShiftStep \rightarrow 0} \frac{\Normal\GibbsEnergyStep}{\Normal\ShiftStep} = -\left(\Upper{\InterfaceEnergy} + \Lower{\InterfaceEnergy}\right) \cos \SurfaceNormalAngle
+    \frac{\partial \GibbsEnergy}{\partial \Normal{\Shift}} = \lim_{\Step\Normal\Shift \rightarrow 0} \frac{\Step\Normal\GibbsEnergy}{\Step\Normal\Shift} = -\left(\Upper{\InterfaceEnergy} + \Lower{\InterfaceEnergy}\right) \cos \SurfaceNormalAngle
     \label{eq:gibbs-partial-surface-normal}
 \end{equation}
 
@@ -83,29 +83,29 @@ Regarding the normal shifting, the direction vector is under an angle of $\Surfa
     \label{eq:delta-surface-tangential}
 \end{equation}
 
-The change in Gibbs energy is calculated in a similar way acc.~to~\autoref{eq:gibbs-diff-surface-tangential}, but the shifted surface lengths calculate as in \autoref{eq:surface-distance-shifted-tangential-upper} and \autoref{eq:surface-distance-shifted-tangential-lower} in dependence on the tangential shift $\Tangential{\ShiftStep}$.
+The change in Gibbs energy is calculated in a similar way acc.~to~\autoref{eq:gibbs-diff-surface-tangential}, but the shifted surface lengths calculate as in \autoref{eq:surface-distance-shifted-tangential-upper} and \autoref{eq:surface-distance-shifted-tangential-lower} in dependence on the tangential shift $\Tangential{\Step\Shift}$.
 Note the signs before the cosine terms.
 
 \begin{equation}
-    \Normal\GibbsEnergyStep = \left( \Upper\SurfaceDistance' - \Upper\SurfaceDistance + \Lower\SurfaceDistance' - \Lower\SurfaceDistance \right) \Surface{\InterfaceEnergy}
+    \Step\Normal\GibbsEnergy = \left( \Upper\SurfaceDistance' - \Upper\SurfaceDistance + \Lower\SurfaceDistance' - \Lower\SurfaceDistance \right) \Surface{\InterfaceEnergy}
     \label{eq:gibbs-diff-surface-tangential}
 \end{equation}
 
 \begin{align}
-    \Upper\SurfaceDistance' &= \sqrt{\Upper{\SurfaceDistance}^2 + \Tangential{\ShiftStep}^2 - 2 \Upper{\SurfaceDistance} \Tangential{\ShiftStep} \cos \SurfaceTangentAngle} \label{eq:surface-distance-shifted-tangential-upper} \\
-    \Lower\SurfaceDistance' &= \sqrt{\Lower{\SurfaceDistance}^2 + \Tangential{\ShiftStep}^2 + 2 \Lower{\SurfaceDistance} \Tangential{\ShiftStep} \cos \SurfaceTangentAngle} \label{eq:surface-distance-shifted-tangential-lower}
+    \Upper\SurfaceDistance' &= \sqrt{\Upper{\SurfaceDistance}^2 + \Tangential{\Step\Shift}^2 - 2 \Upper{\SurfaceDistance} \Tangential{\Step\Shift} \cos \SurfaceTangentAngle} \label{eq:surface-distance-shifted-tangential-upper} \\
+    \Lower\SurfaceDistance' &= \sqrt{\Lower{\SurfaceDistance}^2 + \Tangential{\Step\Shift}^2 + 2 \Lower{\SurfaceDistance} \Tangential{\Step\Shift} \cos \SurfaceTangentAngle} \label{eq:surface-distance-shifted-tangential-lower}
 \end{align}
 
-The slope of the tangent in $\Tangential{\ShiftStep} = 0$ is calculated as in \autoref{eq:gibbs-partial-surface-tangential}.
+The slope of the tangent in $\Tangential{\Step\Shift} = 0$ is calculated as in \autoref{eq:gibbs-partial-surface-tangential}.
 \autoref{fig:model_development/plot_tangential_potential} shows the change in Gibbs energy due to normal shifting with different values of $\InterfaceEnergy$.
 The slope and monotonicity of these curves is here dependent on the \emph{difference} of $\Upper{\InterfaceEnergy}$ and $\Lower{\InterfaceEnergy}$.
 The convexity or concavity of the surface is here only of minor importance.
 Whether the interface with higher $\InterfaceEnergy$ is located on the upper or lower side determines the monotonicity of the curves.
-In the special case when $\Upper{\InterfaceEnergy} = \Lower{\InterfaceEnergy}$, the curve has a minimum in $\Tangential{\ShiftStep} = 0$, meaning that any shift will produce an energy loss.
+In the special case when $\Upper{\InterfaceEnergy} = \Lower{\InterfaceEnergy}$, the curve has a minimum in $\Tangential{\Step\Shift} = 0$, meaning that any shift will produce an energy loss.
 This is the case on all nodes except neck nodes.
 
 \begin{equation}
-    \frac{\partial \GibbsEnergy}{\partial \Tangential{\Shift}} = \lim_{\Tangential\ShiftStep \rightarrow 0} \frac{\Tangential\GibbsEnergyStep}{\Tangential\ShiftStep} = -\left(\Upper{\InterfaceEnergy} - \Lower{\InterfaceEnergy}\right) \cos \SurfaceTangentAngle
+    \frac{\partial \GibbsEnergy}{\partial \Tangential{\Shift}} = \lim_{\Step\Tangential\Shift \rightarrow 0} \frac{\Step\Tangential\GibbsEnergy}{\Step\Tangential\Shift} = -\left(\Upper{\InterfaceEnergy} - \Lower{\InterfaceEnergy}\right) \cos \SurfaceTangentAngle
     \label{eq:gibbs-partial-surface-tangential}
 \end{equation}
 

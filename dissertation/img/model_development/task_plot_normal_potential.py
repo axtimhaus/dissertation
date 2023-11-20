@@ -54,8 +54,8 @@ def task_plot_normal_potential(produces: dict[..., Path]):
             c=f"C{i}",
         )
 
-    ax.set_xlabel(r"$\Normal\ShiftStep$ in \unit{\meter}")
-    ax.set_ylabel(r"$\Normal\GibbsEnergyStep$ in \unit{\joule\per\meter}")
+    ax.set_xlabel(r"$\Step\Normal\Shift$ in \unit{\meter}")
+    ax.set_ylabel(r"$\Step\Normal\GibbsEnergy$ in \unit{\joule\per\meter}")
     ax.grid(True)
     ax.set_ylim(bottom=1.5 * ax.get_ylim()[0])
 
