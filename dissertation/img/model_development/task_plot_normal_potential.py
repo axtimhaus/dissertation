@@ -45,7 +45,7 @@ def task_plot_normal_potential(produces: dict[..., Path]):
             ds,
             dg(ds, np.deg2rad(delta), gamma_u, gamma_l),
             c=f"C{i}",
-            label=rf"$\Upper\InterfaceEnergy=\qty{{{gamma_u}}}{{\joule\per\square\meter}}, \Lower\InterfaceEnergy=\qty{{{gamma_l}}}{{\joule\per\square\meter}}, \SurfaceNormalAngle=\qty{{{delta}}}{{\degree}}$"
+            label=rf"$\Upper\InterfaceEnergy=\qty{{{gamma_u}}}{{\joule\per\square\meter}}, \Lower\InterfaceEnergy=\qty{{{gamma_l}}}{{\joule\per\square\meter}}, \Normal\SurfaceVectorAngle=\qty{{{delta}}}{{\degree}}$"
         )
         ax.plot(
             ds,

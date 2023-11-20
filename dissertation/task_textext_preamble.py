@@ -1,13 +1,12 @@
 from pathlib import Path
 
 import pytask
-import tomlkit
 
 PREAMBLE = r"""
-\documentclass{standalone}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{amsfonts}
+\usepackage[math-style=ISO]{unicode-math}
+\usepackage{siunitx}
 """
 
 
@@ -15,5 +14,6 @@ PREAMBLE = r"""
 @pytask.mark.produces("textext_preamble.tex")
 def task_textext_preamble(depends_on: Path, produces: Path):
     symbols_text = depends_on.read_text()
+    preamble = PREAMBLE + symbols_text
 
-    produces.write_text(PREAMBLE + symbols_text)
+    produces.write_text(preamble)

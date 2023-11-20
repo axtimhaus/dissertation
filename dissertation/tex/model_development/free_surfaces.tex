@@ -45,41 +45,41 @@ The change of Gibbs energy due to node shifting is described by \autoref{eq:gibb
 \end{equation}
 
 The shifting of nodes is separated into two components as shown in \autoref{fig:surface-node-shifting}.
-The normal vector points under an angle of $\SurfaceNormalAngle$ acc.~to~\autoref{eq:delta-surface-normal} to both surface lines.
+The normal vector points under an angle of $\Normal\SurfaceVectorAngle$ acc.~to~\autoref{eq:delta-surface-normal} to both surface lines.
 
 \begin{equation}
-    \SurfaceNormalAngle = \pi - \frac{1}{2} \left(\Upper\SurfaceRadiusAngle + \Lower\SurfaceRadiusAngle\right)
+    \Normal\SurfaceVectorAngle = \pi - \frac{1}{2} \left(\Upper\SurfaceRadiusAngle + \Lower\SurfaceRadiusAngle\right)
     \label{eq:delta-surface-normal}
 \end{equation}
 
 With a certain normal shift $\Normal{\Step\Shift}$, the surface lengths after shifting are calculated by \autoref{eq:surface-distance-shifted-normal-upper} and \autoref{eq:surface-distance-shifted-normal-lower}.
 
 \begin{align}
-    \Upper\SurfaceDistance' &= \sqrt{\Upper{\SurfaceDistance}^2 + \Normal{\Step\Shift}^2 - 2 \Upper{\SurfaceDistance} \Normal{\Step\Shift} \cos \SurfaceNormalAngle} \label{eq:surface-distance-shifted-normal-upper}\\
-    \Lower\SurfaceDistance' &= \sqrt{\Lower{\SurfaceDistance}^2 + \Normal{\Step\Shift}^2 - 2 \Lower{\SurfaceDistance} \Normal{\Step\Shift} \cos \SurfaceNormalAngle} \label{eq:surface-distance-shifted-normal-lower}
+    \Upper\SurfaceDistance' &= \sqrt{\Upper{\SurfaceDistance}^2 + \Normal{\Step\Shift}^2 - 2 \Upper{\SurfaceDistance} \Normal{\Step\Shift} \cos \Normal\SurfaceVectorAngle} \label{eq:surface-distance-shifted-normal-upper}\\
+    \Lower\SurfaceDistance' &= \sqrt{\Lower{\SurfaceDistance}^2 + \Normal{\Step\Shift}^2 - 2 \Lower{\SurfaceDistance} \Normal{\Step\Shift} \cos \Normal\SurfaceVectorAngle} \label{eq:surface-distance-shifted-normal-lower}
 \end{align}
 
 The slope of the tangent in $\Normal{\Step\Shift} = 0$ is calculated as in \autoref{eq:gibbs-partial-surface-normal}.
-\autoref{fig:model_development/plot_normal_potential} shows the change in Gibbs energy due to normal shifting with different values of $\SurfaceNormalAngle$ and $\InterfaceEnergy$.
-A $\SurfaceNormalAngle > \qty{90}{\degree}$ means a convex surface, thus energy gain when inward shifting (negative $\Normal{\Step\Shift}$).
-A $\SurfaceNormalAngle < \qty{90}{\degree}$ means a concave surface, thus energy gain when outward shifting (positive $\Normal{\Step\Shift}$).
-A $\SurfaceNormalAngle = \qty{90}{\degree}$ means a even surface, thus energy loss in both shifting directions.
-Note, that the slope is dependent on the sum of $\Upper{\InterfaceEnergy}$ and $\Lower{\InterfaceEnergy}$, whereas the monotonicity depends on $\SurfaceNormalAngle$.
+\autoref{fig:model_development/plot_normal_potential} shows the change in Gibbs energy due to normal shifting with different values of $\Normal\SurfaceVectorAngle$ and $\InterfaceEnergy$.
+A $\Normal\SurfaceVectorAngle > \qty{90}{\degree}$ means a convex surface, thus energy gain when inward shifting (negative $\Normal{\Step\Shift}$).
+A $\Normal\SurfaceVectorAngle < \qty{90}{\degree}$ means a concave surface, thus energy gain when outward shifting (positive $\Normal{\Step\Shift}$).
+A $\Normal\SurfaceVectorAngle = \qty{90}{\degree}$ means a even surface, thus energy loss in both shifting directions.
+Note, that the slope is dependent on the sum of $\Upper{\InterfaceEnergy}$ and $\Lower{\InterfaceEnergy}$, whereas the monotonicity depends on $\Normal\SurfaceVectorAngle$.
 
 \begin{equation}
-    \frac{\partial \GibbsEnergy}{\partial \Normal{\Shift}} = \lim_{\Step\Normal\Shift \rightarrow 0} \frac{\Step\Normal\GibbsEnergy}{\Step\Normal\Shift} = -\left(\Upper{\InterfaceEnergy} + \Lower{\InterfaceEnergy}\right) \cos \SurfaceNormalAngle
+    \frac{\partial \GibbsEnergy}{\partial \Normal{\Shift}} = \lim_{\Step\Normal\Shift \rightarrow 0} \frac{\Step\Normal\GibbsEnergy}{\Step\Normal\Shift} = -\left(\Upper{\InterfaceEnergy} + \Lower{\InterfaceEnergy}\right) \cos \Normal\SurfaceVectorAngle
     \label{eq:gibbs-partial-surface-normal}
 \end{equation}
 
 \begin{equation}
-    \frac{\partial \Volume}{\partial \Normal{\Shift}} = \frac{1}{2} \left( \Upper\SurfaceDistance + \Lower\SurfaceDistance \right) \sin \SurfaceNormalAngle
+    \frac{\partial \Volume}{\partial \Normal{\Shift}} = \frac{1}{2} \left( \Upper\SurfaceDistance + \Lower\SurfaceDistance \right) \sin \Normal\SurfaceVectorAngle
     \label{eq:volume-partial-surface-normal}
 \end{equation}
 
-Regarding the normal shifting, the direction vector is under an angle of $\SurfaceTangentAngle$ acc.~to.~\autoref{eq:delta-surface-tangential} to the upper surface line.
+Regarding the normal shifting, the direction vector is under an angle of $\Tangential\SurfaceVectorAngle$ acc.~to.~\autoref{eq:delta-surface-tangential} to the upper surface line.
 
 \begin{equation}
-    \SurfaceTangentAngle = \SurfaceNormalAngle - \frac{\pi}{2}
+    \Tangential\SurfaceVectorAngle = \Normal\SurfaceVectorAngle - \frac{\pi}{2}
     \label{eq:delta-surface-tangential}
 \end{equation}
 
@@ -92,8 +92,8 @@ Note the signs before the cosine terms.
 \end{equation}
 
 \begin{align}
-    \Upper\SurfaceDistance' &= \sqrt{\Upper{\SurfaceDistance}^2 + \Tangential{\Step\Shift}^2 - 2 \Upper{\SurfaceDistance} \Tangential{\Step\Shift} \cos \SurfaceTangentAngle} \label{eq:surface-distance-shifted-tangential-upper} \\
-    \Lower\SurfaceDistance' &= \sqrt{\Lower{\SurfaceDistance}^2 + \Tangential{\Step\Shift}^2 + 2 \Lower{\SurfaceDistance} \Tangential{\Step\Shift} \cos \SurfaceTangentAngle} \label{eq:surface-distance-shifted-tangential-lower}
+    \Upper\SurfaceDistance' &= \sqrt{\Upper{\SurfaceDistance}^2 + \Tangential{\Step\Shift}^2 - 2 \Upper{\SurfaceDistance} \Tangential{\Step\Shift} \cos \Tangential\SurfaceVectorAngle} \label{eq:surface-distance-shifted-tangential-upper} \\
+    \Lower\SurfaceDistance' &= \sqrt{\Lower{\SurfaceDistance}^2 + \Tangential{\Step\Shift}^2 + 2 \Lower{\SurfaceDistance} \Tangential{\Step\Shift} \cos \Tangential\SurfaceVectorAngle} \label{eq:surface-distance-shifted-tangential-lower}
 \end{align}
 
 The slope of the tangent in $\Tangential{\Step\Shift} = 0$ is calculated as in \autoref{eq:gibbs-partial-surface-tangential}.
@@ -105,11 +105,11 @@ In the special case when $\Upper{\InterfaceEnergy} = \Lower{\InterfaceEnergy}$, 
 This is the case on all nodes except neck nodes.
 
 \begin{equation}
-    \frac{\partial \GibbsEnergy}{\partial \Tangential{\Shift}} = \lim_{\Step\Tangential\Shift \rightarrow 0} \frac{\Step\Tangential\GibbsEnergy}{\Step\Tangential\Shift} = -\left(\Upper{\InterfaceEnergy} - \Lower{\InterfaceEnergy}\right) \cos \SurfaceTangentAngle
+    \frac{\partial \GibbsEnergy}{\partial \Tangential{\Shift}} = \lim_{\Step\Tangential\Shift \rightarrow 0} \frac{\Step\Tangential\GibbsEnergy}{\Step\Tangential\Shift} = -\left(\Upper{\InterfaceEnergy} - \Lower{\InterfaceEnergy}\right) \cos \Tangential\SurfaceVectorAngle
     \label{eq:gibbs-partial-surface-tangential}
 \end{equation}
 
 \begin{equation}
-    \frac{\partial \Volume}{\partial \Tangential{\Shift}} = \frac{1}{2} \left( \Lower\SurfaceDistance - \Upper\SurfaceDistance \right) \sin \SurfaceTangentAngle
+    \frac{\partial \Volume}{\partial \Tangential{\Shift}} = \frac{1}{2} \left( \Lower\SurfaceDistance - \Upper\SurfaceDistance \right) \sin \Tangential\SurfaceVectorAngle
     \label{eq:volume-partial-surface-tangential}
 \end{equation}

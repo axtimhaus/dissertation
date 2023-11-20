@@ -14,15 +14,24 @@ def in_build_dir(f: Path):
 IMAGE_FILE_FORMATS = [
     "pdf",
     "png",
-    "svg"
 ]
 
 IMAGE_FILE_SUFFIXES = ["." + f for f in IMAGE_FILE_FORMATS]
 
+mpl.use('pgf')
+
+PREAMBLE_FILE = Path(ROOT_DIR / "textext_preamble.tex")
+
+if PREAMBLE_FILE.exists():
+    preamble = PREAMBLE_FILE.read_text()
+    mpl.rcParams.update({
+        "pgf.preamble": preamble,
+        "text.latex.preamble": preamble
+    })
+
 mpl.rcParams.update({
-    "text.usetex": True,
-    "text.latex.preamble": rf"\usepackage{{{ROOT_DIR / 'symbols'}}}\usepackage{{siunitx}}\usepackage{{amsmath}}",
-    "font.family": "serif",
+    "pgf.texsystem": "lualatex",
+    "pgf.rcfonts": False,
     "figure.autolayout": True,
 })
 
