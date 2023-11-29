@@ -45,7 +45,7 @@ def task_plot_normal_potential(produces: dict[..., Path]):
             ds,
             dg(ds, np.deg2rad(delta), gamma_u, gamma_l),
             c=f"C{i}",
-            label=rf"$\Upper\InterfaceEnergy=\qty{{{gamma_u}}}{{\joule\per\square\meter}}, \Lower\InterfaceEnergy=\qty{{{gamma_l}}}{{\joule\per\square\meter}}, \Normal\SurfaceVectorAngle=\qty{{{delta}}}{{\degree}}$"
+            label=rf"$\InterfaceEnergy_\Upper=\qty{{{gamma_u}}}{{\joule\per\square\meter}}, \InterfaceEnergy_\Lower=\qty{{{gamma_l}}}{{\joule\per\square\meter}}, \SurfaceVectorAngle_\Normal=\qty{{{delta}}}{{\degree}}$"
         )
         ax.plot(
             ds,
@@ -54,8 +54,8 @@ def task_plot_normal_potential(produces: dict[..., Path]):
             c=f"C{i}",
         )
 
-    ax.set_xlabel(r"$\Step\Normal\Shift$ in \unit{\meter}")
-    ax.set_ylabel(r"$\Step\Normal\GibbsEnergy$ in \unit{\joule\per\meter}")
+    ax.set_xlabel(r"$\Step\Shift_\Normal$ in \unit{\meter}")
+    ax.set_ylabel(r"$\Step\GibbsEnergy_\Normal$ in \unit{\joule\per\meter}")
     ax.grid(True)
     ax.set_ylim(bottom=1.5 * ax.get_ylim()[0])
 
