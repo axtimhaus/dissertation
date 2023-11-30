@@ -27,8 +27,9 @@
 
 \usepackage[hidelinks]{hyperref}
 
-\usepackage{glossaries}
-\usepackage{glossaries-extra}
+\usepackage[record=nameref,abbreviations]{glossaries-extra}
+\GlsXtrLoadResources[src=abbreviations]
+
 \usepackage{textcomp}
 
 \begin{document}
@@ -41,6 +42,8 @@
     \tableofcontents
 
     \input{tex/preface}
+
+    \printunsrtglossary[type=\glsxtrabbrvtype]
 
     \input{tex/introduction}
     \input{tex/aim_and_scope}
