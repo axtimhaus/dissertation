@@ -18,34 +18,53 @@ But the center of the particle is used as an anchor for defining a particles pos
 With this concept the particle can be moved in space without translating the surface node coordinates and the description of node evolution is simplified, since only the local geometry must be regarded.
 Particle movement occurs due to diffusional fluxes in the grain boundaries, which is macroscopically observed as shrinkage.
 
-Particles shall be arranged here in a \emph{directed acyclic graph} (DAG) structure.
-An example of such a structure in shown in \autoref{fig:model_development/particle_graph}.
+The contact topology of multiple particle can be described as a graph, where the vertices correspond to particles and the edges correspond to contact relations between the particles.
+The undirected graph structure of a particle contact is shown in \autoref{fig:model_development/particle_graph}.
+The indices of the vertices are at this point arbitrary, but are reused in the same way in the following.
+
+For simulation purposes, the introduction of a hierarchy in the particle contacts is feasible to introduce a specific order for equation construction.
+More specifically the particle contacts shall be described as a~\gls{DAG}.
+Such a graph can always be constructed from a given undirected graph by performing a \gls{BFGS} starting at the desired root vertex and dropping all edges pointing back to the parent.
+An example of such a structure in shown in \autoref{fig:model_development/particle_graph_dag}.
 The particle labeled with index 0 is the \emph{root} of the graph, the only vertex that has no incoming edges.
 In general, the root of the particle graph can be chosen arbitrarily, but for efficiency reasons, it should be a particle which leads to a graph as flat as possible.
+The root particle has a fixed position in space and therefore acts as origin for all coordinate systems used throughout the calculations.
 There may be cases, where the particle graph has rooted tree structure, which simplifies the problem significantly, since then all particles are able to move freely.
 Edges like the red one in the figure break the tree structure.
-Note, that they do not form cycles in the meaning of graph theory, since the edges are directed.
+Note, that they do not form cycles in the~\gls{DAG} in the meaning of graph theory, since the edges are directed.
+But in terms of the underlying undirected graph they are anyway cycles.
 To avoid ambiguities, the term ring contact shall be used here instead.
 Ring contacts introduce additional constraints to the particle movement, since each particle in the ring influences the movement of the others.
+The edges closing a ring are named correspondingly as \glspl{RCE}.
 
 \begin{figure}
     \centering
     \includegraphics{img/model_development/particle_graph}
-    \caption{Particle Directed Acyclic Graph Structure}
+    \caption{Undirected Particle Graph Representing Contact Conditions}
     \label{fig:model_development/particle_graph}
 \end{figure}
 
+\begin{figure}
+    \centering
+    \includegraphics{img/model_development/particle_graph_dag}
+    \caption{Directed Acyclic Graph Structure of Particle COntacts Rooted at Vertex 0}
+    \label{fig:model_development/particle_graph_dag}
+\end{figure}
 
-To locate particles in space a tree-like structure shall be used.
-In the center of the absolute space a single particle is located, which will not change its position and all other particles' locations are defined relative to that.
-This particle shall be called the \emph{root particle}\@.
-It's nearest neighbors in contact define their coordinates as polar coordinates $(\Particle\Angle, \Particle\Radius)$ with origin at the center of the root particle.
-In accordance to common nomenclature of such data structures, the involved particles shall be called \emph{parents} resp.~ \emph{children}.
-Each particle may have further children in this structure, which define their coordinates with respect to their parents center.
-The coordinate system of the children is identical to the coordinate system of the parent's nodes.
-Aside it's center location, a particle may be rotated around it's center point.
-This rotation angle is given as $\RotationAngle$.
+\Glspl{RCE} are discovered during a~\gls{BFGS} when a vertex is encountered that was already marked as visited.
+To be able to construct geometric constraints on particle movement, a ring path must be defined.
+A ring path is a path following the cycle in the undirected graph, the currently regarded ring corresponds to.
+It is generally not unique, but this is also not necessary.
+To find a ring path, a~\gls{DFGS} is performed on the undirected particle graph with the ring closing edge removed.
+The removed edge is afterwards appended to the path to close the ring.
+The procedure is illustrated in \autoref{fig:model_development/particle_graph_ring_search}.
 
+\begin{figure}
+    \centering
+   % \includegraphics{img/model_development/particle_graph_ring_search}
+    \caption{Ring Path Search Using a Depth-First Graph Search}
+    \label{fig:model_development/particle_graph_ring_search}
+\end{figure}
 
 In regard of sintering processes, the contact properties of multiple particles are investigated.
 The common interface of two particles in contact is commonly called a sinter neck.
