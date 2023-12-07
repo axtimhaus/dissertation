@@ -18,6 +18,9 @@ But the center of the particle is used as an anchor for defining a particles pos
 With this concept the particle can be moved in space without translating the surface node coordinates and the description of node evolution is simplified, since only the local geometry must be regarded.
 Particle movement occurs due to diffusional fluxes in the grain boundaries, which is macroscopically observed as shrinkage.
 
+The location of a particle is defined by the cartesian coordinates of its center $\X$ and $\Y$, as well as a rotation angle $\RotationAngle$ with the center as pole.
+The rotation angle also defines the origin axis of the particles local coordinate system.
+
 The contact topology of multiple particle can be described as a graph, where the vertices correspond to particles and the edges correspond to contact relations between the particles.
 The undirected graph structure of a particle contact is shown in \autoref{fig:model_development/particle_graph}.
 The indices of the vertices are at this point arbitrary, but are reused in the same way in the following.
