@@ -21,6 +21,10 @@ dependencies = [
     "schemdraw",
     "jinja2",
     "tomlkit",
+    "jupyterlab",
+    "sympy",
+    "python-language-server",
+    "jupyter"
 ]
 
 [tool.hatch.envs.default]
