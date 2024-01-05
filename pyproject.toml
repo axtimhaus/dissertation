@@ -14,17 +14,15 @@ authors = [
 dependencies = [
     "pytask ~= 0.4",
     "pytask-latex ~= 0.4",
-    "pandas",
-    "matplotlib",
-    "numpy",
-    "scipy",
-    "schemdraw",
-    "jinja2",
-    "tomlkit",
-    "jupyterlab",
-    "sympy",
-    "python-language-server",
-    "jupyter"
+    "pandas ~= 2.1",
+    "matplotlib ~= 3.8",
+    "numpy ~= 1.26",
+    "scipy ~= 1.11",
+    "schemdraw ~= 0.17",
+    "tomlkit ~= 0.12",
+    "jupyter ~= 1.0",
+    "sympy ~= 1.12",
+    "python-lsp-server ~= 1.9",
 ]
 
 [tool.hatch.envs.default]
@@ -33,6 +31,11 @@ path = ".venv"
 [tool.hatch.envs.default.scripts]
 build = "pytask build"
 clean = 'pytask clean --mode force'
+
+[tool.hatch.build]
+packages = [
+    "dissertation"
+]
 
 [tool.pytask.ini_options]
 editor_url_scheme = "pycharm"
