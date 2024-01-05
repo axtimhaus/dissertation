@@ -12,8 +12,8 @@ authors = [
     { name = "Max Weiner", email = "max.weiner@imf.tu-freiberg.de" },
 ]
 dependencies = [
-    "pytask",
-    "pytask-latex",
+    "pytask ~= 0.4",
+    "pytask-latex ~= 0.4",
     "pandas",
     "matplotlib",
     "numpy",

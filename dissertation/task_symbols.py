@@ -13,10 +13,11 @@ def create_command_def(name: str, code: str):
         return rf"\newcommand{{\{name}}}{{{{{code}}}}}"
 
 
-@pytask.mark.depends_on("symbols.toml")
-@pytask.mark.produces("symbols.sty")
-def task_symbols(depends_on: Path, produces: Path):
-    input_text = depends_on.read_text()
+def task_symbols(
+        toml_file=Path("symbols.toml"),
+        produces=Path("symbols.sty")
+):
+    input_text = toml_file.read_text()
 
     data = tomlkit.loads(input_text)
 

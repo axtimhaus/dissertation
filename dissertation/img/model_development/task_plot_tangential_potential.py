@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pytask
 
-from config import IMAGE_FILE_FORMATS, in_build_dir
+from dissertation.config import IMAGE_FILE_FORMATS, in_build_dir
 
 THIS_DIR = Path(__file__).parent
 
@@ -28,8 +28,9 @@ def dg_lin(ds, delta, gamma_u, gamma_l):
     return -(gamma_u - gamma_l) * np.cos(delta) * ds
 
 
-@pytask.mark.produces([in_build_dir(THIS_DIR / f"plot_tangential_potential.{e}") for e in IMAGE_FILE_FORMATS])
-def task_plot_tangential_potential(produces: dict[..., Path]):
+def task_plot_tangential_potential(
+        produces: list[Path] = [in_build_dir(THIS_DIR / f"plot_tangential_potential.{e}") for e in IMAGE_FILE_FORMATS]
+):
     fig: plt.Figure = plt.figure(figsize=(6, 4), dpi=600)
     ax: plt.Axes = fig.subplots()
 
@@ -61,5 +62,5 @@ def task_plot_tangential_potential(produces: dict[..., Path]):
 
     ax.legend(loc="lower left")
 
-    for f in produces.values():
+    for f in produces:
         fig.savefig(f)

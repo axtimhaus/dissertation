@@ -1,4 +1,5 @@
 import subprocess
+from typing import Annotated
 
 import pytask
 from pathlib import Path
@@ -10,17 +11,20 @@ FILES = THIS_DIR.rglob("*.svg")
 
 for f in FILES:
 
-    @pytask.mark.task(id=str(f.relative_to(THIS_DIR)))
-    @pytask.mark.depends_on(f)
-    @pytask.mark.produces([in_build_dir(f.with_suffix(e)) for e in IMAGE_FILE_SUFFIXES])
-    def task_task_convert_svg_source(depends_on: Path, produces: dict[..., Path]):
-        for p in produces.values():
+    @pytask.task(id=str(f.relative_to(THIS_DIR)))
+    def task_task_convert_svg_source(
+            source: Path = f,
+            produces: list[Path] = [
+                in_build_dir(f.with_suffix(e)) for e in IMAGE_FILE_SUFFIXES
+            ]
+    ):
+        for t in produces:
             result = subprocess.run([
                 "inkscape",
                 "-D",
                 "-d", "600",
-                "-o", str(p),
-                str(depends_on)
+                "-o", str(t),
+                str(source)
             ], capture_output=True, text=True)
 
             print(result.stdout)

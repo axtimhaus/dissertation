@@ -10,10 +10,11 @@ PREAMBLE = r"""
 """
 
 
-@pytask.mark.depends_on("symbols.sty")
-@pytask.mark.produces("textext_preamble.tex")
-def task_textext_preamble(depends_on: Path, produces: Path):
-    symbols_text = depends_on.read_text()
+def task_textext_preamble(
+        sty_file=Path("symbols.sty"),
+        produces=Path("textext_preamble.tex")
+):
+    symbols_text = sty_file.read_text()
     preamble = PREAMBLE + symbols_text
 
     produces.write_text(preamble)
