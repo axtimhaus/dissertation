@@ -1,0 +1,136 @@
+\chapter{Equation System}\label{ch:equation-system}
+
+
+\section{Components of the Lagrangian Gradient}\label{sec:components-of-the-lagrangian-gradient}
+
+The following table displays all components of the Lagrangian gradient to be solved for the application of the \gls{TEP}.
+Node symbols $n$ or contact symbols $c$ in parentheses behind another symbol mean, that this symbol is local to the node or contact, thus there exist one distinct value for each node or contact.
+$n_\Upper$ denotes the upper neighbor of the currently regarded node, as well as $n_\Lower$ the lower.
+The equations are all formulated in terms of fluxes from one node to the upper neighbor $\Flux_{\Upper}$, since $\Flux_\Lower(n) = -\Flux_\Upper(n_\Lower)$ must be always fulfilled.
+This saves one unknown per node.
+
+\begin{longtblr}[
+    label=none,
+    entry=none,
+    note{*}={Only if the node is in parent position.}
+]{
+    colspec={lX[c]},
+    measure=vbox
+}
+    \toprule
+    \SetCell[c=2]{l} for each non-contact node $n$ \\
+    \midrule
+    $\LagrangeFunction_{\Step\Shift_\Normal(n)}$ &
+    \begin{equation*}
+        0
+        = \frac{\partial\GibbsEnergy}{\partial\Shift_\Normal(n)} \left( 1 + \LagrangeParameter_1 \right)
+        + \frac{\partial\Volume(n)}{\partial\Shift_\Normal(n)} \LagrangeParameter_{\Volume}(n)
+    \end{equation*} \\
+
+    $\LagrangeFunction_{\Flux_\Upper(n)}$ &
+    \begin{equation*}
+        0
+        = \frac{2 \GasConstant \Temperature}{\MolarVolume \VacancyConcentration^\Standard} \frac{\SurfaceDistance_\Upper(n) \Flux_\Upper(n)}{\DiffusionCoefficient_\Upper(n)} \LagrangeParameter_1
+        - \LagrangeParameter_\Volume(n)
+        + \LagrangeParameter_\Volume(n_\Upper)
+    \end{equation*} \\
+
+    $\LagrangeFunction_{\LagrangeParameter_\Volume(n)}$ &
+    \begin{equation*}
+        0
+        = \frac{\partial\Volume(n)}{\partial\Shift_\Normal} \Step\Shift_{\Normal}(n)
+        - \Flux_{\Upper}(n)
+        + \Flux_{\Upper}(n_\Lower)
+    \end{equation*} \\
+
+    \midrule
+    \SetCell[c=2]{l} for each contact node $n$ as part of contact $c$ \\
+    \midrule
+    $\LagrangeFunction_{\Step\Shift_\Normal(n)}$ &
+    \begin{equation*}
+        0
+        = \frac{\partial\GibbsEnergy}{\partial\Shift_\Normal(n)} \left( 1 + \LagrangeParameter_1 \right)
+        + \frac{\partial\Volume(n)}{\partial\Shift_\Normal(n)} \LagrangeParameter_{\Volume}(n)
+        - \frac{\partial \Radius_\Contact(c)}{\partial\Shift_\Normal(n)} \LagrangeParameter_{\Radius_\Contact}(n)
+        - \frac{\partial \Angle_\Contact(c)}{\partial\Shift_\Normal(n)} \LagrangeParameter_{\Angle_\Contact}(n)
+    \end{equation*} \\
+
+    $\LagrangeFunction_{\Step\Shift_\Tangential(n)}$ &
+    \begin{equation*}
+        0
+        = \frac{\partial\GibbsEnergy}{\partial\Shift_\Tangential(n)} \left( 1 + \LagrangeParameter_1 \right)
+        + \frac{\partial\Volume(n)}{\partial\Shift_\Tangential(n)} \LagrangeParameter_{\Volume}(n)
+        - \frac{\partial \Radius_\Contact(c)}{\partial\Shift_\Tangential(n)} \LagrangeParameter_{\Radius_\Contact}(n)
+        - \frac{\partial \Angle_\Contact(c)}{\partial\Shift_\Tangential(n)} \LagrangeParameter_{\Angle_\Contact}(n)
+    \end{equation*} \\
+
+    $\LagrangeFunction_{\Flux_\Upper(n)}$ & same as above \\
+
+    $\LagrangeFunction_{\LagrangeParameter_\Volume(n)}$ &
+    \begin{equation*}
+        0
+        = \frac{\partial\Volume(n)}{\partial\Shift_\Normal} \Step\Shift_{\Normal}(n)
+        + \frac{\partial\Volume(n)}{\partial\Shift_\Tangential} \Step\Shift_{\Tangential}(n)
+        - \Flux_{\Upper}(n)
+        + \Flux_{\Upper}(n_\Lower)
+    \end{equation*} \\
+
+    $\LagrangeFunction_{\LagrangeParameter_{\Radius_\Contact}(n)}$\TblrNote{*} &
+    \begin{multline*}
+        0
+        = \Step\Radius_{\Contact}(c)
+        - \frac{\partial \Radius_\Contact(c)}{\partial\Shift_\Normal(n)} \left( \Step\Shift_{\Normal}^{|\Parent}(n) + \Step\Shift_{\Normal}^{|\Child}(n) \right)
+        - \frac{\partial \Radius_\Contact(c)}{\partial\Shift_\Tangential(n)} \left( \Step\Shift_{\Tangential}^{|\Parent}(n) + \Step\Shift_{\Tangential}^{|\Child}(n) \right) \\
+        - 2 \frac{\partial \Radius_\Contact(c)}{\partial\Shift_\RotationAngle(n)} \Radius^{|\Child}(n) \sin \frac{\Step\RotationAngle_\Child(c)}{2}
+    \end{multline*} \\
+
+    $\LagrangeFunction_{\LagrangeParameter_{\Angle_\Contact}(n)}$\TblrNote{*} &
+    \begin{multline*}
+        0
+        = \Step\Angle_{\Contact}(c)
+        - \frac{\partial \Angle_\Contact(c)}{\partial\Shift_\Normal(n)} \left( \Step\Shift_{\Normal}^{|\Parent}(n) + \Step\Shift_{\Normal}^{|\Child}(n) \right)
+        - \frac{\partial \Angle_\Contact(c)}{\partial\Shift_\Tangential(n)} \left( \Step\Shift_{\Tangential}^{|\Parent}(n) + \Step\Shift_{\Tangential}^{|\Child}(n) \right) \\
+        - 2 \frac{\partial \Angle_\Contact(c)}{\partial\Shift_\RotationAngle(n)} \Radius^{|\Child}(n) \sin \frac{\Step\RotationAngle_\Child(c)}{2}
+    \end{multline*} \\
+
+    \midrule
+    \SetCell[c=2]{l} for each contact $c$ with the therein involved nodes of the parent $\Nodes^{|\Parent}(c)$ \\
+    \midrule
+    $\LagrangeFunction_{\Step\Radius_\Contact(c)}$ &
+    \begin{equation*}
+        0
+        = \sum^{\Nodes^{|\Parent}(c)}_n \LagrangeParameter_{\Radius_\Contact}(n)
+    \end{equation*} \\
+
+    $\LagrangeFunction_{\Step\Angle_\Contact(c)}$ &
+    \begin{equation*}
+        0
+        = \sum^{\Nodes^{|\Parent}(c)}_n \LagrangeParameter_{\Angle_\Contact}(n)
+    \end{equation*} \\
+
+    $\LagrangeFunction_{\Step\RotationAngle_\Child(c)}$ &
+    \begin{multline*}
+        0
+        = \sum^{\Nodes^{|\Parent}(c)}_n \Biggl[
+            - \Radius^{|\Child}(n) \sin \left( \Step\RotationAngle_\Child(c) + \Angle^{|\Child}(n) - \Angle_\Contact^{|\Child}(c) \right) \LagrangeParameter_{\Radius_\Contact}(n) \\
+            + \frac{\Radius^{|\Child}(n)}{\Radius_\Contact(c)} \cos \left( \Step\RotationAngle_\Child(c) + \Angle^{|\Child}(n) - \Angle_\Contact^{|\Child}(c)  \right) \LagrangeParameter_{\Angle_\Contact}(n)
+            \Biggr]
+    \end{multline*} \\
+
+    \midrule
+    \SetCell[c=2]{l} just once for the set of all nodes $\Nodes$ \\
+    \midrule
+    $\LagrangeFunction_{\LagrangeParameter_1}$ &
+    \begin{equation*}
+        0
+        = \sum^\Nodes_n \left[
+            \frac{\partial\GibbsEnergy}{\partial\Shift_\Normal(n)} \Step\Shift_\Normal(n)
+            + \frac{\partial\GibbsEnergy}{\partial\Shift_\Tangential(n)} \Step\Shift_\Tangential(n)
+            - \frac{\SurfaceDistance_\Upper(n) \Flux_\Upper(n)^2 + \SurfaceDistance_\Lower(n) \Flux_\Upper(n_\Lower)^2}{2\GasConstant\Temperature\MolarVolume\VacancyConcentration^\Standard}
+            \right]
+    \end{equation*} \\
+    \bottomrule
+\end{longtblr}
+
+
+\section{Components of the Lagrangian Gradient's Jacobian}\label{sec:components-of-the-lagrangian-gradients-jacobian}
