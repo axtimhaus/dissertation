@@ -7,6 +7,9 @@ PREAMBLE = r"""
 \usepackage{amssymb}
 \usepackage[math-style=ISO]{unicode-math}
 \usepackage{siunitx}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
 """
 
 
