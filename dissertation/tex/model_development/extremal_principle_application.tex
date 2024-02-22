@@ -45,7 +45,7 @@ The dissipation of the whole system is the sum of all node dissipations, since a
 Shifting of particles alone does not follow a thermodynamic force, but is determined by the ensemble of the involved nodes.
 
 \begin{equation}
-    \Dissipation = \sum^\Nodes \left[ \frac{\partial \GibbsEnergy}{\partial \Shift_\Normal} \Step\Shift_\Normal + \frac{\partial \GibbsEnergy}{\partial \Shift_\Tangential} \Step\Shift_\Tangential \right]
+    \Dissipation = -\sum^\Nodes \left[ \frac{\partial \GibbsEnergy}{\partial \Shift_\Normal} \Step\Shift_\Normal + \frac{\partial \GibbsEnergy}{\partial \Shift_\Tangential} \Step\Shift_\Tangential \right]
     \label{eq:dissipation-node}
 \end{equation}
 

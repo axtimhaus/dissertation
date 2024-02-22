@@ -25,14 +25,14 @@ They depend only on the current geometry and constant material parameters (espec
     $\LagrangeFunction_{\Step\Shift_\Normal(n)}$ &
     \begin{equation*}
         0
-        = \frac{\partial\GibbsEnergy}{\partial\Shift_\Normal(n)} \left( 1 + \LagrangeParameter_1 \right)
+        = -\frac{\partial\GibbsEnergy}{\partial\Shift_\Normal(n)} \left( 1 + \LagrangeParameter_1 \right)
         + \frac{\partial\Volume(n)}{\partial\Shift_\Normal(n)} \LagrangeParameter_{\Volume}(n)
     \end{equation*} \\
 
     $\LagrangeFunction_{\Flux_\Upper(n)}$ &
     \begin{equation*}
         0
-        = \frac{2 \GasConstant \Temperature}{\MolarVolume \VacancyConcentration^\Standard} \frac{\SurfaceDistance_\Upper(n) \Flux_\Upper(n)}{\DiffusionCoefficient_\Upper(n)} \LagrangeParameter_1
+        = -\frac{2 \GasConstant \Temperature}{\MolarVolume \VacancyConcentration^\Standard} \frac{\SurfaceDistance_\Upper(n) \Flux_\Upper(n)}{\DiffusionCoefficient_\Upper(n)} \LagrangeParameter_1
         - \LagrangeParameter_\Volume(n)
         + \LagrangeParameter_\Volume(n_\Upper)
     \end{equation*} \\
@@ -51,7 +51,7 @@ They depend only on the current geometry and constant material parameters (espec
     $\LagrangeFunction_{\Step\Shift_\Normal(n)}$ &
     \begin{equation*}
         0
-        = \frac{\partial\GibbsEnergy}{\partial\Shift_\Normal(n)} \left( 1 + \LagrangeParameter_1 \right)
+        = -\frac{\partial\GibbsEnergy}{\partial\Shift_\Normal(n)} \left( 1 + \LagrangeParameter_1 \right)
         + \frac{\partial\Volume(n)}{\partial\Shift_\Normal(n)} \LagrangeParameter_{\Volume}(n)
         - \frac{\partial \Radius_\Contact(c)}{\partial\Shift_\Normal(n)} \LagrangeParameter_{\Radius_\Contact}(n)
         - \frac{\partial \Angle_\Contact(c)}{\partial\Shift_\Normal(n)} \LagrangeParameter_{\Angle_\Contact}(n)
@@ -60,7 +60,7 @@ They depend only on the current geometry and constant material parameters (espec
     $\LagrangeFunction_{\Step\Shift_\Tangential(n)}$ &
     \begin{equation*}
         0
-        = \frac{\partial\GibbsEnergy}{\partial\Shift_\Tangential(n)} \left( 1 + \LagrangeParameter_1 \right)
+        = -\frac{\partial\GibbsEnergy}{\partial\Shift_\Tangential(n)} \left( 1 + \LagrangeParameter_1 \right)
         + \frac{\partial\Volume(n)}{\partial\Shift_\Tangential(n)} \LagrangeParameter_{\Volume}(n)
         - \frac{\partial \Radius_\Contact(c)}{\partial\Shift_\Tangential(n)} \LagrangeParameter_{\Radius_\Contact}(n)
         - \frac{\partial \Angle_\Contact(c)}{\partial\Shift_\Tangential(n)} \LagrangeParameter_{\Angle_\Contact}(n)
@@ -114,8 +114,8 @@ They depend only on the current geometry and constant material parameters (espec
     \begin{multline*}
         0
         = \sum^{\Nodes^{|\Parent}(c)}_n \Biggl[
-            - \Radius^{|\Child}(n) \sin \left( \Step\RotationAngle_\Child(c) + \Angle^{|\Child}(n) - \Angle_\Contact^{|\Child}(c) \right) \LagrangeParameter_{\Radius_\Contact}(n) \\
-            + \frac{\Radius^{|\Child}(n)}{\Radius_\Contact(c)} \cos \left( \Step\RotationAngle_\Child(c) + \Angle^{|\Child}(n) - \Angle_\Contact^{|\Child}(c)  \right) \LagrangeParameter_{\Angle_\Contact}(n)
+            - \Radius^{|\Child}(n) \sin \left( \Angle^{|\Child}(n) - \Angle_\Contact^{|\Child}(c) \right) \LagrangeParameter_{\Radius_\Contact}(n) \\
+            + \frac{\Radius^{|\Child}(n)}{\Radius_\Contact(c)} \cos \left( \Angle^{|\Child}(n) - \Angle_\Contact^{|\Child}(c)  \right) \LagrangeParameter_{\Angle_\Contact}(n)
             \Biggr]
     \end{multline*} \\
 
@@ -128,7 +128,7 @@ They depend only on the current geometry and constant material parameters (espec
         = \sum^\Nodes_n \left[
             \frac{\partial\GibbsEnergy}{\partial\Shift_\Normal(n)} \Step\Shift_\Normal(n)
             + \frac{\partial\GibbsEnergy}{\partial\Shift_\Tangential(n)} \Step\Shift_\Tangential(n)
-            - \frac{\GasConstant\Temperature\SurfaceDistance_\Upper(n)}{\MolarVolume\VacancyConcentration^\Standard \DiffusionCoefficient_\Upper}\Flux_\Upper(n)^2
+            + \frac{\GasConstant\Temperature\SurfaceDistance_\Upper(n)}{\MolarVolume\VacancyConcentration^\Standard \DiffusionCoefficient_\Upper}\Flux_\Upper(n)^2
             \right]
     \end{equation*} \\
     \bottomrule
@@ -168,7 +168,7 @@ The symbolism is the same as above.
     \midrule
     \SetCell[r=2]{h} $\LagrangeFunction_{\Step\Shift_\Normal(n)}$ & $\LagrangeParameter_1$ &
     \begin{equation*}
-        \frac{\partial\GibbsEnergy}{\partial\Shift_\Normal(n)}
+        -\frac{\partial\GibbsEnergy}{\partial\Shift_\Normal(n)}
     \end{equation*} \\
     & $\LagrangeParameter_\Volume(n)$ &
     \begin{equation*}
@@ -178,11 +178,11 @@ The symbolism is the same as above.
     \midrule
     \SetCell[r=4]{h} $\LagrangeFunction_{\Flux_\Upper(n)}$ & $\LagrangeParameter_1$ &
     \begin{equation*}
-        \frac{2 \GasConstant \Temperature}{\MolarVolume \VacancyConcentration^\Standard} \frac{\SurfaceDistance_\Upper(n) \Flux_\Upper(n)}{\DiffusionCoefficient_\Upper(n)}
+        -2\frac{\GasConstant \Temperature}{\MolarVolume \VacancyConcentration^\Standard} \frac{\SurfaceDistance_\Upper(n) \Flux_\Upper(n)}{\DiffusionCoefficient_\Upper(n)}
     \end{equation*} \\
     & $\Flux_\Upper(n)$ &
     \begin{equation*}
-        \frac{2 \GasConstant \Temperature}{\MolarVolume \VacancyConcentration^\Standard} \frac{\SurfaceDistance_\Upper(n)}{\DiffusionCoefficient_\Upper(n)} \LagrangeParameter_1
+        -2\frac{\GasConstant \Temperature}{\MolarVolume \VacancyConcentration^\Standard} \frac{\SurfaceDistance_\Upper(n)}{\DiffusionCoefficient_\Upper(n)} \LagrangeParameter_1
     \end{equation*} \\
     & $\LagrangeParameter_\Volume(n)$ &
     \begin{equation*}
@@ -224,7 +224,7 @@ The symbolism is the same as above.
     \midrule
     \SetCell[r=4]{h} $\LagrangeFunction_{\Step\Shift_\Tangential(n)}$ & $\LagrangeParameter_1$ &
     \begin{equation*}
-        \frac{\partial\GibbsEnergy}{\partial\Shift_\Tangential(n)} \LagrangeParameter_1
+        -\frac{\partial\GibbsEnergy}{\partial\Shift_\Tangential(n)}
     \end{equation*} \\
     & $\LagrangeParameter_\Volume(n)$ &
     \begin{equation*}
@@ -274,7 +274,7 @@ The symbolism is the same as above.
     \end{equation*} \\
     & $\Step\RotationAngle_\Child(c)$ &
     \begin{equation*}
-        -\frac{\partial \Radius_\Contact(c)}{\partial\Shift_\RotationAngle(n)} \Radius^{|\Child}(n) \cos \frac{\Step\RotationAngle_\Child(c)}{2}
+        -\Radius^{|\Child}(n) \sin \left( \Angle^{|\Child}(n) - \Angle_\Contact(c) \right)
     \end{equation*} \\
 
     \midrule
@@ -300,7 +300,7 @@ The symbolism is the same as above.
     \end{equation*} \\
     & $\Step\RotationAngle_\Child(c)$ &
     \begin{equation*}
-        - \frac{\partial \Angle_\Contact(c)}{\partial\Shift_\RotationAngle(n)} \Radius^{|\Child}(n) \cos \frac{\Step\RotationAngle_\Child(c)}{2}
+        \frac{\Radius^{|\Child}(n)}{\Radius_\Contact(c)} \cos \left( \Angle^{|\Child}(n) - \Angle_\Contact(c) \right)
     \end{equation*} \\
 
     \midrule
@@ -337,15 +337,15 @@ The symbolism is the same as above.
     \midrule
     \SetCell[r=3]{h} $\LagrangeFunction_{\LagrangeParameter_1}$ & for each $\Step\Shift_\Normal(n)$ &
     \begin{equation*}
-            \frac{\partial\GibbsEnergy}{\partial\Shift_\Normal(n)}
+            -\frac{\partial\GibbsEnergy}{\partial\Shift_\Normal(n)}
     \end{equation*} \\
     & for each $\Step\Shift_\Tangential(n)$ &
     \begin{equation*}
-            \frac{\partial\GibbsEnergy}{\partial\Shift_\Tangential(n)}
+            -\frac{\partial\GibbsEnergy}{\partial\Shift_\Tangential(n)}
     \end{equation*} \\
     & for each $\Flux_\Upper(n)$ &
     \begin{equation*}
-        -2\frac{\GasConstant\Temperature\SurfaceDistance_\Upper(n)}{\MolarVolume\VacancyConcentration^\Standard \DiffusionCoefficient_\Upper} \Flux_\Upper(n)
+        2\frac{\GasConstant\Temperature\SurfaceDistance_\Upper(n)}{\MolarVolume\VacancyConcentration^\Standard \DiffusionCoefficient_\Upper} \Flux_\Upper(n)
     \end{equation*} \\
     \bottomrule
 \end{longtblr}
