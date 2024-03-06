@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+jupyter = "~=1.0"
+matplotlib = "~=3.8"
+numpy = "~=1.26"
+pandas = "~=2.1"
+pytask-latex = "~=0.4.0"
+pytask = "~=0.4.0"
+python-lsp-server = "~=1.9"
+schemdraw = "~=0.17"
+scipy = "~=1.11"
+sympy = "~=1.12"
+tomlkit = "~=0.12"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
