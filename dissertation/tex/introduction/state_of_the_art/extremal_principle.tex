@@ -61,10 +61,10 @@ Often the fluxes $\Vect\Flux$ are used therein.
 Recently, \textcite{Hackl2020a} published a generalized formulation of the principle breaking up the need to have the same kinetic variables in the dissipation $\Dissipation$ and the dissipation function $\DissipationFunction$.
 The following elaborations use a different notation than in the reference, which fits better to the needs of the application in \autoref{sec:extremal-principle-application}, but the meaning is generally equivalent.
 The dissipation $\Dissipation$ is defined in the same way as before, but the dissipation function $\DissipationFunction$ does not include the velocities of internal state $\Vect{\InternalStateVelocity}$, but instead the fluxes $\Vect\Flux$ as in \autoref{eq:dissipation-function-general}.
-Note, that the velocities $\Vect{\InternalStateVelocity}$ are \emph{not} required to be identical to the fluxes $\Vect\Flux$ here, neither they must have the same size.
+Note that the velocities $\Vect{\InternalStateVelocity}$ are \emph{not} required to be identical to the fluxes $\Vect\Flux$ here, neither must they have the same size.
 The connections between the velocities $\Vect{\InternalStateVelocity}$ and the fluxes $\Vect\Flux$ are introduced by the constraints $\Vect\RequiredConstraint$ as in \autoref{eq:required-constraints}.
 These are required to be able to solve the problem, so they shall be called \emph{required} constraints hereinafter.
-$\Vect\RequiredConstraint$ and $\Vect\Flux$ must be of same size.
+$\Vect\RequiredConstraint$ and $\Vect\InternalStateVelocity$ must be of the same size.
 But it is also possible to include several \emph{additional} constraints $\Vect\AddionalConstraint$.
 These may be used for other requirements on the validity of the model, for example geometric constraints.
 The constraints may include several \emph{auxiliary variables} $\Vect\AuxiliaryVariable$ that are not part of $\Vect\InternalStateVariable$ or $\Vect\Flux$ and occur therefore neither in $\Dissipation$ nor $\DissipationFunction$.
