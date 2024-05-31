@@ -8,8 +8,8 @@ PREAMBLE = r"""
 \usepackage[math-style=ISO]{unicode-math}
 \usepackage{siunitx}
 \usepackage{fontspec}
-\setmainfont{TeX Gyre Termes}
-\setmathfont{TeX Gyre Termes Math}
+%\setmainfont{TeX Gyre Termes}
+%\setmathfont{TeX Gyre Termes Math}
 """
 
 

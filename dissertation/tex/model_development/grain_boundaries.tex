@@ -31,13 +31,17 @@ The total movement of the right particle due to node shifting can be formulated 
 \begin{subequations}
     \begin{align}
         \Step\Radius_\Contact &=
-        \frac{\partial \Radius_\Contact}{\partial \Shift_\Normal} \Step\Shift_\Normal
-        + \frac{\partial \Radius_\Contact}{\partial \Shift_\Tangential} \Step\Shift_\Tangential
+        \frac{\partial \Radius_\Contact}{\partial \Shift_\Normal^{|\Parent}} \Step\Shift_\Normal^{|\Parent}
+        + \frac{\partial \Radius_\Contact}{\partial \Shift_\Normal^{|\Child}} \Step\Shift_\Normal^{|\Child}
+        + \frac{\partial \Radius_\Contact}{\partial \Shift_\Tangential^{|\Parent}} \Step\Shift_\Tangential^{|\Parent}
+        + \frac{\partial \Radius_\Contact}{\partial \Shift_\Tangential^{|\Child}} \Step\Shift_\Tangential^{|\Child}
         + \frac{\partial \Radius_\Contact}{\partial \Shift_\RotationAngle} \Step\Shift_\RotationAngle \\
         %
         \Step\Angle_\Contact^{|\Parent} &=
-        \frac{\partial \Angle_\Contact^{|\Parent}}{\partial \Shift_\Normal} \Step\Shift_\Normal
-        + \frac{\partial \Angle_\Contact^{|\Parent}}{\partial \Shift_\Tangential} \Step\Shift_\Tangential
+        \frac{\partial \Angle_\Contact^{|\Parent}}{\partial \Shift_\Normal^{|\Parent}} \Step\Shift_\Normal^{|\Parent}
+        + \frac{\partial \Angle_\Contact^{|\Parent}}{\partial \Shift_\Normal^{|\Child}} \Step\Shift_\Normal^{|\Child}
+        + \frac{\partial \Angle_\Contact^{|\Parent}}{\partial \Shift_\Tangential^{|\Parent}} \Step\Shift_\Tangential^{|\Parent}
+        + \frac{\partial \Angle_\Contact^{|\Parent}}{\partial \Shift_\Tangential^{|\Child}} \Step\Shift_\Tangential^{|\Child}
         + \frac{\partial \Angle_\Contact^{|\Parent}}{\partial \Shift_\RotationAngle} \Step\Shift_\RotationAngle
     \end{align} \label{eq:particle-steps}
 \end{subequations}
@@ -48,66 +52,86 @@ Of course, for each node the resulting movement of the particle will be differen
 The geometric relations are fixed for a regarded state, but the diffusive fluxes can be used to fulfill \autoref{eq:particle-steps} simultaneously for all nodes involved in a contact.
 So there is a set of equations available to describe particle contact conditions as constraints for the TEP-approach.
 
+\begin{equation}
+    \Radius'_{\Contact} = \sqrt{\Radius_{\Contact}^2 + \Step\Shift^2 - 2 \Radius_{\Contact} \Step\Shift \cos \eta}
+    \label{eq:contact-rcprime-normal}
+\end{equation}
+
+\begin{equation}
+    \Step\Angle_{\Contact}^{|\Parent} = \arcsin \left[ \frac{\sin \eta}{\Radius'_\Contact} \Step\Shift \right]
+    \label{eq:contact-dphic-normal}
+\end{equation}
+
+\begin{equation}
+    \frac{\partial \Radius_\Contact}{\partial \Shift}
+    = \lim_{\Step\Shift \rightarrow 0} \frac{\Radius'_\Contact - \Radius_\Contact}{\Step\Shift}
+    = - \cos \eta
+    \label{eq:contact-partial-rc-normal}
+\end{equation}
+
+\begin{equation}
+    \frac{\partial \Angle_\Contact^{|\Parent}}{\partial \Shift}
+    = \lim_{\Step\Shift \rightarrow 0} \frac{\Step\Angle_\Contact^{|\Parent}}{\Step\Shift}
+    = \frac{\sin \eta}{\Radius_\Contact}
+    \label{eq:contact-partial-dphi-normal}
+\end{equation}
+
 \subsection{Normal Shifting}
 
 \begin{figure}
-    \centering
-    \includegraphics{img/model_development/particle_shift_normal}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{img/model_development/particle_shift_normal}
+        \caption{Parent's Node}
+        \label{fig:model_development/particle_shift_normal/parent}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{img/model_development/particle_shift_normal_child}
+        \caption{Child's Node}
+        \label{fig:model_development/particle_shift_normal/child}
+    \end{subfigure}
     \caption{Effect of Normal Node Shifting on Particle Postion}
     \label{fig:model_development/particle_shift_normal}
 \end{figure}
 
 \begin{equation}
-    \Step\Shift_\Normal = \Step\Shift_\Normal^{|\Parent} +  \Step\Shift_\Normal^{|\Child}
-    \label{eq:contact-ds-normal}
+    \eta_\Normal^{|\Parent} = \PI - \left( \Angle^{|\Parent} - \Angle_\Contact^{|\Parent} \right) + \left( \PI - \SurfaceVectorAngle_\Normal^{|\Parent} - \SurfaceRadiusAngle_\Lower^{|\Parent} \right)
+    \label{eq:contact-eta-normal-parent}
 \end{equation}
 
 \begin{equation}
-    \eta_\Normal = \PI - \left( \Angle^{|\Parent} - \Angle_\Contact^{|\Parent} \right) + \left( \PI - \SurfaceVectorAngle_\Normal^{|\Parent} - \SurfaceRadiusAngle_\Lower^{|\Parent} \right)
-    \label{eq:contact-eta-normal}
-\end{equation}
-
-\begin{equation}
-    \Radius'_{\Contact} = \sqrt{\Radius_{\Contact}^2 + \Step\Shift_\Normal^2 - 2 \Radius_{\Contact} \Step\Shift_\Normal \cos \eta_{\Normal}}
-    \label{eq:contact-rcprime-normal}
-\end{equation}
-
-\begin{equation}
-    \Step\Angle_{\Contact}^{|\Parent} = \arcsin \left[ \frac{\sin \eta_\Normal}{\Radius'_\Contact} \Step\Shift_\Normal \right]
-    \label{eq:contact-dphic-normal}
-\end{equation}
-
-\begin{equation}
-    \frac{\partial \Radius_\Contact}{\partial \Shift_\Normal}
-    = \lim_{\Step\Shift_\Normal \rightarrow 0} \frac{\Radius'_\Contact - \Radius_\Contact}{\Step\Shift_\Normal}
-    = - \cos \eta_{\Normal}
-    \label{eq:contact-partial-rc-normal}
-\end{equation}
-
-\begin{equation}
-    \frac{\partial \Angle_\Contact^{|\Parent}}{\partial \Shift_\Normal}
-    = \lim_{\Step\Shift_\Normal \rightarrow 0} \frac{\Step\Angle_\Contact^{|\Parent}}{\Step\Shift_\Normal}
-    = \frac{\sin \eta_\Normal}{\Radius_\Contact}
-    \label{eq:contact-partial-dphi-normal}
+    \eta_\Normal^{|\Child} = \PI + \left( \Angle_\Contact^{|\Child} - \Angle^{|\Child} \right) - \left( \PI - \SurfaceVectorAngle_\Normal^{|\Child} - \SurfaceRadiusAngle_\Upper^{|\Child} \right)
+    \label{eq:contact-eta-normal-child}
 \end{equation}
 
 \subsection{Tangential Shifting}
 
 \begin{figure}
-    \centering
-    \includegraphics{img/model_development/particle_shift_tangential}
-    \caption{Effect of Tangential Node Shifting on Particle Postion}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{img/model_development/particle_shift_tangential}
+        \caption{Parent's Node}
+        \label{fig:model_development/particle_shift_tangential/parent}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{img/model_development/particle_shift_tangential_child}
+        \caption{Child's Node}
+        \label{fig:model_development/particle_shift_tangential/child}
+    \end{subfigure}
+    \caption{Effect of tangential Node Shifting on Particle Postion}
     \label{fig:model_development/particle_shift_tangential}
 \end{figure}
 
 \begin{equation}
-    \Step\Shift_\Tangential = \Step\Shift_\Tangential^{|\Parent} +  \Step\Shift_\Tangential^{|\Child}
-    \label{eq:contact-ds-tangential}
+    \eta_\Tangential = \PI - \left( \Angle^{|\Parent} - \Angle_\Contact^{|\Parent} \right) - \left( \PI - \SurfaceVectorAngle_\Tangential^{|\Parent} - \SurfaceRadiusAngle_\Upper^{|\Parent} \right)
+    \label{eq:contact-eta-tangential-parent}
 \end{equation}
 
 \begin{equation}
-    \eta_\Tangential = - \left( \Angle^{|\Parent} - \Angle_\Contact^{|\Parent} \right) + \left( \PI - \SurfaceVectorAngle_\Tangential^{|\Parent} - \SurfaceRadiusAngle_\Lower^{|\Parent} \right)
-    \label{eq:contact-eta-tangential}
+    \eta_\Tangential = \PI + \left( \Angle_\Contact^{|\Child} - \Angle^{|\Child} \right) - \left( \PI - \SurfaceVectorAngle_\Tangential^{|\Child} - \SurfaceRadiusAngle_\Upper^{|\Child} \right)
+    \label{eq:contact-eta-tangential-child}
 \end{equation}
 
 \subsection{Particle Rotation}
@@ -128,3 +152,5 @@ So there is a set of equations available to describe particle contact conditions
     \eta_\RotationAngle = -\left( \Angle^{|\Child} - \Angle_\Contact^{|\Child} \right) + \frac{\PI - \Step\RotationAngle_\Child}{2}
     \label{eq:contact-eta-rotation}
 \end{equation}
+
+% TODO simplified equations
