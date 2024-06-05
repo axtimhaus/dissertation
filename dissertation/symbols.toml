@@ -54,6 +54,7 @@ InterfaceEnergy = '\gamma'
 Dissipation = '\symscr{D}'
 DissipationFunction = '\symscr{Q}'
 Potential = '\mu'
+ActivationEnergy = 'Q'
 
 # Indizes
 Surface = '\symrm{S}'
@@ -76,3 +77,6 @@ Regarding = '^{|#1}'
 # Sets
 Nodes = '\symbb{N}'
 Particles = '\symbb{P}'
+
+# Mechanics
+Stress = '\sigma'

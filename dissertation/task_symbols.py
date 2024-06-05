@@ -12,16 +12,13 @@ def create_command_def(name: str, code: str):
 
 
 def task_symbols(
-        toml_file=Path("symbols.toml"),
-        produces=Path("symbols.sty")
+    toml_file=Path("symbols.toml"),
+    produces=Path("symbols.sty"),
 ):
     input_text = toml_file.read_text()
 
     data = tomlkit.loads(input_text)
 
-    lines = [
-        create_command_def(n, c)
-        for n, c in data.items()
-    ]
+    lines = [create_command_def(n, c) for n, c in data.items()]
 
     produces.write_text("\n".join(lines))

@@ -9,9 +9,13 @@ Applications
 The classic formulation of the \gls{TEP} was basically formulated by \textcite{Svoboda1991}, however dependent on the works of \textcite{Ziegler1983, Ziegler1963, Onsager1931}.
 It is based on the assumption, that the dissipation in the system is always maximized with respect to thermodynamic and kinetic constraints.
 This is equivalent to the statement, that the system always tries to approach the equilibrium as fast as possible.
+There are several distinct formulations of the \gls{TEP}, they differ mainly in details of their formulation and the conditions of validity.
+\textcite{Fischer2014} pointed out, that Ziegler's principle is the most general one.
+The other's can be derived from that.
+The following elaborations are based on Ziegler's priciple in the formulation by \textcite{Svoboda1991} with own modifications to meet the requirements of the current work.
 
 The dissipation $\Dissipation$ can be formulated as in \autoref{eq:dissipation} in dependence on the vector of external state variables $\Vect\ExternalStateVariable$, the vector of internal state variables $\Vect\InternalStateVariable$ and the velocity vector of internal state variables $\Vect{\InternalStateVelocity}$.
-It is a bilinear form in the velocity vector of internal state variables and the vector of thermodynamik forces.
+It is a bilinear form in the velocity vector of internal state variables and the vector of thermodynamic forces.
 The latter can be expressed as $\partial\GibbsEnergy(\Vect\ExternalStateVariable, \Vect\InternalStateVariable)/\partial \Vect\InternalStateVariable$, where $\GibbsEnergy$ is the Gibbs energy of the system.
 None the minus sign, as the dissipation is being maximized, where the change in Gibbs energy is defined negative for voluntary processes.
 The Gibbs energy is as state function independent of $\Vect{\InternalStateVelocity}$, thus the thermodynamic forces do not include any kinetic constraints.
