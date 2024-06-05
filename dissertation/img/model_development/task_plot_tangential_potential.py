@@ -1,8 +1,7 @@
 from pathlib import Path
 
-import numpy as np
 import matplotlib.pyplot as plt
-import pytask
+import numpy as np
 
 from dissertation.config import IMAGE_FILE_FORMATS, in_build_dir
 

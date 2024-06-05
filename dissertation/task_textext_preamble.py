@@ -1,7 +1,5 @@
 from pathlib import Path
 
-import pytask
-
 PREAMBLE = r"""
 \usepackage{amsmath}
 \usepackage{amssymb}
