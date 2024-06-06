@@ -80,3 +80,15 @@ Particles = '\symbb{P}'
 
 # Mechanics
 Stress = '\sigma'
+
+# Statistics and Monte Carlo
+# StochasticInput = 'X'
+# StochasticInputObservation = 'x'
+# StochasticOutput = 'Y'
+# StochasticOutputObservation = 'y'
+Expectation = '\mu'
+StandardDeviation = '\sigma'
+Estimated = '\hat{#1}'
+Probability = 'p'
+CumulativeProbability = 'P'
+
