@@ -11,10 +11,14 @@ from dissertation.config import ROOT_DIR
     script=Path("dissertation.tex"),
     document=Path("dissertation.pdf"),
     compilation_steps=cs.latexmk(
-        options=("-r", ROOT_DIR / "latexmkrc"),
-    )
+        options=(
+            "-r",
+            ROOT_DIR / "latexmkrc",
+            "-g",
+        ),
+    ),
 )
 def task_build_latex(
-        symbols_file=Path("symbols.sty"),
+    symbols_file=Path("symbols.sty"),
 ):
     pass

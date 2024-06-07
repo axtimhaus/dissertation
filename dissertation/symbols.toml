@@ -30,6 +30,7 @@ SurfaceRadiusAngle = '\alpha'
 SurfaceVectorAngle = '\delta'
 Shift = 's'
 RotationAngle = '\omega'
+Diameter = 'd'
 
 # Thermodynamics
 Temperature = 'T'
