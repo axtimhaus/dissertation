@@ -1,4 +1,5 @@
 dissertation/*.pdf
+**/*-SAVE_ERROR
 
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider

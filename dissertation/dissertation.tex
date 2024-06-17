@@ -47,24 +47,38 @@
 
     \maketitle
 
+    \pagenumbering{Roman}
+
     \tableofcontents
 
     \input{tex/preface}
 
-    \printunsrtglossary[type=\glsxtrabbrvtype]
+    \input{tex/summary}
 
-    \input{tex/introduction}
-    \input{tex/aim_and_scope}
-    \input{tex/powder}
-    \input{tex/model_development}
-    \input{tex/implementation}
-    \input{tex/model_validation}
-    \input{tex/summary_and_outlook}
-
-    %\input{symbol_index}
-
+    \printunsrtglossary[type=\glsxtrabbrvtype,title=List of Abbreviations]
+    \addchap{List of Symbols}
     \listoffigures
     \listoftables
+
+    \clearpage
+    \pagenumbering{arabic}
+
+    \part{Introduction}\label{part:introduction}
+    \input{tex/basic_theory}
+    \input{tex/numerical_methods}
+    \input{tex/aim_and_scope}
+
+    \part{Model Development}\label{part:model-development}
+    \input{tex/particle_model}
+    \input{tex/interface_model}
+    \input{tex/multiscale_approach}
+    \input{tex/implementation}
+
+    \part{Model Application and Validation}\label{part:model-application-and-validation}
+    \input{tex/crafted_cases}
+    \input{tex/statistical_powder_modelling}
+    \input{tex/experimental_validation}
+
     \printbibliography
 
     \input{tex/appendix}
