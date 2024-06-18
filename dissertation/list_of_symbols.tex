@@ -1,0 +1,13 @@
+\addchap{List of Symbols}
+
+\begin{longtblr}[
+    label=none,
+]{lX}
+    \toprule
+    Symbol               & Meaning              \\
+    \midrule
+    {% for symbol in symbols -%}
+    ${{ symbol.value }}$ & {{ symbol.comment }} \\
+    {% endfor -%}
+    \bottomrule
+\end{longtblr}

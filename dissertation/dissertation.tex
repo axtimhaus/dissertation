@@ -23,6 +23,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 
+\usepackage{multicol}
 \usepackage{tabularray}
 \UseTblrLibrary{booktabs}
 \UseTblrLibrary{varwidth}
@@ -56,7 +57,7 @@
     \input{tex/summary}
 
     \printunsrtglossary[type=\glsxtrabbrvtype,title=List of Abbreviations]
-    \addchap{List of Symbols}
+    \include{list_of_symbols}
     \listoffigures
     \listoftables
 
