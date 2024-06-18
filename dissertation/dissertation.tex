@@ -40,6 +40,7 @@
 \GlsXtrLoadResources[src=abbreviations]
 
 \usepackage{textcomp}
+\addtokomafont{chapterentry}{\normalfont\large}
 
 \begin{document}
     \title{Microscopic Simulation of Solid State Sintering Regarding Irregularly Shaped Powder Particles}
@@ -48,21 +49,11 @@
 
     \maketitle
 
-    \pagenumbering{Roman}
-
     \tableofcontents
 
     \input{tex/preface}
 
     \input{tex/summary}
-
-    \printunsrtglossary[type=\glsxtrabbrvtype,title=List of Abbreviations]
-    \include{list_of_symbols}
-    \listoffigures
-    \listoftables
-
-    \clearpage
-    \pagenumbering{arabic}
 
     \part{Introduction}\label{part:introduction}
     \input{tex/basic_theory}
@@ -79,6 +70,12 @@
     \input{tex/crafted_cases}
     \input{tex/statistical_powder_modelling}
     \input{tex/experimental_validation}
+
+    \addpart{References}
+    \printunsrtglossary[type=\glsxtrabbrvtype,title=List of Abbreviations]
+    \include{list_of_symbols}
+    \listoffigures
+    \listoftables
 
     \printbibliography
 
