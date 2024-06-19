@@ -6,14 +6,14 @@ Commonly, a distinction is made between Monte-Carlo sampling and Monte-Carlo sim
 The former uses random numbers following a certain distribution as input to a function to explore the values of the function in the regarded argument space.
 The latter uses sampling from distributions to model actual random processes.
 According to \textcite{Lemieux2009} these are in fact just two different ways of viewing the problem, the formulation can be converted into each other.
-Both will be discuseed in \autoref{subsubsec:monte-carlo-classic}.
+Both will be discuseed in \autoref{subsec:monte-carlo-classic}.
 A method of this type will be applied for powder modelling in \autoref{ch:powder}.
 Another class of methods is often referred to as kinetic \gls{MCM}.
 This term refers to modelling the evolution of a system in time by altering the system state in each time step based on random numbers and the probabilities of state change.
 This method was used for modelling of sintering and microstructure evolution before (e.g. \cite{Braginsky2005, Luque2010, Tikare2003, Wang2018}), were the probability of state change usually correlates to the local chemical potential.
-These methods will be briefly discussed in \autoref{subsubsec:monte-carlo-kinetic-sintering}.
+These methods will be briefly discussed in \autoref{subsec:monte-carlo-kinetic-sintering}.
 
-\subsubsection{Classic Monte Carlo Methods}\label{subsubsec:monte-carlo-classic}
+\subsection{Classic Monte Carlo Methods}\label{subsec:monte-carlo-classic}
 
 The basic idea behind classic \glspl{MCM} is to use randomly sampled values as input to a function and analysing the distribution of result values afterwards using the methods of descriptive statistics.
 The
@@ -72,7 +72,7 @@ Such estimators are known under the term variance reduction techniques, see agai
   \label{eq:estimator-variance}
 \end{equation}
 
-\subsubsection{Sintering Simulation by Kinetic Monte Carlo Methods}\label{subsubsec:monte-carlo-kinetic-sintering}
+\subsection{Sintering Simulation by Kinetic Monte Carlo Methods}\label{subsec:monte-carlo-kinetic-sintering}
 
 The basic idea behind most kinetic \glspl{MCM} (f.e. \cite{Braginsky2005, Luque2010, Tikare2003, Wang2018}) is to discretize the model space into finite volumes (voxels) with a defined discrete state, which may change with a defined probability. 
 This type of system discretization is also referred to as cellular automaton.
