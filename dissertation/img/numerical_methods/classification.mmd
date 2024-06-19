@@ -1,0 +1,13 @@
+flowchart TD
+    root[interface description] --- direct
+    root --- indirect
+
+    direct --> fdm(finite differences)
+    direct --> fem(finite elements)
+
+    indirect --- sharp
+    sharp --> lsm(level-set)
+    sharp --> ca(cellular automaton)
+
+    indirect --- diffuse
+    diffuse --> pfm(phase field)

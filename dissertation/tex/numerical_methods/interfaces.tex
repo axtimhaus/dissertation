@@ -1,0 +1,47 @@
+\section{Interface Descriptions}\label{sec:interfaces}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{img/numerical_methods/classification}
+  \end{center}
+  \caption{Classification of Interface Description Methods}\label{fig:classification}
+\end{figure}
+
+Since the tracking of the interfaces is a key problem in modelling of sintering, a classfication by the approach taken for that is feasible. 
+See \autoref{fig:classification} for a visualization of this classification.
+The approach taken there is also crucial for the used numerical integration procedure, the needed material data and the feasibility of the obtained simulation results. 
+
+The first distinction can be made into approaches with direct and with indirect interface tracking.
+Direct tracking means that the location of the interface is directly defined by discrete points in space, which are moved during the integration procedure to describe the shape evolution of the interface. 
+Direct interface approaches usually use a \glsfirst{FDM} (see \autoref{subsec:interfaces-finite-differences}) or a \glsfirst{FEM} (see \autoref{subsec:interfaces-finite-elements}) to represent the particles shape. 
+
+Indirect tracking, however, means that the interface location is defined by the value of an auxiliary function. 
+The discretization is there connected to the solution space, the points are usually fixed (but must not be) and the motion of the interface is just realized by changes in the auxiliary function values.
+Indirect interface methods can further be classified in methods with sharp and diffuse interfaces. 
+A sharp interface means that the interface is considered as a defined line, where the two phases exist on the one resp.~the other side of. 
+Here we have the \glsfirst{LSM} (see \autoref{subsec:interfaces-level-set}) and \glsfirstplural{CA} (see \autoref{subsec:interfaces-cellular-automata}) approaches.
+Diffuse interfaces mean a more or less smooth transition between two phases, so that the actual position can not directly be located. 
+This diffusivity must not be confused with the physical width of the interface. 
+The physical width of the interface is the region where the atomic structure significantly deviates from the bulk structure. 
+This is usually in the order of a few atomic diameters (around or below \qty{1}{\nano\meter}). 
+The width of a diffuse interface is a numerical artifact and depends on the size of the spatial discretization. 
+Typical widths are here rather in the range around \qty{1}{\micro\meter}. 
+The diffuse interface width is not physical, but a numeric requirement to be able to calculate gradients through the interface.
+Diffuse interfaces are used in \glsfirst{PFM} approaches (see \autoref{subsec:interfaces-phase-field}).
+
+\subsection{Direct Interface Approaches Using Finite Differences}\label{subsec:interfaces-finite-differences}
+
+\subsection{Direct Interface Approaches Using Finite Elements}\label{subsec:interfaces-finite-elements}
+
+\subsection{Indirect Sharp Interface Approaches Using the Level-Set Method}\label{subsec:interfaces-level-set}
+
+\subsection{Indirect Sharp Interface Approaches Using Cellular Automata}\label{subsec:interfaces-cellular-automata}
+
+A \gls{CA} is a discretization scheme, where the solution space is discretized in finite cells, of possible arbitrary shape. 
+The state of these cells (or sometimes voxels), for example the belonging to a phase or grain, is defined by discrete state variables. 
+In each time step the state variables' values are changed in dependence on the governing model equations. 
+For sintering, these governing equations are usually randomized, which leads to the \glsfirst{kMCM}, which will be discussed in \autoref{subsubsec:monte-carlo-kinetic-sintering}.
+In this type of model there is usually no continuous or almost continuous interface, as the interface is just the outer boundary of coherent cells belonging to the same phase or grain.
+This is similar to a low resolution pixel graphic with discrete colors.
+
+\subsection{Indirect Diffuse Interface Approaches Using the Phase Field Method}\label{subsec:interfaces-phase-field}
