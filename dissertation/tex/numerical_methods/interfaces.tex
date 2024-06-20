@@ -45,3 +45,62 @@ In this type of model there is usually no continuous or almost continuous interf
 This is similar to a low resolution pixel graphic with discrete colors.
 
 \subsection{Indirect Diffuse Interface Approaches Using the Phase Field Method}\label{subsec:interfaces-phase-field}
+
+The phase field method is based on the idea to describe the phase distribution in a regarded solution space by the value of an auxiliary variable, usually referred to as phase field variable or order parameter. 
+The task of tracking the interface is reduced to the task of describing the time evolution of the order parameter by use of differential equations. 
+The method resides on a grand energy potential, either written in terms of Gibbs energy $\GibbsEnergy$ or Helmholtz energy $\HelmholtzEnergy$, which describes the thermodynamic evolution of the system.
+For the example of a coupled thermal and diffusional system consisting of two phases the total differential of the specific Helmholtz free energy $\SpecificHelmholtzEnergy$ can be stated as \autoref{eq:phase-field-helmholtz-functional}, with the specific entropy $\SpecificEntropy$, the temperature $\Temperature$, the chemical potential $\ChemicalPotential$ and concentration $\Concentration_i$ of species $i$, as well as the order parameter for the phase $\xi$ and the thermodynamic driving force of phase transition $\beta$, which includes both, the driving force of bulk transformation and of interface generation or destruction.
+
+\begin{equation}
+  \Deriv f = - \SpecificEntropy \Deriv \Temperature + \ChemicalPotential_i \Deriv \Concentration_i - \beta \Deriv \xi
+  \label{eq:phase-field-helmholtz-functional}
+\end{equation}
+
+According to \textcite{Allen1979} the driving force $\beta$ is given as in \autoref{eq:allen-cahn-driving}, which includes a dependency on the gradient of the order parameter $\xi$, which covers the change in energy due to change in interfacial areas. 
+$\kappa_\xi$ is a material dependent parameter, which is related to the interface energy $\InterfaceEnergy$.
+
+\begin{equation}
+  \beta = - \left( \frac{\partial\SpecificHelmholtzEnergy}{\partial\xi} - \kappa_\xi \nabla^2 \xi \right)
+  \label{eq:allen-cahn-driving}
+\end{equation}
+
+Assuming kinetics proportional to the driving force (as usual for small driving forces), one gets \autoref{eq:allen-cahn-differential} as evolution presription for the order parameter with $M_\xi$ as kinetic constant (mobility constant). 
+
+\begin{equation}
+  \frac{\Deriv\xi}{\Deriv\Time} = \Mobility_\xi \beta = -\Mobility_\xi \left( \frac{\partial\SpecificHelmholtzEnergy}{\partial\xi} - \kappa_\xi \nabla^2 \xi \right)
+  \label{eq:allen-cahn-differential}
+\end{equation}
+
+The width of the interface can be estimated using \autoref{eq:phase-field-interfacial-width}. 
+To ensure numerical stability and accuracy, the discretization width of the numerical solution should be smaller than the interface width (at least four cells within the interface according to \textcite{Qin2010}).
+
+\begin{equation}
+  l = \sqrt{\frac{2\kappa_\xi \xi_\Equilibrium}{\SpecificHelmholtzEnergy(\xi) - \SpecificHelmholtzEnergy(\xi_\Equilibrium)}}
+  \label{eq:phase-field-interfacial-width}
+\end{equation}
+
+Additional kinetic equations must be found in a similar way for the other state variables $\Temperature$ and $\Concentration_i$. 
+Temperature kinetics are usually described by \autoref{eq:phase-field-kinetic-temperature} with the specific heat capacity $c_\Volume$ and the heat conductivity $k$, which is in fact just Fourier's heat conduction law. 
+Diffusion kinetics, however, can be described by \autoref{eq:phase-field-kinetic-concentration} with a law similar to the classic description of diffusion using Fick's law (see \autoref{sec:diffusion}). 
+Note that the mobility coefficient $\Mobility_ij$ is here not identical to the diffusion coeffcient $\DiffusionCoefficient$, since it relates the flux to the gradient of chemical potential $\ChemicalPotential$, instead of the concentration gradient. 
+
+\begin{equation}
+  \frac{\Deriv\Temperature}{\Deriv \Time} = \frac{1}{c_\Volume} \nabla \cdot \left( k \nabla \Temperature \right) 
+  \label{eq:phase-field-kinetic-temperature}
+\end{equation}
+
+\begin{equation}
+  \frac{\Deriv\Concentration_i}{\Deriv \Time} = \nabla \cdot \left( \Mobility_{ij} \nabla \ChemicalPotential_j \right) 
+  \label{eq:phase-field-kinetic-concentration}
+\end{equation}
+
+The phase field method offers a flexible approach to the description of heterogeneous thermodynamic systems, as additional energy contributions can be included easily as additonal terms in the energy functional \autoref{eq:phase-field-helmholtz-functional}.
+Additonal phases can be included by introduction of additonal order parameters. 
+Additional internal processes like chemical reactions can be regarded in the same way. 
+The numerical treatment of all state variables in the system is very similar, the only important distinction is the for conserved fields (e.g. concentrations) and non-conserved fields (e.g. phase variables).
+Numerical difficulties occur due to the varying magnitude of the involved gradients.
+There are several excellent review articles on basics and application of the phase field method \cite{Chen2022, Qin2010, Chen2002, Steinbach2009, Steinbach2013, Wang2010, Tonks2019}.
+
+The main disadvantage of phase field models is the unphysical wide interface caused by the continuous description of phase composition by the order parameters. 
+This numerical tweak leads also to the hardly concrete concept of the interface area per unit volume $\Area_\InterfaceEnergy$ in \autoref{eq:phase-field-helmholtz-functional}, which is, in fact, more a mathematical construct then a physical quantity.
+Applications of this method to sintering problems often rely on empirical fitting of the various material factors included, or, on general observations on sintering behavior far from any real material data.

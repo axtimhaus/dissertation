@@ -19,17 +19,17 @@ Its temperature dependence is usually described by an Arrhenius-type equation as
     \label{eq:diffusion-coefficient-arrhenius}
 \end{equation}
 
-The local vacancy concentration as driving force of the diffusion, however, depends on the thermal equilibrium vacancy concentration $\VacancyConcentration^\Standard$ and the local chemical potential $\Potential$ as in \autoref{eq:vacancy-concentration}.
+The local vacancy concentration as driving force of the diffusion, however, depends on the thermal equilibrium vacancy concentration $\VacancyConcentration^\Standard$ and the local chemical potential $\ChemicalPotential$ as in \autoref{eq:vacancy-concentration}.
 
 \begin{equation}
-    \VacancyConcentration = \VacancyConcentration^\Standard \left( 1 - \frac{\Potential - \Potential^\Standard}{\GasConstant\Temperature} \right)
+    \VacancyConcentration = \VacancyConcentration^\Standard \left( 1 - \frac{\ChemicalPotential - \ChemicalPotential^\Standard}{\GasConstant\Temperature} \right)
     \label{eq:vacancy-concentration}
 \end{equation}
 
 The main factor influencing the chemical potential in the regarded sintering processes are stresses, especially stresses originating from curved surfaces or interfaces (also known as surface tensions). The local chemical potential by a stress $\Stress$ is given as in \autoref{eq:potential-stress} with the molar volume $\MolarVolume$.
 
 \begin{equation}
-    \Potential = \Potential^\Standard + \Stress \MolarVolume
+    \ChemicalPotential = \ChemicalPotential^\Standard + \Stress \MolarVolume
     \label{eq:potential-stress}
 \end{equation}
 

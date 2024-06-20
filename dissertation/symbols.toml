@@ -40,8 +40,10 @@ GasConstant = 'R' # specific gas constant
 BoltzmannConstant = 'k_{\symrm{B}}' # Boltzmann's constant
 MolarVolume = 'V_{\symrm{m}}' # molar volume
 Flux = 'j' # flux
-VacancyConcentration = '\xi' # vacancy concentration
+Concentration = 'c' # concentration
+VacancyConcentration = '\Concentration_\mathrm{Va}' # vacancy concentration
 DiffusionCoefficient = 'D' # diffusion coefficient
+Mobility = 'M' # mobility coefficient
 InternalStateVariable = 'x' # internal variable of state
 InternalStateVelocity = '\dot{x}' # internal velocity of state
 ExternalStateVariable = 'X' # external variable of state
@@ -50,11 +52,19 @@ AddionalConstraint = 'g' # additional constraint to TEP
 AuxiliaryVariable = '\xi' # auxiliary variable in TEP
 
 # Energy
-GibbsEnergy = 'G' # Gibbs' energy
+GibbsEnergy = 'G' # Gibbs energy (free enthalpy)
+SpecificGibbsEnergy = 'g' # specific Gibbs energy (free enthalpy)
+MolarGibbsEnergy = 'G_\mathrm{m}' # molar Gibbs energy (free enthalpy)
+HelmholtzEnergy = 'F' # Helmholtz energy (free energy)
+SpecificHelmholtzEnergy = 'f' # specific Helmholtz energy (free energy)
+MolarHelmholtzEnergy = 'F_\mathrm{m}' # molar Helmholtz energy (free energy)
+Entropy = 'S' # entropy
+SpecificEntropy = 's' # specific entropy
+MolarEntropy = 'S_\mathrm{m}' # molar entropy
 InterfaceEnergy = '\gamma' # interface energy
 Dissipation = '\symscr{D}' # dissipation
 DissipationFunction = '\symscr{Q}' # dissipation function
-Potential = '\mu' # chemical potential
+ChemicalPotential = '\mu' # chemical potential
 ActivationEnergy = 'Q' # activation energy
 
 # Indizes
@@ -74,6 +84,7 @@ Tangential = '\|' # index for tangential direction
 Particle = '\symrm{P}' # index for particle
 Standard = '\circ' # index for standard conditions
 Regarding = '^{|#1}' # index specifying the coordinate system
+Equilibrium = '\mathrm{eq}' # index for thermodynamic equilibrium
 
 # Sets
 Nodes = '\symbb{N}' # set of nodes
