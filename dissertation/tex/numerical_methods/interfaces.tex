@@ -57,7 +57,7 @@ For the example of a coupled thermal and diffusional system consisting of two ph
 \end{equation}
 
 According to \textcite{Allen1979} the driving force $\beta$ is given as in \autoref{eq:allen-cahn-driving}, which includes a dependency on the gradient of the order parameter $\xi$, which covers the change in energy due to change in interfacial areas. 
-$\kappa_\xi$ is a material dependent parameter, which is related to the interface energy $\InterfaceEnergy$.
+$\kappa_\xi$ is a material dependent parameter (gradient coefficient), which is related to the interface energy $\InterfaceEnergy$.
 
 \begin{equation}
   \beta = - \left( \frac{\partial\SpecificHelmholtzEnergy}{\partial\xi} - \kappa_\xi \nabla^2 \xi \right)
@@ -79,10 +79,18 @@ To ensure numerical stability and accuracy, the discretization width of the nume
   \label{eq:phase-field-interfacial-width}
 \end{equation}
 
+For conserved order parameters, the Cahn-Hillard equation \cite{Cahn1961} can be applied instead as given in \autoref{eq:cahn-hillard}.
+
+\begin{equation}
+  \frac{\Deriv\xi}{\Deriv\Time} = \nabla \cdot \Mobility_\xi \nabla \left( \frac{\partial\SpecificHelmholtzEnergy}{\partial\xi} - \kappa_\xi \nabla^2 \xi \right)
+  \label{eq:cahn-hillard}
+\end{equation}
+
 Additional kinetic equations must be found in a similar way for the other state variables $\Temperature$ and $\Concentration_i$. 
 Temperature kinetics are usually described by \autoref{eq:phase-field-kinetic-temperature} with the specific heat capacity $c_\Volume$ and the heat conductivity $k$, which is in fact just Fourier's heat conduction law. 
 Diffusion kinetics, however, can be described by \autoref{eq:phase-field-kinetic-concentration} with a law similar to the classic description of diffusion using Fick's law (see \autoref{sec:diffusion}). 
 Note that the mobility coefficient $\Mobility_ij$ is here not identical to the diffusion coeffcient $\DiffusionCoefficient$, since it relates the flux to the gradient of chemical potential $\ChemicalPotential$, instead of the concentration gradient. 
+These common laws are in fact just special cases of the Cahn-Hillard (\autoref{eq:cahn-hillard}) equation, as both are conserved fields.
 
 \begin{equation}
   \frac{\Deriv\Temperature}{\Deriv \Time} = \frac{1}{c_\Volume} \nabla \cdot \left( k \nabla \Temperature \right) 
@@ -99,8 +107,34 @@ Additonal phases can be included by introduction of additonal order parameters.
 Additional internal processes like chemical reactions can be regarded in the same way. 
 The numerical treatment of all state variables in the system is very similar, the only important distinction is the for conserved fields (e.g. concentrations) and non-conserved fields (e.g. phase variables).
 Numerical difficulties occur due to the varying magnitude of the involved gradients.
+Influence of crystal orientation can also be introduced into the system by directionally dependent material parameters~\cite{Deng2012}.
+For sintering problems the influence of temperature gradients is usually neglected, except for \textcite{Yang2020}.
 There are several excellent review articles on basics and application of the phase field method \cite{Chen2022, Qin2010, Chen2002, Steinbach2009, Steinbach2013, Wang2010, Tonks2019}.
 
 The main disadvantage of phase field models is the unphysical wide interface caused by the continuous description of phase composition by the order parameters. 
-This numerical tweak leads also to the hardly concrete concept of the interface area per unit volume $\Area_\InterfaceEnergy$ in \autoref{eq:phase-field-helmholtz-functional}, which is, in fact, more a mathematical construct then a physical quantity.
-Applications of this method to sintering problems often rely on empirical fitting of the various material factors included, or, on general observations on sintering behavior far from any real material data.
+Therefore, material parameters in energy and kinetic functions are not directly identifiable with actual physical quantities. 
+They depend not only on the actaul material properties, but also on the numerical properties of the model, such as interface width and discretization width.
+This is natural, since the local characteristics of the (approximately) sharp real interface must be transformed to the diffuse interface while maintaining the globally observable behavior.
+Applications of this method to sintering problems often on general observations on sintering behavior far from any real material data~\cite{Deng2012, Wang2006, Asp2006, Jing2003, Kumar2010, Kumar2011, Shinagawa2014}.
+\textcite{Biswas2016, Biswas2017} determined the mobilities $\Mobility$ from the corresponding diffusion coefficients by use of a method by \textcite{Moelans2008}.
+Several authors~\cite{Chockalingam2016, Biswas2016, Biswas2017, Choudhuri2021} used an equation system developed by \textcite{Ahmed2013} to determine the gradient coefficents $\kappa$ and from actual material data, however still including the numerical properties.
+
+A major difficulty in application to sintering problems is the description of rigid body motion. 
+For modelling dense microstructures, the only possible changes are due to phase transformations and diffusional flows, since the space is fully occupied by matter. 
+In sintering, however, the is usually a significant amount of void (or atmosphere), which is not able to withstand the motion of a solid body.
+The distict grains may (and do) move relative to each other due to changes in their contact geometry effected by diffusional flows along the grain boundaries.
+This is observed macroscopically as shrinkage, a main phenomenon of sintering processes.
+The movement is not directly driven by diffusional flows or phase transformations, so it cannot be included directly in the grand energy functional.
+Some phase-field-based sintering model neglect this mechanism, therefore not regarding the phenomenon of shrinkage \cite{Asp2006, Chockalingam2016, Hotzer2019, Jing2003, Kumar2010, Kumar2011, Deng2012, Zhang2014, Yang2020, Choudhuri2021}.
+
+An approach by \textcite{Wang2006} (and adopted by others~\cite{Termuhlen2021, Biswas2016, Biswas2017}) regards the rigid body motion by additonal terms in the Allen-Cahn and Cahn-Hillard equations including an advection velocity of the particles. 
+This advection velocity is calculated from the force and torque balance on the particle volume. 
+Forces and torques are obtained from the order parameter gradient.
+\textcite{Shinagawa2014} used a coupled \gls{DEM} model to determine the rigid body motion independently from the phase field.
+Both models are updated from the other by an iterational process.
+\textcite{Ivannikov2021} introduced a grain boundary force similar to that of \textcite{Wang2006}, but did not include it in the kinetics equation, rather they set a constraint on it to be always zero. 
+If the constraint is violated, they calculate and apply an advection vector to restore it.
+
+The undelying numerical method to solve the field equations is usually a \gls{FDM}~\cite{Wang2006, Hotzer2019, Jing2003, Kumar2010, Kumar2011, Zhang2014} or \gls{FEM}~\cite{Asp2006, Chockalingam2016, Biswas2016, Biswas2017, Greenquist2020, Ivannikov2021} scheme.
+Most models are formulated in 2D, only a few in 3D space~\cite{Greenquist2020, Termuhlen2021}
+
