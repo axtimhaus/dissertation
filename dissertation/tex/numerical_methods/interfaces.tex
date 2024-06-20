@@ -35,6 +35,39 @@ Diffuse interfaces are used in \glsfirst{PFM} approaches (see \autoref{subsec:in
 
 \subsection{Indirect Sharp Interface Approaches Using the Level-Set Method}\label{subsec:interfaces-level-set}
 
+Tracking of interfaces using a sharp interface is possible by application of the \gls{LSM}.
+An auxiliary function (or level-set function) $\phi$ is introduced which is positive inside the regarded phase and negative outside, so $\phi = 0$ defines the location of the interface.
+Usually the value of the function corresponds to the signed euclidic distance of the current point from the boundary. 
+This enables the use of the gradient $\nabla \phi$ for example for calculation of the interface curvature.
+The time evolution of the auxiliary function is described by \autoref{eq:level-set-elementary}, with the interface velocity vector $\Vect v$.
+
+\begin{equation}
+  \frac{\partial\phi}{\partial\Time} = \Vect v \nabla\phi = 0
+  \label{eq:level-set-elementary}
+\end{equation}
+
+Overview articles of the method in general were published for example by \textcite{Osher2001, Gibou2018, vanDijk2013}.
+Applications to sintering problems have been conducted by \textcite{Bruchon2010, Bruchon2010, PinoMunoz2013}. 
+The basic approach is very similar to direct interface approaches, as diffusional fluxes are directly computed by application of Fick's law with potentials obtained from surface curvature. 
+The velocity $v$ is taken normal from the current surface and calculated from mass conservation incorporating the diffusional fluxes.
+The curvature is obtained from the gradient of the level-set function by \autoref{eq:level-set-curvature}.
+
+\begin{equation}
+  \Curvature = \nabla \cdot \frac{\nabla\phi}{\Abs{\nabla\phi}}
+  \label{eq:level-set-curvature}
+\end{equation}
+
+The solution of \autoref{eq:level-set-elementary}, however, is usually only conducted in a certain region near the interface. 
+Outside this region the solution is roughly approaximated, but this does not preserve the signed distance character of the level-set functions. 
+For this reason a renormalization procedure is applied to restore this character. 
+
+Level-set approaches give a clean indirect description of a sharp interface. 
+This approach circumvents the logical problems inherent in diffuse interfaces, gives a smooth interface line in contrast to cellular approaches and nevertheless  has the advantage of easy indirect interface tracking. 
+The main disadvantage of this method is the restriction to only two phases, at least no extension to multiple phases has been published yet.
+This seems also the main reason, why the adoption of this method for sintering problems is currently rather low.
+Especially, there is no numeric distinction between the particles, just between solid and void (or liquid for the case of liquid phase sintering).
+Therefore, also the boundary between the particles is inexistent, so grain boundary diffusion cannot be described.
+
 \subsection{Indirect Sharp Interface Approaches Using Cellular Automata}\label{subsec:interfaces-cellular-automata}
 
 A \gls{CA} is a discretization scheme, where the solution space is discretized in finite cells, of possible arbitrary shape. 
@@ -109,7 +142,9 @@ The numerical treatment of all state variables in the system is very similar, th
 Numerical difficulties occur due to the varying magnitude of the involved gradients.
 Influence of crystal orientation can also be introduced into the system by directionally dependent material parameters~\cite{Deng2012}.
 For sintering problems the influence of temperature gradients is usually neglected, except for \textcite{Yang2020}.
-There are several excellent review articles on basics and application of the phase field method \cite{Chen2022, Qin2010, Chen2002, Steinbach2009, Steinbach2013, Wang2010, Tonks2019}.
+There are several excellent review articles on basics and application of the \gls{PFM}~\cite{Chen2022, Qin2010, Chen2002, Steinbach2009, Steinbach2013, Wang2010, Tonks2019}.
+Today, the \gls{PFM} is the most used approach for simulation of sintering, but also applied in other fields of materials modelling and beyond.
+The main reason for this seems to be its flexibility and clean and easy formulation of multiple coupled mechanisms.
 
 The main disadvantage of phase field models is the unphysical wide interface caused by the continuous description of phase composition by the order parameters. 
 Therefore, material parameters in energy and kinetic functions are not directly identifiable with actual physical quantities. 

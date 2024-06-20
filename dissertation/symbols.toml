@@ -6,6 +6,7 @@ Transposed = '#1^{\symrm{T}}' # transposed matrix
 Step = '\symrm{\delta}\mspace{-1mu}' # step difference operator
 Diff = '\symrm{\Delta}\mspace{-1mu}' # difference operator
 Deriv = '\symrm{d}\mspace{-1mu}' # differential operator
+Abs = '\lvert#1\rvert'
 
 # Polar Coordinates
 Radius = 'r' # radius coordinate
