@@ -29,8 +29,8 @@ Volume = 'V' # volume
 Area = 'A' # area
 SurfaceDistance = 'a' # surface distance between nodes
 SurfaceRadiusAngle = '\alpha' # angle between surface line and radius
-SurfaceVectorAngle = '\delta' # angle between surface line and surface normal resp. tangent
-Shift = 's' # shift of a node
+SurfaceVectorAngle = '\beta' # angle between surface line and surface normal resp. tangent
+Shift = 's' # shift (displacement) of a node or particle
 RotationAngle = '\omega' # rotation
 Diameter = 'd' # diameter
 

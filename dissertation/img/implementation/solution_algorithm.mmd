@@ -1,0 +1,36 @@
+sequenceDiagram
+    participant t as Time Level
+    participant ts as Time Step Level 
+    participant g as Equation System:<br/>Global Level 
+    participant c as Equation System:<br/>Contact Level 
+    participant p as Equation System:<br/>Particle Level
+
+    note over t: Estimate Solution
+
+    loop integrate over time
+        t ->> ts: current system state
+        loop until step is valid
+            ts ->> g: current system state
+            loop find root of equation system
+                g ->> p: primary Lagrange multiplicator
+                loop for each particle
+                    note over p: Solve Particle Block
+                end
+                p ->> c: particle block solutions
+                note over c: Solve Contact Block
+                c ->> g: particle and contact block solutions
+                note over g: Evaluate Dissipation Constraint
+                note over g: Update Primary Lagrange Multiplicator
+            end
+            g ->> ts: root found
+            note over ts: Validate Step
+            opt step is invalid
+                note over ts: Try to Recover
+            end
+        end
+        ts ->> t: valid step
+        note over t: Increment Time
+        note over t: Store Step
+    end
+
+    note over t: Solution Finished

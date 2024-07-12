@@ -53,27 +53,27 @@ The geometric relations are fixed for a regarded state, but the diffusive fluxes
 So there is a set of equations available to describe particle contact conditions as constraints for the TEP-approach.
 
 \begin{equation}
-	\Radius'_{{\Contact}} = \sqrt{\Radius_{{\Contact}}^2 + \Step\Shift^2 - 2 \Radius_{{\Contact}} \Step\Shift \cos \eta}
-	\label{eq:contact-rcprime-normal}
+	\Radius'_{{\Contact}} = \sqrt{\Radius_{{\Contact}}^2 + \Step\Shift^2 + 2 \Radius_{{\Contact}} \Step\Shift \cos \eta}
+	\label{eq:contact-rcprime}
 \end{equation}
 
 \begin{equation}
 	\Step\Angle_{{\Contact}}\Regarding\Parent = \arcsin \left[ \frac{\sin \eta}{\Radius'_{\Contact}} \Step\Shift \right]
-	\label{eq:contact-dphic-normal}
+	\label{eq:contact-dphic}
 \end{equation}
 
 \begin{equation}
 	\frac{\partial \Radius_{\Contact}}{\partial \Shift}
 	= \lim_{\Step\Shift \rightarrow 0} \frac{\Radius'_{\Contact} - \Radius_{\Contact}}{\Step\Shift}
-	= - \cos \eta
-	\label{eq:contact-partial-rc-normal}
+	= \cos \eta
+	\label{eq:contact-partial-rc}
 \end{equation}
 
 \begin{equation}
 	\frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift}
 	= \lim_{\Step\Shift \rightarrow 0} \frac{\Step\Angle_{\Contact}\Regarding\Parent}{\Step\Shift}
 	= \frac{\sin \eta}{\Radius_{\Contact}}
-	\label{eq:contact-partial-dphi-normal}
+	\label{eq:contact-partial-phi}
 \end{equation}
 
 These constraints can also be seen as a different formulation of the force balance on the grain boundary.
@@ -89,18 +89,23 @@ the actual prescription to calculate depends on the mode of shift an will be giv
 \end{equation}
 
 \begin{equation}
+  \Projected\Radius\Regarding\Child = \Radius\Regarding\Child \sin \tau
+  \label{eq:torque-lever-arm}
+\end{equation}
+
+\begin{equation}
 	\sum^{\Nodes_{\Contact}} \Radius\Regarding\Child
 	\left[
-		\Step\Shift_{\Normal}\Regarding\Parent \cos \left( \SurfaceRadiusAngle_{\Upper}\Regarding\Child + \frac\pi2 - \SurfaceVectorAngle_{{\Normal}{\Lower}}\Regarding\Parent\right)
-		+ \Step\Shift_{\Normal}\Regarding\Child \cos \left( \SurfaceRadiusAngle_{\Upper}\Regarding\Child + \SurfaceVectorAngle_{{\Normal}{\Upper}}\Regarding\Child - \frac\pi2 \right)
-		+ \Step\Shift_{\Tangential}\Regarding\Parent \cos \left( \SurfaceRadiusAngle_{\Lower}\Regarding\Child - \frac\pi2 - \SurfaceVectorAngle_{{\Tangential}{\Upper}}\Regarding\Parent\right)
-		+ \Step\Shift_{\Tangential}\Regarding\Child \cos \left( \frac\pi2 - \SurfaceRadiusAngle_{\Upper}\Regarding\Child - \SurfaceVectorAngle_{{\Tangential}{\Upper}}\Regarding\Child\right)
+    \Step\Shift_{\Normal}\Regarding\Parent \sin \tau_{\Normal}\Regarding\Parent
+		+ \Step\Shift_{\Normal}\Regarding\Child \sin \tau_{\Normal}\Regarding\Child
+		+ \Step\Shift_{\Tangential}\Regarding\Parent \sin \tau_{\Tangential}\Regarding\Parent
+		+ \Step\Shift_{\Tangential}\Regarding\Child \sin \tau_{\Tangential}\Regarding\Child
 		\right]
 	= 0
 	\label{eq:torque-balance}
 \end{equation}
 
-In the following, the geometric relations will be derived for each of the node shift modes.
+In the following, the geometric relation will be derived for each of the node shift modes.
 
 \subsection{Normal Shifting}
 
@@ -121,14 +126,28 @@ In the following, the geometric relations will be derived for each of the node s
 	\label{fig:model_development/particle_shift_normal}
 \end{figure}
 
+\minisec{Parent's Node}
+
 \begin{equation}
-	\eta_{\Normal}\Regarding\Parent = \PI - \left( \Angle\Regarding\Parent - \Angle_{\Contact}\Regarding\Parent \right) + \left( \PI - \SurfaceVectorAngle_{\Normal}\Regarding\Parent - \SurfaceRadiusAngle_{\Lower}\Regarding\Parent \right)
+	\eta_{\Normal}\Regarding\Parent = \left( \Angle\Regarding\Parent - \Angle_{\Contact}\Regarding\Parent \right) - \left( \PI - \SurfaceVectorAngle_{\Normal\Lower}\Regarding\Parent - \SurfaceRadiusAngle_{\Lower}\Regarding\Parent \right)
 	\label{eq:contact-eta-normal-parent}
 \end{equation}
 
 \begin{equation}
-	\eta_{\Normal}\Regarding\Child = \PI + \left( \Angle_{\Contact}\Regarding\Child - \Angle\Regarding\Child \right) - \left( \PI - \SurfaceVectorAngle_{\Normal}\Regarding\Child - \SurfaceRadiusAngle_{\Upper}\Regarding\Child \right)
+  \tau_{\Normal}\Regarding\Parent = \SurfaceVectorAngle_{\Normal\Lower}\Regarding\Parent -  \left( \PI - \SurfaceRadiusAngle_{\Lower}\Regarding\Parent - \Angle\Regarding\Parent + \Angle_{\Contact}\Regarding\Parent - \Angle_{\Contact}\Regarding\Child + \Angle\Regarding\Child \right)
+	\label{eq:contact-tau-normal-parent}
+\end{equation}
+
+
+\minisec{Child's Node}
+
+\begin{equation}
+	\eta_{\Normal}\Regarding\Child =  \left( \PI - \SurfaceVectorAngle_{\Normal\Upper}\Regarding\Child - \SurfaceRadiusAngle_{\Upper}\Regarding\Child \right) - \left( \Angle_{\Contact}\Regarding\Child - \Angle\Regarding\Child \right)
 	\label{eq:contact-eta-normal-child}
+\end{equation}
+
+\begin{equation}
+  \tau_{\Normal}\Regarding\Child = \PI - \SurfaceVectorAngle_{\Normal\Upper}\Regarding\Child - \SurfaceRadiusAngle_{\Upper}\Regarding\Child	\label{eq:contact-tau-normal-child}
 \end{equation}
 
 \subsection{Tangential Shifting}
@@ -150,14 +169,27 @@ In the following, the geometric relations will be derived for each of the node s
 	\label{fig:model_development/particle_shift_tangential}
 \end{figure}
 
+\minisec{Parent's Node}
+
 \begin{equation}
-	\eta_{\Tangential} = \PI - \left( \Angle\Regarding\Parent - \Angle_{\Contact}\Regarding\Parent \right) - \left( \PI - \SurfaceVectorAngle_{\Tangential}\Regarding\Parent - \SurfaceRadiusAngle_{\Upper}\Regarding\Parent \right)
+	\eta_{\Tangential}\Regarding\Parent = \left( \Angle\Regarding\Parent - \Angle_{\Contact}\Regarding\Parent \right) + \left( \PI - \SurfaceVectorAngle_{\Tangential\Upper}\Regarding\Parent - \SurfaceRadiusAngle_{\Upper}\Regarding\Parent \right)
 	\label{eq:contact-eta-tangential-parent}
 \end{equation}
 
 \begin{equation}
-	\eta_{\Tangential} = \PI + \left( \Angle_{\Contact}\Regarding\Child - \Angle\Regarding\Child \right) - \left( \PI - \SurfaceVectorAngle_{\Tangential}\Regarding\Child - \SurfaceRadiusAngle_{\Upper}\Regarding\Child \right)
+  \tau_{\Tangential}\Regarding\Parent = \left( \PI - \SurfaceRadiusAngle_{\Lower}\Regarding\Parent - \Angle\Regarding\Parent + \Angle_{\Contact}\Regarding\Parent - \Angle_{\Contact}\Regarding\Child + \Angle\Regarding\Child \right) - \SurfaceVectorAngle_{\Tangential\Lower}\Regarding\Parent
+	\label{eq:contact-tau-tangential-parent}
+\end{equation}
+
+\minisec{Child's Node}
+
+\begin{equation}
+	\eta_{\Tangential}\Regarding\Child =  \left( \PI - \SurfaceVectorAngle_{\Tangential\Upper}\Regarding\Child - \SurfaceRadiusAngle_{\Upper}\Regarding\Child \right) - \left( \Angle_{\Contact}\Regarding\Child - \Angle\Regarding\Child \right)
 	\label{eq:contact-eta-tangential-child}
+\end{equation}
+
+\begin{equation}
+  \tau_{\Tangential}\Regarding\Child = \SurfaceVectorAngle_{\Tangential\Upper}\Regarding\Child + \SurfaceRadiusAngle_{\Upper}\Regarding\Child	\label{eq:contact-tau-tangential-child}
 \end{equation}
 
 \subsection{Particle Rotation}
@@ -171,15 +203,27 @@ In the following, the geometric relations will be derived for each of the node s
 
 \begin{equation}
 	\Step\Shift_{\RotationAngle} = 2 \Radius\Regarding\Child \sin \frac{\Step\RotationAngle_{\Child}}{2}
-	\label{eq:contact-ds-rotation}
+	\label{eq:contact-ds-rotation} 
 \end{equation}
 
 \begin{equation}
-	\eta_\RotationAngle = -\left( \Angle\Regarding\Child - \Angle_{\Contact}\Regarding\Child \right) + \frac{\PI - \Step\RotationAngle_{\Child}}{2}
+  \eta_\RotationAngle = \PI - \left( \Angle_{\Contact}\Regarding\Child - \Angle\Regarding\Child \right) - \frac{\PI - \Step\RotationAngle_{\Child}}{2}
 	\label{eq:contact-eta-rotation}
 \end{equation}
 
-% TODO simplified equations
+\begin{equation}
+  \frac{\partial \Radius_{\Contact}}{\partial \RotationAngle}
+	= \lim_{\Step\Shift \rightarrow 0} \frac{\Radius'_{\Contact} - \Radius_{\Contact}}{\Step\Shift}
+  = \Radius\Regarding\Child \sin \left( \Angle\Regarding\Child - \Angle_{\Contact}\Regarding\Child \right)
+	\label{eq:contact-partial-rc-rotation}
+\end{equation}
+
+\begin{equation}
+	\frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \RotationAngle}
+	= \lim_{\Step\Shift \rightarrow 0} \frac{\Step\Angle_{\Contact}\Regarding\Parent}{\Step\Shift}
+	= \frac{\Radius\Regarding\Child \cos \left( \Angle\Regarding\Child - \Angle_{\Contact}\Regarding\Child \right)}{\Radius_{\Contact}}
+	\label{eq:contact-partial-phi-rotation}
+\end{equation}
 
 
 

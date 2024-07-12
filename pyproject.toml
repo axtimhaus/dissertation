@@ -17,6 +17,7 @@ dependencies = [
     "scipy ~= 1.11",
     "sympy ~= 1.12",
     "tomlkit ~= 0.12",
+    "coconut"
 ]
 
 [tool.pytask.ini_options]
