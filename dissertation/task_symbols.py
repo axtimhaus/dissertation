@@ -1,16 +1,19 @@
 from pathlib import Path
 
 import tomlkit
+import re
 
 from dissertation.config import ROOT_DIR, in_build_dir, JINJA_ENV
+
+RE_ARGUMENT = re.compile(r"#\d")
 
 
 def create_command_def(name: str, code: str):
     if "#" in code:
-        par_count = code.count("#")
-        return rf"\newcommand{{\{name}}}[{par_count}]{{{{{code}}}}}"
+        arguments = RE_ARGUMENT.findall(code)
+        return rf"\gdef\{name}{''.join(arguments)}{{{code}}}"
     else:
-        return rf"\newcommand{{\{name}}}{{{{{code}}}}}"
+        return rf"\gdef\{name}{{{code}}}"
 
 
 def task_symbols(

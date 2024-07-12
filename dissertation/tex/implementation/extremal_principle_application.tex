@@ -2,8 +2,8 @@
 
 In the following the generalized extremal principle is applied on the current model of particles and nodes, see \autoref{subsubsec:extremal-priciple-generalized} for details on the approach.
 As before, an index of the currently regarded particle or node is neglected where appropriate for brevity.
-The indizes $\square_\Upper$ and $\square_\Lower$ are used to denote the upper resp.~lower neighbor of a node.
-$\Nodes$ is the set of all nodes present in the system and $\Particles$ the set of all particles, respectively.
+The indizes $\square_{\Upper}$ and $\square_{\Lower}$ are used to denote the upper resp.~lower neighbor of a node.
+${\Nodes}$ is the set of all nodes present in the system and ${\Particle}s$ the set of all particles, respectively.
 
 \subsection{Time Scale Definition}\label{subsec:time-scale-definition}
 
@@ -23,16 +23,16 @@ First, the internal state variables $\Vect\InternalStateVariable$, the internal 
 The feasibility of the approach heavily depends on this choice.
 
 The choice of the fluxes is straightforward with the diffusional fluxes.
-One has two diffusional fluxes on each node $\Flux_\Upper$ and $\Flux_\Lower$, however the flux of the upper node to the lower and the flux from the lower to the upper are always equal due to constance of mass.
+One has two diffusional fluxes on each node $\Flux_{\Upper}$ and $\Flux_{\Lower}$, however the flux of the upper node to the lower and the flux from the lower to the upper are always equal due to constance of mass.
 Additional fluxes are to be found in the fluxes from the particle to the matrix $\Matrix\Flux$, if a matrix is present in the inter-particle spaces.
 
 The internal state variables are the polar coordinates of the nodes $\left[ \Radius, \Angle \right]$ in with pole in their particle's center, since they determine the thermodynamic forces and the main aim of the simulation is to follow the time evolution of the particles and nodes.
-The coordinates of the particles $\left[ \Particle\Radius, \Particle\Angle, \Particle\RotationAngle \right]$ are not used as internal state variables, since they are unambiguously defined, if the coordinates of all nodes relative to their particle are known and also which nodes are in contact to each other.
+The coordinates of the particles $\left[ \Radius_{\Particle}, \Angle_{\Particle}, \RotationAngle_{\Particle} \right]$ are not used as internal state variables, since they are unambiguously defined, if the coordinates of all nodes relative to their particle are known and also which nodes are in contact to each other.
 Moreover, the particle coordinates are auxiliary variables (included in $\Vect\AuxiliaryVariable$) to ease formulation of the geometric constraints.
 
 The straightforward choice of the internal state velocities are the finite changes of internal state variables (e.g. $\Delta\Radius$ and $\Delta\Angle$).
 However, for the changes in node coordinates this is not feasible, since they do not depend linearly on the fluxes due to triangular function relations.
-A more appropriate way is to define the node shifts $\Step\Shift_\Normal$ and $\Step\Shift_\Tangential$ as internal state velocities, so that the required constraints $\Vect\RequiredConstraint$ become linear (see \autoref{subsec:required-constraints}).
+A more appropriate way is to define the node shifts $\Step\Shift_{\Normal}$ and $\Step\Shift_{\Tangential}$ as internal state velocities, so that the required constraints $\Vect\RequiredConstraint$ become linear (see \autoref{subsec:required-constraints}).
 As they are determined, translation into new coordinates is directly possible using the relations obtained in the previous sections.
 
 The external state variables (such as temperature $\Temperature$ and pressure $\Pressure$) are not considered in the following, since they are assumed constant.
@@ -45,14 +45,14 @@ The dissipation of the whole system is the sum of all node dissipations, since a
 Shifting of particles alone does not follow a thermodynamic force, but is determined by the ensemble of the involved nodes.
 
 \begin{equation}
-    \Dissipation = -\sum^\Nodes \left[ \frac{\partial \GibbsEnergy}{\partial \Shift_\Normal} \Step\Shift_\Normal + \frac{\partial \GibbsEnergy}{\partial \Shift_\Tangential} \Step\Shift_\Tangential \right]
+    \Dissipation = -\sum^{\Nodes} \left[ \frac{\partial \GibbsEnergy}{\partial \Shift_{\Normal}} \Step\Shift_{\Normal} + \frac{\partial \GibbsEnergy}{\partial \Shift_{\Tangential}} \Step\Shift_{\Tangential} \right]
     \label{eq:dissipation-node}
 \end{equation}
 
 \subsection{Dissipation Function $\DissipationFunction$}\label{subsec:dissipation-function}
 
 \begin{equation}
-    \DissipationFunction = \sum^\Nodes \frac{1}{2} \frac{\GasConstant\Temperature}{\MolarVolume{\VacancyConcentration}^\Standard} \left( \frac{\SurfaceDistance_\Upper {\Flux}_\Upper^2}{{\DiffusionCoefficient}_\Upper} + \frac{{\SurfaceDistance}_\Lower {\Flux}_\Lower^2}{{\DiffusionCoefficient}_\Lower}\right) \Step\Time
+    \DissipationFunction = \sum^{\Nodes} \frac{1}{2} \frac{\GasConstant\Temperature}{\MolarVolume{\VacancyConcentration}^\Standard} \left( \frac{\SurfaceDistance_{\Upper} {\Flux}_{\Upper}^2}{{\DiffusionCoefficient}_{\Upper}} + \frac{{\SurfaceDistance}_{\Lower} {\Flux}_{\Lower}^2}{{\DiffusionCoefficient}_{\Lower}}\right) \Step\Time
     \label{eq:dissipation-function-node}
 \end{equation}
 
@@ -61,7 +61,7 @@ Shifting of particles alone does not follow a thermodynamic force, but is determ
 Relation between fluxes resp.~volume change and shift.
 
 \begin{equation}
-    \frac{\partial\Volume}{\partial{\Shift}_\Normal} {\Step\Shift}_\Normal + \frac{\partial\Volume}{\partial{\Shift}_\Tangential} {\Step\Shift}_\Tangential = \Step\Volume = \left( {\Flux}_\Upper + {\Flux}_\Lower \right) \Step\Time
+    \frac{\partial\Volume}{\partial{\Shift}_{\Normal}} {\Step\Shift}_{\Normal} + \frac{\partial\Volume}{\partial{\Shift}_{\Tangential}} {\Step\Shift}_{\Tangential} = \Step\Volume = \left( {\Flux}_{\Upper} + {\Flux}_{\Lower} \right) \Step\Time
     \label{eq:required-constraint-flux-shift}
 \end{equation}
 
@@ -71,8 +71,8 @@ For each contact node, where:
 
 \begin{subequations}
     \begin{align}
-        \Step\Particle\Radius &= \frac{\partial \Particle\Radius}{\partial \Shift_\Normal} \Step\Shift_\Normal + \frac{\partial \Particle\Radius}{\partial \Shift_\Tangential} \Step\Shift_\Tangential \\
-        \Step\Particle\Angle &= \frac{\partial \Particle\Angle}{\partial \Shift_\Normal} \Step\Shift_\Normal + \frac{\partial \Particle\Angle}{\partial \Shift_\Tangential} \Step\Shift_\Tangential \\
-        \Step\Particle\RotationAngle &= \frac{\partial \Particle\RotationAngle}{\partial \Shift_\Normal} \Step\Shift_\Normal + \frac{\partial \Particle\RotationAngle}{\partial \Shift_\Tangential} \Step\Shift_\Tangential
+        \Step{\Particle}\Radius &= \frac{\partial {\Particle}\Radius}{\partial \Shift_{\Normal}} \Step\Shift_{\Normal} + \frac{\partial {\Particle}\Radius}{\partial \Shift_{\Tangential}} \Step\Shift_{\Tangential} \\
+        \Step{\Particle}\Angle &= \frac{\partial {\Particle}\Angle}{\partial \Shift_{\Normal}} \Step\Shift_{\Normal} + \frac{\partial {\Particle}\Angle}{\partial \Shift_{\Tangential}} \Step\Shift_{\Tangential} \\
+        \Step{\Particle}\RotationAngle &= \frac{\partial {\Particle}\RotationAngle}{\partial \Shift_{\Normal}} \Step\Shift_{\Normal} + \frac{\partial {\Particle}\RotationAngle}{\partial \Shift_{\Tangential}} \Step\Shift_{\Tangential}
     \end{align}
 \end{subequations}
