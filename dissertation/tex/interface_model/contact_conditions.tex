@@ -1,4 +1,4 @@
-\section{Considerations on Grain Boundaries}\label{sec:grain-boundaries}
+\section{Contact Conditions Between Particles}\label{sec:contact-conditions}
 
 In contrast to free surfaces, where the geometric evolution of a node is not constrained by the surrounding space, in grain boundaries the node shifting acts counter the solid material of the other particle.
 This introduces additional constraints, since the grain boundary must not form holes and must not overlap.
@@ -76,8 +76,8 @@ So there is a set of equations available to describe particle contact conditions
 	\label{eq:contact-partial-phi}
 \end{equation}
 
-These constraints can also be seen as a different formulation of the force balance on the grain boundary.
-An additional contraint arrises from the torque balance, which dertermines the rotation of the child particle around its center. 
+The constraints of \autoref{eq:particle-steps} can also be seen as a different formulation of the force balance on the grain boundary.
+An additional contraint arrises from the torque balance, which determines the rotation of the child particle around its center. 
 Each mode of node shifting induces a torque on the child particle, which depends on the size of the shift, the local radius of the particle and the orientation of surface and shift.
 The particular torques as given in \autoref{eq:particular-torque} must balance to zero for each contact (\autoref{eq:torque-balance}).
 $\Projected\Radius\Regarding\Child$ is the projected lever arm of the particular shift relative to the child particle's center,
@@ -96,16 +96,16 @@ the actual prescription to calculate depends on the mode of shift an will be giv
 \begin{equation}
 	\sum^{\Nodes_{\Contact}} \Radius\Regarding\Child
 	\left[
-    \Step\Shift_{\Normal}\Regarding\Parent \sin \tau_{\Normal}\Regarding\Parent
+    -\Step\Shift_{\Normal}\Regarding\Parent \sin \tau_{\Normal}\Regarding\Parent
 		+ \Step\Shift_{\Normal}\Regarding\Child \sin \tau_{\Normal}\Regarding\Child
-		+ \Step\Shift_{\Tangential}\Regarding\Parent \sin \tau_{\Tangential}\Regarding\Parent
+		- \Step\Shift_{\Tangential}\Regarding\Parent \sin \tau_{\Tangential}\Regarding\Parent
 		+ \Step\Shift_{\Tangential}\Regarding\Child \sin \tau_{\Tangential}\Regarding\Child
 		\right]
 	= 0
 	\label{eq:torque-balance}
 \end{equation}
 
-In the following, the geometric relation will be derived for each of the node shift modes.
+In the following, the geometric relations will be derived for each of the node shift modes.
 
 \subsection{Normal Shifting}
 
@@ -116,6 +116,7 @@ In the following, the geometric relation will be derived for each of the node sh
 		\caption{Parent's Node}
 		\label{fig:model_development/particle_shift_normal/parent}
 	\end{subfigure}
+  \vspace{5mm}
 	\begin{subfigure}{\linewidth}
 		\centering
 		\includegraphics{img/model_development/particle_shift_normal_child}
@@ -159,6 +160,7 @@ In the following, the geometric relation will be derived for each of the node sh
 		\caption{Parent's Node}
 		\label{fig:model_development/particle_shift_tangential/parent}
 	\end{subfigure}
+  \vspace{5mm}
 	\begin{subfigure}{\linewidth}
 		\centering
 		\includegraphics{img/model_development/particle_shift_tangential_child}
