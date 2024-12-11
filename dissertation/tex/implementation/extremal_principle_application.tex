@@ -3,19 +3,7 @@
 In the following the generalized extremal principle is applied on the current model of particles and nodes, see \autoref{subsubsec:extremal-priciple-generalized} for details on the approach.
 As before, an index of the currently regarded particle or node is neglected where appropriate for brevity.
 The indizes $\ldots_{\Upper}$ and $\ldots_{\Lower}$ are used to denote the upper resp.~lower neighbor of a node.
-${\Nodes}$ is the set of all nodes present in the system and ${\Particle}s$ the set of all particles, respectively.
-
-\subsection{Time Scale Definition}\label{subsec:time-scale-definition}
-
-The application of the TEP results in ordinary differential equations in time which can be solved analytically for simple problems.
-Here, however, the problem is to complex to be solved analytically, so numerical time integration is required.
-Usually, the transition from infinitesimal description to finite time steps would be performed as a last step, but doing this step at the beginning opens possibilities of simplifying the equations and clarifies the following elaborations.
-At this point, it does not matter if a simple Eulerian integration is used or more complex methods like Runge-Kutta.
-The key feature is, that we use a finite time step width $\Step\Time$, which is fixed in each time step calculation, but may change from step to step.
-So, the internal state velocities $\InternalStateVelocity$ are directly linked linearly to finite changes using the time step as follows:
-\begin{equation}
-    \Step\InternalStateVariable = \InternalStateVelocity \cdot \Step\Time
-\end{equation}
+${\Nodes}$ is the set of all nodes present in the system and ${\Particles}$ the set of all particles, respectively.
 
 \subsection{Choice of Variables}\label{subsec:choice-of-variables}
 
@@ -24,55 +12,86 @@ The feasibility of the approach heavily depends on this choice.
 
 The choice of the fluxes is straightforward with the diffusional fluxes.
 One has two diffusional fluxes on each node $\Flux_{\Upper}$ and $\Flux_{\Lower}$, however the flux of the upper node to the lower and the flux from the lower to the upper are always equal due to constance of mass.
-Additional fluxes are to be found in the fluxes from the particle to the matrix $\Matrix\Flux$, if a matrix is present in the inter-particle spaces.
+Additional fluxes are to be found in the fluxes from the particle to the matrix $\Flux_{\Matrix}$, if a matrix is present in the inter-particle spaces.
 
-The internal state variables are the polar coordinates of the nodes $\left[ \Radius, \Angle \right]$ in with pole in their particle's center, since they determine the thermodynamic forces and the main aim of the simulation is to follow the time evolution of the particles and nodes.
+The internal state variables are the polar coordinates of the nodes $\left[ \Radius, \Angle \right]$ with pole in their particle's center, since they determine the thermodynamic forces and the main aim of the simulation is to follow the time evolution of the particles and nodes.
 The coordinates of the particles $\left[ \Radius_{\Particle}, \Angle_{\Particle}, \RotationAngle_{\Particle} \right]$ are not used as internal state variables, since they are unambiguously defined, if the coordinates of all nodes relative to their particle are known and also which nodes are in contact to each other.
 Moreover, the particle coordinates are auxiliary variables (included in $\Vect\AuxiliaryVariable$) to ease formulation of the geometric constraints.
 
-The straightforward choice of the internal state velocities are the finite changes of internal state variables (e.g. $\Delta\Radius$ and $\Delta\Angle$).
-However, for the changes in node coordinates this is not feasible, since they do not depend linearly on the fluxes due to triangular function relations.
-A more appropriate way is to define the node shifts $\Step\Shift_{\Normal}$ and $\Step\Shift_{\Tangential}$ as internal state velocities, so that the required constraints $\Vect\RequiredConstraint$ become linear (see \autoref{subsec:required-constraints}).
+For numerical and equation formulation reasons, the internal state velocities $\dot\Radius$ and $\dot\Angle$ are replaced by the velocities of node shift along normal and tangential surface vectors $\dot\Shift_{\Normal}$ and $\dot\Shift_{\Tangential}$.
 As they are determined, translation into new coordinates is directly possible using the relations obtained in the previous sections.
 
 The external state variables (such as temperature $\Temperature$ and pressure $\Pressure$) are not considered in the following, since they are assumed constant.
 
-\subsection{Dissipation $\Dissipation$}\label{subsec:dissipation}
+\subsection{Establishing the Equation System}
 
-The dissipation at one node is given by the product node shifts and the respective Gibbs energy derivatives as in \autoref{eq:dissipation-node}.
-The Gibbs energy derivatives were determined in previous sections for the different node types.
+In the following the necessary equations shall be composed.
+This includes the definition of the dissipation $\Dissipation$, the dissipation function $\DissipationFunction$, required constraints and additional constraints.
+The resulting components of the Lagrangian gradient and the respective Jacobian matrix are omitted here for brevity, but listed in \autoref{ch:equation-system}.
+
+\minisec{Dissipation $\Dissipation$}
+
+The dissipation at one node is given by the product of node shifts and the respective Gibbs energy derivatives as in \autoref{eq:dissipation-node}.
+The Gibbs energy derivatives were determined in \autoref{sec:surface-evolution} for the different node types.
 The dissipation of the whole system is the sum of all node dissipations, since all thermodynamic forces occur at nodes.
 Shifting of particles alone does not follow a thermodynamic force, but is determined by the ensemble of the involved nodes.
 
 \begin{equation}
-    \Dissipation = -\sum^{\Nodes} \left[ \frac{\partial \GibbsEnergy}{\partial \Shift_{\Normal}} \Step\Shift_{\Normal} + \frac{\partial \GibbsEnergy}{\partial \Shift_{\Tangential}} \Step\Shift_{\Tangential} \right]
+    \Dissipation = -\sum^{\Nodes} \left[ \frac{\partial \GibbsEnergy}{\partial \Shift_{\Normal}} \dot\Shift_{\Normal} + \frac{\partial \GibbsEnergy}{\partial \Shift_{\Tangential}} \dot\Shift_{\Tangential} \right]
     \label{eq:dissipation-node}
 \end{equation}
 
-\subsection{Dissipation Function $\DissipationFunction$}\label{subsec:dissipation-function}
+\minisec{Dissipation Function $\DissipationFunction$}
+
+The dissipation function as formulation of the dissipation in terms of fluxes involves the square of fluxes, 
+the surface distance $\SurfaceDistance$,
+the diffusion coefficient along the interface $\DiffusionCoefficient$,
+the molar volume $\MolarVolume$ of the particle substance,
+the thermal vacancy concentration $\VacancyConcentration^{\Standard}$ at the respective temperature,
+the universal gas constant $\GasConstant$
+and the absolute temperature $\Temperature$.
+Regarding only the fluxes to the upper node is sufficient, since the fluxes to the lower are regarded from the lower node on.
 
 \begin{equation}
-    \DissipationFunction = \sum^{\Nodes} \frac{1}{2} \frac{\GasConstant\Temperature}{\MolarVolume{\VacancyConcentration}^\Standard} \left( \frac{\SurfaceDistance_{\Upper} {\Flux}_{\Upper}^2}{{\DiffusionCoefficient}_{\Upper}} + \frac{{\SurfaceDistance}_{\Lower} {\Flux}_{\Lower}^2}{{\DiffusionCoefficient}_{\Lower}}\right) \Step\Time
+    \DissipationFunction = \sum^{\Nodes} \frac{\GasConstant\Temperature}{\MolarVolume{\VacancyConcentration}^\Standard} \frac{\SurfaceDistance_{\Upper} {\Flux}_{\Upper}^2}{{\DiffusionCoefficient}_{\Upper}}
     \label{eq:dissipation-function-node}
 \end{equation}
 
-\subsection{Required Constraints $\Vect\RequiredConstraint$}\label{subsec:required-constraints}
+The Langrangian multiplicator for the equality constraint of both dissipation formulations will be denoted as $\LagrangeParameter_{\Dissipation}$ in the following.
 
-Relation between fluxes resp.~volume change and shift.
+\minisec{Required Constraints $\Vect\RequiredConstraint$}
+
+The required constraints needed to link internal state velocities and fluxes are given by the constance of volume resp.\ mass at each node.
 
 \begin{equation}
-    \frac{\partial\Volume}{\partial{\Shift}_{\Normal}} {\Step\Shift}_{\Normal} + \frac{\partial\Volume}{\partial{\Shift}_{\Tangential}} {\Step\Shift}_{\Tangential} = \Step\Volume = \left( {\Flux}_{\Upper} + {\Flux}_{\Lower} \right) \Step\Time
+    \frac{\partial\Volume}{\partial{\Shift}_{\Normal}} {\dot\Shift}_{\Normal} + \frac{\partial\Volume}{\partial{\Shift}_{\Tangential}} {\dot\Shift}_{\Tangential} = \dot\Volume = \left( {\Flux}_{\Upper} + {\Flux}_{\Lower} \right)
     \label{eq:required-constraint-flux-shift}
 \end{equation}
 
+The Langrangian multiplicator for this constraint will be denoted as $\LagrangeParameter_\Volume$ in the following.
+
 \subsection{Additonal Constraints $\Vect\AddionalConstraint$}\label{subsec:additonal-constraints}
 
-For each contact node, where:
+Additional constraints occur at particle contacts.
+For each node involved in a contact the conditions according to \autoref{eq:particle-steps} are applied in a formulation in terms of node shift velocities $\dot\Shift$.
 
 \begin{subequations}
-    \begin{align}
-        \Step{\Particle}\Radius &= \frac{\partial {\Particle}\Radius}{\partial \Shift_{\Normal}} \Step\Shift_{\Normal} + \frac{\partial {\Particle}\Radius}{\partial \Shift_{\Tangential}} \Step\Shift_{\Tangential} \\
-        \Step{\Particle}\Angle &= \frac{\partial {\Particle}\Angle}{\partial \Shift_{\Normal}} \Step\Shift_{\Normal} + \frac{\partial {\Particle}\Angle}{\partial \Shift_{\Tangential}} \Step\Shift_{\Tangential} \\
-        \Step{\Particle}\RotationAngle &= \frac{\partial {\Particle}\RotationAngle}{\partial \Shift_{\Normal}} \Step\Shift_{\Normal} + \frac{\partial {\Particle}\RotationAngle}{\partial \Shift_{\Tangential}} \Step\Shift_{\Tangential}
-    \end{align}
+	\begin{align}
+		\dot\Radius_{\Contact}           & =
+		\frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Normal}\Regarding\Parent} \dot\Shift_{\Normal}\Regarding\Parent
+		+ \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Normal}\Regarding\Child} \dot\Shift_{\Normal}\Regarding\Child
+		+ \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Tangential}\Regarding\Parent} \dot\Shift_{\Tangential}\Regarding\Parent
+		+ \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Tangential}\Regarding\Child} \dot\Shift_{\Tangential}\Regarding\Child \\
+		%
+		\dot\Angle_{\Contact}\Regarding\Parent & =
+		\frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Normal}\Regarding\Parent} \dot\Shift_{\Normal}\Regarding\Parent
+		+ \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Normal}\Regarding\Child} \dot\Shift_{\Normal}\Regarding\Child
+		+ \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Tangential}\Regarding\Parent} \dot\Shift_{\Tangential}\Regarding\Parent
+		+ \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Tangential}\Regarding\Child} \dot\Shift_{\Tangential}\Regarding\Child
+	\end{align} \label{eq:contact-constraints}
 \end{subequations}
+
+The Langrangian multiplicator for these constraints will be denoted as $\LagrangeParameter_{\Radius_{\Contact}}$ and $\LagrangeParameter_{\Angle_{\Contact}}$ in the following.
+
+For all rings occuring in the particle system, additional contraints are included as given in \autoref{eq:ring-condition} with no further modifications.
+The Langrangian multiplicator for this constraint will be denoted as $\LagrangeParameter_{\Ring\X}$ and $\LagrangeParameter_{\Ring\Y}$ in the following.

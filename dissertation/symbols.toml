@@ -84,6 +84,7 @@ Contact = '\symrm{C}' # index for contact
 Normal = '\perp' # index for normal direction
 Tangential = '\|' # index for tangential direction
 Particle = '\symrm{P}' # index for particle
+Ring = '\symrm{R}' # index for particle
 Standard = '\circ' # index for standard conditions
 Regarding = '^{|#1}' # index specifying the coordinate system
 Equilibrium = '\mathrm{eq}' # index for thermodynamic equilibrium
