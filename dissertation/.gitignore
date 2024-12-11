@@ -1,9 +1,13 @@
+dissertation.pdf
+
 symbol_index.tex
 symbols.sty
 
 dissertation.glstex
 
 .build
+
+*-SAVE-ERROR
 
 ### TeX template
 ## Core latex/pdflatex auxiliary files:
