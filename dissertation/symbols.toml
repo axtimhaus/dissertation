@@ -92,6 +92,8 @@ Equilibrium = '\mathrm{eq}' # index for thermodynamic equilibrium
 # Sets
 Nodes = '\symbb{N}' # set of nodes
 Particles = '\symbb{P}' # set of particles
+Contacts = '\symbb{C}' # set of contacts
+Rings = '\symbb{R}' # set of contacts
 
 # Mechanics
 Stress = '\sigma' # normal stress
