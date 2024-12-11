@@ -77,7 +77,7 @@ So there is a set of equations available to describe particle contact conditions
 \end{equation}
 
 The constraints of \autoref{eq:particle-steps} can also be seen as a different formulation of the force balance on the grain boundary.
-An additional contraint arrises from the torque balance, which determines the rotation of the child particle around its center. 
+An additional contraint arrises from the torque balance, which determines the rotation of the child particle around its center.
 Each mode of node shifting induces a torque on the child particle, which depends on the size of the shift, the local radius of the particle and the orientation of surface and shift.
 The particular torques as given in \autoref{eq:particular-torque} must balance to zero for each contact (\autoref{eq:torque-balance}).
 $\Projected\Radius\Regarding\Child$ is the projected lever arm of the particular shift relative to the child particle's center,
@@ -205,7 +205,7 @@ In the following, the geometric relations will be derived for each of the node s
 
 \begin{equation}
 	\Step\Shift_{\RotationAngle} = 2 \Radius\Regarding\Child \sin \frac{\Step\RotationAngle_{\Child}}{2}
-	\label{eq:contact-ds-rotation} 
+	\label{eq:contact-ds-rotation}
 \end{equation}
 
 \begin{equation}
@@ -228,4 +228,52 @@ In the following, the geometric relations will be derived for each of the node s
 \end{equation}
 
 
+\subsection{Ring Contacts}\label{subsec:ring-contacts}
 
+\begin{figure}
+	\centering
+	\includegraphics{img/model_development/particle_ring_contact}
+	\caption{Additonal Constraint with Ring Contacts}
+	\label{fig:model_development/particle_ring_contact}
+\end{figure}
+
+When multiple particles contact each other so that they form a closed ring (or cycle) of contacts,
+an additional constraint must be introduced, since the particle movement is hindered by the closed ring.
+As described in \autoref{sec:contact-graphs}, the contacts between particles can be described as edges in a graph with the particles as vertices.
+The contact edge closing a ring is regarded as shown above as any other edge.
+However, the child particle of this edge now performs 2 distinct movements,
+one in terms of the first path, one in terms of the second path (see \autoref{fig:model_development/particle_ring_contact}).
+The ring contact conditions requires, that these two are compatible with each other, meaning that they represent the same vector in terms of the global coordinate system.
+The ring constraint is formulated in terms of global cartesian coordinates.
+The shift vector of a particle in terms of global coordinates with its parent particle assumed to be fixed is obtained as follows:
+
+\begin{equation} 
+		\Step\Shift_{i} = \left[ \begin{+matrix}
+		\left( \Radius_{\Contact i} + \Step\Radius_{\Contact i} \right) \cos \left( \RotationAngle_i + \Angle_{\Contact i} + \Step\Angle_{\Contact i} \right) - \Radius_{\Contact i} \cos \left( \RotationAngle_i + \Angle_{\Contact i} \right)\\
+		\left( \Radius_{\Contact i} + \Step\Radius_{\Contact i} \right) \sin \left( \RotationAngle_i + \Angle_{\Contact i} + \Step\Angle_{\Contact i} \right) - \Radius_{\Contact i} \sin \left( \RotationAngle_i + \Angle_{\Contact i} \right) 
+		\end{+matrix} \right]
+		\label{eq:ring-condition-ds-absolute}
+\end{equation}
+
+As before a linear approximation to this is made to be suitable for later \gls{TEP} application.
+The derivation with respect to time of \autoref{eq:ring-condition-ds-absolute} yields:
+
+\begin{equation} 
+		\frac{\partial\Shift_{i}}{\partial\Time} 
+	    = \lim_{\Step\Time \rightarrow 0} \frac{\Step\Shift_i}{\Step\Time}
+		= \left[ 
+		\begin{+matrix}
+		\cos \left( \RotationAngle_i + \Angle_{\Contact i} \right) \frac{\partial \Radius_{\Contact i}}{\partial\Time} - \Radius_{\Contact i} \sin \left( \RotationAngle_i + \Angle_{\Contact i} \right) \frac{\partial \Angle_{\Contact i}}{\partial\Time}\\
+		\sin \left( \RotationAngle_i + \Angle_{\Contact i} \right) \frac{\partial \Radius_{\Contact i}}{\partial\Time} + \Radius_{\Contact i} \cos \left( \RotationAngle_i + \Angle_{\Contact i} \right) \frac{\partial \Angle_{\Contact i}}{\partial\Time}\\
+		\end{+matrix} 
+		\right]
+		\label{eq:ring-condition-ds-differential}
+\end{equation}
+
+The final condition is that the sum of the partial shifts along the primary path to the ring closing particle must equal the sum of those along the secondary path, so that both paths yield the same total shift.
+This translates to actually two constraints per ring, one for $\X$ and one for $\Y$ direction.
+
+\begin{equation}
+    0 = \sum_i^\text{primary path} \frac{\partial\Shift_{i}}{\partial\Time} - \sum_i^\text{secondary path} \frac{\partial\Shift_{i}}{\partial\Time} 
+    \label{eq:ring-condition}
+\end{equation}
