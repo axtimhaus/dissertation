@@ -18,6 +18,8 @@ dependencies = [
     "sympy ~= 1.12",
     "tomlkit ~= 0.12",
     "jupyter",
+    "pydantic ~= 2.0",
+    "deepdiff ~= 8.0",
 ]
 
 [tool.pytask.ini_options]
