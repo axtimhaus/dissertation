@@ -44,7 +44,8 @@ class ParticleSizeRatioStudy(ParameterStudy):
     def input_for(self, parameter_value: float) -> Input:
         model = get_base_input_copy()
         model.particle2.radius *= parameter_value
-        model.particle2.x += (model.particle1.radius + model.particle2.radius) * 1.05
+        model.particle2.x = (model.particle1.radius + model.particle2.radius) * 1.05
+
         return model
 
 

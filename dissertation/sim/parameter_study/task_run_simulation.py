@@ -23,12 +23,19 @@ for study in STUDIES:
         @task(id=f"{study}/{value}")
         def task_run(
             input_file=study.dir(value) / "input.json",
-            produces=study.dir(value) / "output.json",
+            produces=study.dir(value) / "output.parquet",
             csharp_proj=THIS_DIR / "parameter_study" / "parameter_study.csproj",
             csharp_program=THIS_DIR / "parameter_study" / "Program.cs",
         ):
-            subprocess.run(
-                ["dotnet", "run", str(input_file), str(produces), "--project", str(csharp_proj)],
+            result = subprocess.run(
+                ["dotnet", "run", "--project", str(csharp_proj), str(input_file), str(produces)],
                 cwd=str(input_file.parent),
                 check=False,
+                capture_output=True,
+                text=True,
             )
+
+            print("=== OUT ===\n", result.stdout)
+            print("=== ERR ===\n", result.stderr)
+
+            result.check_returncode()
