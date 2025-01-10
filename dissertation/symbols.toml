@@ -111,3 +111,7 @@ Estimated = '\hat' # estimation of the respected value
 Probability = 'p' # probability
 CumulativeProbability = 'P' # cumulative probability
 
+# Features
+Shrinkage = '\varepsilon'
+NeckRadius = '\Radius_{\Neck}'
+NeckArea = '\Area_{\Neck}'

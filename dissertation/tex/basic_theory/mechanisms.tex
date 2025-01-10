@@ -7,9 +7,10 @@ Liquid phase sintering, where the material partially melts to assist closing por
 Therefore, the term sintering shall always refer to solid state sintering from here on.
 
 Sintering in general is a process, where powder material is densified and strengthened by thermal treatment at elevated temperatures.
-The process is mainly driven by reduction of the energy stored in the system microstural features, such as grain boundaries, surfaces and other crystal defects.
-These features are transformed by diffusional flows of material to reach a state of lower energy.
-In this process, energy is dissipated, so it is an irreversible process.
+The process is mainly driven by reduction of the energy stored in the system microstructural features, such as grain boundaries, surfaces and other crystal defects.
+The energy is dissipated, so it is an irreversible process.
+The microstructural state of the material is mainly transformed by diffusional flows to reach a state of lower energy.
+In some systems also other transport mechanisms such as viscose or plastic flow can be observed, but are not regarded in the current work.
 
 \begin{figure}
 	\centering
@@ -19,19 +20,47 @@ In this process, energy is dissipated, so it is an irreversible process.
 \end{figure}
 
 In common sintering processes the following diffusion mechanisms may occur, but their importance depends on powder geometry, process conditions and material properties.
-The place and usual direction of their occurence is visualized in \autoref{fig:introduction/state_of_the_art/diffusion_mechanisms}.
+The place and usual direction of their occurrence is visualized in \autoref{fig:introduction/state_of_the_art/diffusion_mechanisms}.
 
 \begin{description}
-	\item[Volume Diffusion] Diffusion in the bulk material mediated by vacancies. Usually one of the slowest mechanisms and often neglegible.
-	\item[Surface Diffusion] Diffusion along free surfaces (interfaces with surrounding atmosphere or vacuum). Much faster than volume diffusion.
-	\item[Grain Boundary Diffusion] Diffusion along grain boundaries (solid-solid interfaces). Usually slower than surface diffusion but faster than volume diffusion.
-	\item[Evaporation/Condensation] Evaporation of atoms to the gas phase and condensation at another point. Fast transport through the gas phase, but usually occurs only at very high temperatures or with very volatile substances.
+	\item[Volume Diffusion] Diffusion in the bulk material mediated by vacancies.
+	Usually one of the slowest mechanisms and often negligible.
+	\item[Surface Diffusion] Diffusion along free surfaces (interfaces with surrounding atmosphere or vacuum).
+	Much faster than volume diffusion.
+	\item[Grain Boundary Diffusion] Diffusion along grain boundaries (solid-solid interfaces).
+	Usually slower than surface diffusion but faster than volume diffusion.
+	\item[Evaporation/Condensation] Evaporation of atoms to the gas phase and condensation at another point.
+	Fast transport through the gas phase, but usually occurs only at very high temperatures, with very volatile substances or due to chemical reactions.
 \end{description}
 
-Sintering is usually distinguished in three stages:
+Macroscopically these mechanisms can be observed via properties of the body such a size and shape or of the material such as strength, density, electrical and magnetic properties or chemical surface activity.
+
+The most commonly observed effect is shrinkage, which means that the sintered body is smaller than the green body.
+This is caused by transport of material from between the particles to the surface of the neck via grain boundary diffusion or volume diffusion.
+Solely surface diffusion does not cause shrinkage.
+As the mass of the system is constant, shrinkage must coincide with an increase in density resp.\ decrease of the amount of voids (porosity) in the body.
+Shrinkage is usually quantified normed initial size $L_0$ with the current size $L$.
+
+\begin{equation}
+	\Shrinkage = \frac{L - L_0}{L_0}
+	\label{eq:shrinkage}
+\end{equation}
+
+Most material properties are directly correlated with the size of the bonds between the particles which form during sintering, called sinter necks.
+The driving force for neck formation is the reduction of surface area in interaction with the energy stored in grain boundaries (which is usually much smaller per area unit).
+Most notably the strength varies directly with the neck size since the largest part of the load is transmitted via the necks, but also electric and magnetic properties.
+The neck is usually measured in terms of its radius $\NeckRadius$ or area $\NeckArea$.
+
+By the dominating mechanisms and their effect on neck growth and shrinkage, sintering is usually divided in three stages:
 
 \begin{description}
-	\item[Initial/Early Stage] Creation of initial contact. Major diffusion along surfaces to the sinter neck (triple points of surfaces and grain boundary). Rapid increase of neck size but low shrinkage.
-	\item[Intermediate Stage] Porosity is still open and connected. Major diffusion along grain boundaries to the pores. Removal of substance at grain boundaries leeds to large shrinkage.
-	\item[Final/Late Stage] Mainly closed porosity, gas pressure in pores may affect sintering. Still mainly grain boundary, but also volume diffusion. Slow progress in shrinkage and densification.
+	\item[Initial/Early Stage] Creation of initial contact.
+	Major diffusion along surfaces to the sinter neck (triple points of surfaces and grain boundary).
+	Rapid increase of neck size but low shrinkage.
+	\item[Intermediate Stage] Porosity is still open and connected.
+	Major diffusion along grain boundaries to the pores.
+	Removal of substance at grain boundaries leads to large shrinkage.
+	\item[Final/Late Stage] Mainly closed porosity, gas pressure in pores may affect sintering.
+	Still mainly grain boundary, but also volume diffusion.
+	Slow progress in shrinkage and densification.
 \end{description}
