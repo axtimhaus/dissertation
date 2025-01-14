@@ -13,7 +13,7 @@ The approach taken there is also crucial for the used numerical integration proc
 
 The first distinction can be made into approaches with direct and with indirect interface tracking.
 Direct tracking means that the location of the interface is directly defined by discrete points in space, which are moved during the integration procedure to describe the shape evolution of the interface. 
-Direct interface approaches usually use a \glsfirst{FDM} (see \autoref{subsec:interfaces-finite-differences}) or a \glsfirst{FEM} (see \autoref{subsec:interfaces-finite-elements}) to represent the particles shape. 
+Direct interface approaches usually use the \glsfirst{FDM} or the \glsfirst{FEM} to represent the particles shape.
 
 Indirect tracking, however, means that the interface location is defined by the value of an auxiliary function. 
 The discretization is there connected to the solution space, the points are usually fixed (but must not be) and the motion of the interface is just realized by changes in the auxiliary function values.
@@ -29,9 +29,31 @@ Typical widths are here rather in the range around \qty{1}{\micro\meter}.
 The diffuse interface width is not physical, but a numeric requirement to be able to calculate gradients through the interface.
 Diffuse interfaces are used in \glsfirst{PFM} approaches (see \autoref{subsec:interfaces-phase-field}).
 
-\subsection{Direct Interface Approaches Using Finite Differences}\label{subsec:interfaces-finite-differences}
+\subsection{Direct Interface Approaches}\label{subsec:interfaces-direct}
 
-\subsection{Direct Interface Approaches Using Finite Elements}\label{subsec:interfaces-finite-elements}
+Several authors have published sintering models where the interfaces are described directly by discrete points either in a finite difference or finite element scheme.
+
+This approach has the great advantage of direct and easy computation of geometrical features such as curvatures, as the defining points are directly available.
+Curvature calculation is either done by application of finite differences~\cite{Svoboda1995, Bouvard1996} or by interpolation functions~\cite{Svoboda1995, Nikolic1999, Jagota1988a, Lechelle2014}.
+
+The major problem of direct interface approaches is maintaining the contact conditions resp.~the geometric validity of the grain boundary.
+Most models, therefore, assume a heavily idealised (planar) grain boundary and rely on symmetry to simplify determination of the particle motions~\cite{Svoboda1995, Svoboda1992, Bouvard1996, Jagota1988a, Wakai2018}.
+The problem therefore reduced to determining the evolution of the surface geometry.
+
+\textcite{Svoboda1995, Bouvard1996} are classic \gls{FDM}-based solutions of two equal circular particles with heavy symmetry assumptions.
+An advanced \gls{FDM}-based model was published by \textcite{Klinger2013, Klinger2012, Klinger2011} which supports curved grain boundaries.
+
+\textcite{Jagota1988a} published a direct FE model for two-particle sintering, however, based on viscous constitutive equations.
+So this some is merely useful for amorphous material rather than crystalline ones.
+\textcite{Lechelle2014} built a direct FE model in the tradition of classic mechanical FE approaches.
+It regards surface and grain boundary diffusion considering the interfacial stresses as outer load and applying contact conditions in the grain boundary.
+This model seems to be basically able to work with particles of arbitrary shape, but was only evaluated for two spherical particles.
+
+There is a free and open-source program by \textcite{Brakke1992} aimed at modelling the evolution of different surfaces in time by minimizing the energy stepwise.
+However, it lacks direct support for time-coupled simulation, as the kinetics are solely determined by use of a global constant.
+\textcite{Wakai2022} recently built a 3D multiple-particle sintering simulation based on this program, with older iteration in \cite{Wakai2011, Wakai2018}.
+Their implementation includes rigid body motion but only for symmetric cases, as all motion is directed towards the center point.
+
 
 \subsection{Indirect Sharp Interface Approaches Using the Level-Set Method}\label{subsec:interfaces-level-set}
 
@@ -47,7 +69,7 @@ The time evolution of the auxiliary function is described by \autoref{eq:level-s
 \end{equation}
 
 Overview articles of the method in general were published for example by \textcite{Osher2001, Gibou2018, vanDijk2013}.
-Applications to sintering problems have been conducted by \textcite{Bruchon2010, Bruchon2010, PinoMunoz2013}. 
+Applications to sintering problems have been conducted by \textcite{Bruchon2010, Bruchon2012, PinoMunoz2013}.
 The basic approach is very similar to direct interface approaches, as diffusional fluxes are directly computed by application of Fick's law with potentials obtained from surface curvature. 
 The velocity $v$ is taken normal from the current surface and calculated from mass conservation incorporating the diffusional fluxes.
 The curvature is obtained from the gradient of the level-set function by \autoref{eq:level-set-curvature}.
