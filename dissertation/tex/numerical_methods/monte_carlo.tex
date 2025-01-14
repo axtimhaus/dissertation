@@ -74,16 +74,16 @@ Such estimators are known under the term variance reduction techniques, see agai
 
 \subsection{Sintering Simulation by Kinetic Monte Carlo Methods}\label{subsec:monte-carlo-kinetic-sintering}
 
-The basic idea behind most kinetic \glspl{MCM} (f.e. \cite{Braginsky2005, Luque2010, Tikare2003, Wang2018}) is to discretize the model space into finite volumes (voxels) with a defined discrete state, which may change with a defined probability. 
+The basic idea behind most kinetic \glspl{MCM} (f.e. \cite{Braginsky2005, Luque2010, Tikare2003, Wang2018, Bjork2012}) is to discretize the model space into finite volumes (voxels) with a defined discrete state, which may change with a defined probability.
 This type of system discretization is also referred to as cellular automaton.
 In each step, a voxel is chosen randomly and the probability of changing its state is calculated. 
 Then, the state is changed conditionally by comparing the probability to the value of a random number. 
 The term "kinetic" refers hereby to the correlation of the number of steps performed to the process time. 
 This correlation is usually not directly obtainable, but has to be determined by comparison to experimental results, if desired.
 
-The way to determine the probability of state changes varies in the publisched models. 
-\citeauthor{Braginsky2005}\cite{Braginsky2005, Tikare2003} evaluate the energy change $\Diff E$ of the system for the case the state change has actually happened.
-The energy change is then correlated to the probabilty by \autoref{eq:kinetic-monte-carlo-energy-probability}, where a negative ernergy change (reduction of system energy) is always accepted, however positive ones tend to zero probability by an exponential law.  
+The way to determine the probability of state changes varies in the published models.
+\citeauthor{Tikare2003}\cite{Braginsky2005, Tikare2003, Bjork2012, Tikare2010} evaluate the energy change $\Diff E$ of the system for the case the state change has actually happened.
+The energy change is then correlated to the probability by \autoref{eq:kinetic-monte-carlo-energy-probability}, where a negative energy change (reduction of system energy) is always accepted, however positive ones tend to zero probability by an exponential law.
 
 \begin{equation}
   \Probability = \begin{cases}
@@ -96,12 +96,12 @@ The energy change is then correlated to the probabilty by \autoref{eq:kinetic-mo
 Another way correlates the probability to the local surface geometry, which resembles classic sintering theory. 
 \textcite{Luque2010} (although for liquid phase sintering) evaluates the number of neighboring voxels with the same or different state and correlate the probability with that count. 
 High count of non-solid (in this case liquid, but void also imaginable) voxels beneath a solid mean a high convex curvature at this point. 
-In contrast, a high count of solids beneath a a non-solid one mean a high concave curvature.
+In contrast, a high count of solids beneath a non-solid one mean a high concave curvature.
 In \textcite{Luque2005}, they evaluate a number of different approaches for the correlation between these counts and the probability. 
 They remark, that although lots of different approaches could be chosen, only few are feasible due to the danger of generating numerical artifacts in the system state.
 A similar approach was taken by \textcite{Wang2018}.
 
-This type of models is especially usefull for liquid phase sintering, since there are no voids, so state change from liquid to solid or vice versa does not violate the mass conservation law. 
+This type of models is especially useful for liquid phase sintering, since there are no voids, so state change from liquid to solid or vice versa does not violate the mass conservation law.
 In solid state sintering one has to make sure, that for every solid voxel appearing there is one removed. 
 Especially to model densification void voxels have to be transported to the outer surface. 
 \textcite{Braginsky2005} remove a solid voxel at the outer surface for every vacancy anhilated at a grain boundary. 
