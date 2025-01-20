@@ -2,6 +2,7 @@ namespace parameter_study;
 
 class ParticleInput
 {
+    public required Guid Id { get; set; }
     public required double X { get; set; }
     public required double Y { get; set; }
     public required double Radius { get; set; }
@@ -31,4 +32,12 @@ class Input
     public required MaterialInput Material1 { get; set; }
     public required MaterialInput Material2 { get; set; }
     public required InterfaceInput GrainBoundary { get; set; }
+
+    public required double Temperature { get; set; }
+
+    public required double VacancyConcentration { get; set; }
+
+    public required double GasConstant { get; set; }
+
+    public required double Duration { get; set; }
 }

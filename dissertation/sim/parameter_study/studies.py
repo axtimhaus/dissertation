@@ -1,4 +1,5 @@
 import deepdiff
+from uuid import UUID
 
 from dissertation.sim.parameter_study.data_model import (
     ParameterStudy,
@@ -12,8 +13,10 @@ from dissertation.sim.parameter_study.data_model import (
 def hash(studies: list[ParameterStudy]) -> str:
     return deepdiff.DeepHash(studies)[studies]
 
+PARTICLE1_ID = UUID("989b9875-2a6b-40c3-ab2f-5ebc96682dbe")
+PARTICLE2_ID = UUID("10cac1cc-6205-4b91-85b4-4e9d6f126274")
 
-BASE_PARTICLE = ParticleInput(radius=100e-6)
+BASE_PARTICLE = ParticleInput(id=PARTICLE1_ID, radius=100e-6)
 
 BASE_SURFACE = InterfaceInput(energy=0.9, diffusion_coefficient=1.65e-10)
 BASE_GRAIN_BOUNDARY = InterfaceInput(
@@ -29,10 +32,14 @@ BASE_MATERIAL = MaterialInput(
 
 BASE_INPUT = Input(
     particle1=BASE_PARTICLE.model_copy(deep=True),
-    particle2=BASE_PARTICLE.model_copy(deep=True, update={"x": 210e-6}),
+    particle2=BASE_PARTICLE.model_copy(deep=True, update={"id": PARTICLE2_ID, "x": 210e-6}),
     material1=BASE_MATERIAL.model_copy(deep=True),
     material2=BASE_MATERIAL.model_copy(deep=True),
     grain_boundary=BASE_GRAIN_BOUNDARY.model_copy(deep=True),
+    gas_constant=8.31446261815324,
+    temperature=1273,
+    vacancy_concentration=1e-4,
+    duration=3.6e6,
 )
 
 
@@ -44,7 +51,8 @@ class ParticleSizeRatioStudy(ParameterStudy):
     def input_for(self, parameter_value: float) -> Input:
         model = get_base_input_copy()
         model.particle2.radius *= parameter_value
-        model.particle2.x = (model.particle1.radius + model.particle2.radius) * 1.05
+        model.particle2.x = (model.particle1.radius * 1.05 + model.particle2.radius)
+        model.particle2.node_count = int(model.particle2.node_count * parameter_value)
 
         return model
 

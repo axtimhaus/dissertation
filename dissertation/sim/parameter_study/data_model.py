@@ -1,15 +1,16 @@
 from abc import abstractmethod, ABC
 from pathlib import Path
 from typing import Literal, Iterable
+from uuid import UUID
 
 import numpy as np
 from pydantic import BaseModel, ConfigDict, Field
-from numpy.typing import ArrayLike
 
 THIS_DIR = Path(__file__).parent
 
 
 class ParticleInput(BaseModel):
+    id: UUID
     x: float = 0
     y: float = 0
     radius: float = Field(ge=0)
@@ -36,6 +37,22 @@ class Input(BaseModel):
     material1: MaterialInput
     material2: MaterialInput
     grain_boundary: InterfaceInput
+    gas_constant: float
+    temperature: float
+    duration: float
+    vacancy_concentration: float
+
+    @property
+    def _time_norm_common(self):
+        return self.gas_constant * self.temperature / self.vacancy_concentration * self.particle1.radius ** 4 /  self.material1.molar_mass * self.material1.density
+
+    @property
+    def time_norm_surface(self):
+        return self._time_norm_common / (self.material1.surface.diffusion_coefficient * self.material1.surface.energy)
+
+    @property
+    def time_norm_grain_boundary(self):
+        return self._time_norm_common / (self.grain_boundary.diffusion_coefficient * self.grain_boundary.energy)
 
 
 class ParameterStudy(BaseModel, ABC):
@@ -51,7 +68,7 @@ class ParameterStudy(BaseModel, ABC):
     def __str__(self) -> str:
         return f"{self.parameter_name}_{self.min}_{self.max}_{self.scale}_{self.count}"
 
-    def dir(self, value: float | None = None):
+    def dir(self, value: float | str | None = None):
         base = THIS_DIR / "runs" / str(self)
         if value is not None:
             return base / str(value)

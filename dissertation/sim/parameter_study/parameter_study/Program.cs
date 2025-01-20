@@ -4,10 +4,12 @@ using Microsoft.Extensions.Logging;
 using parameter_study;
 using Plotly.NET;
 using RefraSin.Compaction.ProcessModel;
+using RefraSin.Coordinates;
 using RefraSin.Coordinates.Absolute;
 using RefraSin.MaterialData;
 using RefraSin.ParquetStorage;
 using RefraSin.ParticleModel.ParticleFactories;
+using RefraSin.ParticleModel.Remeshing;
 using RefraSin.Plotting;
 using RefraSin.ProcessModel;
 using RefraSin.ProcessModel.Sintering;
@@ -37,25 +39,25 @@ var material2Id = Guid.NewGuid();
 var material1 = new Material(
     material1Id,
     "material1",
-    new BulkProperties(0, 1e-4),
+    new BulkProperties(0, input.VacancyConcentration),
     new SubstanceProperties(input.Material1.Density, input.Material1.MolarMass),
     new InterfaceProperties(
         input.Material1.Surface.DiffusionCoefficient,
         input.Material1.Surface.Energy
     ),
-    new Dictionary<Guid, IInterfaceProperties>() { { material2Id, grainBoundary } }
+    new Dictionary<Guid, IInterfaceProperties> { { material2Id, grainBoundary } }
 );
 
 var material2 = new Material(
     material2Id,
     "material2",
-    new BulkProperties(0, 1e-4),
+    new BulkProperties(0, input.VacancyConcentration),
     new SubstanceProperties(input.Material2.Density, input.Material1.MolarMass),
     new InterfaceProperties(
         input.Material2.Surface.DiffusionCoefficient,
         input.Material2.Surface.Energy
     ),
-    new Dictionary<Guid, IInterfaceProperties>() { { material1Id, grainBoundary } }
+    new Dictionary<Guid, IInterfaceProperties> { { material1Id, grainBoundary } }
 );
 
 var particle1 = new ShapeFunctionParticleFactory(
@@ -68,7 +70,7 @@ var particle1 = new ShapeFunctionParticleFactory(
 {
     CenterCoordinates = (input.Particle1.X, input.Particle1.Y),
     NodeCount = input.Particle1.NodeCount,
-}.GetParticle();
+}.GetParticle(input.Particle1.Id);
 
 var particle2 = new ShapeFunctionParticleFactory(
     input.Particle2.Radius,
@@ -80,7 +82,8 @@ var particle2 = new ShapeFunctionParticleFactory(
 {
     CenterCoordinates = (input.Particle2.X, input.Particle2.Y),
     NodeCount = input.Particle2.NodeCount,
-}.GetParticle();
+    RotationAngle = Angle.Half,
+}.GetParticle(input.Particle2.Id);
 
 var initialState = new SystemState(Guid.Empty, 0, [particle1, particle2]);
 
@@ -94,16 +97,16 @@ var compactedState = new FocalCompactionStep(
 ParticlePlot.PlotParticles(compactedState.Particles).SaveHtml("compactedState.html");
 
 Log.Logger = new LoggerConfiguration().WriteTo.File("run.log").CreateLogger();
-var loggerFactory = LoggerFactory.Create(builder =>
-{
-    builder.AddSerilog();
-});
+var loggerFactory = LoggerFactory.Create(builder => { builder.AddSerilog(); });
+
+var solver = new SinteringSolver(loggerFactory, SolverRoutines.Default);
 
 var process = new SinteringStep(
-    1e4,
-    1273,
-    new SinteringSolver(loggerFactory, SolverRoutines.Default),
-    new[] { material1, material2 }
+    input.Duration,
+    input.Temperature,
+    solver,
+    [material1, material2],
+    input.GasConstant
 );
 
 var storage = new ParquetStorage(outputFile);
