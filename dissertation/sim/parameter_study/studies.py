@@ -57,6 +57,19 @@ class ParticleSizeRatioStudy(ParameterStudy):
         return model
 
 
+class SurfaceBoundaryEnergyStudy(ParameterStudy):
+    def input_for(self, parameter_value: float) -> Input:
+        model = get_base_input_copy()
+        model.grain_boundary.energy *= model.material1.surface.energy * parameter_value
+        return model
+
+class SurfaceBoundaryDiffusionStudy(ParameterStudy):
+    def input_for(self, parameter_value: float) -> Input:
+        model = get_base_input_copy()
+        model.grain_boundary.diffusion_coefficient *= model.material1.surface.diffusion_coefficient * parameter_value
+        return model
+
+
 STUDIES = [
     ParticleSizeRatioStudy(
         parameter_name="particle_size_ratio",
@@ -64,5 +77,19 @@ STUDIES = [
         max=10,
         count=10,
         scale="geom",
+    ),
+    SurfaceBoundaryEnergyStudy(
+        parameter_name="surface_boundary_energy",
+        min=0.01,
+        max=1,
+        count=10,
+        scale="geom"
+    ),
+    SurfaceBoundaryDiffusionStudy(
+        parameter_name="surface_boundary_diffusion",
+        min=0.01,
+        max=1,
+        count=10,
+        scale="geom"
     ),
 ]
