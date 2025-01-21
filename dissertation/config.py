@@ -20,6 +20,9 @@ IMAGE_FILE_FORMATS = [
 
 IMAGE_FILE_SUFFIXES = ["." + f for f in IMAGE_FILE_FORMATS]
 
+def image_produces(stem: Path):
+    return [stem.with_suffix(s) for s in IMAGE_FILE_SUFFIXES]
+
 mpl.use('pgf')
 
 PREAMBLE_FILE = Path(ROOT_DIR / "textext_preamble.tex")

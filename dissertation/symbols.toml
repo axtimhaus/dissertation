@@ -21,7 +21,9 @@ Y = 'y' # vertical coordinate
 PI = '\symrm{\pi}'
 E = '\symrm{e}'
 
+# Time
 Time = 't' # time
+TimeNorm = '\tau'
 
 # Geometry
 Curvature = '\kappa' # curvature of a surface
