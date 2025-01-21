@@ -1,16 +1,12 @@
-Python dependencies of this repository are maintained with `hatch`.
+Python dependencies of this repository are maintained with [`uv`](https://docs.astral.sh/uv/).
 
 The primary virtual environment is created in the `.venv` directory using
 
-    hatch env create
+    uv sync
 
 To build the entire project execute
 
-    hatch run build
-
-Or from with the virtual environment created by `hatch`
-
-    pytask build
+    uv run pytask
 
 Additional software, that must be present in the system includes:
 - LaTeX (any current distribution)
