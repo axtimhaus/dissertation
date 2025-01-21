@@ -5,49 +5,25 @@ authors = [
 ]
 description = "LaTeX project for doctoral thesis (dissertation)"
 version = "0"
-
+requires-python = ">=3.12"
 dependencies = [
-    "pytask ~= 0.4.0",
-    "pytask-latex ~= 0.4.0",
+    "pytask ~= 0.5.0",
+    "pytask-latex",
     "matplotlib ~= 3.8",
     "plotly ~= 5.20",
-    "numpy ~= 1.26",
+    "numpy ~= 2.0",
     "pandas ~= 2.1",
     "schemdraw ~= 0.17",
     "scipy ~= 1.11",
     "sympy ~= 1.12",
     "tomlkit ~= 0.12",
-    "coconut"
+    "jupyter",
 ]
 
 [tool.pytask.ini_options]
 editor_url_scheme = "pycharm"
 paths = ["dissertation"]
 
-[tool.hatch]
-
-[tool.hatch.build]
-packages = ["dissertation"]
-
-[tool.hatch.env]
-requires = [
-    "hatch-pip-compile"
-]
-
-[tool.hatch.envs.default]
-type = "pip-compile"
-path = ".venv"
-lock-filename = "default.lock"
-pip-compile-hashes = true
-dependencies = [
-    "jupyter",
-    "jupyterlab",
-    "python-lsp-server ~= 1.9",
-]
-
-[tool.hatch.envs.default.scripts]
-build = "python -m pytask"
-
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
