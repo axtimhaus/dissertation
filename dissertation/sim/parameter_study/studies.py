@@ -32,14 +32,14 @@ BASE_MATERIAL = MaterialInput(
 
 BASE_INPUT = Input(
     particle1=BASE_PARTICLE.model_copy(deep=True),
-    particle2=BASE_PARTICLE.model_copy(deep=True, update={"id": PARTICLE2_ID, "x": 210e-6}),
+    particle2=BASE_PARTICLE.model_copy(deep=True, update={"id": PARTICLE2_ID, "x": 1.99 * BASE_PARTICLE.radius}),
     material1=BASE_MATERIAL.model_copy(deep=True),
     material2=BASE_MATERIAL.model_copy(deep=True),
     grain_boundary=BASE_GRAIN_BOUNDARY.model_copy(deep=True),
     gas_constant=8.31446261815324,
     temperature=1273,
     vacancy_concentration=1e-4,
-    duration=3.6e6,
+    duration=3.6e5,
 )
 
 
@@ -51,7 +51,7 @@ class ParticleSizeRatioStudy(ParameterStudy):
     def input_for(self, parameter_value: float) -> Input:
         model = get_base_input_copy()
         model.particle2.radius *= parameter_value
-        model.particle2.x = (model.particle1.radius * 1.05 + model.particle2.radius)
+        model.particle2.x = (model.particle1.radius * 0.99 + model.particle2.radius)
         model.particle2.node_count = int(model.particle2.node_count * parameter_value)
 
         return model

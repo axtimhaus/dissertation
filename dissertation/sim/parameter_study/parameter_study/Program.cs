@@ -91,7 +91,9 @@ ParticlePlot.PlotParticles(initialState.Particles).SaveHtml("initialState.html")
 
 var compactedState = new FocalCompactionStep(
     new AbsolutePoint(0, 0),
-    input.Particle1.Radius / 100
+    stepDistance: input.Particle1.Radius / 100,
+    minimumRelativeIntrusion: 0.5,
+    maxStepCount:1
 ).Solve(initialState);
 
 ParticlePlot.PlotParticles(compactedState.Particles).SaveHtml("compactedState.html");
