@@ -34,7 +34,7 @@ for study in STUDIES:
                 times = grain_boundary["State.Time_one"][mask] / input.time_norm_surface
                 neck_sizes = grain_boundary["Node.SurfaceDistance.ToUpper_one"][mask] + grain_boundary["Node.SurfaceDistance.ToLower_one"][mask] / input.particle1.radius
 
-                ax.plot(times , neck_sizes, label=f"{key}")
+                ax.plot(times , neck_sizes, label=f"{key:.2f}")
 
             ax.legend()
             ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")

@@ -40,7 +40,7 @@ for study in STUDIES:
                 times = particle1["State.Time_one"][mask] / study.input_for(key).time_norm_surface
                 shrinkages = (distance0 - distances[mask]) / distance0
 
-                ax.plot(times , shrinkages, label=f"{key}")
+                ax.plot(times , shrinkages, label=f"{key:.2f}")
 
             ax.legend()
             ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
