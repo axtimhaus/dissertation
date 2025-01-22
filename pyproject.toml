@@ -27,6 +27,9 @@ dependencies = [
 editor_url_scheme = "pycharm"
 paths = ["dissertation"]
 
+[tool.hatch.build]
+packages = ["dissertation"]
+
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
