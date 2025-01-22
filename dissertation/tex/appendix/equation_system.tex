@@ -1,6 +1,5 @@
 \chapter{Complete Equation System of the Model}\label{ch:equation-system}
 
-
 \section{Components of the Lagrangian Gradient}\label{sec:components-of-the-lagrangian-gradient}
 
 The following table displays all components of the Lagrangian gradient to be solved for the application of the \gls{TEP}.
@@ -12,13 +11,13 @@ Partial derivatives, that have been left standing symbolically, are given in the
 They depend only on the current geometry and constant material parameters (especially the local interface energy).
 
 \begin{longtblr}[
-    label=none,
-    entry=none,
-    note{*}={Only if the node is in parent position.}
-]{
-    colspec={lX[c]},
-    measure=vbox
-}
+        label=none,
+        entry=none,
+        note{*}={Only if the node is in parent position.}
+    ]{
+        colspec={lX[c]},
+        measure=vbox
+    }
     \toprule
     \SetCell[c=2]{l} for each non-contact node $n$ \\
     \midrule
@@ -100,15 +99,15 @@ They depend only on the current geometry and constant material parameters (espec
     \begin{itemize}
         \item the therein involved nodes of the parent $\Nodes\Regarding\Parent(c)$,
         \item the rings this contact is part of $\Rings(c)$,
-        \item the parent particle of this contact $p$ 
-        \item $\delta(c)$ as a sign function that is $1$ at the primary path and $-1$ at the secondary path 
+        \item the parent particle of this contact $p$
+        \item $\delta(c)$ as a sign function that is $1$ at the primary path and $-1$ at the secondary path
     \end{itemize} \\
     \midrule
     $\LagrangeFunction_{\dot\Radius_{\Contact}(c)}$ &
     \begin{equation*}
         0
         = \sum^{\Nodes\Regarding\Parent(c)}_n \LagrangeParameter_{\Radius_{\Contact}}(n)
-        + \sum_r^{\Rings(c)} \delta(c) \left[ 
+        + \sum_r^{\Rings(c)} \delta(c) \left[
             \cos \left( \RotationAngle(p) + \Angle_{\Contact}(c) \right) \LagrangeParameter_{\Ring\X}(r)
             + \sin \left( \RotationAngle(p) + \Angle_{\Contact}(c) \right) \LagrangeParameter_{\Ring\Y}(r)
         \right]
@@ -118,7 +117,7 @@ They depend only on the current geometry and constant material parameters (espec
     \begin{multline*}
         0
         = \sum^{\Nodes\Regarding\Parent(c)}_n \LagrangeParameter_{\Angle_{\Contact}}(n)\\
-        + \sum_r^{\Rings(c)} \delta(c) \Radius_{\Contact}(c) \left[ 
+        + \sum_r^{\Rings(c)} \delta(c) \Radius_{\Contact}(c) \left[
             -\sin \left( \RotationAngle(p) + \Angle_{\Contact}(c) \right) \LagrangeParameter_{\Ring\X}(r)
             + \cos \left( \RotationAngle(p) + \Angle_{\Contact}(c) \right) \LagrangeParameter_{\Ring\Y}(r)
         \right]
@@ -130,36 +129,36 @@ They depend only on the current geometry and constant material parameters (espec
         = \sum^{\Nodes\Regarding\Parent(c)}_n \Biggl[
             - \Radius\Regarding\Child(n) \sin \left( \Angle\Regarding\Child(n) - \Angle_{\Contact}\Regarding\Child(c) \right) \LagrangeParameter_{\Radius_{\Contact}}(n) \\
             + \frac{\Radius\Regarding\Child(n)}{\Radius_{\Contact}(c)} \cos \left( \Angle\Regarding\Child(n) - \Angle_{\Contact}\Regarding\Child(c)  \right) \LagrangeParameter_{\Angle_{\Contact}}(n)
-            \Biggr]
+        \Biggr]
     \end{multline*} \\
 
     \midrule
     \SetCell[c=2]{l} for each ring $r$ with
     \begin{itemize}
         \item the therein involved contacts $\Contacts(r)$,
-        \item the parent particle of a contact $p(c)$ 
-        \item $\delta(c)$ as a sign function that is $1$ at the primary path and $-1$ at the secondary path 
+        \item the parent particle of a contact $p(c)$
+        \item $\delta(c)$ as a sign function that is $1$ at the primary path and $-1$ at the secondary path
     \end{itemize} \\
     \midrule
-    
+
     $\LagrangeFunction_{\LagrangeParameter_{\Ring\X}(r)}$ &
     \begin{equation*}
         0
-        = \sum_c^{\Contacts(r)} \delta(c)  \left[ 
-            \cos \left( \RotationAngle(p(c)) + \Angle_{\Contact}(c) \right) \dot\Radius_{\Contact}(c) 
-            - \Radius_{\Contact}(c) \sin \left( \RotationAngle(p(c)) + \Angle_{\Contact}(c) \right) \dot\Angle_{\Contact}(c) 
+        = \sum_c^{\Contacts(r)} \delta(c)  \left[
+            \cos \left( \RotationAngle(p(c)) + \Angle_{\Contact}(c) \right) \dot\Radius_{\Contact}(c)
+            - \Radius_{\Contact}(c) \sin \left( \RotationAngle(p(c)) + \Angle_{\Contact}(c) \right) \dot\Angle_{\Contact}(c)
         \right]
     \end{equation*} \\
-    
+
     $\LagrangeFunction_{\LagrangeParameter_{\Ring\Y}(r)}$ &
     \begin{equation*}
         0
-        = \sum_c^{\Contacts(r)} \delta(c)  \left[ 
-            \sin \left( \RotationAngle(p(c)) + \Angle_{\Contact}(c) \right) \dot\Radius_{\Contact}(c) 
-            + \Radius_{\Contact}(c) \cos \left( \RotationAngle(p(c)) + \Angle_{\Contact}(c) \right) \dot\Angle_{\Contact}(c) 
+        = \sum_c^{\Contacts(r)} \delta(c)  \left[
+            \sin \left( \RotationAngle(p(c)) + \Angle_{\Contact}(c) \right) \dot\Radius_{\Contact}(c)
+            + \Radius_{\Contact}(c) \cos \left( \RotationAngle(p(c)) + \Angle_{\Contact}(c) \right) \dot\Angle_{\Contact}(c)
         \right]
     \end{equation*} \\
-    
+
     \midrule
     \SetCell[c=2]{l} just once for the set of all nodes $\Nodes$ \\
     \midrule
@@ -170,7 +169,7 @@ They depend only on the current geometry and constant material parameters (espec
             \frac{\partial\GibbsEnergy}{\partial\Shift_{\Normal}(n)} \dot\Shift_{\Normal}(n)
             + \frac{\partial\GibbsEnergy}{\partial\Shift_{\Tangential}(n)} \dot\Shift_{\Tangential}(n)
             + \frac{\GasConstant\Temperature\SurfaceDistance_{\Upper}(n)}{\MolarVolume\VacancyConcentration^{\Standard} \DiffusionCoefficient_{\Upper}}\Flux_{\Upper}(n)^2
-            \right]
+        \right]
     \end{equation*} \\
     \bottomrule
 \end{longtblr}
@@ -182,13 +181,13 @@ The following table displays the non-zero components of the Jacobian.
 The symbolism is the same as above.
 
 \begin{longtblr}[
-    label=none,
-    entry=none,
-    note{*}={Only if the node is in parent position.}
-]{
-    colspec={llX[c]},
-    measure=vbox
-}
+        label=none,
+        entry=none,
+        note{*}={Only if the node is in parent position.}
+    ]{
+        colspec={llX[c]},
+        measure=vbox
+    }
     \toprule
     \SetCell[c=3]{l} for each non-contact node $n$ \\
     \midrule
@@ -204,11 +203,11 @@ The symbolism is the same as above.
     \midrule
     \SetCell[r=4]{h} $\LagrangeFunction_{\Flux_{\Upper}(n)}$ & $\LagrangeParameter_{\Dissipation}$ &
     \begin{equation*}
-      -2\frac{\GasConstant \Temperature}{\MolarVolume \VacancyConcentration^{\Standard}} \frac{\SurfaceDistance_{\Upper}(n) \Flux_{\Upper}(n)}{\DiffusionCoefficient_{\Upper}(n)}
+        -2\frac{\GasConstant \Temperature}{\MolarVolume \VacancyConcentration^{\Standard}} \frac{\SurfaceDistance_{\Upper}(n) \Flux_{\Upper}(n)}{\DiffusionCoefficient_{\Upper}(n)}
     \end{equation*} \\
     & $\Flux_{\Upper}(n)$ &
     \begin{equation*}
-      -2\frac{\GasConstant \Temperature}{\MolarVolume \VacancyConcentration^{\Standard}} \frac{\SurfaceDistance_{\Upper}(n)}{\DiffusionCoefficient_{\Upper}(n)} \LagrangeParameter_{\Dissipation}
+        -2\frac{\GasConstant \Temperature}{\MolarVolume \VacancyConcentration^{\Standard}} \frac{\SurfaceDistance_{\Upper}(n)}{\DiffusionCoefficient_{\Upper}(n)} \LagrangeParameter_{\Dissipation}
     \end{equation*} \\
     & $\LagrangeParameter_{\Volume}(n)$ &
     \begin{equation*}
@@ -338,8 +337,8 @@ The symbolism is the same as above.
     \end{itemize}
     with
     \begin{itemize}
-        \item the parent particle of this contact $p$ 
-        \item $\delta(c)$ as a sign function that is $1$ at the primary path and $-1$ at the secondary path 
+        \item the parent particle of this contact $p$
+        \item $\delta(c)$ as a sign function that is $1$ at the primary path and $-1$ at the secondary path
     \end{itemize} \\
     \midrule
     \SetCell[r=3]{h} $\LagrangeFunction_{\dot\Radius_{\Contact}(c)}$ & for each $\LagrangeParameter_{\Radius_{\Contact}}(n)$ &
@@ -381,18 +380,18 @@ The symbolism is the same as above.
         \sum^{\Nodes\Regarding\Parent(c)}_n \Biggl[
             - \Radius\Regarding\Child(n) \cos \left( \dot\RotationAngle_{\Child}(c) + \Angle\Regarding\Child(n) - \Angle_{\Contact}\Regarding\Child(c) \right) \LagrangeParameter_{\Radius_{\Contact}}(n) \\
             - \frac{\Radius\Regarding\Child(n)}{\Radius_{\Contact}(c)} \sin \left( \dot\RotationAngle_{\Child}(c) + \Angle\Regarding\Child(n) - \Angle_{\Contact}\Regarding\Child(c)  \right) \LagrangeParameter_{\Angle_{\Contact}}(n)
-            \Biggr]
+        \Biggr]
     \end{multline*} \\
-    
+
     \midrule
     \SetCell[c=3]{l} for each ring $r$ and therein involved contact $c \in \Contacts(r)$ with
     \begin{itemize}
-        \item the parent particle of a contact $p(c)$ 
-        \item $\delta(c)$ as a sign function that is $1$ at the primary path and $-1$ at the secondary path 
+        \item the parent particle of a contact $p(c)$
+        \item $\delta(c)$ as a sign function that is $1$ at the primary path and $-1$ at the secondary path
     \end{itemize} \\
     \midrule
-    
-    \SetCell[r=2]{h} $\LagrangeFunction_{\LagrangeParameter_{\Ring\X}(r)}$ 
+
+    \SetCell[r=2]{h} $\LagrangeFunction_{\LagrangeParameter_{\Ring\X}(r)}$
     & for each $\Radius_{\Contact}(c)$ &
     \begin{equation*}
         \delta(c) \cos \left( \RotationAngle(p) + \Angle_{\Contact}(c) \right)
@@ -401,8 +400,8 @@ The symbolism is the same as above.
     \begin{equation*}
         -\delta(c) \Radius_{\Contact}(c) \sin \left( \RotationAngle(p) + \Angle_{\Contact}(c) \right)
     \end{equation*} \\
-    
-    \SetCell[r=2]{h} $\LagrangeFunction_{\LagrangeParameter_{\Ring\Y}(r)}$ 
+
+    \SetCell[r=2]{h} $\LagrangeFunction_{\LagrangeParameter_{\Ring\Y}(r)}$
     & for each $\Radius_{\Contact}(c)$ &
     \begin{equation*}
         \delta(c) \sin \left( \RotationAngle(p) + \Angle_{\Contact}(c) \right)
@@ -417,15 +416,15 @@ The symbolism is the same as above.
     \midrule
     \SetCell[r=3]{h} $\LagrangeFunction_{\LagrangeParameter_{\Dissipation}}$ & for each $\dot\Shift_{\Normal}(n)$ &
     \begin{equation*}
-            -\frac{\partial\GibbsEnergy}{\partial\Shift_{\Normal}(n)}
+        -\frac{\partial\GibbsEnergy}{\partial\Shift_{\Normal}(n)}
     \end{equation*} \\
     & for each $\dot\Shift_{\Tangential}(n)$ &
     \begin{equation*}
-            -\frac{\partial\GibbsEnergy}{\partial\Shift_{\Tangential}(n)}
+        -\frac{\partial\GibbsEnergy}{\partial\Shift_{\Tangential}(n)}
     \end{equation*} \\
     & for each $\Flux_{\Upper}(n)$ &
     \begin{equation*}
-      2\frac{\GasConstant\Temperature\SurfaceDistance_{\Upper}(n)}{\MolarVolume\VacancyConcentration^{\Standard} \DiffusionCoefficient_{\Upper}} \Flux_{\Upper}(n)
+        2\frac{\GasConstant\Temperature\SurfaceDistance_{\Upper}(n)}{\MolarVolume\VacancyConcentration^{\Standard} \DiffusionCoefficient_{\Upper}} \Flux_{\Upper}(n)
     \end{equation*} \\
     \bottomrule
 \end{longtblr}

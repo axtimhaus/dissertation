@@ -1,0 +1,6 @@
+wrap = false
+wraplen = 120
+tabsize = 4
+tabchar = "space"
+verbosity = "warn"
+lists = []

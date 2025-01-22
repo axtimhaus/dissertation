@@ -99,7 +99,7 @@ Rings = '\symbb{R}' # set of contacts
 
 # Mechanics
 Stress = '\sigma' # normal stress
-Force = 'F' # force 
+Force = 'F' # force
 Torque = 'M' # torque
 
 # Statistics and Monte Carlo

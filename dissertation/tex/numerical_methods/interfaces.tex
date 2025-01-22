@@ -1,31 +1,31 @@
 \section{Interface Descriptions}\label{sec:interfaces}
 
 \begin{figure}
-  \begin{center}
-    \includegraphics[width=0.95\textwidth]{img/numerical_methods/classification}
-  \end{center}
-  \caption{Classification of Interface Description Methods}\label{fig:classification}
+    \begin{center}
+        \includegraphics[width=0.95\textwidth]{img/numerical_methods/classification}
+    \end{center}
+    \caption{Classification of Interface Description Methods}\label{fig:classification}
 \end{figure}
 
-Since the tracking of the interfaces is a key problem in modelling of sintering, a classfication by the approach taken for that is feasible. 
+Since the tracking of the interfaces is a key problem in modelling of sintering, a classfication by the approach taken for that is feasible.
 See \autoref{fig:classification} for a visualization of this classification.
-The approach taken there is also crucial for the used numerical integration procedure, the needed material data and the feasibility of the obtained simulation results. 
+The approach taken there is also crucial for the used numerical integration procedure, the needed material data and the feasibility of the obtained simulation results.
 
 The first distinction can be made into approaches with direct and with indirect interface tracking.
-Direct tracking means that the location of the interface is directly defined by discrete points in space, which are moved during the integration procedure to describe the shape evolution of the interface. 
+Direct tracking means that the location of the interface is directly defined by discrete points in space, which are moved during the integration procedure to describe the shape evolution of the interface.
 Direct interface approaches usually use the \glsfirst{FDM} or the \glsfirst{FEM} to represent the particles shape.
 
-Indirect tracking, however, means that the interface location is defined by the value of an auxiliary function. 
+Indirect tracking, however, means that the interface location is defined by the value of an auxiliary function.
 The discretization is there connected to the solution space, the points are usually fixed (but must not be) and the motion of the interface is just realized by changes in the auxiliary function values.
-Indirect interface methods can further be classified in methods with sharp and diffuse interfaces. 
-A sharp interface means that the interface is considered as a defined line, where the two phases exist on the one resp.~the other side of. 
+Indirect interface methods can further be classified in methods with sharp and diffuse interfaces.
+A sharp interface means that the interface is considered as a defined line, where the two phases exist on the one resp.~the other side of.
 Here we have the \glsfirst{LSM} (see \autoref{subsec:interfaces-level-set}) and \glsfirstplural{CA} (see \autoref{subsec:interfaces-cellular-automata}) approaches.
-Diffuse interfaces mean a more or less smooth transition between two phases, so that the actual position can not directly be located. 
-This diffusivity must not be confused with the physical width of the interface. 
-The physical width of the interface is the region where the atomic structure significantly deviates from the bulk structure. 
-This is usually in the order of a few atomic diameters (around or below \qty{1}{\nano\meter}). 
-The width of a diffuse interface is a numerical artifact and depends on the size of the spatial discretization. 
-Typical widths are here rather in the range around \qty{1}{\micro\meter}. 
+Diffuse interfaces mean a more or less smooth transition between two phases, so that the actual position can not directly be located.
+This diffusivity must not be confused with the physical width of the interface.
+The physical width of the interface is the region where the atomic structure significantly deviates from the bulk structure.
+This is usually in the order of a few atomic diameters (around or below \qty{1}{\nano\meter}).
+The width of a diffuse interface is a numerical artifact and depends on the size of the spatial discretization.
+Typical widths are here rather in the range around \qty{1}{\micro\meter}.
 The diffuse interface width is not physical, but a numeric requirement to be able to calculate gradients through the interface.
 Diffuse interfaces are used in \glsfirst{PFM} approaches (see \autoref{subsec:interfaces-phase-field}).
 
@@ -54,37 +54,36 @@ However, it lacks direct support for time-coupled simulation, as the kinetics ar
 \textcite{Wakai2022} recently built a 3D multiple-particle sintering simulation based on this program, with older iteration in \cite{Wakai2011, Wakai2018}.
 Their implementation includes rigid body motion but only for symmetric cases, as all motion is directed towards the center point.
 
-
 \subsection{Indirect Sharp Interface Approaches Using the Level-Set Method}\label{subsec:interfaces-level-set}
 
 Tracking of interfaces using a sharp interface is possible by application of the \gls{LSM}.
 An auxiliary function (or level-set function) $\phi$ is introduced which is positive inside the regarded phase and negative outside, so $\phi = 0$ defines the location of the interface.
-Usually the value of the function corresponds to the signed euclidic distance of the current point from the boundary. 
+Usually the value of the function corresponds to the signed euclidic distance of the current point from the boundary.
 This enables the use of the gradient $\nabla \phi$ for example for calculation of the interface curvature.
 The time evolution of the auxiliary function is described by \autoref{eq:level-set-elementary}, with the interface velocity vector $\Vect v$.
 
 \begin{equation}
-  \frac{\partial\phi}{\partial\Time} = \Vect v \nabla\phi = 0
-  \label{eq:level-set-elementary}
+    \frac{\partial\phi}{\partial\Time} = \Vect v \nabla\phi = 0
+    \label{eq:level-set-elementary}
 \end{equation}
 
 Overview articles of the method in general were published for example by \textcite{Osher2001, Gibou2018, vanDijk2013}.
 Applications to sintering problems have been conducted by \textcite{Bruchon2010, Bruchon2012, PinoMunoz2013}.
-The basic approach is very similar to direct interface approaches, as diffusional fluxes are directly computed by application of Fick's law with potentials obtained from surface curvature. 
+The basic approach is very similar to direct interface approaches, as diffusional fluxes are directly computed by application of Fick's law with potentials obtained from surface curvature.
 The velocity $v$ is taken normal from the current surface and calculated from mass conservation incorporating the diffusional fluxes.
 The curvature is obtained from the gradient of the level-set function by \autoref{eq:level-set-curvature}.
 
 \begin{equation}
-  \Curvature = \nabla \cdot \frac{\nabla\phi}{\Abs{\nabla\phi}}
-  \label{eq:level-set-curvature}
+    \Curvature = \nabla \cdot \frac{\nabla\phi}{\Abs{\nabla\phi}}
+    \label{eq:level-set-curvature}
 \end{equation}
 
-The solution of \autoref{eq:level-set-elementary}, however, is usually only conducted in a certain region near the interface. 
-Outside this region the solution is roughly approaximated, but this does not preserve the signed distance character of the level-set functions. 
-For this reason a renormalization procedure is applied to restore this character. 
+The solution of \autoref{eq:level-set-elementary}, however, is usually only conducted in a certain region near the interface.
+Outside this region the solution is roughly approaximated, but this does not preserve the signed distance character of the level-set functions.
+For this reason a renormalization procedure is applied to restore this character.
 
-Level-set approaches give a clean indirect description of a sharp interface. 
-This approach circumvents the logical problems inherent in diffuse interfaces, gives a smooth interface line in contrast to cellular approaches and nevertheless  has the advantage of easy indirect interface tracking. 
+Level-set approaches give a clean indirect description of a sharp interface.
+This approach circumvents the logical problems inherent in diffuse interfaces, gives a smooth interface line in contrast to cellular approaches and nevertheless  has the advantage of easy indirect interface tracking.
 The main disadvantage of this method is the restriction to only two phases, at least no extension to multiple phases has been published yet.
 This seems also the main reason, why the adoption of this method for sintering problems is currently rather low.
 Especially, there is no numeric distinction between the particles, just between solid and void (or liquid for the case of liquid phase sintering).
@@ -92,74 +91,74 @@ Therefore, also the boundary between the particles is inexistent, so grain bound
 
 \subsection{Indirect Sharp Interface Approaches Using Cellular Automata}\label{subsec:interfaces-cellular-automata}
 
-A \gls{CA} is a discretization scheme, where the solution space is discretized in finite cells, of possible arbitrary shape. 
-The state of these cells (or sometimes voxels), for example the belonging to a phase or grain, is defined by discrete state variables. 
-In each time step the state variables' values are changed in dependence on the governing model equations. 
+A \gls{CA} is a discretization scheme, where the solution space is discretized in finite cells, of possible arbitrary shape.
+The state of these cells (or sometimes voxels), for example the belonging to a phase or grain, is defined by discrete state variables.
+In each time step the state variables' values are changed in dependence on the governing model equations.
 For sintering, these governing equations are usually randomized, which leads to the \glsfirst{kMCM}, which will be discussed in \autoref{subsec:monte-carlo-kinetic-sintering}.
 In this type of model there is usually no continuous or almost continuous interface, as the interface is just the outer boundary of coherent cells belonging to the same phase or grain.
 This is similar to a low resolution pixel graphic with discrete colors.
 
 \subsection{Indirect Diffuse Interface Approaches Using the Phase Field Method}\label{subsec:interfaces-phase-field}
 
-The phase field method is based on the idea to describe the phase distribution in a regarded solution space by the value of an auxiliary variable, usually referred to as phase field variable or order parameter. 
-The task of tracking the interface is reduced to the task of describing the time evolution of the order parameter by use of differential equations. 
+The phase field method is based on the idea to describe the phase distribution in a regarded solution space by the value of an auxiliary variable, usually referred to as phase field variable or order parameter.
+The task of tracking the interface is reduced to the task of describing the time evolution of the order parameter by use of differential equations.
 The method resides on a grand energy potential, either written in terms of Gibbs energy $\GibbsEnergy$ or Helmholtz energy $\HelmholtzEnergy$, which describes the thermodynamic evolution of the system.
 For the example of a coupled thermal and diffusional system consisting of two phases the total differential of the specific Helmholtz free energy $\SpecificHelmholtzEnergy$ can be stated as \autoref{eq:phase-field-helmholtz-functional}, with the specific entropy $\SpecificEntropy$, the temperature $\Temperature$, the chemical potential $\ChemicalPotential$ and concentration $\Concentration_i$ of species $i$, as well as the order parameter for the phase $\xi$ and the thermodynamic driving force of phase transition $\beta$, which includes both, the driving force of bulk transformation and of interface generation or destruction.
 
 \begin{equation}
-  \Deriv f = - \SpecificEntropy \Deriv \Temperature + \ChemicalPotential_i \Deriv \Concentration_i - \beta \Deriv \xi
-  \label{eq:phase-field-helmholtz-functional}
+    \Deriv f = - \SpecificEntropy \Deriv \Temperature + \ChemicalPotential_i \Deriv \Concentration_i - \beta \Deriv \xi
+    \label{eq:phase-field-helmholtz-functional}
 \end{equation}
 
-According to \textcite{Allen1979} the driving force $\beta$ is given as in \autoref{eq:allen-cahn-driving}, which includes a dependency on the gradient of the order parameter $\xi$, which covers the change in energy due to change in interfacial areas. 
+According to \textcite{Allen1979} the driving force $\beta$ is given as in \autoref{eq:allen-cahn-driving}, which includes a dependency on the gradient of the order parameter $\xi$, which covers the change in energy due to change in interfacial areas.
 $\kappa_\xi$ is a material dependent parameter (gradient coefficient), which is related to the interface energy $\InterfaceEnergy$.
 
 \begin{equation}
-  \beta = - \left( \frac{\partial\SpecificHelmholtzEnergy}{\partial\xi} - \kappa_\xi \nabla^2 \xi \right)
-  \label{eq:allen-cahn-driving}
+    \beta = - \left( \frac{\partial\SpecificHelmholtzEnergy}{\partial\xi} - \kappa_\xi \nabla^2 \xi \right)
+    \label{eq:allen-cahn-driving}
 \end{equation}
 
-Assuming kinetics proportional to the driving force (as usual for small driving forces), one gets \autoref{eq:allen-cahn-differential} as evolution presription for the order parameter with $M_\xi$ as kinetic constant (mobility constant). 
+Assuming kinetics proportional to the driving force (as usual for small driving forces), one gets \autoref{eq:allen-cahn-differential} as evolution presription for the order parameter with $M_\xi$ as kinetic constant (mobility constant).
 
 \begin{equation}
-  \frac{\Deriv\xi}{\Deriv\Time} = \Mobility_\xi \beta = -\Mobility_\xi \left( \frac{\partial\SpecificHelmholtzEnergy}{\partial\xi} - \kappa_\xi \nabla^2 \xi \right)
-  \label{eq:allen-cahn-differential}
+    \frac{\Deriv\xi}{\Deriv\Time} = \Mobility_\xi \beta = -\Mobility_\xi \left( \frac{\partial\SpecificHelmholtzEnergy}{\partial\xi} - \kappa_\xi \nabla^2 \xi \right)
+    \label{eq:allen-cahn-differential}
 \end{equation}
 
-The width of the interface can be estimated using \autoref{eq:phase-field-interfacial-width}. 
+The width of the interface can be estimated using \autoref{eq:phase-field-interfacial-width}.
 To ensure numerical stability and accuracy, the discretization width of the numerical solution should be smaller than the interface width (at least four cells within the interface according to \textcite{Qin2010}).
 
 \begin{equation}
-  l = \sqrt{\frac{2\kappa_\xi \xi_\Equilibrium}{\SpecificHelmholtzEnergy(\xi) - \SpecificHelmholtzEnergy(\xi_\Equilibrium)}}
-  \label{eq:phase-field-interfacial-width}
+    l = \sqrt{\frac{2\kappa_\xi \xi_\Equilibrium}{\SpecificHelmholtzEnergy(\xi) - \SpecificHelmholtzEnergy(\xi_\Equilibrium)}}
+    \label{eq:phase-field-interfacial-width}
 \end{equation}
 
 For conserved order parameters, the Cahn-Hillard equation \cite{Cahn1961} can be applied instead as given in \autoref{eq:cahn-hillard}.
 
 \begin{equation}
-  \frac{\Deriv\xi}{\Deriv\Time} = \nabla \cdot \Mobility_\xi \nabla \left( \frac{\partial\SpecificHelmholtzEnergy}{\partial\xi} - \kappa_\xi \nabla^2 \xi \right)
-  \label{eq:cahn-hillard}
+    \frac{\Deriv\xi}{\Deriv\Time} = \nabla \cdot \Mobility_\xi \nabla \left( \frac{\partial\SpecificHelmholtzEnergy}{\partial\xi} - \kappa_\xi \nabla^2 \xi \right)
+    \label{eq:cahn-hillard}
 \end{equation}
 
-Additional kinetic equations must be found in a similar way for the other state variables $\Temperature$ and $\Concentration_i$. 
-Temperature kinetics are usually described by \autoref{eq:phase-field-kinetic-temperature} with the specific heat capacity $c_\Volume$ and the heat conductivity $k$, which is in fact just Fourier's heat conduction law. 
-Diffusion kinetics, however, can be described by \autoref{eq:phase-field-kinetic-concentration} with a law similar to the classic description of diffusion using Fick's law (see \autoref{sec:diffusion}). 
-Note that the mobility coefficient $\Mobility_ij$ is here not identical to the diffusion coeffcient $\DiffusionCoefficient$, since it relates the flux to the gradient of chemical potential $\ChemicalPotential$, instead of the concentration gradient. 
+Additional kinetic equations must be found in a similar way for the other state variables $\Temperature$ and $\Concentration_i$.
+Temperature kinetics are usually described by \autoref{eq:phase-field-kinetic-temperature} with the specific heat capacity $c_\Volume$ and the heat conductivity $k$, which is in fact just Fourier's heat conduction law.
+Diffusion kinetics, however, can be described by \autoref{eq:phase-field-kinetic-concentration} with a law similar to the classic description of diffusion using Fick's law (see \autoref{sec:diffusion}).
+Note that the mobility coefficient $\Mobility_ij$ is here not identical to the diffusion coeffcient $\DiffusionCoefficient$, since it relates the flux to the gradient of chemical potential $\ChemicalPotential$, instead of the concentration gradient.
 These common laws are in fact just special cases of the Cahn-Hillard (\autoref{eq:cahn-hillard}) equation, as both are conserved fields.
 
 \begin{equation}
-  \frac{\Deriv\Temperature}{\Deriv \Time} = \frac{1}{c_\Volume} \nabla \cdot \left( k \nabla \Temperature \right) 
-  \label{eq:phase-field-kinetic-temperature}
+    \frac{\Deriv\Temperature}{\Deriv \Time} = \frac{1}{c_\Volume} \nabla \cdot \left( k \nabla \Temperature \right)
+    \label{eq:phase-field-kinetic-temperature}
 \end{equation}
 
 \begin{equation}
-  \frac{\Deriv\Concentration_i}{\Deriv \Time} = \nabla \cdot \left( \Mobility_{ij} \nabla \ChemicalPotential_j \right) 
-  \label{eq:phase-field-kinetic-concentration}
+    \frac{\Deriv\Concentration_i}{\Deriv \Time} = \nabla \cdot \left( \Mobility_{ij} \nabla \ChemicalPotential_j \right)
+    \label{eq:phase-field-kinetic-concentration}
 \end{equation}
 
 The phase field method offers a flexible approach to the description of heterogeneous thermodynamic systems, as additional energy contributions can be included easily as additonal terms in the energy functional \autoref{eq:phase-field-helmholtz-functional}.
-Additonal phases can be included by introduction of additonal order parameters. 
-Additional internal processes like chemical reactions can be regarded in the same way. 
+Additonal phases can be included by introduction of additonal order parameters.
+Additional internal processes like chemical reactions can be regarded in the same way.
 The numerical treatment of all state variables in the system is very similar, the only important distinction is the for conserved fields (e.g. concentrations) and non-conserved fields (e.g. phase variables).
 Numerical difficulties occur due to the varying magnitude of the involved gradients.
 Influence of crystal orientation can also be introduced into the system by directionally dependent material parameters~\cite{Deng2012}.
@@ -168,30 +167,29 @@ There are several excellent review articles on basics and application of the \gl
 Today, the \gls{PFM} is the most used approach for simulation of sintering, but also applied in other fields of materials modelling and beyond.
 The main reason for this seems to be its flexibility and clean and easy formulation of multiple coupled mechanisms.
 
-The main disadvantage of phase field models is the unphysical wide interface caused by the continuous description of phase composition by the order parameters. 
-Therefore, material parameters in energy and kinetic functions are not directly identifiable with actual physical quantities. 
+The main disadvantage of phase field models is the unphysical wide interface caused by the continuous description of phase composition by the order parameters.
+Therefore, material parameters in energy and kinetic functions are not directly identifiable with actual physical quantities.
 They depend not only on the actaul material properties, but also on the numerical properties of the model, such as interface width and discretization width.
 This is natural, since the local characteristics of the (approximately) sharp real interface must be transformed to the diffuse interface while maintaining the globally observable behavior.
 Applications of this method to sintering problems often on general observations on sintering behavior far from any real material data~\cite{Deng2012, Wang2006, Asp2006, Jing2003, Kumar2010, Kumar2011, Shinagawa2014}.
 \textcite{Biswas2016, Biswas2017} determined the mobilities $\Mobility$ from the corresponding diffusion coefficients by use of a method by \textcite{Moelans2008}.
 Several authors~\cite{Chockalingam2016, Biswas2016, Biswas2017, Choudhuri2021} used an equation system developed by \textcite{Ahmed2013} to determine the gradient coefficents $\kappa$ and from actual material data, however still including the numerical properties.
 
-A major difficulty in application to sintering problems is the description of rigid body motion. 
-For modelling dense microstructures, the only possible changes are due to phase transformations and diffusional flows, since the space is fully occupied by matter. 
+A major difficulty in application to sintering problems is the description of rigid body motion.
+For modelling dense microstructures, the only possible changes are due to phase transformations and diffusional flows, since the space is fully occupied by matter.
 In sintering, however, the is usually a significant amount of void (or atmosphere), which is not able to withstand the motion of a solid body.
 The distict grains may (and do) move relative to each other due to changes in their contact geometry effected by diffusional flows along the grain boundaries.
 This is observed macroscopically as shrinkage, a main phenomenon of sintering processes.
 The movement is not directly driven by diffusional flows or phase transformations, so it cannot be included directly in the grand energy functional.
 Some phase-field-based sintering model neglect this mechanism, therefore not regarding the phenomenon of shrinkage \cite{Asp2006, Chockalingam2016, Hotzer2019, Jing2003, Kumar2010, Kumar2011, Deng2012, Zhang2014, Yang2020, Choudhuri2021}.
 
-An approach by \textcite{Wang2006} (and adopted by others~\cite{Termuhlen2021, Biswas2016, Biswas2017}) regards the rigid body motion by additonal terms in the Allen-Cahn and Cahn-Hillard equations including an advection velocity of the particles. 
-This advection velocity is calculated from the force and torque balance on the particle volume. 
+An approach by \textcite{Wang2006} (and adopted by others~\cite{Termuhlen2021, Biswas2016, Biswas2017}) regards the rigid body motion by additonal terms in the Allen-Cahn and Cahn-Hillard equations including an advection velocity of the particles.
+This advection velocity is calculated from the force and torque balance on the particle volume.
 Forces and torques are obtained from the order parameter gradient.
 \textcite{Shinagawa2014} used a coupled \gls{DEM} model to determine the rigid body motion independently from the phase field.
 Both models are updated from the other by an iterational process.
-\textcite{Ivannikov2021} introduced a grain boundary force similar to that of \textcite{Wang2006}, but did not include it in the kinetics equation, rather they set a constraint on it to be always zero. 
+\textcite{Ivannikov2021} introduced a grain boundary force similar to that of \textcite{Wang2006}, but did not include it in the kinetics equation, rather they set a constraint on it to be always zero.
 If the constraint is violated, they calculate and apply an advection vector to restore it.
 
 The undelying numerical method to solve the field equations is usually a \gls{FDM}~\cite{Wang2006, Hotzer2019, Jing2003, Kumar2010, Kumar2011, Zhang2014} or \gls{FEM}~\cite{Asp2006, Chockalingam2016, Biswas2016, Biswas2017, Greenquist2020, Ivannikov2021} scheme.
 Most models are formulated in 2D, only a few in 3D space~\cite{Greenquist2020, Termuhlen2021}
-

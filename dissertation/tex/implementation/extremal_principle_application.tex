@@ -43,7 +43,7 @@ Shifting of particles alone does not follow a thermodynamic force, but is determ
 
 \minisec{Dissipation Function $\DissipationFunction$}
 
-The dissipation function as formulation of the dissipation in terms of fluxes involves the square of fluxes, 
+The dissipation function as formulation of the dissipation in terms of fluxes involves the square of fluxes,
 the surface distance $\SurfaceDistance$,
 the diffusion coefficient along the interface $\DiffusionCoefficient$,
 the molar volume $\MolarVolume$ of the particle substance,
@@ -76,19 +76,19 @@ Additional constraints occur at particle contacts.
 For each node involved in a contact the conditions according to \autoref{eq:particle-steps} are applied in a formulation in terms of node shift velocities $\dot\Shift$.
 
 \begin{subequations}
-	\begin{align}
-		\dot\Radius_{\Contact}           & =
-		\frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Normal}\Regarding\Parent} \dot\Shift_{\Normal}\Regarding\Parent
-		+ \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Normal}\Regarding\Child} \dot\Shift_{\Normal}\Regarding\Child
-		+ \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Tangential}\Regarding\Parent} \dot\Shift_{\Tangential}\Regarding\Parent
-		+ \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Tangential}\Regarding\Child} \dot\Shift_{\Tangential}\Regarding\Child \\
-		%
-		\dot\Angle_{\Contact}\Regarding\Parent & =
-		\frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Normal}\Regarding\Parent} \dot\Shift_{\Normal}\Regarding\Parent
-		+ \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Normal}\Regarding\Child} \dot\Shift_{\Normal}\Regarding\Child
-		+ \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Tangential}\Regarding\Parent} \dot\Shift_{\Tangential}\Regarding\Parent
-		+ \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Tangential}\Regarding\Child} \dot\Shift_{\Tangential}\Regarding\Child
-	\end{align} \label{eq:contact-constraints}
+    \begin{align}
+        \dot\Radius_{\Contact}           & =
+        \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Normal}\Regarding\Parent} \dot\Shift_{\Normal}\Regarding\Parent
+        + \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Normal}\Regarding\Child} \dot\Shift_{\Normal}\Regarding\Child
+        + \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Tangential}\Regarding\Parent} \dot\Shift_{\Tangential}\Regarding\Parent
+        + \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Tangential}\Regarding\Child} \dot\Shift_{\Tangential}\Regarding\Child \\
+        %
+        \dot\Angle_{\Contact}\Regarding\Parent & =
+        \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Normal}\Regarding\Parent} \dot\Shift_{\Normal}\Regarding\Parent
+        + \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Normal}\Regarding\Child} \dot\Shift_{\Normal}\Regarding\Child
+        + \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Tangential}\Regarding\Parent} \dot\Shift_{\Tangential}\Regarding\Parent
+        + \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Tangential}\Regarding\Child} \dot\Shift_{\Tangential}\Regarding\Child
+    \end{align} \label{eq:contact-constraints}
 \end{subequations}
 
 The Langrangian multiplicator for these constraints will be denoted as $\LagrangeParameter_{\Radius_{\Contact}}$ and $\LagrangeParameter_{\Angle_{\Contact}}$ in the following.

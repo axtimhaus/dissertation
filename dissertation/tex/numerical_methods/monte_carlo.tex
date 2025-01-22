@@ -25,8 +25,8 @@ The principle is to calculate the average of the function in the regarded interv
 Let us consider a function $f$ which is deterministic, but is feeded with a stochastic variable $X$ and maps this to another stochastic variable $Y$ as shown in \autoref{eq:monte-carlo-function}.
 
 \begin{equation}
-	Y = f(X)
-	\label{eq:monte-carlo-function}
+    Y = f(X)
+    \label{eq:monte-carlo-function}
 \end{equation}
 
 The variable $X$ is distributed according to a a-priori known distribution with the \gls{PDF} $d_X$ and the \gls{CDF} $D_X$.
@@ -37,8 +37,8 @@ This method is the simplest and computationally cheapest way of generating such 
 For some distributions, there is no explicit formulation of the \gls{CDF}, most notable for the widely used normal distribution.
 
 \begin{equation}
-	x_i = D_X^{-1}(u_i)
-	\label{eq:monte-carlo-inversion}
+    x_i = D_X^{-1}(u_i)
+    \label{eq:monte-carlo-inversion}
 \end{equation}
 
 If inversion is not applicable, there are other methods such as acceptance-rejection and composition.
@@ -54,31 +54,31 @@ The actual quality assessment of such generators is a complicated task and out o
 \textcite{Lemieux2009} gives a brief introduction to this topic and references a large number of more detailed publications.
 For this work the Mersenne Twister \cite{Matsumoto1998} was chosen as recommended there.
 
-Evaluation of the function $f$ multiple times with the previously obtained samples $x_i$ as input produces the observations $y_i$ of the variable $Y$. 
+Evaluation of the function $f$ multiple times with the previously obtained samples $x_i$ as input produces the observations $y_i$ of the variable $Y$.
 These observations are then investigated using classical descriptive statistics.
 Special values of interest are often the expectation $\Expectation(Y)$ and the standard deviation or variance $\StandardDeviation(Y)$ resp. $\StandardDeviation(Y)^2$.
-Those can be estimated from the sample by \autoref{eq:estimator-expectation} and \autoref{eq:estimator-variance}. 
-Note the $N-1$ in \autoref{eq:estimator-variance} for the sample standard deviation, because the naive approach with just $N$ would introduce a bias into the estimation caused by the linking to the estimated expectation $\Estimated\Expectation(Y)$. 
+Those can be estimated from the sample by \autoref{eq:estimator-expectation} and \autoref{eq:estimator-variance}.
+Note the $N-1$ in \autoref{eq:estimator-variance} for the sample standard deviation, because the naive approach with just $N$ would introduce a bias into the estimation caused by the linking to the estimated expectation $\Estimated\Expectation(Y)$.
 There are several other possibilities to construct estimators for those properties, which may be more efficient (converge to required precision with fewer computational effort) depending on the characteristics of the problem.
 Such estimators are known under the term variance reduction techniques, see again \textcite{Lemieux2009} for a overview on these.
 
 \begin{equation}
-  \Estimated\Expectation(Y) = \frac{1}{N} \sum_i^N y_i
-  \label{eq:estimator-expectation}
+    \Estimated\Expectation(Y) = \frac{1}{N} \sum_i^N y_i
+    \label{eq:estimator-expectation}
 \end{equation}
 
 \begin{equation}
-  \Estimated\StandardDeviation^2(Y) = \frac{1}{N-1} \sum_i^N \left( y_i - \Estimated\Expectation(Y) \right)^2
-  \label{eq:estimator-variance}
+    \Estimated\StandardDeviation^2(Y) = \frac{1}{N-1} \sum_i^N \left( y_i - \Estimated\Expectation(Y) \right)^2
+    \label{eq:estimator-variance}
 \end{equation}
 
 \subsection{Sintering Simulation by Kinetic Monte Carlo Methods}\label{subsec:monte-carlo-kinetic-sintering}
 
 The basic idea behind most kinetic \glspl{MCM} (f.e. \cite{Braginsky2005, Luque2010, Tikare2003, Wang2018, Bjork2012}) is to discretize the model space into finite volumes (voxels) with a defined discrete state, which may change with a defined probability.
 This type of system discretization is also referred to as cellular automaton.
-In each step, a voxel is chosen randomly and the probability of changing its state is calculated. 
-Then, the state is changed conditionally by comparing the probability to the value of a random number. 
-The term "kinetic" refers hereby to the correlation of the number of steps performed to the process time. 
+In each step, a voxel is chosen randomly and the probability of changing its state is calculated.
+Then, the state is changed conditionally by comparing the probability to the value of a random number.
+The term "kinetic" refers hereby to the correlation of the number of steps performed to the process time.
 This correlation is usually not directly obtainable, but has to be determined by comparison to experimental results, if desired.
 
 The way to determine the probability of state changes varies in the published models.
@@ -86,28 +86,29 @@ The way to determine the probability of state changes varies in the published mo
 The energy change is then correlated to the probability by \autoref{eq:kinetic-monte-carlo-energy-probability}, where a negative energy change (reduction of system energy) is always accepted, however positive ones tend to zero probability by an exponential law.
 
 \begin{equation}
-  \Probability = \begin{cases}
-    \exp \left( -\frac{\Diff E}{\BoltzmannConstant \Temperature} \right) & \Diff E > 0 \\
-    1 & \Diff E \le 0
-  \end{cases}
-  \label{eq:kinetic-monte-carlo-energy-probability}
+    \Probability =
+    \begin{cases}
+        \exp \left( -\frac{\Diff E}{\BoltzmannConstant \Temperature} \right) & \Diff E > 0 \\
+        1 & \Diff E \le 0
+    \end{cases}
+    \label{eq:kinetic-monte-carlo-energy-probability}
 \end{equation}
 
-Another way correlates the probability to the local surface geometry, which resembles classic sintering theory. 
-\textcite{Luque2010} (although for liquid phase sintering) evaluates the number of neighboring voxels with the same or different state and correlate the probability with that count. 
-High count of non-solid (in this case liquid, but void also imaginable) voxels beneath a solid mean a high convex curvature at this point. 
+Another way correlates the probability to the local surface geometry, which resembles classic sintering theory.
+\textcite{Luque2010} (although for liquid phase sintering) evaluates the number of neighboring voxels with the same or different state and correlate the probability with that count.
+High count of non-solid (in this case liquid, but void also imaginable) voxels beneath a solid mean a high convex curvature at this point.
 In contrast, a high count of solids beneath a non-solid one mean a high concave curvature.
-In \textcite{Luque2005}, they evaluate a number of different approaches for the correlation between these counts and the probability. 
+In \textcite{Luque2005}, they evaluate a number of different approaches for the correlation between these counts and the probability.
 They remark, that although lots of different approaches could be chosen, only few are feasible due to the danger of generating numerical artifacts in the system state.
 A similar approach was taken by \textcite{Wang2018}.
 
 This type of models is especially useful for liquid phase sintering, since there are no voids, so state change from liquid to solid or vice versa does not violate the mass conservation law.
-In solid state sintering one has to make sure, that for every solid voxel appearing there is one removed. 
-Especially to model densification void voxels have to be transported to the outer surface. 
-\textcite{Braginsky2005} remove a solid voxel at the outer surface for every vacancy anhilated at a grain boundary. 
+In solid state sintering one has to make sure, that for every solid voxel appearing there is one removed.
+Especially to model densification void voxels have to be transported to the outer surface.
+\textcite{Braginsky2005} remove a solid voxel at the outer surface for every vacancy anhilated at a grain boundary.
 This approach, although conserving the mass, appears like teleportation of mass from the surface to the inner and lacks therefore in physical justification.
 
-The main difficulty of these models is the mapping of the internal time of the algorithm, often referred to as Monte Carlo steps (MCS), to the actual time of the real process. 
-The models usually do not involve any kinetic parameters like diffusion coefficients or mobilities, as they are not required for the solution of the model. 
+The main difficulty of these models is the mapping of the internal time of the algorithm, often referred to as Monte Carlo steps (MCS), to the actual time of the real process.
+The models usually do not involve any kinetic parameters like diffusion coefficients or mobilities, as they are not required for the solution of the model.
 However, this complicates the transfer of the simulation results to the experiment or comparision to other simulation approaches.
 Usually, a linear correlation between MCS and real time is assumed and the proportionality factor is fitted by experiments or other simpler models.

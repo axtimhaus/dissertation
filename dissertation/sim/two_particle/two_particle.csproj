@@ -6,11 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-  
+
   <ItemGroup>
-    
+
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.0" />
-    
+
     <PackageReference Include="RefraSin.ParticleModel" Version="1.0.0"/>
     <PackageReference Include="RefraSin.MaterialData" Version="1.0.0"/>
     <PackageReference Include="RefraSin.Compaction" Version="1.0.0"/>
@@ -19,7 +19,7 @@
     <PackageReference Include="RefraSin.TEPSolver" Version="1.0.0"/>
     <PackageReference Include="RefraSin.Plotting" Version="1.0.0"/>
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
-    
+
   </ItemGroup>
 
 </Project>

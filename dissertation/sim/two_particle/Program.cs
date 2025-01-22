@@ -93,13 +93,16 @@ var compactedState = new FocalCompactionStep(
     new AbsolutePoint(0, 0),
     stepDistance: input.Particle1.Radius / 100,
     minimumRelativeIntrusion: 0.5,
-    maxStepCount:1
+    maxStepCount: 1
 ).Solve(initialState);
 
 ParticlePlot.PlotParticles(compactedState.Particles).SaveHtml("compactedState.html");
 
 Log.Logger = new LoggerConfiguration().WriteTo.File("run.log").CreateLogger();
-var loggerFactory = LoggerFactory.Create(builder => { builder.AddSerilog(); });
+var loggerFactory = LoggerFactory.Create(builder =>
+{
+    builder.AddSerilog();
+});
 
 var solver = new SinteringSolver(loggerFactory, SolverRoutines.Default);
 

@@ -7,9 +7,9 @@ The geometric constraints are dependent on the local evolution of the grain boun
 Starting from a compact grain boundary, meaning that there are no holes and/or overlap present within it, the condition of maintaining the compactness of the grain boundary can be formulated as follows, if the postions of the particles are fixed.
 
 \begin{align}
-	\Step\Shift_{\Normal}\Regarding\Parent = -\Step\Shift_{\Normal}\Regarding\Child \\
-	\Step\Shift_{\Tangential}\Regarding\Parent = -\Step\Shift_{\Tangential}\Regarding\Child
-	\label{eq:maintain-compact-particles-fixed}
+    \Step\Shift_{\Normal}\Regarding\Parent = -\Step\Shift_{\Normal}\Regarding\Child \\
+    \Step\Shift_{\Tangential}\Regarding\Parent = -\Step\Shift_{\Tangential}\Regarding\Child
+    \label{eq:maintain-compact-particles-fixed}
 \end{align}
 
 But in reality the positions of particles to each other change, which can be observed macroscopically as shrinkage.
@@ -29,51 +29,50 @@ Therefore, the rotation step $\Step\RotationAngle_{\Child}$ is introduced as ano
 
 The total movement of the right particle due to node shifting can be formulated as a total differential:
 \begin{subequations}
-	\begin{align}
-		\Step\Radius_{\Contact}           & =
-		\frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Normal}\Regarding\Parent} \Step\Shift_{\Normal}\Regarding\Parent
-		+ \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Normal}\Regarding\Child} \Step\Shift_{\Normal}\Regarding\Child
-		+ \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Tangential}\Regarding\Parent} \Step\Shift_{\Tangential}\Regarding\Parent
-		+ \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Tangential}\Regarding\Child} \Step\Shift_{\Tangential}\Regarding\Child
-		+ \frac{\partial \Radius_{\Contact}}{\partial \Shift_\RotationAngle} \Step\Shift_\RotationAngle \\
-		%
-		\Step\Angle_{\Contact}\Regarding\Parent & =
-		\frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Normal}\Regarding\Parent} \Step\Shift_{\Normal}\Regarding\Parent
-		+ \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Normal}\Regarding\Child} \Step\Shift_{\Normal}\Regarding\Child
-		+ \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Tangential}\Regarding\Parent} \Step\Shift_{\Tangential}\Regarding\Parent
-		+ \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Tangential}\Regarding\Child} \Step\Shift_{\Tangential}\Regarding\Child
-		+ \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_\RotationAngle} \Step\Shift_\RotationAngle
-	\end{align} \label{eq:particle-steps}
+    \begin{align}
+        \Step\Radius_{\Contact}           & =
+        \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Normal}\Regarding\Parent} \Step\Shift_{\Normal}\Regarding\Parent
+        + \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Normal}\Regarding\Child} \Step\Shift_{\Normal}\Regarding\Child
+        + \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Tangential}\Regarding\Parent} \Step\Shift_{\Tangential}\Regarding\Parent
+        + \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Tangential}\Regarding\Child} \Step\Shift_{\Tangential}\Regarding\Child
+        + \frac{\partial \Radius_{\Contact}}{\partial \Shift_\RotationAngle} \Step\Shift_\RotationAngle \\
+        %
+        \Step\Angle_{\Contact}\Regarding\Parent & =
+        \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Normal}\Regarding\Parent} \Step\Shift_{\Normal}\Regarding\Parent
+        + \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Normal}\Regarding\Child} \Step\Shift_{\Normal}\Regarding\Child
+        + \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Tangential}\Regarding\Parent} \Step\Shift_{\Tangential}\Regarding\Parent
+        + \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Tangential}\Regarding\Child} \Step\Shift_{\Tangential}\Regarding\Child
+        + \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_\RotationAngle} \Step\Shift_\RotationAngle
+    \end{align} \label{eq:particle-steps}
 \end{subequations}
 The partial derivatives therein are obtained from the geometric relations in the above figures.
-
 
 Of course, for each node the resulting movement of the particle will be different due to geometric relations and diffusive fluxes.
 The geometric relations are fixed for a regarded state, but the diffusive fluxes can be used to fulfill \autoref{eq:particle-steps} simultaneously for all nodes involved in a contact.
 So there is a set of equations available to describe particle contact conditions as constraints for the TEP-approach.
 
 \begin{equation}
-	\Radius'_{{\Contact}} = \sqrt{\Radius_{{\Contact}}^2 + \Step\Shift^2 + 2 \Radius_{{\Contact}} \Step\Shift \cos \eta}
-	\label{eq:contact-rcprime}
+    \Radius'_{{\Contact}} = \sqrt{\Radius_{{\Contact}}^2 + \Step\Shift^2 + 2 \Radius_{{\Contact}} \Step\Shift \cos \eta}
+    \label{eq:contact-rcprime}
 \end{equation}
 
 \begin{equation}
-	\Step\Angle_{{\Contact}}\Regarding\Parent = \arcsin \left[ \frac{\sin \eta}{\Radius'_{\Contact}} \Step\Shift \right]
-	\label{eq:contact-dphic}
+    \Step\Angle_{{\Contact}}\Regarding\Parent = \arcsin \left[ \frac{\sin \eta}{\Radius'_{\Contact}} \Step\Shift \right]
+    \label{eq:contact-dphic}
 \end{equation}
 
 \begin{equation}
-	\frac{\partial \Radius_{\Contact}}{\partial \Shift}
-	= \lim_{\Step\Shift \rightarrow 0} \frac{\Radius'_{\Contact} - \Radius_{\Contact}}{\Step\Shift}
-	= \cos \eta
-	\label{eq:contact-partial-rc}
+    \frac{\partial \Radius_{\Contact}}{\partial \Shift}
+    = \lim_{\Step\Shift \rightarrow 0} \frac{\Radius'_{\Contact} - \Radius_{\Contact}}{\Step\Shift}
+    = \cos \eta
+    \label{eq:contact-partial-rc}
 \end{equation}
 
 \begin{equation}
-	\frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift}
-	= \lim_{\Step\Shift \rightarrow 0} \frac{\Step\Angle_{\Contact}\Regarding\Parent}{\Step\Shift}
-	= \frac{\sin \eta}{\Radius_{\Contact}}
-	\label{eq:contact-partial-phi}
+    \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift}
+    = \lim_{\Step\Shift \rightarrow 0} \frac{\Step\Angle_{\Contact}\Regarding\Parent}{\Step\Shift}
+    = \frac{\sin \eta}{\Radius_{\Contact}}
+    \label{eq:contact-partial-phi}
 \end{equation}
 
 The constraints of \autoref{eq:particle-steps} can also be seen as a different formulation of the force balance on the grain boundary.
@@ -84,25 +83,25 @@ $\Projected\Radius\Regarding\Child$ is the projected lever arm of the particular
 the actual prescription to calculate depends on the mode of shift an will be given below.
 
 \begin{equation}
-  \Torque = \Step\Shift \cdot \Projected\Radius\Regarding\Child
-  \label{eq:particular-torque}
+    \Torque = \Step\Shift \cdot \Projected\Radius\Regarding\Child
+    \label{eq:particular-torque}
 \end{equation}
 
 \begin{equation}
-  \Projected\Radius\Regarding\Child = \Radius\Regarding\Child \sin \tau
-  \label{eq:torque-lever-arm}
+    \Projected\Radius\Regarding\Child = \Radius\Regarding\Child \sin \tau
+    \label{eq:torque-lever-arm}
 \end{equation}
 
 \begin{equation}
-	\sum^{\Nodes_{\Contact}} \Radius\Regarding\Child
-	\left[
-    -\Step\Shift_{\Normal}\Regarding\Parent \sin \tau_{\Normal}\Regarding\Parent
-		+ \Step\Shift_{\Normal}\Regarding\Child \sin \tau_{\Normal}\Regarding\Child
-		- \Step\Shift_{\Tangential}\Regarding\Parent \sin \tau_{\Tangential}\Regarding\Parent
-		+ \Step\Shift_{\Tangential}\Regarding\Child \sin \tau_{\Tangential}\Regarding\Child
-		\right]
-	= 0
-	\label{eq:torque-balance}
+    \sum^{\Nodes_{\Contact}} \Radius\Regarding\Child
+    \left[
+        -\Step\Shift_{\Normal}\Regarding\Parent \sin \tau_{\Normal}\Regarding\Parent
+        + \Step\Shift_{\Normal}\Regarding\Child \sin \tau_{\Normal}\Regarding\Child
+        - \Step\Shift_{\Tangential}\Regarding\Parent \sin \tau_{\Tangential}\Regarding\Parent
+        + \Step\Shift_{\Tangential}\Regarding\Child \sin \tau_{\Tangential}\Regarding\Child
+    \right]
+    = 0
+    \label{eq:torque-balance}
 \end{equation}
 
 In the following, the geometric relations will be derived for each of the node shift modes.
@@ -110,131 +109,129 @@ In the following, the geometric relations will be derived for each of the node s
 \subsection{Normal Shifting}
 
 \begin{figure}
-	\begin{subfigure}{\linewidth}
-		\centering
-		\includegraphics{img/model_development/particle_shift_normal}
-		\caption{Parent's Node}
-		\label{fig:model_development/particle_shift_normal/parent}
-	\end{subfigure}
-  \vspace{5mm}
-	\begin{subfigure}{\linewidth}
-		\centering
-		\includegraphics{img/model_development/particle_shift_normal_child}
-		\caption{Child's Node}
-		\label{fig:model_development/particle_shift_normal/child}
-	\end{subfigure}
-	\caption{Effect of Normal Node Shifting on Particle Postion}
-	\label{fig:model_development/particle_shift_normal}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{img/model_development/particle_shift_normal}
+        \caption{Parent's Node}
+        \label{fig:model_development/particle_shift_normal/parent}
+    \end{subfigure}
+    \vspace{5mm}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{img/model_development/particle_shift_normal_child}
+        \caption{Child's Node}
+        \label{fig:model_development/particle_shift_normal/child}
+    \end{subfigure}
+    \caption{Effect of Normal Node Shifting on Particle Postion}
+    \label{fig:model_development/particle_shift_normal}
 \end{figure}
 
 \minisec{Parent's Node}
 
 \begin{equation}
-	\eta_{\Normal}\Regarding\Parent = \left( \Angle\Regarding\Parent - \Angle_{\Contact}\Regarding\Parent \right) - \left( \PI - \SurfaceVectorAngle_{\Normal\Lower}\Regarding\Parent - \SurfaceRadiusAngle_{\Lower}\Regarding\Parent \right)
-	\label{eq:contact-eta-normal-parent}
+    \eta_{\Normal}\Regarding\Parent = \left( \Angle\Regarding\Parent - \Angle_{\Contact}\Regarding\Parent \right) - \left( \PI - \SurfaceVectorAngle_{\Normal\Lower}\Regarding\Parent - \SurfaceRadiusAngle_{\Lower}\Regarding\Parent \right)
+    \label{eq:contact-eta-normal-parent}
 \end{equation}
 
 \begin{equation}
-  \tau_{\Normal}\Regarding\Parent = \SurfaceVectorAngle_{\Normal\Lower}\Regarding\Parent -  \left( \PI - \SurfaceRadiusAngle_{\Lower}\Regarding\Parent - \Angle\Regarding\Parent + \Angle_{\Contact}\Regarding\Parent - \Angle_{\Contact}\Regarding\Child + \Angle\Regarding\Child \right)
-	\label{eq:contact-tau-normal-parent}
+    \tau_{\Normal}\Regarding\Parent = \SurfaceVectorAngle_{\Normal\Lower}\Regarding\Parent -  \left( \PI - \SurfaceRadiusAngle_{\Lower}\Regarding\Parent - \Angle\Regarding\Parent + \Angle_{\Contact}\Regarding\Parent - \Angle_{\Contact}\Regarding\Child + \Angle\Regarding\Child \right)
+    \label{eq:contact-tau-normal-parent}
 \end{equation}
-
 
 \minisec{Child's Node}
 
 \begin{equation}
-	\eta_{\Normal}\Regarding\Child =  \left( \PI - \SurfaceVectorAngle_{\Normal\Upper}\Regarding\Child - \SurfaceRadiusAngle_{\Upper}\Regarding\Child \right) - \left( \Angle_{\Contact}\Regarding\Child - \Angle\Regarding\Child \right)
-	\label{eq:contact-eta-normal-child}
+    \eta_{\Normal}\Regarding\Child =  \left( \PI - \SurfaceVectorAngle_{\Normal\Upper}\Regarding\Child - \SurfaceRadiusAngle_{\Upper}\Regarding\Child \right) - \left( \Angle_{\Contact}\Regarding\Child - \Angle\Regarding\Child \right)
+    \label{eq:contact-eta-normal-child}
 \end{equation}
 
 \begin{equation}
-  \tau_{\Normal}\Regarding\Child = \PI - \SurfaceVectorAngle_{\Normal\Upper}\Regarding\Child - \SurfaceRadiusAngle_{\Upper}\Regarding\Child	\label{eq:contact-tau-normal-child}
+    \tau_{\Normal}\Regarding\Child = \PI - \SurfaceVectorAngle_{\Normal\Upper}\Regarding\Child - \SurfaceRadiusAngle_{\Upper}\Regarding\Child    \label{eq:contact-tau-normal-child}
 \end{equation}
 
 \subsection{Tangential Shifting}
 
 \begin{figure}
-	\begin{subfigure}{\linewidth}
-		\centering
-		\includegraphics{img/model_development/particle_shift_tangential}
-		\caption{Parent's Node}
-		\label{fig:model_development/particle_shift_tangential/parent}
-	\end{subfigure}
-  \vspace{5mm}
-	\begin{subfigure}{\linewidth}
-		\centering
-		\includegraphics{img/model_development/particle_shift_tangential_child}
-		\caption{Child's Node}
-		\label{fig:model_development/particle_shift_tangential/child}
-	\end{subfigure}
-	\caption{Effect of tangential Node Shifting on Particle Postion}
-	\label{fig:model_development/particle_shift_tangential}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{img/model_development/particle_shift_tangential}
+        \caption{Parent's Node}
+        \label{fig:model_development/particle_shift_tangential/parent}
+    \end{subfigure}
+    \vspace{5mm}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{img/model_development/particle_shift_tangential_child}
+        \caption{Child's Node}
+        \label{fig:model_development/particle_shift_tangential/child}
+    \end{subfigure}
+    \caption{Effect of tangential Node Shifting on Particle Postion}
+    \label{fig:model_development/particle_shift_tangential}
 \end{figure}
 
 \minisec{Parent's Node}
 
 \begin{equation}
-	\eta_{\Tangential}\Regarding\Parent = \left( \Angle\Regarding\Parent - \Angle_{\Contact}\Regarding\Parent \right) + \left( \PI - \SurfaceVectorAngle_{\Tangential\Upper}\Regarding\Parent - \SurfaceRadiusAngle_{\Upper}\Regarding\Parent \right)
-	\label{eq:contact-eta-tangential-parent}
+    \eta_{\Tangential}\Regarding\Parent = \left( \Angle\Regarding\Parent - \Angle_{\Contact}\Regarding\Parent \right) + \left( \PI - \SurfaceVectorAngle_{\Tangential\Upper}\Regarding\Parent - \SurfaceRadiusAngle_{\Upper}\Regarding\Parent \right)
+    \label{eq:contact-eta-tangential-parent}
 \end{equation}
 
 \begin{equation}
-  \tau_{\Tangential}\Regarding\Parent = \left( \PI - \SurfaceRadiusAngle_{\Lower}\Regarding\Parent - \Angle\Regarding\Parent + \Angle_{\Contact}\Regarding\Parent - \Angle_{\Contact}\Regarding\Child + \Angle\Regarding\Child \right) - \SurfaceVectorAngle_{\Tangential\Lower}\Regarding\Parent
-	\label{eq:contact-tau-tangential-parent}
+    \tau_{\Tangential}\Regarding\Parent = \left( \PI - \SurfaceRadiusAngle_{\Lower}\Regarding\Parent - \Angle\Regarding\Parent + \Angle_{\Contact}\Regarding\Parent - \Angle_{\Contact}\Regarding\Child + \Angle\Regarding\Child \right) - \SurfaceVectorAngle_{\Tangential\Lower}\Regarding\Parent
+    \label{eq:contact-tau-tangential-parent}
 \end{equation}
 
 \minisec{Child's Node}
 
 \begin{equation}
-	\eta_{\Tangential}\Regarding\Child =  \left( \PI - \SurfaceVectorAngle_{\Tangential\Upper}\Regarding\Child - \SurfaceRadiusAngle_{\Upper}\Regarding\Child \right) - \left( \Angle_{\Contact}\Regarding\Child - \Angle\Regarding\Child \right)
-	\label{eq:contact-eta-tangential-child}
+    \eta_{\Tangential}\Regarding\Child =  \left( \PI - \SurfaceVectorAngle_{\Tangential\Upper}\Regarding\Child - \SurfaceRadiusAngle_{\Upper}\Regarding\Child \right) - \left( \Angle_{\Contact}\Regarding\Child - \Angle\Regarding\Child \right)
+    \label{eq:contact-eta-tangential-child}
 \end{equation}
 
 \begin{equation}
-  \tau_{\Tangential}\Regarding\Child = \SurfaceVectorAngle_{\Tangential\Upper}\Regarding\Child + \SurfaceRadiusAngle_{\Upper}\Regarding\Child	\label{eq:contact-tau-tangential-child}
+    \tau_{\Tangential}\Regarding\Child = \SurfaceVectorAngle_{\Tangential\Upper}\Regarding\Child + \SurfaceRadiusAngle_{\Upper}\Regarding\Child    \label{eq:contact-tau-tangential-child}
 \end{equation}
 
 \subsection{Particle Rotation}
 
 \begin{figure}
-	\centering
-	\includegraphics{img/model_development/particle_shift_rotation}
-	\caption{Effect of Particle Rotation on Particle Postion}
-	\label{fig:model_development/particle_shift_rotation}
+    \centering
+    \includegraphics{img/model_development/particle_shift_rotation}
+    \caption{Effect of Particle Rotation on Particle Postion}
+    \label{fig:model_development/particle_shift_rotation}
 \end{figure}
 
 \begin{equation}
-	\Step\Shift_{\RotationAngle} = 2 \Radius\Regarding\Child \sin \frac{\Step\RotationAngle_{\Child}}{2}
-	\label{eq:contact-ds-rotation}
+    \Step\Shift_{\RotationAngle} = 2 \Radius\Regarding\Child \sin \frac{\Step\RotationAngle_{\Child}}{2}
+    \label{eq:contact-ds-rotation}
 \end{equation}
 
 \begin{equation}
-  \eta_\RotationAngle = \PI - \left( \Angle_{\Contact}\Regarding\Child - \Angle\Regarding\Child \right) - \frac{\PI - \Step\RotationAngle_{\Child}}{2}
-	\label{eq:contact-eta-rotation}
+    \eta_\RotationAngle = \PI - \left( \Angle_{\Contact}\Regarding\Child - \Angle\Regarding\Child \right) - \frac{\PI - \Step\RotationAngle_{\Child}}{2}
+    \label{eq:contact-eta-rotation}
 \end{equation}
 
 \begin{equation}
-  \frac{\partial \Radius_{\Contact}}{\partial \RotationAngle}
-	= \lim_{\Step\Shift \rightarrow 0} \frac{\Radius'_{\Contact} - \Radius_{\Contact}}{\Step\Shift}
-  = \Radius\Regarding\Child \sin \left( \Angle\Regarding\Child - \Angle_{\Contact}\Regarding\Child \right)
-	\label{eq:contact-partial-rc-rotation}
+    \frac{\partial \Radius_{\Contact}}{\partial \RotationAngle}
+    = \lim_{\Step\Shift \rightarrow 0} \frac{\Radius'_{\Contact} - \Radius_{\Contact}}{\Step\Shift}
+    = \Radius\Regarding\Child \sin \left( \Angle\Regarding\Child - \Angle_{\Contact}\Regarding\Child \right)
+    \label{eq:contact-partial-rc-rotation}
 \end{equation}
 
 \begin{equation}
-	\frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \RotationAngle}
-	= \lim_{\Step\Shift \rightarrow 0} \frac{\Step\Angle_{\Contact}\Regarding\Parent}{\Step\Shift}
-	= \frac{\Radius\Regarding\Child \cos \left( \Angle\Regarding\Child - \Angle_{\Contact}\Regarding\Child \right)}{\Radius_{\Contact}}
-	\label{eq:contact-partial-phi-rotation}
+    \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \RotationAngle}
+    = \lim_{\Step\Shift \rightarrow 0} \frac{\Step\Angle_{\Contact}\Regarding\Parent}{\Step\Shift}
+    = \frac{\Radius\Regarding\Child \cos \left( \Angle\Regarding\Child - \Angle_{\Contact}\Regarding\Child \right)}{\Radius_{\Contact}}
+    \label{eq:contact-partial-phi-rotation}
 \end{equation}
-
 
 \subsection{Ring Contacts}\label{subsec:ring-contacts}
 
 \begin{figure}
-	\centering
-	\includegraphics{img/model_development/particle_ring_contact}
-	\caption{Additonal Constraint with Ring Contacts}
-	\label{fig:model_development/particle_ring_contact}
+    \centering
+    \includegraphics{img/model_development/particle_ring_contact}
+    \caption{Additonal Constraint with Ring Contacts}
+    \label{fig:model_development/particle_ring_contact}
 \end{figure}
 
 When multiple particles contact each other so that they form a closed ring (or cycle) of contacts,
@@ -247,33 +244,34 @@ The ring contact conditions requires, that these two are compatible with each ot
 The ring constraint is formulated in terms of global cartesian coordinates.
 The shift vector of a particle in terms of global coordinates with its parent particle assumed to be fixed is obtained as follows:
 
-\begin{equation} 
-		\Step\Shift_{i} = \left[ \begin{+matrix}
-		\left( \Radius_{\Contact i} + \Step\Radius_{\Contact i} \right) \cos \left( \RotationAngle_i + \Angle_{\Contact i} + \Step\Angle_{\Contact i} \right) - \Radius_{\Contact i} \cos \left( \RotationAngle_i + \Angle_{\Contact i} \right)\\
-		\left( \Radius_{\Contact i} + \Step\Radius_{\Contact i} \right) \sin \left( \RotationAngle_i + \Angle_{\Contact i} + \Step\Angle_{\Contact i} \right) - \Radius_{\Contact i} \sin \left( \RotationAngle_i + \Angle_{\Contact i} \right) 
-		\end{+matrix} \right]
-		\label{eq:ring-condition-ds-absolute}
+\begin{equation}
+    \Step\Shift_{i} = \left[
+        \begin{+matrix}
+            \left( \Radius_{\Contact i} + \Step\Radius_{\Contact i} \right) \cos \left( \RotationAngle_i + \Angle_{\Contact i} + \Step\Angle_{\Contact i} \right) - \Radius_{\Contact i} \cos \left( \RotationAngle_i + \Angle_{\Contact i} \right)\\
+            \left( \Radius_{\Contact i} + \Step\Radius_{\Contact i} \right) \sin \left( \RotationAngle_i + \Angle_{\Contact i} + \Step\Angle_{\Contact i} \right) - \Radius_{\Contact i} \sin \left( \RotationAngle_i + \Angle_{\Contact i} \right)
+    \end{+matrix} \right]
+    \label{eq:ring-condition-ds-absolute}
 \end{equation}
 
 As before a linear approximation to this is made to be suitable for later \gls{TEP} application.
 The derivation with respect to time of \autoref{eq:ring-condition-ds-absolute} yields:
 
-\begin{equation} 
-		\frac{\partial\Shift_{i}}{\partial\Time} 
-	    = \lim_{\Step\Time \rightarrow 0} \frac{\Step\Shift_i}{\Step\Time}
-		= \left[ 
-		\begin{+matrix}
-		\cos \left( \RotationAngle_i + \Angle_{\Contact i} \right) \frac{\partial \Radius_{\Contact i}}{\partial\Time} - \Radius_{\Contact i} \sin \left( \RotationAngle_i + \Angle_{\Contact i} \right) \frac{\partial \Angle_{\Contact i}}{\partial\Time}\\
-		\sin \left( \RotationAngle_i + \Angle_{\Contact i} \right) \frac{\partial \Radius_{\Contact i}}{\partial\Time} + \Radius_{\Contact i} \cos \left( \RotationAngle_i + \Angle_{\Contact i} \right) \frac{\partial \Angle_{\Contact i}}{\partial\Time}\\
-		\end{+matrix} 
-		\right]
-		\label{eq:ring-condition-ds-differential}
+\begin{equation}
+    \frac{\partial\Shift_{i}}{\partial\Time}
+    = \lim_{\Step\Time \rightarrow 0} \frac{\Step\Shift_i}{\Step\Time}
+    = \left[
+        \begin{+matrix}
+            \cos \left( \RotationAngle_i + \Angle_{\Contact i} \right) \frac{\partial \Radius_{\Contact i}}{\partial\Time} - \Radius_{\Contact i} \sin \left( \RotationAngle_i + \Angle_{\Contact i} \right) \frac{\partial \Angle_{\Contact i}}{\partial\Time}\\
+            \sin \left( \RotationAngle_i + \Angle_{\Contact i} \right) \frac{\partial \Radius_{\Contact i}}{\partial\Time} + \Radius_{\Contact i} \cos \left( \RotationAngle_i + \Angle_{\Contact i} \right) \frac{\partial \Angle_{\Contact i}}{\partial\Time}\\
+        \end{+matrix}
+    \right]
+    \label{eq:ring-condition-ds-differential}
 \end{equation}
 
 The final condition is that the sum of the partial shifts along the primary path to the ring closing particle must equal the sum of those along the secondary path, so that both paths yield the same total shift.
 This translates to actually two constraints per ring, one for $\X$ and one for $\Y$ direction.
 
 \begin{equation}
-    0 = \sum_i^\text{primary path} \frac{\partial\Shift_{i}}{\partial\Time} - \sum_i^\text{secondary path} \frac{\partial\Shift_{i}}{\partial\Time} 
+    0 = \sum_i^\text{primary path} \frac{\partial\Shift_{i}}{\partial\Time} - \sum_i^\text{secondary path} \frac{\partial\Shift_{i}}{\partial\Time}
     \label{eq:ring-condition}
 \end{equation}

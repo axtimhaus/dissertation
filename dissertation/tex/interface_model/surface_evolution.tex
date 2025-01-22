@@ -1,38 +1,38 @@
 \section{Evolution of Particle Surfaces by Node Shifting}\label{sec:surface-evolution}
 
 \begin{figure}
-	\begin{subfigure}{\linewidth}
-		\centering
-		\includegraphics{img/model_development/node_shift_normal}
-		\caption{Normal Direction}
-		\label{fig:model_development/surface_normal}
-	\end{subfigure}
-	\begin{subfigure}{\linewidth}
-		\centering
-		\includegraphics{img/model_development/node_shift_tangential}
-		\caption{Tangential Direction}
-		\label{fig:model_development/surface_tangential}
-	\end{subfigure}
-	\caption{Shifting of Surface Nodes}
-	\label{fig:surface-node-shifting}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{img/model_development/node_shift_normal}
+        \caption{Normal Direction}
+        \label{fig:model_development/surface_normal}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{img/model_development/node_shift_tangential}
+        \caption{Tangential Direction}
+        \label{fig:model_development/surface_tangential}
+    \end{subfigure}
+    \caption{Shifting of Surface Nodes}
+    \label{fig:surface-node-shifting}
 \end{figure}
 
 \begin{figure}
-	\begin{subfigure}{\linewidth}
-		\centering
-		\includegraphics{img/model_development/plot_normal_potential}
-		\caption{Normal Direction}
-		\label{fig:model_development/plot_normal_potential}
-	\end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{img/model_development/plot_normal_potential}
+        \caption{Normal Direction}
+        \label{fig:model_development/plot_normal_potential}
+    \end{subfigure}
 
-	\begin{subfigure}{\linewidth}
-		\centering
-		\includegraphics{img/model_development/plot_tangential_potential}
-		\caption{Tangential Direction}
-		\label{fig:model_development/plot_tangential_potential}
-	\end{subfigure}
-	\caption{Change in Gibbs Energy Due to Node Shifting (tangents dashed)}
-	\label{fig:surface-node-potentials}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{img/model_development/plot_tangential_potential}
+        \caption{Tangential Direction}
+        \label{fig:model_development/plot_tangential_potential}
+    \end{subfigure}
+    \caption{Change in Gibbs Energy Due to Node Shifting (tangents dashed)}
+    \label{fig:surface-node-potentials}
 \end{figure}
 
 If a node is displaced (shifted) in space, a change in Gibbs energy occurs due to the change in surface resp.\ interface area.
@@ -41,23 +41,23 @@ Since a 2D problem is regarded, the length of the surface line $\SurfaceDistance
 The change of Gibbs energy due to node shifting is described by \autoref{eq:gibbs-diff-surface-normal} with the prime values as measures after shifting.
 
 \begin{equation}
-  \Step\GibbsEnergy_{\Normal} = \left( \SurfaceDistance_{\Upper}' - \SurfaceDistance_{\Upper} \right) \InterfaceEnergy_{\Upper} +  \left(\SurfaceDistance_{\Lower}' - \SurfaceDistance_{\Lower} \right) \InterfaceEnergy_{\Lower}
-	\label{eq:gibbs-diff-surface-normal}
+    \Step\GibbsEnergy_{\Normal} = \left( \SurfaceDistance_{\Upper}' - \SurfaceDistance_{\Upper} \right) \InterfaceEnergy_{\Upper} +  \left(\SurfaceDistance_{\Lower}' - \SurfaceDistance_{\Lower} \right) \InterfaceEnergy_{\Lower}
+    \label{eq:gibbs-diff-surface-normal}
 \end{equation}
 
 The shifting of nodes is separated into two components as shown in \autoref{fig:surface-node-shifting}.
 The normal vector points under an angle of $\SurfaceVectorAngle_\Normal$ acc.~to~\autoref{eq:delta-surface-normal} to both surface lines.
 
 \begin{equation}
-	\SurfaceVectorAngle_{\Normal} = \pi - \frac{1}{2} \left(\SurfaceRadiusAngle_{\Upper} + \SurfaceRadiusAngle_{\Lower} \right)
-	\label{eq:delta-surface-normal}
+    \SurfaceVectorAngle_{\Normal} = \pi - \frac{1}{2} \left(\SurfaceRadiusAngle_{\Upper} + \SurfaceRadiusAngle_{\Lower} \right)
+    \label{eq:delta-surface-normal}
 \end{equation}
 
 With a certain normal shift ${\Step\Shift}_\Normal$, the surface lengths after shifting are calculated by \autoref{eq:surface-distance-shifted-normal-upper} and \autoref{eq:surface-distance-shifted-normal-lower}.
 
 \begin{align}
-	\SurfaceDistance_{\Upper}' & = \sqrt{\SurfaceDistance_{\Upper}^2 + \Step\Shift_{\Normal}^2 - 2 \SurfaceDistance_{\Upper} \Step\Shift_{\Normal} \cos \SurfaceVectorAngle_{\Normal}} \label{eq:surface-distance-shifted-normal-upper}         \\
-	\SurfaceDistance_{\Lower}' & = \sqrt{{\SurfaceDistance}_{\Lower}^2 + {\Step\Shift}_{\Normal}^2 - 2 {\SurfaceDistance}_{\Lower} {\Step\Shift}_{\Normal} \cos \SurfaceVectorAngle_{\Normal}} \label{eq:surface-distance-shifted-normal-lower}
+    \SurfaceDistance_{\Upper}' & = \sqrt{\SurfaceDistance_{\Upper}^2 + \Step\Shift_{\Normal}^2 - 2 \SurfaceDistance_{\Upper} \Step\Shift_{\Normal} \cos \SurfaceVectorAngle_{\Normal}} \label{eq:surface-distance-shifted-normal-upper}         \\
+    \SurfaceDistance_{\Lower}' & = \sqrt{{\SurfaceDistance}_{\Lower}^2 + {\Step\Shift}_{\Normal}^2 - 2 {\SurfaceDistance}_{\Lower} {\Step\Shift}_{\Normal} \cos \SurfaceVectorAngle_{\Normal}} \label{eq:surface-distance-shifted-normal-lower}
 \end{align}
 
 The slope of the tangent in ${\Step\Shift}_{\Normal} = 0$ is calculated as in \autoref{eq:gibbs-partial-surface-normal}.
@@ -68,33 +68,33 @@ A $\SurfaceVectorAngle_{\Normal} = \qty{90}{\degree}$ means a even surface, thus
 Note, that the slope is dependent on the sum of ${\InterfaceEnergy}_{\Upper}$ and ${\InterfaceEnergy}_{\Lower}$, whereas the monotonicity depends on $\SurfaceVectorAngle_{\Normal}$.
 
 \begin{equation}
-	\frac{\partial \GibbsEnergy}{\partial {\Shift}_{\Normal}} = \lim_{\Step\Shift_{\Normal} \rightarrow 0} \frac{\Step\GibbsEnergy_{\Normal}}{\Step\Shift_{\Normal}} = -\left({\InterfaceEnergy}_{\Upper} + {\InterfaceEnergy}_{\Lower}\right) \cos \SurfaceVectorAngle_{\Normal}
-	\label{eq:gibbs-partial-surface-normal}
+    \frac{\partial \GibbsEnergy}{\partial {\Shift}_{\Normal}} = \lim_{\Step\Shift_{\Normal} \rightarrow 0} \frac{\Step\GibbsEnergy_{\Normal}}{\Step\Shift_{\Normal}} = -\left({\InterfaceEnergy}_{\Upper} + {\InterfaceEnergy}_{\Lower}\right) \cos \SurfaceVectorAngle_{\Normal}
+    \label{eq:gibbs-partial-surface-normal}
 \end{equation}
 
 \begin{equation}
-	\frac{\partial \Volume}{\partial {\Shift}_{\Normal}} = \frac{1}{2} \left( \SurfaceDistance_{\Upper} + \SurfaceDistance_{\Lower} \right) \sin \SurfaceVectorAngle_{\Normal}
-	\label{eq:volume-partial-surface-normal}
+    \frac{\partial \Volume}{\partial {\Shift}_{\Normal}} = \frac{1}{2} \left( \SurfaceDistance_{\Upper} + \SurfaceDistance_{\Lower} \right) \sin \SurfaceVectorAngle_{\Normal}
+    \label{eq:volume-partial-surface-normal}
 \end{equation}
 
 Regarding the tangential shifting, the direction vector is under an angle of $\SurfaceVectorAngle_{\Tangential}$ acc.~to.~\autoref{eq:delta-surface-tangential} to the upper surface line.
 
 \begin{equation}
-	\SurfaceVectorAngle_{\Tangential} = \SurfaceVectorAngle_{\Normal} - \frac{\pi}{2}
-	\label{eq:delta-surface-tangential}
+    \SurfaceVectorAngle_{\Tangential} = \SurfaceVectorAngle_{\Normal} - \frac{\pi}{2}
+    \label{eq:delta-surface-tangential}
 \end{equation}
 
 The change in Gibbs energy is calculated in a similar way acc.~to~\autoref{eq:gibbs-diff-surface-tangential}, but the shifted surface lengths calculate as in \autoref{eq:surface-distance-shifted-tangential-upper} and \autoref{eq:surface-distance-shifted-tangential-lower} in dependence on the tangential shift ${\Step\Shift}_{\Tangential}$.
 Note the signs before the cosine terms.
 
 \begin{equation}
-  \Step\GibbsEnergy_{\Tangential} = \left( \SurfaceDistance_{\Upper}' - \SurfaceDistance_{\Upper} \right) \InterfaceEnergy_{\Upper} +  \left(\SurfaceDistance_{\Lower}' - \SurfaceDistance_{\Lower} \right) \InterfaceEnergy_{\Lower}
-	\label{eq:gibbs-diff-surface-tangential}
+    \Step\GibbsEnergy_{\Tangential} = \left( \SurfaceDistance_{\Upper}' - \SurfaceDistance_{\Upper} \right) \InterfaceEnergy_{\Upper} +  \left(\SurfaceDistance_{\Lower}' - \SurfaceDistance_{\Lower} \right) \InterfaceEnergy_{\Lower}
+    \label{eq:gibbs-diff-surface-tangential}
 \end{equation}
 
 \begin{align}
-	\SurfaceDistance_{\Upper}' & = \sqrt{{\SurfaceDistance}_{\Upper}^2 + {\Step\Shift}_{\Tangential}^2 - 2 {\SurfaceDistance}_{\Upper} {\Step\Shift}_{\Tangential} \cos \SurfaceVectorAngle_{\Tangential}} \label{eq:surface-distance-shifted-tangential-upper} \\
-	\SurfaceDistance_{\Lower}' & = \sqrt{{\SurfaceDistance}_{\Lower}^2 + {\Step\Shift}_{\Tangential}^2 + 2 {\SurfaceDistance}_{\Lower} {\Step\Shift}_{\Tangential} \cos \SurfaceVectorAngle_{\Tangential}} \label{eq:surface-distance-shifted-tangential-lower}
+    \SurfaceDistance_{\Upper}' & = \sqrt{{\SurfaceDistance}_{\Upper}^2 + {\Step\Shift}_{\Tangential}^2 - 2 {\SurfaceDistance}_{\Upper} {\Step\Shift}_{\Tangential} \cos \SurfaceVectorAngle_{\Tangential}} \label{eq:surface-distance-shifted-tangential-upper} \\
+    \SurfaceDistance_{\Lower}' & = \sqrt{{\SurfaceDistance}_{\Lower}^2 + {\Step\Shift}_{\Tangential}^2 + 2 {\SurfaceDistance}_{\Lower} {\Step\Shift}_{\Tangential} \cos \SurfaceVectorAngle_{\Tangential}} \label{eq:surface-distance-shifted-tangential-lower}
 \end{align}
 
 The slope of the tangent in ${\Step\Shift}_{\Tangential} = 0$ is calculated as in \autoref{eq:gibbs-partial-surface-tangential}.
@@ -106,41 +106,40 @@ In the special case when ${\InterfaceEnergy}_{\Upper} = {\InterfaceEnergy}_{\Low
 This is the case on all nodes except neck nodes.
 
 \begin{equation}
-	\frac{\partial \GibbsEnergy}{\partial {\Shift}_{\Tangential}} = \lim_{\Step\Shift_{\Tangential} \rightarrow 0} \frac{\Step\GibbsEnergy_{\Tangential}}{\Step\Shift_{\Tangential}} = -\left({\InterfaceEnergy}_{\Upper} - {\InterfaceEnergy}_{\Lower}\right) \cos \SurfaceVectorAngle_{\Tangential}
-	\label{eq:gibbs-partial-surface-tangential}
+    \frac{\partial \GibbsEnergy}{\partial {\Shift}_{\Tangential}} = \lim_{\Step\Shift_{\Tangential} \rightarrow 0} \frac{\Step\GibbsEnergy_{\Tangential}}{\Step\Shift_{\Tangential}} = -\left({\InterfaceEnergy}_{\Upper} - {\InterfaceEnergy}_{\Lower}\right) \cos \SurfaceVectorAngle_{\Tangential}
+    \label{eq:gibbs-partial-surface-tangential}
 \end{equation}
 
 \begin{equation}
-	\frac{\partial \Volume}{\partial {\Shift}_{\Tangential}} = \frac{1}{2} \left( \SurfaceDistance_{\Lower} - \SurfaceDistance_{\Upper} \right) \sin \SurfaceVectorAngle_{\Tangential}
-	\label{eq:volume-partial-surface-tangential}
+    \frac{\partial \Volume}{\partial {\Shift}_{\Tangential}} = \frac{1}{2} \left( \SurfaceDistance_{\Lower} - \SurfaceDistance_{\Upper} \right) \sin \SurfaceVectorAngle_{\Tangential}
+    \label{eq:volume-partial-surface-tangential}
 \end{equation}
 
-The neck nodes (triple points between two surfaces and one grain boundary) are a special case. 
-For numerical reasons, their shifting is not taken normal resp.~tangential to the surface line, but only to the grain boundary, as this is in consistence with their primary evolution during sintering. 
-The case, where the grain boundary is located below the currenlty reagarded node, is shown in \autoref{fig:surface-node-shifting-neck}. 
+The neck nodes (triple points between two surfaces and one grain boundary) are a special case.
+For numerical reasons, their shifting is not taken normal resp.~tangential to the surface line, but only to the grain boundary, as this is in consistence with their primary evolution during sintering.
+The case, where the grain boundary is located below the currenlty reagarded node, is shown in \autoref{fig:surface-node-shifting-neck}.
 Here, one must distiguish between the shift vector angles $\SurfaceVectorAngle$ to the upper resp.~to the lower surface line.
 For the shown case the angles are as in \autoref{eq:shift-neck-angles}, if the grain boundary is, however, located above the node, than the values of the upper and lower angles have to be switched.
 
 \begin{align}
-  \SurfaceVectorAngle_{\Normal\Upper} = \frac32 \PI - \SurfaceRadiusAngle_{\Upper} - \SurfaceRadiusAngle_{\Lower} \qquad &\text{and} \qquad \SurfaceVectorAngle_{\Normal\Lower} = \frac\PI2 \\
-  \SurfaceVectorAngle_{\Tangential\Upper} = \PI - \SurfaceRadiusAngle_{\Upper} - \SurfaceRadiusAngle_{\Lower} \qquad &\text{and} \qquad \SurfaceVectorAngle_{\Tangential\Lower} = 0
-  \label{eq:shift-neck-angles}
+    \SurfaceVectorAngle_{\Normal\Upper} = \frac32 \PI - \SurfaceRadiusAngle_{\Upper} - \SurfaceRadiusAngle_{\Lower} \qquad &\text{and} \qquad \SurfaceVectorAngle_{\Normal\Lower} = \frac\PI2 \\
+    \SurfaceVectorAngle_{\Tangential\Upper} = \PI - \SurfaceRadiusAngle_{\Upper} - \SurfaceRadiusAngle_{\Lower} \qquad &\text{and} \qquad \SurfaceVectorAngle_{\Tangential\Lower} = 0
+    \label{eq:shift-neck-angles}
 \end{align}
 
 \begin{figure}
-	\begin{subfigure}{\linewidth}
-		\centering
-		\includegraphics{img/model_development/node_shift_normal_neck}
-		\caption{Normal Direction}
-		\label{fig:model_development/node_shift_normal_neck}
-	\end{subfigure}
-	\begin{subfigure}{\linewidth}
-		\centering
-		\includegraphics{img/model_development/node_shift_tangential_neck}
-		\caption{Tangential Direction}
-		\label{fig:model_development/node_shift_tangential_neck}
-	\end{subfigure}
-	\caption{Shifting of Surface Nodes}
-	\label{fig:surface-node-shifting-neck}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{img/model_development/node_shift_normal_neck}
+        \caption{Normal Direction}
+        \label{fig:model_development/node_shift_normal_neck}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{img/model_development/node_shift_tangential_neck}
+        \caption{Tangential Direction}
+        \label{fig:model_development/node_shift_tangential_neck}
+    \end{subfigure}
+    \caption{Shifting of Surface Nodes}
+    \label{fig:surface-node-shifting-neck}
 \end{figure}
-
