@@ -1,17 +1,20 @@
-import deepdiff
+from abc import ABC, abstractmethod
+from pathlib import Path
+from typing import Literal, Iterable
+
 from uuid import UUID
 
-from dissertation.sim.parameter_study.data_model import (
-    ParameterStudy,
+import numpy as np
+from pydantic import BaseModel, ConfigDict
+
+from dissertation.sim.two_particle.input import (
     Input,
     ParticleInput,
     MaterialInput,
     InterfaceInput,
 )
 
-
-def hash(studies: list[ParameterStudy]) -> str:
-    return deepdiff.DeepHash(studies)[studies]
+THIS_DIR = Path(__file__).parent
 
 PARTICLE1_ID = UUID("989b9875-2a6b-40c3-ab2f-5ebc96682dbe")
 PARTICLE2_ID = UUID("10cac1cc-6205-4b91-85b4-4e9d6f126274")
@@ -45,6 +48,43 @@ BASE_INPUT = Input(
 
 def get_base_input_copy():
     return BASE_INPUT.model_copy(deep=True)
+
+
+class ParameterStudy(BaseModel, ABC):
+    model_config = ConfigDict(frozen=True)
+
+    parameter_name: str
+    min: float = 0
+    max: float = 10
+    count: int = 10
+    scale: Literal["lin", "log", "geom"]
+    display_tex: str = ""
+
+    def __str__(self) -> str:
+        return f"{self.parameter_name}_{self.min}_{self.max}_{self.scale}_{self.count}"
+
+    def dir(self, value: float | str | None = None):
+        base = THIS_DIR / "runs" / str(self)
+        if value is not None:
+            return base / str(value)
+        return base
+
+    @property
+    def parameter_values(self) -> Iterable[float]:
+        if self.scale == "lin":
+            return np.linspace(self.min, self.max, self.count, True)
+
+        if self.scale == "geom":
+            return np.geomspace(self.min, self.max, self.count, True)
+
+        if self.scale == "log":
+            return np.logspace(self.min, self.max, self.count, True)
+
+        raise ValueError(self.scale)
+
+    @abstractmethod
+    def input_for(self, parameter_value: float) -> Input:
+        raise NotImplementedError()
 
 
 class ParticleSizeRatioStudy(ParameterStudy):
