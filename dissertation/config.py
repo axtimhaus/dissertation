@@ -20,25 +20,26 @@ IMAGE_FILE_FORMATS = [
 
 IMAGE_FILE_SUFFIXES = ["." + f for f in IMAGE_FILE_FORMATS]
 
+
 def image_produces(stem: Path):
     return [stem.with_suffix(s) for s in IMAGE_FILE_SUFFIXES]
 
-mpl.use('pgf')
+
+mpl.use("pgf")
 
 PREAMBLE_FILE = Path(ROOT_DIR / "textext_preamble.tex")
 
 if PREAMBLE_FILE.exists():
     preamble = PREAMBLE_FILE.read_text()
-    mpl.rcParams.update({
-        "pgf.preamble": preamble,
-        "text.latex.preamble": preamble
-    })
+    mpl.rcParams.update({"pgf.preamble": preamble, "text.latex.preamble": preamble})
 
-mpl.rcParams.update({
-    "pgf.texsystem": "lualatex",
-    "pgf.rcfonts": False,
-    "figure.autolayout": True,
-})
+mpl.rcParams.update(
+    {
+        "pgf.texsystem": "lualatex",
+        "pgf.rcfonts": False,
+        "figure.autolayout": True,
+    }
+)
 
 
 JINJA_ENV = jinja2.Environment(loader=jinja2.FileSystemLoader(ROOT_DIR, encoding="utf-8"))

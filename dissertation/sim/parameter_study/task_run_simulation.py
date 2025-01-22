@@ -27,7 +27,14 @@ for study in STUDIES:
             csharp_proj=THIS_DIR.parent / "two_particle" / "two_particle.csproj",
         ):
             result = subprocess.run(
-                ["dotnet", "run", "--project", str(csharp_proj), str(input_file), str(produces)],
+                [
+                    "dotnet",
+                    "run",
+                    "--project",
+                    str(csharp_proj),
+                    str(input_file),
+                    str(produces),
+                ],
                 cwd=str(input_file.parent),
                 check=False,
                 capture_output=True,

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Literal, Iterable
-
+from typing import Literal
 from uuid import UUID
 
 import numpy as np
@@ -9,9 +9,9 @@ from pydantic import BaseModel, ConfigDict
 
 from dissertation.sim.two_particle.input import (
     Input,
-    ParticleInput,
-    MaterialInput,
     InterfaceInput,
+    MaterialInput,
+    ParticleInput,
 )
 
 THIS_DIR = Path(__file__).parent
@@ -84,14 +84,14 @@ class ParameterStudy(BaseModel, ABC):
 
     @abstractmethod
     def input_for(self, parameter_value: float) -> Input:
-        raise NotImplementedError()
+        raise NotImplementedError
 
 
 class ParticleSizeRatioStudy(ParameterStudy):
     def input_for(self, parameter_value: float) -> Input:
         model = get_base_input_copy()
         model.particle2.radius *= parameter_value
-        model.particle2.x = (model.particle1.radius * 0.99 + model.particle2.radius)
+        model.particle2.x = model.particle1.radius * 0.99 + model.particle2.radius
         model.particle2.node_count = int(model.particle2.node_count * parameter_value)
 
         return model
@@ -102,6 +102,7 @@ class SurfaceBoundaryEnergyStudy(ParameterStudy):
         model = get_base_input_copy()
         model.grain_boundary.energy *= model.material1.surface.energy * parameter_value
         return model
+
 
 class SurfaceBoundaryDiffusionStudy(ParameterStudy):
     def input_for(self, parameter_value: float) -> Input:
@@ -123,13 +124,13 @@ STUDIES = [
         min=0.01,
         max=1,
         count=10,
-        scale="geom"
+        scale="geom",
     ),
     SurfaceBoundaryDiffusionStudy(
         parameter_name="surface_boundary_diffusion",
         min=0.01,
         max=1,
         count=10,
-        scale="geom"
+        scale="geom",
     ),
 ]

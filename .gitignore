@@ -1,5 +1,6 @@
 .pytask
 .idea
+.virtual_documents
 
 ### Python template
 # Byte-compiled / optimized / DLL files

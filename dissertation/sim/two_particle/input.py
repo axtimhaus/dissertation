@@ -1,10 +1,7 @@
-from abc import abstractmethod, ABC
 from pathlib import Path
-from typing import Literal, Iterable
 from uuid import UUID
 
-import numpy as np
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, Field
 
 THIS_DIR = Path(__file__).parent
 
@@ -44,7 +41,14 @@ class Input(BaseModel):
 
     @property
     def _time_norm_common(self):
-        return self.gas_constant * self.temperature / self.vacancy_concentration * self.particle1.radius ** 4 /  self.material1.molar_mass * self.material1.density
+        return (
+            self.gas_constant
+            * self.temperature
+            / self.vacancy_concentration
+            * self.particle1.radius**4
+            / self.material1.molar_mass
+            * self.material1.density
+        )
 
     @property
     def time_norm_surface(self):

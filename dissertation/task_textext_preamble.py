@@ -11,10 +11,7 @@ PREAMBLE = r"""
 """
 
 
-def task_textext_preamble(
-        sty_file=Path("symbols.sty"),
-        produces=Path("textext_preamble.tex")
-):
+def task_textext_preamble(sty_file=Path("symbols.sty"), produces=Path("textext_preamble.tex")):
     symbols_text = sty_file.read_text()
     preamble = PREAMBLE + symbols_text
 
