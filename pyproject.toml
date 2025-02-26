@@ -21,6 +21,7 @@ dependencies = [
     "jupyter",
     "pydantic ~= 2.0",
     "deepdiff ~= 8.0",
+    "jupytext~=1.16",
 ]
 
 [tool.pytask.ini_options]
