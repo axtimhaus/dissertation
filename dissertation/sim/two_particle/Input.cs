@@ -5,6 +5,7 @@ class ParticleInput
     public required Guid Id { get; set; }
     public required double X { get; set; }
     public required double Y { get; set; }
+    public required double RotationAngle { get; set; }
     public required double Radius { get; set; }
     public required double Ovality { get; set; }
     public required uint PeakCount { get; set; }

@@ -2,6 +2,8 @@ import subprocess
 from pathlib import Path
 from uuid import UUID
 
+import numpy as np
+
 from dissertation.sim.two_particle.input import (
     Input,
     InterfaceInput,
@@ -16,7 +18,14 @@ PARTICLE1_ID = UUID("989b9875-2a6b-40c3-ab2f-5ebc96682dbe")
 PARTICLE2_ID = UUID("10cac1cc-6205-4b91-85b4-4e9d6f126274")
 
 PARTICLE1 = ParticleInput(id=PARTICLE1_ID, radius=100e-6)
-PARTICLE2 = PARTICLE1.model_copy(deep=True, update={"id": PARTICLE2_ID, "x": 1.99 * PARTICLE1.radius})
+PARTICLE2 = PARTICLE1.model_copy(
+    deep=True,
+    update={
+        "id": PARTICLE2_ID,
+        "x": 1.99 * PARTICLE1.radius,
+        "rotation_angle": np.pi,
+    },
+)
 
 SURFACE = InterfaceInput(energy=0.9, diffusion_coefficient=1.65e-10)
 GRAIN_BOUNDARY = InterfaceInput(

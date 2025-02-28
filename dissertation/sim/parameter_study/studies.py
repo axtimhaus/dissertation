@@ -35,7 +35,14 @@ BASE_MATERIAL = MaterialInput(
 
 BASE_INPUT = Input(
     particle1=BASE_PARTICLE.model_copy(deep=True),
-    particle2=BASE_PARTICLE.model_copy(deep=True, update={"id": PARTICLE2_ID, "x": 1.99 * BASE_PARTICLE.radius}),
+    particle2=BASE_PARTICLE.model_copy(
+        deep=True,
+        update={
+            "id": PARTICLE2_ID,
+            "x": 1.99 * BASE_PARTICLE.radius,
+            "rotation_angle": np.pi,
+        },
+    ),
     material1=BASE_MATERIAL.model_copy(deep=True),
     material2=BASE_MATERIAL.model_copy(deep=True),
     grain_boundary=BASE_GRAIN_BOUNDARY.model_copy(deep=True),
@@ -108,6 +115,42 @@ class SurfaceBoundaryDiffusionStudy(ParameterStudy):
     def input_for(self, parameter_value: float) -> Input:
         model = get_base_input_copy()
         model.grain_boundary.diffusion_coefficient = model.material1.surface.diffusion_coefficient * parameter_value
+        return model
+
+
+class OvalityTipTipStudy(ParameterStudy):
+    def input_for(self, parameter_value: float) -> Input:
+        model = get_base_input_copy()
+        model.particle1.ovality = parameter_value
+        model.particle2.ovality = parameter_value
+        model.particle2.x = model.particle1.radius * (1 + model.particle1.ovality) * 0.99 + model.particle2.radius * (
+            1 + model.particle2.ovality
+        )
+        return model
+
+
+class OvalityTipFlankStudy(ParameterStudy):
+    def input_for(self, parameter_value: float) -> Input:
+        model = get_base_input_copy()
+        model.particle1.ovality = parameter_value
+        model.particle2.ovality = parameter_value
+        model.particle2.rotation_angle = np.pi / 2
+        model.particle2.x = model.particle1.radius * (1 + model.particle1.ovality) * 0.99 + model.particle2.radius * (
+            1 + model.particle2.ovality
+        )
+        return model
+
+
+class OvalityFlankFlankStudy(ParameterStudy):
+    def input_for(self, parameter_value: float) -> Input:
+        model = get_base_input_copy()
+        model.particle1.ovality = parameter_value
+        model.particle1.rotation_angle = np.pi / 2
+        model.particle2.ovality = parameter_value
+        model.particle2.rotation_angle = np.pi / 2
+        model.particle2.x = model.particle1.radius * (1 + model.particle1.ovality) * 0.99 + model.particle2.radius * (
+            1 + model.particle2.ovality
+        )
         return model
 
 

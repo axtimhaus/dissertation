@@ -1,6 +1,7 @@
 from pathlib import Path
 from uuid import UUID
 
+import numpy as np
 from pydantic import BaseModel, Field
 
 THIS_DIR = Path(__file__).parent
@@ -10,6 +11,7 @@ class ParticleInput(BaseModel):
     id: UUID
     x: float = 0
     y: float = 0
+    rotation_angle: float = Field(ge=0, lt=2 * np.pi, default=0)
     radius: float = Field(ge=0)
     ovality: float = Field(ge=0, lt=1, default=0)
     peak_count: int = Field(ge=0, default=0)

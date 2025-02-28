@@ -70,6 +70,7 @@ var particle1 = new ShapeFunctionParticleFactory(
 {
     CenterCoordinates = (input.Particle1.X, input.Particle1.Y),
     NodeCount = input.Particle1.NodeCount,
+    RotationAngle = input.Particle1.RotationAngle,
 }.GetParticle(input.Particle1.Id);
 
 var particle2 = new ShapeFunctionParticleFactory(
@@ -82,7 +83,7 @@ var particle2 = new ShapeFunctionParticleFactory(
 {
     CenterCoordinates = (input.Particle2.X, input.Particle2.Y),
     NodeCount = input.Particle2.NodeCount,
-    RotationAngle = Angle.Half,
+    RotationAngle = input.Particle2.RotationAngle,
 }.GetParticle(input.Particle2.Id);
 
 var initialState = new SystemState(Guid.Empty, 0, [particle1, particle2]);
