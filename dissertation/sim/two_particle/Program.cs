@@ -106,6 +106,10 @@ var loggerFactory = LoggerFactory.Create(builder =>
 
 var solver = new SinteringSolver(loggerFactory, SolverRoutines.Default);
 
+var plotHandler = new PlotEventHandler();
+
+solver.SessionInitialized += plotHandler.Handle;
+
 var process = new SinteringStep(
     input.Duration,
     input.Temperature,
@@ -123,3 +127,15 @@ ParticlePlot.PlotParticles(finalState.Particles).SaveHtml("finalState.html");
 
 storage.Dispose();
 Log.CloseAndFlush();
+
+
+class PlotEventHandler
+{
+    private int _counter;
+    
+    public void Handle(object? sender, SinteringSolver.SessionInitializedEventArgs e)
+    {
+        ParticlePlot.PlotParticles(e.SolverSession.CurrentState.Particles).SaveHtml($"session_{_counter}.html");
+        _counter++;
+    }
+}
