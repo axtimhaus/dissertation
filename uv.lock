@@ -246,6 +246,15 @@ wheels = [
 ]
 
 [[package]]
+name = "cloudpickle"
+version = "3.1.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/52/39/069100b84d7418bc358d81669d5748efb14b9cceacd2f9c75f550424132f/cloudpickle-3.1.1.tar.gz", hash = "sha256:b216fa8ae4019d5482a8ac3c95d8f6346115d8835911fd4aefd1a445e4242c64", size = 22113 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7e/e8/64c37fadfc2816a7701fa8a6ed8d87327c7d54eacfbfb6edab14a2f2be75/cloudpickle-3.1.1-py3-none-any.whl", hash = "sha256:c8c5a44295039331ee9dad40ba100a9c7297b6f988e50e87ccdf3765a668350e", size = 20992 },
+]
+
+[[package]]
 name = "colorama"
 version = "0.4.6"
 source = { registry = "https://pypi.org/simple" }
@@ -379,6 +388,7 @@ dependencies = [
     { name = "pydantic" },
     { name = "pytask" },
     { name = "pytask-latex" },
+    { name = "pytask-parallel" },
     { name = "schemdraw" },
     { name = "scipy" },
     { name = "sympy" },
@@ -398,6 +408,7 @@ requires-dist = [
     { name = "pydantic", specifier = "~=2.0" },
     { name = "pytask", specifier = "~=0.5.0" },
     { name = "pytask-latex" },
+    { name = "pytask-parallel", specifier = ">=0.5.0" },
     { name = "schemdraw", specifier = "~=0.17" },
     { name = "scipy", specifier = "~=1.11" },
     { name = "sympy", specifier = "~=1.12" },
@@ -970,6 +981,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/bb/0c/638957d81421c3462d409d312e110b4e86719e083135c4f8dbfd6c405827/latex_dependency_scanner-0.1.3.tar.gz", hash = "sha256:4f75f3780a2a83632c0119e4b5bb8e0b86018ebc376f500e3d34fe57cc6ab039", size = 6019 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/5f/02/9cc6bf6426d0d692b9425f5448e4c064becab1cc82ebff962166ca4b0f7a/latex_dependency_scanner-0.1.3-py3-none-any.whl", hash = "sha256:5c1e3ecbf2bf5c3b66ba418bf8bdae210c98e20be36bbf0981659f5cf0842990", size = 7264 },
+]
+
+[[package]]
+name = "loky"
+version = "3.4.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "cloudpickle" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/7e/7d/a66ba4e28ee37b87771f7cdf36e91e0d94a429cd2297a406443f34f6b9f0/loky-3.4.1.tar.gz", hash = "sha256:66db350de68c301299c882ace3b8f06ba5c4cb2c45f8fcffd498160ce8280753", size = 100148 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2e/4b/d5f8d45c28b193fe5974f95ecfa2bac87e268a543da298bab258ded6ae95/loky-3.4.1-py3-none-any.whl", hash = "sha256:7132da80d1a057b5917ff32c7867b65ed164aae84c259a1dbc44375791280c87", size = 54570 },
 ]
 
 [[package]]
@@ -1645,6 +1668,24 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/01/e2/3018bd184797d6ce137de99b732aaa9995d3572f04eda507b67986e0e78a/pytask_latex-0.4.2.tar.gz", hash = "sha256:a92fd1267583b506cc1d5db9c16e64d54bb8d0de9d54dbdd48451fbca7e28a57", size = 15589 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/be/39/395f77f67b0ea46245ff509d2aefa9fe7cc6c611f165874724e99f02e505/pytask_latex-0.4.2-py3-none-any.whl", hash = "sha256:df78fa7f70abc14075b60bcadb41d83e2d108deaeb403530bc0a502723b9bfb9", size = 12170 },
+]
+
+[[package]]
+name = "pytask-parallel"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "attrs" },
+    { name = "click" },
+    { name = "cloudpickle" },
+    { name = "loky" },
+    { name = "pluggy" },
+    { name = "pytask" },
+    { name = "rich" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/dd/4e/a4cad348c89b53d1ad964ae4fdac211bd90ccdb79a91ed8396e5ca343ca3/pytask_parallel-0.5.0.tar.gz", hash = "sha256:9c58bdf2dbab3bbd51106d7bc43fbeac6d9d081ffe7e510d1f33f95df6d9c013", size = 13490 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a5/73/30e167904b14b9f631b0411a1b765ec82bd8dc3fdb4db09293a4d832dbf8/pytask_parallel-0.5.0-py3-none-any.whl", hash = "sha256:802804ddb826d2f028288e9b432fb58692b75905b3a1b3318ea68dbad1d45318", size = 17768 },
 ]
 
 [[package]]
