@@ -1,7 +1,7 @@
 import subprocess
 from pathlib import Path
 
-from pytask import task
+from pytask import task, mark
 
 from dissertation.sim.parameter_study.studies import STUDIES
 
@@ -21,6 +21,7 @@ for study in STUDIES:
             produces.write_text(study.input_for(value).model_dump_json(indent=4))
 
         @task(id=f"{study}/{value}")
+        @mark.persist
         def task_run(
             input_file=study.dir(value) / "input.json",
             produces=study.dir(value) / "output.parquet",
