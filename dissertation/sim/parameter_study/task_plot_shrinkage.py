@@ -6,9 +6,10 @@ import pandas as pd
 import pyarrow.compute as pc
 import pyarrow as pa
 import pyarrow.parquet as pq
+from matplotlib import ticker
 from pytask import task
 
-from dissertation.config import image_produces
+from dissertation.config import image_produces, integer_log_space
 from dissertation.sim.parameter_study.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES
 
 THIS_DIR = Path(__file__).parent
@@ -33,7 +34,7 @@ for study in STUDIES:
             times, shrinkages = get_shrinkages(key, df)
             ax.plot(times, shrinkages, label=f"{key:.2f}")
 
-        ax.legend()
+        ax.legend(title=study.display_tex, ncols=2)
         ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
         ax.set_ylabel("Shrinkage")
 
@@ -65,8 +66,11 @@ for study in STUDIES:
 
         grid_x, grid_y = np.meshgrid(times, params)
 
-        cs = ax.contour(grid_x, grid_y, shrinkages, levels=np.logspace(-3, 0, 22, endpoint=True, base=10), norm="log")
-        ax.clabel(cs, fmt=lambda level: f"{level:.2e}")
+        formatter = ticker.LogFormatterSciNotation()
+        locs = integer_log_space(1, -3, 3, -1)
+
+        cs = ax.contour(grid_x, grid_y, shrinkages, levels=locs, norm="log", cmap="copper")
+        ax.clabel(cs, fmt=lambda level: formatter(level))
 
         ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
         ax.set_ylabel(study.display_tex)

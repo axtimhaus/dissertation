@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 import numpy as np
 import pandas as pd
 import pyarrow as pa
@@ -8,7 +9,7 @@ import pyarrow.compute as pc
 import pyarrow.parquet as pq
 from pytask import task
 
-from dissertation.config import image_produces
+from dissertation.config import image_produces, integer_log_space
 from dissertation.sim.parameter_study.studies import PARTICLE1_ID, STUDIES
 
 THIS_DIR = Path(__file__).parent
@@ -33,9 +34,9 @@ for study in STUDIES:
             times, neck_sizes = get_neck_sizes(key, df)
             ax.plot(times, neck_sizes, label=f"{key:.2f}")
 
-        ax.legend()
+        ax.legend(title=study.display_tex, ncols=2)
         ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
-        ax.set_ylabel("Relative Neck Size")
+        ax.set_ylabel(r"Relative Neck Size $\Radius_{\Neck} / \Radius_0$")
 
         for p in produces:
             fig.savefig(p)
@@ -61,12 +62,14 @@ for study in STUDIES:
         end_time = max([t[-1] for t, _ in times_neck_size])
 
         times = np.geomspace(start_time, end_time, RESAMPLE_COUNT)
-        shrinkages = np.array([np.interp(times, t, s) for t, s in times_neck_size])
+        neck_sizes = np.array([np.interp(times, t, s) for t, s in times_neck_size])
 
         grid_x, grid_y = np.meshgrid(times, params)
 
-        cs = ax.contour(grid_x, grid_y, shrinkages, levels=np.logspace(-3, 0, 22, endpoint=True, base=10), norm="log")
-        ax.clabel(cs, fmt=lambda level: f"{level:.2e}")
+        locs = integer_log_space(1, -1, 1, 0)
+
+        cs = ax.contour(grid_x, grid_y, neck_sizes, levels=locs, norm="log", cmap="copper")
+        ax.clabel(cs, fmt=lambda level: f"{level:g}")
 
         ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
         ax.set_ylabel(study.display_tex)
@@ -80,10 +83,8 @@ def load_data(results_files):
 
 
 def get_neck_sizes(param, df: pa.Table):
-    expr = (pc.field("Particle.Id") == PARTICLE1_ID.bytes) & (pc.field("Node.Type") == 1)
-    print(expr)
     grain_boundary: pd.DataFrame = (
-        df.filter(expr)
+        df.filter((pc.field("Particle.Id") == PARTICLE1_ID.bytes) & (pc.field("Node.Type") == 1))
         .group_by(["State.Id"])
         .aggregate(
             [
