@@ -14,7 +14,7 @@ class ParticleInput(BaseModel):
     ovality: float = Field(ge=0, lt=1, default=0)
     peak_count: int = Field(ge=0, default=0)
     peak_height: float = Field(ge=0, lt=1, default=0)
-    node_count: int = Field(gt=0, default=50)
+    node_count: int = Field(gt=0, default=100)
 
 
 class InterfaceInput(BaseModel):
