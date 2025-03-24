@@ -35,6 +35,7 @@ SurfaceVectorAngle = '\beta' # angle between surface line and surface normal res
 Shift = 's' # shift (displacement) of a node or particle
 RotationAngle = '\omega' # rotation
 Diameter = 'd' # diameter
+Ovality = 'o' # ovality of particle
 
 # Thermodynamics
 Temperature = 'T' # absolute temperature

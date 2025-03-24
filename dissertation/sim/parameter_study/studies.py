@@ -126,7 +126,7 @@ class OvalityTipTipStudy(ParameterStudy):
         model.particle1.ovality = parameter_value
         model.particle2.ovality = parameter_value
         model.particle2.x = model.particle1.radius * (1 + model.particle1.ovality) * 0.99 + model.particle2.radius * (
-            1 + model.particle2.ovality
+                1 + model.particle2.ovality
         )
         return model
 
@@ -138,7 +138,7 @@ class OvalityTipFlankStudy(ParameterStudy):
         model.particle2.ovality = parameter_value
         model.particle2.rotation_angle = np.pi / 2
         model.particle2.x = model.particle1.radius * (1 + model.particle1.ovality) * 0.99 + model.particle2.radius * (
-            1 + model.particle2.ovality
+                1 - model.particle2.ovality
         )
         return model
 
@@ -150,8 +150,8 @@ class OvalityFlankFlankStudy(ParameterStudy):
         model.particle1.rotation_angle = np.pi / 2
         model.particle2.ovality = parameter_value
         model.particle2.rotation_angle = np.pi / 2
-        model.particle2.x = model.particle1.radius * (1 + model.particle1.ovality) * 0.99 + model.particle2.radius * (
-            1 + model.particle2.ovality
+        model.particle2.x = model.particle1.radius * (1 - model.particle1.ovality) * 0.99 + model.particle2.radius * (
+                1 - model.particle2.ovality
         )
         return model
 
@@ -180,5 +180,29 @@ STUDIES = [
         count=11,
         scale="geom",
         display_tex=r"Diffusion Coefficient Ratio $\DiffusionCoefficient_{\GrainBoundary} / \DiffusionCoefficient_{\Surface}$",
+    ),
+    OvalityTipTipStudy(
+        parameter_name="ovality_tip_tip",
+        min=0.1,
+        max=0.6,
+        count=6,
+        scale="lin",
+        display_tex=r"Ovality $\Ovality$",
+    ),
+    OvalityTipFlankStudy(
+        parameter_name="ovality_tip_flank",
+        min=0.1,
+        max=0.6,
+        count=6,
+        scale="lin",
+        display_tex=r"Ovality $\Ovality$",
+    ),
+    OvalityFlankFlankStudy(
+        parameter_name="ovality_flank_flank",
+        min=0.1,
+        max=0.6,
+        count=6,
+        scale="lin",
+        display_tex=r"Ovality $\Ovality$",
     ),
 ]
