@@ -8,7 +8,7 @@ class ParticleInput
     public required double RotationAngle { get; set; }
     public required double Radius { get; set; }
     public required double Ovality { get; set; }
-    public required uint PeakCount { get; set; }
+    public required int PeakCount { get; set; }
     public required double PeakHeight { get; set; }
     public required int NodeCount { get; set; }
 }
@@ -41,4 +41,19 @@ class Input
     public required double GasConstant { get; set; }
 
     public required double Duration { get; set; }
+    
+    public required FreeSurfaceRemesherOptions? FreeSurfaceRemesherOptions { get; set; }
+}
+
+class FreeSurfaceRemesherOptions
+{
+    public required double DeletionLimit { get; set; } 
+
+    public required double AdditionLimit { get; set; }
+
+    public required double MinWidthFactor { get; set; } 
+
+    public required double MaxWidthFactor { get; set; }
+
+    public required double TwinPointLimit { get; set; }
 }

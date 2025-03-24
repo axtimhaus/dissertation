@@ -1,16 +1,15 @@
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
 import numpy as np
 import pandas as pd
 import pyarrow as pa
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
-from pytask import task
+from pytask import task, mark
 
 from dissertation.config import image_produces, integer_log_space
-from dissertation.sim.parameter_study.studies import PARTICLE1_ID, STUDIES
+from dissertation.sim.parameter_study.studies import PARTICLE1_ID, STUDIES, ParameterStudy
 
 THIS_DIR = Path(__file__).parent
 RESAMPLE_COUNT = 500
@@ -18,6 +17,8 @@ RESAMPLE_COUNT = 500
 for study in STUDIES:
 
     @task(id=f"{study}")
+    @mark.plot
+    @mark.parameter_study
     def task_plot_neck_size(
         study=study,
         produces=image_produces(study.dir("plots") / "neck_size"),
@@ -31,7 +32,7 @@ for study in STUDIES:
         ax.set_yscale("log")
 
         for key, df in data_frames.items():
-            times, neck_sizes = get_neck_sizes(key, df)
+            times, neck_sizes = get_neck_sizes(key, df, study)
             ax.plot(times, neck_sizes, label=f"{key:.2f}")
 
         ax.legend(title=study.display_tex, ncols=2)
@@ -43,6 +44,8 @@ for study in STUDIES:
 
 
     @task(id=f"{study}")
+    @mark.plot
+    @mark.parameter_study
     def task_plot_neck_size_map(
             study=study,
             produces=image_produces(study.dir("plots") / "neck_size_map"),
@@ -56,7 +59,7 @@ for study in STUDIES:
         ax.set_yscale("log")
 
         params = np.array(list(data_frames.keys()))
-        times_neck_size = [get_neck_sizes(key, df) for key, df in data_frames.items()]
+        times_neck_size = [get_neck_sizes(key, df, study) for key, df in data_frames.items()]
 
         start_time = max([t[0] for t, _ in times_neck_size])
         end_time = max([t[-1] for t, _ in times_neck_size])
@@ -82,7 +85,7 @@ def load_data(results_files):
     return {k: pq.read_table(f).flatten().flatten() for k, f in results_files.items()}
 
 
-def get_neck_sizes(param, df: pa.Table):
+def get_neck_sizes(param, df: pa.Table, study: ParameterStudy):
     grain_boundary: pd.DataFrame = (
         df.filter((pc.field("Particle.Id") == PARTICLE1_ID.bytes) & (pc.field("Node.Type") == 1))
         .group_by(["State.Id"])

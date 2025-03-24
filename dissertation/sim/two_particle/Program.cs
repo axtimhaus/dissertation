@@ -15,6 +15,7 @@ using RefraSin.ProcessModel;
 using RefraSin.ProcessModel.Sintering;
 using RefraSin.Storage;
 using RefraSin.TEPSolver;
+using RefraSin.TEPSolver.StepWidthControllers;
 using Serilog;
 
 var inputFile = args[0];
@@ -60,31 +61,27 @@ var material2 = new Material(
     new Dictionary<Guid, IInterfaceProperties> { { material1Id, grainBoundary } }
 );
 
-var particle1 = new ShapeFunctionParticleFactory(
+var particle1 = new ShapeFunctionParticleFactoryEllipseOvalityCosPeaks(
+    material1Id,
+    (input.Particle1.X, input.Particle1.Y),
+    input.Particle1.RotationAngle,
+    input.Particle1.NodeCount,
     input.Particle1.Radius,
-    input.Particle1.PeakHeight,
-    input.Particle1.PeakCount,
     input.Particle1.Ovality,
-    material1Id
-)
-{
-    CenterCoordinates = (input.Particle1.X, input.Particle1.Y),
-    NodeCount = input.Particle1.NodeCount,
-    RotationAngle = input.Particle1.RotationAngle,
-}.GetParticle(input.Particle1.Id);
+    input.Particle1.PeakCount,
+    input.Particle1.PeakHeight
+).GetParticle(input.Particle1.Id);
 
-var particle2 = new ShapeFunctionParticleFactory(
+var particle2 = new ShapeFunctionParticleFactoryEllipseOvalityCosPeaks(
+    material2Id,
+    (input.Particle2.X, input.Particle2.Y),
+    input.Particle2.RotationAngle,
+    input.Particle2.NodeCount,
     input.Particle2.Radius,
-    input.Particle2.PeakHeight,
-    input.Particle2.PeakCount,
     input.Particle2.Ovality,
-    material2Id
-)
-{
-    CenterCoordinates = (input.Particle2.X, input.Particle2.Y),
-    NodeCount = input.Particle2.NodeCount,
-    RotationAngle = input.Particle2.RotationAngle,
-}.GetParticle(input.Particle2.Id);
+    input.Particle2.PeakCount,
+    input.Particle2.PeakHeight
+).GetParticle(input.Particle2.Id);
 
 var initialState = new SystemState(Guid.Empty, 0, [particle1, particle2]);
 
@@ -100,12 +97,15 @@ var compactedState = new FocalCompactionStep(
 ParticlePlot.PlotParticles(compactedState.Particles).SaveHtml("compactedState.html");
 
 Log.Logger = new LoggerConfiguration().WriteTo.File("run.log").CreateLogger();
-var loggerFactory = LoggerFactory.Create(builder =>
-{
-    builder.AddSerilog();
-});
+var loggerFactory = LoggerFactory.Create(builder => { builder.AddSerilog(); });
 
-var solver = new SinteringSolver(loggerFactory, SolverRoutines.Default);
+var routines = SolverRoutines.Default with
+{
+    Remeshers = YieldRemeshers(),
+    StepWidthController = new MaximumDisplacementAngleStepWidthController()
+};
+
+var solver = new SinteringSolver(loggerFactory, routines);
 
 var plotHandler = new PlotEventHandler();
 
@@ -129,11 +129,26 @@ ParticlePlot.PlotParticles(finalState.Particles).SaveHtml("finalState.html");
 storage.Dispose();
 Log.CloseAndFlush();
 
+IEnumerable<IParticleSystemRemesher> YieldRemeshers()
+{
+    if (input.FreeSurfaceRemesherOptions is not null)
+    {
+        yield return new FreeSurfaceRemesher(
+            input.FreeSurfaceRemesherOptions.DeletionLimit,
+            input.FreeSurfaceRemesherOptions.AdditionLimit,
+            input.FreeSurfaceRemesherOptions.MinWidthFactor,
+            input.FreeSurfaceRemesherOptions.MaxWidthFactor,
+            input.FreeSurfaceRemesherOptions.TwinPointLimit
+        );
+    }
+
+    yield return new NeckNeighborhoodRemesher();
+}
 
 class PlotEventHandler
 {
     private int _counter;
-    
+
     public void Handle(object? sender, SinteringSolver.SessionInitializedEventArgs e)
     {
         ParticlePlot.PlotParticles(e.SolverSession.CurrentState.Particles).SaveHtml($"session_{_counter}.html");

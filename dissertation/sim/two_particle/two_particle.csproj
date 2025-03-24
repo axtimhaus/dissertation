@@ -11,7 +11,7 @@
 
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.0" />
 
-    <PackageReference Include="RefraSin.ParticleModel" Version="1.0.0"/>
+    <PackageReference Include="RefraSin.ParticleModel" Version="1.1.0"/>
     <PackageReference Include="RefraSin.MaterialData" Version="1.0.0"/>
     <PackageReference Include="RefraSin.Compaction" Version="1.0.0"/>
     <PackageReference Include="RefraSin.ParquetStorage" Version="1.0.0"/>

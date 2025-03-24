@@ -30,6 +30,14 @@ class MaterialInput(BaseModel):
     molar_mass: float = Field(gt=0)
 
 
+class FreeSurfaceRemesherOptions(BaseModel):
+    deletion_limit: float = Field(ge=0, default=0.05)
+    addition_limit: float = Field(ge=0, default=0.5)
+    min_width_factor: float = Field(ge=0, lt=1, default=0.25)
+    max_width_factor: float = Field(ge=0, lt=1, default=3.0)
+    twin_point_limit: float = Field(ge=0, lt=1, default=0.1)
+
+
 class Input(BaseModel):
     particle1: ParticleInput
     particle2: ParticleInput
@@ -40,6 +48,7 @@ class Input(BaseModel):
     temperature: float
     duration: float
     vacancy_concentration: float
+    free_surface_remesher_options: FreeSurfaceRemesherOptions | None = None
 
     @property
     def _time_norm_common(self):

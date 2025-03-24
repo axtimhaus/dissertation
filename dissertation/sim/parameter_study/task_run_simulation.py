@@ -11,6 +11,7 @@ for study in STUDIES:
     for value in study.parameter_values:
 
         @task(id=f"{study}/{value}")
+        @mark.parameter_study
         def task_create_input(
             study=study,
             value=value,
@@ -22,6 +23,8 @@ for study in STUDIES:
 
         @task(id=f"{study}/{value}")
         @mark.persist
+        @mark.sim
+        @mark.parameter_study
         def task_run(
             input_file=study.dir(value) / "input.json",
             produces=study.dir(value) / "output.parquet",

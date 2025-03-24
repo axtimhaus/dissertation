@@ -29,6 +29,12 @@ dependencies = [
 editor_url_scheme = "pycharm"
 paths = ["dissertation"]
 
+[tool.pytask.ini_options.markers]
+remeshing_study = "Tasks of the remeshing study"
+parameter_study = "Tasks of the parameter study"
+sim = "Simulation task"
+plot = "Plot task"
+
 [tool.hatch.build]
 packages = ["dissertation"]
 

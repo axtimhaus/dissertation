@@ -12,6 +12,7 @@ from dissertation.sim.two_particle.input import (
     InterfaceInput,
     MaterialInput,
     ParticleInput,
+FreeSurfaceRemesherOptions,
 )
 
 THIS_DIR = Path(__file__).parent
@@ -50,6 +51,7 @@ BASE_INPUT = Input(
     temperature=1273,
     vacancy_concentration=1e-4,
     duration=3.6e5,
+    free_surface_remesher_options=FreeSurfaceRemesherOptions()
 )
 
 

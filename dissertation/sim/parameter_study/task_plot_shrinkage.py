@@ -7,10 +7,10 @@ import pyarrow.compute as pc
 import pyarrow as pa
 import pyarrow.parquet as pq
 from matplotlib import ticker
-from pytask import task
+from pytask import task, mark
 
 from dissertation.config import image_produces, integer_log_space
-from dissertation.sim.parameter_study.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES
+from dissertation.sim.parameter_study.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES, ParameterStudy
 
 THIS_DIR = Path(__file__).parent
 RESAMPLE_COUNT = 500
@@ -18,6 +18,8 @@ RESAMPLE_COUNT = 500
 for study in STUDIES:
 
     @task(id=f"{study}")
+    @mark.plot
+    @mark.parameter_study
     def task_plot_shrinkage(
         study=study,
         produces=image_produces(study.dir("plots") / "shrinkage"),
@@ -31,7 +33,7 @@ for study in STUDIES:
         ax.set_yscale("log")
 
         for key, df in data_frames.items():
-            times, shrinkages = get_shrinkages(key, df)
+            times, shrinkages = get_shrinkages(key, df, study)
             ax.plot(times, shrinkages, label=f"{key:.2f}")
 
         ax.legend(title=study.display_tex, ncols=2)
@@ -43,6 +45,8 @@ for study in STUDIES:
 
 
     @task(id=f"{study}")
+    @mark.plot
+    @mark.parameter_study
     def task_plot_shrinkage_map(
             study=study,
             produces=image_produces(study.dir("plots") / "shrinkage_map"),
@@ -56,7 +60,7 @@ for study in STUDIES:
         ax.set_yscale("log")
 
         params = np.array(list(data_frames.keys()))
-        times_shrinkages = [get_shrinkages(key, df) for key, df in data_frames.items()]
+        times_shrinkages = [get_shrinkages(key, df, study) for key, df in data_frames.items()]
 
         start_time = max([t[0] for t, _ in times_shrinkages])
         end_time = max([t[-1] for t, _ in times_shrinkages])
@@ -87,7 +91,7 @@ def distance(particle1_x, particle1_y, particle2_x, particle2_y):
     return np.sqrt((particle2_x - particle1_x) ** 2 + (particle2_y - particle1_y) ** 2)
 
 
-def get_shrinkages(param, df: pa.Table):
+def get_shrinkages(param, df: pa.Table, study: ParameterStudy):
     particle1: pd.DataFrame = df.filter(pc.field("Particle.Id") == PARTICLE1_ID.bytes).group_by(["State.Id"]).aggregate(
         [("State.Time", "one"), ("Particle.Coordinates.X", "one"), ("Particle.Coordinates.Y", "one")]).sort_by(
         "State.Time_one").to_pandas()
