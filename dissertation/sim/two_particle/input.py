@@ -31,7 +31,7 @@ class MaterialInput(BaseModel):
 
 
 class FreeSurfaceRemesherOptions(BaseModel):
-    deletion_limit: float = Field(ge=0, default=0.05)
+    deletion_limit: float = Field(ge=0, default=0.01)
     addition_limit: float = Field(ge=0, default=0.5)
     min_width_factor: float = Field(ge=0, lt=1, default=0.25)
     max_width_factor: float = Field(ge=0, lt=1, default=3.0)
@@ -49,6 +49,7 @@ class Input(BaseModel):
     duration: float
     vacancy_concentration: float
     free_surface_remesher_options: FreeSurfaceRemesherOptions | None = None
+    time_step_angle_limit: float = 0.1
 
     @property
     def _time_norm_common(self):

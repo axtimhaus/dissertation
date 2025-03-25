@@ -30,14 +30,16 @@ def task_plot_shrinkage(
     ax: plt.Axes = fig.subplots()
     ax.set_xscale("log")
     ax.set_yscale("log")
+    ax.grid(True)
 
     for key, df in data_frames.items():
         times, shrinkages = get_shrinkages(studies[key], df)
-        ax.plot(times, shrinkages, label=key)
+        ax.plot(times, shrinkages, label=key, alpha=0.5)
 
     ax.legend()
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
     ax.set_ylabel("Shrinkage")
+    fig.tight_layout()
 
     for p in produces:
         fig.savefig(p)

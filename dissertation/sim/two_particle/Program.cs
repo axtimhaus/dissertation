@@ -102,10 +102,10 @@ var loggerFactory = LoggerFactory.Create(builder => { builder.AddSerilog(); });
 var routines = SolverRoutines.Default with
 {
     Remeshers = YieldRemeshers(),
-    StepWidthController = new MaximumDisplacementAngleStepWidthController()
+    StepWidthController = new MaximumDisplacementAngleStepWidthController(maximumDisplacementAngle: input.TimeStepAngleLimit)
 };
 
-var solver = new SinteringSolver(loggerFactory, routines);
+var solver = new SinteringSolver(loggerFactory, routines, remeshingEverySteps: 100);
 
 var plotHandler = new PlotEventHandler();
 

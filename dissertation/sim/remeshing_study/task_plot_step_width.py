@@ -28,15 +28,17 @@ def task_plot_time_step_width(
     ax: plt.Axes = fig.subplots()
     ax.set_xscale("log")
     ax.set_yscale("log")
+    ax.grid(True)
 
     for key, df in data_frames.items():
         times, steps = get_time_steps(studies[key], df)
-        p = ax.plot(times, steps, label=key)[0]
+        p = ax.plot(times, steps, label=key, alpha=0.5)[0]
         ax.axhline(times.mean(), label="mean", color=p.get_color(), ls="--")
 
     ax.legend()
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
     ax.set_ylabel("Shrinkage")
+    fig.tight_layout()
 
     for p in produces:
         fig.savefig(p)

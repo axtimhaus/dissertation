@@ -4,6 +4,7 @@ from pathlib import Path
 from pytask import task, mark
 
 from dissertation.sim.parameter_study.studies import STUDIES
+from rich.markup import escape
 
 THIS_DIR = Path(__file__).parent
 
@@ -45,7 +46,7 @@ for study in STUDIES:
                 text=True,
             )
 
-            print("=== OUT ===\n", result.stdout)
-            print("=== ERR ===\n", result.stderr)
+            print("=== OUT ===\n", escape(result.stdout))
+            print("=== ERR ===\n", escape(result.stderr))
 
             result.check_returncode()

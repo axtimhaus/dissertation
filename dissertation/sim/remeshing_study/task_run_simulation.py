@@ -5,16 +5,18 @@ from pathlib import Path
 from pytask import task, mark
 
 from dissertation.sim.remeshing_study.studies import STUDIES
+from rich.markup import escape
 
 THIS_DIR = Path(__file__).parent
 
 for study in STUDIES:
     @task(id=f"{study}")
+    @mark.persist
     @mark.remeshing_study
     def task_create_input(
         study=study,
         produces=study.dir() / "input.json",
-        studies_module=THIS_DIR / "studies.py",
+        # studies_module=THIS_DIR / "studies.py",
     ):
         produces.parent.mkdir(exist_ok=True, parents=True)
         produces.write_text(study.input.model_dump_json(indent=4))
@@ -46,8 +48,8 @@ for study in STUDIES:
 
         end = time.time()
 
-        print("=== OUT ===\n", result.stdout)
-        print("=== ERR ===\n", result.stderr)
+        print("=== OUT ===\n", escape(result.stdout))
+        print("=== ERR ===\n", escape(result.stderr))
 
         produces["time"].write_text(str(end-start))
 

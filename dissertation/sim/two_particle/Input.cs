@@ -43,6 +43,8 @@ class Input
     public required double Duration { get; set; }
     
     public required FreeSurfaceRemesherOptions? FreeSurfaceRemesherOptions { get; set; }
+    
+    public required double TimeStepAngleLimit { get; set; }
 }
 
 class FreeSurfaceRemesherOptions

@@ -3,6 +3,7 @@ from pathlib import Path
 from uuid import UUID
 
 import numpy as np
+from rich.markup import escape
 
 from dissertation.sim.two_particle.input import (
     Input,
@@ -79,7 +80,7 @@ def task_run(
         text=True,
     )
 
-    print("=== OUT ===\n", result.stdout)
-    print("=== ERR ===\n", result.stderr)
+    print("=== OUT ===\n", escape(result.stdout))
+    print("=== ERR ===\n", escape(result.stderr))
 
     result.check_returncode()
