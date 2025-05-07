@@ -1,8 +1,6 @@
 [project]
 name = "dissertation"
-authors = [
-    { name = "Max Weiner", email = "max.weiner@imf.tu-freiberg.de" },
-]
+authors = [{ name = "Max Weiner", email = "max.weiner@imf.tu-freiberg.de" }]
 description = "LaTeX project for doctoral thesis (dissertation)"
 version = "0"
 requires-python = ">=3.12"
@@ -37,6 +35,10 @@ plot = "Plot task"
 
 [tool.hatch.build]
 packages = ["dissertation"]
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
 
 [build-system]
 requires = ["hatchling"]

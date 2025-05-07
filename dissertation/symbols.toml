@@ -10,6 +10,7 @@ Grad = '\symrm{\nabla}\mspace{-1mu}' # gradient operator
 Abs = '\lvert#1\rvert'
 Projected = '\bar'                   # projected value
 Mean = '\overbar{#1}'
+Normalized = '#1^\star'
 
 # Polar Coordinates
 Radius = 'r'      # radius coordinate
