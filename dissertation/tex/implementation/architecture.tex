@@ -1,0 +1,24 @@
+\section{Architecture of the Simulation Program}\label{sec:architecture}
+
+The model is implemented in a C\# program library including
+\begin{itemize}
+    \item data structures that represent sintering processes, particles, nodes and their properties
+    \item a planar geometry library based on hierarchically defined coordinate systems
+    \item a solver routine with adjustable subroutines for the diffusion problem as described in \autoref{sec:solution}
+    \item remeshing routines as described in \autoref{sec:remeshing-procedures}
+    \item basic algorithms for contact determination and creation (not described here)
+    \item some more infrastructure (e.g.~data storage, plotting, \ldots).
+\end{itemize}
+The package is designed with extensibility in mind.
+Therefore, most subroutines like remeshing, integration scheme and step estimation can be selected or replaced by the user if necessary.
+The user can build a simulation by
+\begin{itemize}
+    \item defining the initial state of the particle system
+    \item defining one or multiple processing steps at constant temperature (stepwise constant temperature history approximation)
+    \item selecting quantities (state variables and fluxes) to be evolved in the system as well as respective constraints or use the default set
+    \item selecting the numerical routines or use the default set.
+\end{itemize}
+The code is made available to the public on GitHub at:
+\begin{center}
+    \url{https://github.com/RefraBund/refrasin}
+\end{center}
