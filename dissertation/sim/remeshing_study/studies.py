@@ -1,6 +1,7 @@
 from abc import ABC
 from pathlib import Path
 from uuid import UUID
+import itertools
 
 import numpy as np
 from pydantic import BaseModel, ConfigDict
@@ -9,7 +10,8 @@ from dissertation.sim.two_particle.input import (
     Input,
     InterfaceInput,
     MaterialInput,
-    ParticleInput, FreeSurfaceRemesherOptions,
+    ParticleInput,
+    FreeSurfaceRemesherOptions,
 )
 
 THIS_DIR = Path(__file__).parent
@@ -58,52 +60,30 @@ def get_base_input_copy():
 class RemeshingStudy(BaseModel, ABC):
     model_config = ConfigDict(frozen=True)
 
-    name: str
-    display_tex: str = ""
-    input: Input
+    node_count: int
+    surface_remesher_limit: float | None
 
     def __str__(self) -> str:
-        return f"{self.name}"
+        return f"{self.node_count}_{self.surface_remesher_limit}"
 
     def dir(self):
         base = THIS_DIR / "runs" / str(self)
         return base
 
-def with_node_count(model: Input, n, **update):
-    model = model.model_copy(deep=True, update=update)
-    model.particle1.node_count = n
-    model.particle2.node_count = n
-    return model
+    @property
+    def input(self):
+        model = BASE_INPUT.model_copy(deep=True)
+        model.particle1.node_count = self.node_count
+        model.particle2.node_count = self.node_count
+        model.free_surface_remesher_options = (
+            FreeSurfaceRemesherOptions(addition_limit=self.surface_remesher_limit)
+            if self.surface_remesher_limit
+            else None
+        )
+        return model
+
 
 STUDIES = [
-    RemeshingStudy(
-        name="no_surface_remeshing_50",
-        input=with_node_count(BASE_INPUT, 50, time_step_angle_limit=0.02),
-        display_tex="No Surface Remeshing 50",
-    ),
-    RemeshingStudy(
-        name="no_surface_remeshing",
-        input=BASE_INPUT,
-        display_tex="No Surface Remeshing 100",
-    ),
-    # RemeshingStudy(
-    #     name="no_surface_adding",
-    #     input=BASE_INPUT.model_copy(update=dict(free_surface_remesher_options=FreeSurfaceRemesherOptions(addition_limit=1000000))),
-    #     display_tex="No Surface Node Adding",
-    # ),
-    RemeshingStudy(
-        name="default",
-        input=BASE_INPUT.model_copy(update=dict(free_surface_remesher_options=FreeSurfaceRemesherOptions())),
-        display_tex="Default Parameters",
-    ),
-    RemeshingStudy(
-        name="default_200",
-        input=with_node_count(BASE_INPUT, 200, free_surface_remesher_options=FreeSurfaceRemesherOptions()),
-        display_tex="Default Parameters 200",
-    ),
-    RemeshingStudy(
-        name="limit_005",
-        input=BASE_INPUT.model_copy(update=dict(free_surface_remesher_options=FreeSurfaceRemesherOptions(deletion_limit=0.05))),
-        display_tex="Deletion Limit = 0.05",
-    ),
+    RemeshingStudy(node_count=node_count, surface_remesher_limit=limit)
+    for node_count, limit in itertools.product([50, 100, 200], [None, 0.01, 0.02, 0.05])
 ]
