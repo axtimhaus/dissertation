@@ -9,6 +9,7 @@ Deriv = '\symrm{d}\mspace{-1mu}'     # differential operator
 Grad = '\symrm{\nabla}\mspace{-1mu}' # gradient operator
 Abs = '\lvert#1\rvert'
 Projected = '\bar'                   # projected value
+Mean = '\overbar{#1}'
 
 # Polar Coordinates
 Radius = 'r'      # radius coordinate
