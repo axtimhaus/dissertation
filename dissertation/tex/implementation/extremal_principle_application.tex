@@ -15,7 +15,7 @@ One has two diffusional fluxes on each node $\Flux_{\Upper}$ and $\Flux_{\Lower}
 Additional fluxes are to be found in the fluxes from the particle to the matrix $\Flux_{\Matrix}$, if a matrix is present in the inter-particle spaces.
 
 The internal state variables are the polar coordinates of the nodes $\left[ \Radius, \Angle \right]$ with pole in their particle's center, since they determine the thermodynamic forces and the main aim of the simulation is to follow the time evolution of the particles and nodes.
-The coordinates of the particles $\left[ \Radius_{\Particle}, \Angle_{\Particle}, \RotationAngle_{\Particle} \right]$ are not used as internal state variables, since they are unambiguously defined, if the coordinates of all nodes relative to their particle are known and also which nodes are in contact to each other.
+The coordinates of the particles $\left[ \X_{\Particle}, \Y_{\Particle} \right]$ are not used as internal state variables, since they are unambiguously defined, if the coordinates of all nodes relative to their particle are known and also which nodes are in contact to each other.
 Moreover, the particle coordinates are auxiliary variables (included in $\Vect\AuxiliaryVariable$) to ease formulation of the geometric constraints.
 
 For numerical and equation formulation reasons, the internal state velocities $\dot\Radius$ and $\dot\Angle$ are replaced by the velocities of node shift along normal and tangential surface vectors $\dot\Shift_{\Normal}$ and $\dot\Shift_{\Tangential}$.
@@ -72,10 +72,8 @@ The Langrangian multiplicator for this constraint will be denoted as $\LagrangeP
 
 \subsection{Additonal Constraints $\Vect\AddionalConstraint$}\label{subsec:additonal-constraints}
 
-Additional constraints occur at particle contacts.
 For each node involved in a contact, the conditions according to \autoref{eq:maintain-compact-particles-fixed} are applied.
-
-To fix the position of a particle contact group in space, one of its particles must be constrained in its position by a constrained like \autoref{eq:fixed-particle-constraints}.
+To fix the position of a particle contact group in space, one of its particles must be constrained in its position by a constraint like \autoref{eq:fixed-particle-constraints}.
 
 \begin{subequations}
     \begin{align}
