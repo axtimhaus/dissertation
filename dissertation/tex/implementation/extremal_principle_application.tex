@@ -73,25 +73,16 @@ The Langrangian multiplicator for this constraint will be denoted as $\LagrangeP
 \subsection{Additonal Constraints $\Vect\AddionalConstraint$}\label{subsec:additonal-constraints}
 
 Additional constraints occur at particle contacts.
-For each node involved in a contact the conditions according to \autoref{eq:particle-steps} are applied in a formulation in terms of node shift velocities $\dot\Shift$.
+For each node involved in a contact, the conditions according to \autoref{eq:maintain-compact-particles-fixed} are applied.
+
+To fix the position of a particle contact group in space, one of its particles must be constrained in its position by a constrained like \autoref{eq:fixed-particle-constraints}.
 
 \begin{subequations}
     \begin{align}
-        \dot\Radius_{\Contact}           & =
-        \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Normal}\Regarding\Parent} \dot\Shift_{\Normal}\Regarding\Parent
-        + \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Normal}\Regarding\Child} \dot\Shift_{\Normal}\Regarding\Child
-        + \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Tangential}\Regarding\Parent} \dot\Shift_{\Tangential}\Regarding\Parent
-        + \frac{\partial \Radius_{\Contact}}{\partial \Shift_{\Tangential}\Regarding\Child} \dot\Shift_{\Tangential}\Regarding\Child \\
-        %
-        \dot\Angle_{\Contact}\Regarding\Parent & =
-        \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Normal}\Regarding\Parent} \dot\Shift_{\Normal}\Regarding\Parent
-        + \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Normal}\Regarding\Child} \dot\Shift_{\Normal}\Regarding\Child
-        + \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Tangential}\Regarding\Parent} \dot\Shift_{\Tangential}\Regarding\Parent
-        + \frac{\partial \Angle_{\Contact}\Regarding\Parent}{\partial \Shift_{\Tangential}\Regarding\Child} \dot\Shift_{\Tangential}\Regarding\Child
-    \end{align} \label{eq:contact-constraints}
+        \Step\X_{\Particle} = 0 \\
+        \Step\Y_{\Particle} = 0
+    \end{align}
+    \label{eq:fixed-particle-constraints}
 \end{subequations}
 
-The Langrangian multiplicator for these constraints will be denoted as $\LagrangeParameter_{\Radius_{\Contact}}$ and $\LagrangeParameter_{\Angle_{\Contact}}$ in the following.
-
-For all rings occuring in the particle system, additional contraints are included as given in \autoref{eq:ring-condition} with no further modifications.
-The Langrangian multiplicator for this constraint will be denoted as $\LagrangeParameter_{\Ring\X}$ and $\LagrangeParameter_{\Ring\Y}$ in the following.
+Further constraints of the like are possible, for example to enforce a certain movement or apply an external load on a particle to simulate assisted compaction.

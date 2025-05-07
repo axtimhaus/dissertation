@@ -1,16 +1,17 @@
 # Maths
 Vect = '\symbf{#1}'
-LagrangeFunction = '\symscr{L}' # Lagrangian functional
-LagrangeParameter = '\lambda' # Lagrangian multiplicator
-Transposed = '#1^{\symrm{T}}' # transposed matrix
+LagrangeFunction = '\symscr{L}'      # Lagrangian functional
+LagrangeParameter = '\lambda'        # Lagrangian multiplicator
+Transposed = '#1^{\symrm{T}}'        # transposed matrix
 Step = '\symrm{\delta}\mspace{-1mu}' # step difference operator
 Diff = '\symrm{\Delta}\mspace{-1mu}' # difference operator
-Deriv = '\symrm{d}\mspace{-1mu}' # differential operator
+Deriv = '\symrm{d}\mspace{-1mu}'     # differential operator
+Grad = '\symrm{\nabla}\mspace{-1mu}' # gradient operator
 Abs = '\lvert#1\rvert'
-Projected = '\bar' # projected value
+Projected = '\bar'                   # projected value
 
 # Polar Coordinates
-Radius = 'r' # radius coordinate
+Radius = 'r'      # radius coordinate
 Angle = '\varphi' # angle coordinate
 
 # Cartesian Coordinates
@@ -22,97 +23,97 @@ PI = '\symrm{\pi}'
 E = '\symrm{e}'
 
 # Time
-Time = 't' # time
+Time = 't'        # time
 TimeNorm = '\tau'
 
 # Geometry
-Curvature = '\kappa' # curvature of a surface
-Volume = 'V' # volume
-Area = 'A' # area
-SurfaceDistance = 'a' # surface distance between nodes
+Curvature = '\kappa'          # curvature of a surface
+Volume = 'V'                  # volume
+Area = 'A'                    # area
+SurfaceDistance = 'a'         # surface distance between nodes
 SurfaceRadiusAngle = '\alpha' # angle between surface line and radius
-SurfaceVectorAngle = '\beta' # angle between surface line and surface normal resp. tangent
-Shift = 's' # shift (displacement) of a node or particle
-RotationAngle = '\omega' # rotation
-Diameter = 'd' # diameter
-Ovality = 'o' # ovality of particle
+SurfaceVectorAngle = '\beta'  # angle between surface line and surface normal resp. tangent
+Shift = 's'                   # shift (displacement) of a node or particle
+RotationAngle = '\omega'      # rotation
+Diameter = 'd'                # diameter
+Ovality = 'o'                 # ovality of particle
 
 # Thermodynamics
-Temperature = 'T' # absolute temperature
-CelsiusTemperature = '\vartheta' # celsius temperature
-Pressure = 'p' # pressure
-GasConstant = 'R' # specific gas constant
-BoltzmannConstant = 'k_{\symrm{B}}' # Boltzmann's constant
-MolarVolume = 'V_{\symrm{m}}' # molar volume
-Flux = 'j' # flux
-Concentration = 'c' # concentration
+Temperature = 'T'                                   # absolute temperature
+CelsiusTemperature = '\vartheta'                    # celsius temperature
+Pressure = 'p'                                      # pressure
+GasConstant = 'R'                                   # specific gas constant
+BoltzmannConstant = 'k_{\symrm{B}}'                 # Boltzmann's constant
+MolarVolume = 'V_{\symrm{m}}'                       # molar volume
+Flux = 'j'                                          # flux
+Concentration = 'c'                                 # concentration
 VacancyConcentration = '\Concentration_\mathrm{Va}' # vacancy concentration
-DiffusionCoefficient = 'D' # diffusion coefficient
-Mobility = 'M' # mobility coefficient
-InternalStateVariable = 'x' # internal variable of state
-InternalStateVelocity = '\dot{x}' # internal velocity of state
-ExternalStateVariable = 'X' # external variable of state
-RequiredConstraint = 'f' # required constraint to TEP
-AddionalConstraint = 'g' # additional constraint to TEP
-AuxiliaryVariable = '\xi' # auxiliary variable in TEP
+DiffusionCoefficient = 'D'                          # diffusion coefficient
+Mobility = 'M'                                      # mobility coefficient
+InternalStateVariable = 'x'                         # internal variable of state
+InternalStateVelocity = '\dot{x}'                   # internal velocity of state
+ExternalStateVariable = 'X'                         # external variable of state
+RequiredConstraint = 'f'                            # required constraint to TEP
+AddionalConstraint = 'g'                            # additional constraint to TEP
+AuxiliaryVariable = '\xi'                           # auxiliary variable in TEP
 
 # Energy
-GibbsEnergy = 'G' # Gibbs energy (free enthalpy)
-SpecificGibbsEnergy = 'g' # specific Gibbs energy (free enthalpy)
-MolarGibbsEnergy = 'G_\mathrm{m}' # molar Gibbs energy (free enthalpy)
-HelmholtzEnergy = 'F' # Helmholtz energy (free energy)
-SpecificHelmholtzEnergy = 'f' # specific Helmholtz energy (free energy)
+GibbsEnergy = 'G'                     # Gibbs energy (free enthalpy)
+SpecificGibbsEnergy = 'g'             # specific Gibbs energy (free enthalpy)
+MolarGibbsEnergy = 'G_\mathrm{m}'     # molar Gibbs energy (free enthalpy)
+HelmholtzEnergy = 'F'                 # Helmholtz energy (free energy)
+SpecificHelmholtzEnergy = 'f'         # specific Helmholtz energy (free energy)
 MolarHelmholtzEnergy = 'F_\mathrm{m}' # molar Helmholtz energy (free energy)
-Entropy = 'S' # entropy
-SpecificEntropy = 's' # specific entropy
-MolarEntropy = 'S_\mathrm{m}' # molar entropy
-InterfaceEnergy = '\gamma' # interface energy
-Dissipation = '\symscr{D}' # dissipation
-DissipationFunction = '\symscr{Q}' # dissipation function
-ChemicalPotential = '\mu' # chemical potential
-ActivationEnergy = 'Q' # activation energy
+Entropy = 'S'                         # entropy
+SpecificEntropy = 's'                 # specific entropy
+MolarEntropy = 'S_\mathrm{m}'         # molar entropy
+InterfaceEnergy = '\gamma'            # interface energy
+Dissipation = '\symscr{D}'            # dissipation
+DissipationFunction = '\symscr{Q}'    # dissipation function
+ChemicalPotential = '\mu'             # chemical potential
+ActivationEnergy = 'Q'                # activation energy
 
 # Indizes
-Surface = '\symrm{S}' # index for surface
+Surface = '\symrm{S}'        # index for surface
 GrainBoundary = '\symrm{GB}' # index for grain boundary
-Neck = '\symrm{N}' # index for neck
-Upper = '{\symrm{u}}' # index for upper neighbor node
-Lower = '\symrm{l}' # index for lower neighbor node
-Parent = '\symrm{p}' # index for parent particle
-Child = '\symrm{c}' # index for child particle
+Neck = '\symrm{N}'           # index for neck
+Upper = '{\symrm{u}}'        # index for upper neighbor node
+Lower = '\symrm{l}'          # index for lower neighbor node
+Parent = '\symrm{p}'         # index for parent particle
+Child = '\symrm{c}'          # index for child particle
 Left = '\symrm{L}'
 Right = '\symrm{R}'
-Matrix = '\symrm{M}' # index for matrix material
-Contact = '\symrm{C}' # index for contact
-Normal = '\perp' # index for normal direction
-Tangential = '\|' # index for tangential direction
-Particle = '\symrm{P}' # index for particle
-Ring = '\symrm{R}' # index for particle
-Standard = '\circ' # index for standard conditions
-Regarding = '^{|#1}' # index specifying the coordinate system
-Equilibrium = '\mathrm{eq}' # index for thermodynamic equilibrium
+Matrix = '\symrm{M}'         # index for matrix material
+Contact = '\symrm{C}'        # index for contact
+Normal = '\perp'             # index for normal direction
+Tangential = '\|'            # index for tangential direction
+Particle = '\symrm{P}'       # index for particle
+Ring = '\symrm{R}'           # index for particle
+Standard = '\circ'           # index for standard conditions
+Regarding = '^{|#1}'         # index specifying the coordinate system
+Equilibrium = '\mathrm{eq}'  # index for thermodynamic equilibrium
 
 # Sets
-Nodes = '\symbb{N}' # set of nodes
+Nodes = '\symbb{N}'     # set of nodes
 Particles = '\symbb{P}' # set of particles
-Contacts = '\symbb{C}' # set of contacts
-Rings = '\symbb{R}' # set of contacts
+Contacts = '\symbb{C}'  # set of contacts
+Rings = '\symbb{R}'     # set of contacts
 
 # Mechanics
 Stress = '\sigma' # normal stress
-Force = 'F' # force
-Torque = 'M' # torque
+Force = 'F'       # force
+Torque = 'M'      # torque
 
 # Statistics and Monte Carlo
 # StochasticInput = 'X'
 # StochasticInputObservation = 'x'
 # StochasticOutput = 'Y'
 # StochasticOutputObservation = 'y'
-Expectation = '\mu' # stochastic expectation
+Expectation = '\mu'          # stochastic expectation
 StandardDeviation = '\sigma' # standard deviation
-Estimated = '\hat' # estimation of the respected value
-Probability = 'p' # probability
-CumulativeProbability = 'P' # cumulative probability
+Estimated = '\hat'           # estimation of the respected value
+Probability = 'p'            # probability
+CumulativeProbability = 'P'  # cumulative probability
 
 # Features
 Shrinkage = '\varepsilon'
