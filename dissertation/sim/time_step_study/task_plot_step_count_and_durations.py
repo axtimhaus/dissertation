@@ -15,28 +15,36 @@ THIS_DIR = Path(__file__).parent
 RESAMPLE_COUNT = 500
 
 PLOTS_DIR = Path(__file__).parent / "plots"
+BAR_WIDTH = 0.3
 
 
 @mark.plot
 @mark.time_step_study
-def task_plot_step_count(
+def task_plot_step_count_and_durations(
     produces=image_produces(PLOTS_DIR / "step_count"),
     studies={str(study): study for study in STUDIES},
     results_files={str(study): study.dir() / "output.parquet" for study in STUDIES},
+    time_files={str(study): study.dir() / "time.txt" for study in STUDIES},
 ):
     data_frames = load_data(results_files)
 
     fig: plt.Figure = plt.figure(dpi=600)
     ax: plt.Axes = fig.subplots()
+    ax2 = ax.twinx()
     ax.grid(True)
 
     angle_limits = [str(s.angle_limit) for s in studies.values()]
     step_counts = [get_step_count(df) for key, df in data_frames]
-    ax.bar(angle_limits, step_counts)
 
-    ax.set_xlabel("")
-    ax.set_ylabel("Step Count")
+    ax.bar(angle_limits, step_counts, label="Step Count", color="C0", width=BAR_WIDTH, align="edge")
 
+    times = [float(f.read_text()) for key, f in time_files.items()]
+    ax2.bar(angle_limits, times, label="Simulation Duration", color="C1", width=-BAR_WIDTH, align="edge")
+
+    ax.set_ylabel("Step Count", color="C0")
+    ax.tick_params(axis="y", labelcolor="C0")
+    ax2.set_ylabel(r"Simulation Duration in $\unit{\second}$", color="C1")
+    ax2.tick_params(axis="y", labelcolor="C1")
     for p in produces:
         fig.savefig(p)
 
