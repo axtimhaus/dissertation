@@ -13,7 +13,7 @@ class ParticleInput(BaseModel):
     y: float = 0
     rotation_angle: float = Field(ge=0, lt=2 * np.pi, default=0)
     radius: float = Field(ge=0)
-    ovality: float = Field(ge=0, lt=1, default=0)
+    ovality: float = Field(ge=0, lt=1, default=1)
     peak_count: int = Field(ge=0, default=0)
     peak_height: float = Field(ge=0, lt=1, default=0)
     node_count: int = Field(gt=0, default=100)
@@ -49,7 +49,7 @@ class Input(BaseModel):
     duration: float
     vacancy_concentration: float
     free_surface_remesher_options: FreeSurfaceRemesherOptions | None = None
-    time_step_angle_limit: float = 0.1
+    time_step_angle_limit: float = 0.005
 
     @property
     def _time_norm_common(self):

@@ -41,6 +41,7 @@ def task_plot_step_count_and_durations(
     times = [float(f.read_text()) for key, f in time_files.items()]
     ax2.bar(angle_limits, times, label="Simulation Duration", color="C1", width=-BAR_WIDTH, align="edge")
 
+    ax.set_xlabel("Maximum Displacement Angle")
     ax.set_ylabel("Step Count", color="C0")
     ax.tick_params(axis="y", labelcolor="C0")
     ax2.set_ylabel(r"Simulation Duration in $\unit{\second}$", color="C1")

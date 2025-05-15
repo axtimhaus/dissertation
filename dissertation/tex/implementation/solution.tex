@@ -30,7 +30,7 @@ Most notably, in a particle system without external loads, the trivial solution 
 During testing, it has been noticed that in cases where the solution procedure converges to the trivial solution, doubling the initial solution estimate often pushes the procedure to converge to the right solution.
 This is a simple and fast trick to avoid this issue.
 The reasoning behind this is, that the overall dissipation at necks is often underestimated by the step estimator.
-Convergence to the trivial solution usually occurs, when the estimated overall dissipation is to small by several orders of magnitude.
+Convergence to the trivial solution usually occurs, when the estimated overall dissipation is too small by several orders of magnitude.
 
 The calculation of a Newton step requires the solution of the linear system in \autoref{eq:newton-step}, where $J_{\LagrangeFunction}$ is the Jacobian of the Lagrangian and $\Grad \LagrangeFunction$ it's gradient.
 The system is solved in each step by LU-factorization using an algorithm specialized for sparse matrices of \textcite{Davis2006} implemented in the CSparse.NET package \textcite{Woltering2024}.

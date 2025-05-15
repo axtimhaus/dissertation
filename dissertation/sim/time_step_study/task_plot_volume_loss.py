@@ -42,6 +42,7 @@ def task_plot_volume_loss(
     ax.legend()
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
     ax.set_ylabel(r"Relative Volume Loss")
+    ax.set_ylim(0, 1e-3)
     fig.tight_layout()
 
     for p in produces:
@@ -67,7 +68,7 @@ def get_volume_losses(study, df: pa.Table, particle_id: UUID):
     )
 
     initial_volume = states["Node.Volume.ToUpper_sum"].iloc[0]
-    mask = (states["State.Time_one"] > 1) & (np.diff(states["State.Time_one"], prepend=[0]) > 0)
+    mask = (states["State.Time_one"] > 0) & (np.diff(states["State.Time_one"], prepend=[0]) > 0)
     times = states["State.Time_one"][mask] / study.input.time_norm_surface
     volumes = states["Node.Volume.ToUpper_sum"][mask]
     volume_losses = (volumes - initial_volume) / initial_volume

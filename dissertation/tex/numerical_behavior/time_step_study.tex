@@ -1,0 +1,65 @@
+\section{Study on the Influence of the Time Step Size}
+
+In \autoref{subsec:time-integration-scheme} and \autoref{eq:maximum-angle-difference} the limit of the time step width to use during time integration was given.
+As currently no theoretical limit for stability can be given, the free parameter has to be chosen empirically.
+This study aims at investigating the numerical behavior of the simulation with different maximum displacement angles per time step and fix one for the remains of this work.
+
+\subsection{Construction of the Study}
+
+The study uses a pair of particles of equal size and material, circular in shape with a defined and equal initial distance of contact.
+During testing, circular shaped particles have been found to be more prone to instabilities on their surface than irregular ones due to their smooth surface profile.
+The maximum displacement angle is varied between \qtyrange{0.001}{0.1}{\radian}.
+Surface remeshing is deactivated to keep the finely discretized surface.
+
+Targets of investigation are the time consumption (duration) of the differently parametrized simulations and the step count needed.
+As measure for precision their agreement in shrinkage and the overall volume loss are regarded.
+
+\subsection{Discussion of the Results}
+
+\begin{figure}
+    \includegraphics{sim/time_step_study/plots/step_count}
+    \caption{Step Counts and Simulation Time Consumption Used in Dependence on the Maximum Displacement Angle}
+    \label{fig:time_step_study/plots/step_count}
+\end{figure}
+
+\autoref{fig:time_step_study/plots/step_count} shows the count of calculated time steps alongside with the total time consumption for the simulations.
+The most striking point is that the step count does not directly correlate with the duration.
+The step count shows a minimum around \qty{0.02}{\radian}, whereas the time consumption is constantly low till \qty{0.02}{\radian} and then rises rapidly.
+This is explained through the superimposed influence of the time needed to calculate one time step.
+With small time steps, the solution of the current time step is close to the one of the previous, which is used as initial guess in the Newton procedure.
+Thus, the routine needs fewer iterations to determine the solution.
+With large time steps, however, the new solution is more distant, especially when fluctuations of even surfaces occur in later stages.
+This means slower convergence of equation solving.
+Moreover, from the calculation logs can be observed that the convergence to the trivial solution as described in \autoref{subsec:step-system-solution} more frequently occurs when the parameter takes higher values.
+
+\begin{figure}
+    \includegraphics{sim/time_step_study/plots/shrinkage}
+    \caption{Shrinkage Result Curves Obtained from the Simulations in Dependence on the Maximum Displacement Angle}
+    \label{fig:time_step_study/plots/shrinkage}
+\end{figure}
+
+\autoref{fig:time_step_study/plots/shrinkage} shows the shrinkage curves obtained from the parameter variation.
+Except for the highest \qty{0.1}{\radian} they are all in well agreement.
+This indicates, that the latter is definitely to high to obtain accurate results.
+In the initial stage, the differences are larger than in the final stages, since the conditions change faster their and so a smaller step width could be desireable.
+However, these differences are equalized so that the results are in well agreement in the later stages nevertheless.
+
+\begin{figure}
+    \includegraphics{sim/time_step_study/plots/volume_loss}
+    \caption{Volume Loss During Simulation in Dependence on the Maximum Displacement Angle}
+    \label{fig:time_step_study/plots/volume_loss}
+\end{figure}
+
+\autoref{fig:time_step_study/plots/volume_loss} shows the loss of volume for both particles (solid and dashed lines) in the simulations with the varied parameter (color).
+For the values below \qty{0.01}{\radian} the major source of error are the remeshing steps (jumps in the shown curves), between which the error does not alter very much.
+For the higher values the error originating in the actual time integration is much more pronounced.
+Especially for \qty{0.05} and above the error escalates in the later stages.
+This can be explained by the occurrence of significant fluctuations on the particle surface (numerical instabilities).
+
+\subsection{Summary}
+
+The discussed results show, that lower values of the maximum displacement angle are generally preferable.
+Higher values lead as expected to numerical errors, however do not improve the time consumption of the solution due to convergence issues of the Newton procedure.
+Small time steps allow faster solution due to fewer iterations per step and provide better precision in general.
+With regard to the high memory usage for result data storing the maximum displacement angle \qty{0.005}{\radian} is chosen for the following investigation as it provides the best trade-off.
+Lower values did not provide better performance in the test case but produce significantly higher amounts of data.

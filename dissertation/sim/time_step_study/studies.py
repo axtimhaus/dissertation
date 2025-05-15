@@ -81,4 +81,4 @@ class TimeStepStudy(BaseModel, ABC):
         return model
 
 
-STUDIES = [TimeStepStudy(angle_limit=limit) for limit in [0.005, 0.01, 0.02, 0.05, 0.1]]
+STUDIES = [TimeStepStudy(angle_limit=limit) for limit in [0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1]]
