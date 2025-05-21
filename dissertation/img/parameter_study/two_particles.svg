@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="160mm"
+   height="120mm"
+   viewBox="0 0 160 120"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
+   sodipodi:docname="two_particles.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="1.6403263"
+     inkscape:cx="299.33069"
+     inkscape:cy="248.12137"
+     inkscape:window-width="1920"
+     inkscape:window-height="1131"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g28-3">
+    <inkscape:grid
+       id="grid1"
+       units="mm"
+       originx="0"
+       originy="0"
+       spacingx="0.99999997"
+       spacingy="0.99999997"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       dotted="false"
+       gridanglex="30"
+       gridanglez="30"
+       visible="true" />
+    <sodipodi:guide
+       position="79.999999,70.333016"
+       orientation="78.107845,0"
+       id="guide2"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="58.984096,59.999999"
+       orientation="0,158.86036"
+       id="guide3"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,120"
+       orientation="0,604.72441"
+       id="guide4"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="160,0"
+       orientation="0,-604.72441"
+       id="guide6"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,0"
+       orientation="-453.54331,0"
+       id="guide7"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g28"
+       transform="translate(-4.0088216,18.797411)">
+      <circle
+         style="fill:#a7f1b7;fill-opacity:1;stroke:#15882e;stroke-width:0.352778"
+         id="circle23"
+         cx="54.00882"
+         cy="11.202587"
+         r="20" />
+      <circle
+         style="fill:#cccccc;stroke:#0069b4;stroke-width:0.352778"
+         id="path1"
+         cx="24.008821"
+         cy="11.202587"
+         r="10" />
+      <circle
+         style="fill:#f1a7b7;fill-opacity:1;stroke:#b71e3f;stroke-width:0.352778"
+         id="circle22"
+         cx="44.00882"
+         cy="11.202587"
+         r="10" />
+    </g>
+    <g
+       id="g28-3"
+       transform="translate(70.991176,18.797411)">
+      <ellipse
+         style="fill:#cccccc;stroke:#0069b4;stroke-width:0.352778"
+         id="path1-6"
+         cx="34.00882"
+         cy="11.202587"
+         rx="15"
+         ry="10" />
+      <ellipse
+         style="fill:#f1a7b7;fill-opacity:1;stroke:#b71e3f;stroke-width:0.352778"
+         id="circle22-2"
+         cx="64.00882"
+         cy="11.202587"
+         rx="15"
+         ry="10" />
+      <ellipse
+         style="fill:#cccccc;stroke:#0069b4;stroke-width:0.352778"
+         id="path1-6-0"
+         cx="-40.991177"
+         cy="71.202583"
+         rx="15"
+         ry="10" />
+      <ellipse
+         style="fill:#f1a7b7;fill-opacity:1;stroke:#b71e3f;stroke-width:0.352778"
+         id="circle22-2-9"
+         cx="71.202583"
+         cy="15.991178"
+         rx="15"
+         ry="10"
+         transform="rotate(90)" />
+      <ellipse
+         style="fill:#cccccc;stroke:#0069b4;stroke-width:0.352778"
+         id="path1-6-2"
+         cx="71.202583"
+         cy="-39.00882"
+         rx="15"
+         ry="10"
+         transform="rotate(90)" />
+      <ellipse
+         style="fill:#f1a7b7;fill-opacity:1;stroke:#b71e3f;stroke-width:0.352778"
+         id="circle22-2-6"
+         cx="71.202583"
+         cy="-59.00882"
+         rx="15"
+         ry="10"
+         transform="rotate(90)" />
+      <text
+         xml:space="preserve"
+         style="font-size:4.99999px;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.705556"
+         x="-30.991179"
+         y="37.260921"
+         id="text23"><tspan
+           sodipodi:role="line"
+           id="tspan23"
+           style="fill:#000000;stroke:none;stroke-width:0.705556"
+           x="-30.991179"
+           y="37.260921">circular contact</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.99999px;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.705556"
+         x="49.00882"
+         y="37.260921"
+         id="text23-2"><tspan
+           sodipodi:role="line"
+           id="tspan23-0"
+           style="fill:#000000;stroke:none;stroke-width:0.705556"
+           x="49.00882"
+           y="37.260921">tip/tip contact</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.99999px;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.705556"
+         x="-30.991179"
+         y="97.260918"
+         id="text23-2-9"><tspan
+           sodipodi:role="line"
+           id="tspan23-0-2"
+           style="fill:#000000;stroke:none;stroke-width:0.705556"
+           x="-30.991179"
+           y="97.260918">tip/flank contact</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.99999px;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.705556"
+         x="49.00882"
+         y="97.260918"
+         id="text23-2-9-3"><tspan
+           sodipodi:role="line"
+           id="tspan23-0-2-6"
+           style="fill:#000000;stroke:none;stroke-width:0.705556"
+           x="49.00882"
+           y="97.260918">flank/flank contact</tspan></text>
+      <circle
+         id="path23"
+         style="fill:#000000;stroke:#000000;stroke-width:0.264583"
+         cx="47.56374"
+         cy="35.560421"
+         r="0.057293061" />
+    </g>
+  </g>
+  <metadata
+     id="metadata1">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by/4.0/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by/4.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>
