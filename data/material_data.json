@@ -1,0 +1,23 @@
+{
+  "copper": {
+    "surface_energy": 1.3025,
+    "surface_diffusion_coefficient": null,
+    "grain_boundary_energy": null,
+    "grain_boundary_diffusion_coefficient": {
+      "factor": 2.35e-14,
+      "activation_energy": 107e3
+    },
+    "molar_volume": 7.11e-6,
+    "density": 8.96e3,
+    "molar_mass": 63.54e-3
+  },
+  "al2o3": {
+    "surface_energy": 0.9,
+    "surface_diffusion_coefficient": null,
+    "grain_boundary_energy": null,
+    "grain_boundary_diffusion_coefficient": null,
+    "molar_volume": 7.11e-6,
+    "density": 1.8e3,
+    "molar_mass": 101.96e-3
+  }
+}

@@ -11,14 +11,15 @@
 
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.0" />
 
-    <PackageReference Include="RefraSin.ParticleModel" Version="1.1.0"/>
+    <PackageReference Include="RefraSin.ParticleModel" Version="2.0.0"/>
     <PackageReference Include="RefraSin.MaterialData" Version="1.0.0"/>
     <PackageReference Include="RefraSin.Compaction" Version="1.0.0"/>
     <PackageReference Include="RefraSin.ParquetStorage" Version="1.0.0"/>
-    <PackageReference Include="RefraSin.ProcessModel" Version="1.0.0"/>
-    <PackageReference Include="RefraSin.TEPSolver" Version="1.0.0"/>
+    <PackageReference Include="RefraSin.ProcessModel" Version="2.0.0"/>
+    <PackageReference Include="RefraSin.TEPSolver" Version="2.0.0"/>
     <PackageReference Include="RefraSin.Plotting" Version="1.0.0"/>
-    <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
 
   </ItemGroup>
 
