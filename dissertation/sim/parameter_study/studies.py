@@ -12,7 +12,7 @@ from dissertation.sim.two_particle.input import (
     InterfaceInput,
     MaterialInput,
     ParticleInput,
-FreeSurfaceRemesherOptions,
+    FreeSurfaceRemesherOptions,
 )
 
 THIS_DIR = Path(__file__).parent
@@ -51,7 +51,7 @@ BASE_INPUT = Input(
     temperature=1273,
     vacancy_concentration=1e-4,
     duration=3.6e5,
-    free_surface_remesher_options=FreeSurfaceRemesherOptions()
+    free_surface_remesher_options=FreeSurfaceRemesherOptions(),
 )
 
 
@@ -109,11 +109,25 @@ class ParticleSizeRatioStudy(ParameterStudy):
 class SurfaceBoundaryEnergyStudy(ParameterStudy):
     def input_for(self, parameter_value: float) -> Input:
         model = get_base_input_copy()
-        model.grain_boundary.energy *= model.material1.surface.energy * parameter_value
+        model.grain_boundary.energy = model.material1.surface.energy * parameter_value
         return model
 
 
 class SurfaceBoundaryDiffusionStudy(ParameterStudy):
+    def input_for(self, parameter_value: float) -> Input:
+        model = get_base_input_copy()
+        model.grain_boundary.diffusion_coefficient = model.material1.surface.diffusion_coefficient * parameter_value
+        return model
+
+
+class SurfaceEnergyRatioStudy(ParameterStudy):
+    def input_for(self, parameter_value: float) -> Input:
+        model = get_base_input_copy()
+        model.grain_boundary.energy = model.material1.surface.energy * parameter_value
+        return model
+
+
+class SurfaceDiffusionRatioStudy(ParameterStudy):
     def input_for(self, parameter_value: float) -> Input:
         model = get_base_input_copy()
         model.grain_boundary.diffusion_coefficient = model.material1.surface.diffusion_coefficient * parameter_value
@@ -126,7 +140,7 @@ class OvalityTipTipStudy(ParameterStudy):
         model.particle1.ovality = parameter_value
         model.particle2.ovality = parameter_value
         model.particle2.x = model.particle1.radius * (1 + model.particle1.ovality) * 0.99 + model.particle2.radius * (
-                1 + model.particle2.ovality
+            1 + model.particle2.ovality
         )
         return model
 
@@ -138,7 +152,7 @@ class OvalityTipFlankStudy(ParameterStudy):
         model.particle2.ovality = parameter_value
         model.particle2.rotation_angle = np.pi / 2
         model.particle2.x = model.particle1.radius * (1 + model.particle1.ovality) * 0.99 + model.particle2.radius * (
-                1 - model.particle2.ovality
+            1 - model.particle2.ovality
         )
         return model
 
@@ -151,7 +165,7 @@ class OvalityFlankFlankStudy(ParameterStudy):
         model.particle2.ovality = parameter_value
         model.particle2.rotation_angle = np.pi / 2
         model.particle2.x = model.particle1.radius * (1 - model.particle1.ovality) * 0.99 + model.particle2.radius * (
-                1 - model.particle2.ovality
+            1 - model.particle2.ovality
         )
         return model
 

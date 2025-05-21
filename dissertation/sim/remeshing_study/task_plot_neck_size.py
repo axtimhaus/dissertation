@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from matplotlib.lines import Line2D
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -9,7 +10,15 @@ import pyarrow.parquet as pq
 from pytask import mark
 
 from dissertation.config import image_produces
-from dissertation.sim.remeshing_study.studies import PARTICLE1_ID, STUDIES
+from dissertation.sim.remeshing_study.studies import (
+    LIMIT_COLORS,
+    NODE_COUNT_STYLES,
+    PARTICLE1_ID,
+    PARTICLE2_ID,
+    STUDIES,
+    NODE_COUNTS,
+    LIMITS,
+)
 
 THIS_DIR = Path(__file__).parent
 RESAMPLE_COUNT = 500
@@ -32,11 +41,21 @@ def task_plot_neck_size(
     ax.set_yscale("log")
     ax.grid(True)
 
-    for key, df in data_frames.items():
+    for key, df in data_frames:
         times, neck_sizes = get_neck_sizes(studies[key], df)
-        ax.plot(times, neck_sizes, label=key, alpha=0.5)
+        ax.plot(
+            times,
+            neck_sizes,
+            color=LIMIT_COLORS[studies[key].surface_remesher_limit],
+            linestyle=NODE_COUNT_STYLES[studies[key].node_count],
+            lw=1,
+        )
 
-    ax.legend()
+    handles = [Line2D([], [], color="k", linestyle=NODE_COUNT_STYLES[node_count]) for node_count in NODE_COUNTS] + [
+        Line2D([], [], color=LIMIT_COLORS[limit]) for limit in LIMITS
+    ]
+    labels = [f"n = {node_count}" for node_count in NODE_COUNTS] + [f"limit = {limit}" for limit in LIMITS]
+    ax.legend(handles, labels)
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
     ax.set_ylabel(r"Relative Neck Size $\Radius_{\Neck} / \Radius_0$")
     fig.tight_layout()
@@ -46,7 +65,7 @@ def task_plot_neck_size(
 
 
 def load_data(results_files):
-    return {k: pq.read_table(f).flatten().flatten() for k, f in results_files.items()}
+    return ((k, pq.read_table(f).flatten().flatten()) for k, f in results_files.items())
 
 
 def get_neck_sizes(study, df: pa.Table):
@@ -67,8 +86,8 @@ def get_neck_sizes(study, df: pa.Table):
     mask = (grain_boundary["State.Time_one"] > 1) & (np.diff(grain_boundary["State.Time_one"], prepend=[0]) > 0)
     times = grain_boundary["State.Time_one"][mask] / study.input.time_norm_surface
     neck_sizes = (
-            grain_boundary["Node.SurfaceDistance.ToUpper_one"][mask]
-            + grain_boundary["Node.SurfaceDistance.ToLower_one"][mask] / study.input.particle1.radius
+        grain_boundary["Node.SurfaceDistance.ToUpper_one"][mask]
+        + grain_boundary["Node.SurfaceDistance.ToLower_one"][mask] / study.input.particle1.radius
     )
 
     return times.array, neck_sizes.array

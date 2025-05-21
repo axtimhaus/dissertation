@@ -1,6 +1,7 @@
 from pathlib import Path
 from uuid import UUID
 
+from matplotlib.lines import Line2D
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -10,7 +11,15 @@ import pyarrow.parquet as pq
 from pytask import mark
 
 from dissertation.config import image_produces
-from dissertation.sim.remeshing_study.studies import PARTICLE1_ID, STUDIES, PARTICLE2_ID
+from dissertation.sim.remeshing_study.studies import (
+    LIMIT_COLORS,
+    NODE_COUNT_STYLES,
+    PARTICLE1_ID,
+    PARTICLE2_ID,
+    STUDIES,
+    NODE_COUNTS,
+    LIMITS,
+)
 
 THIS_DIR = Path(__file__).parent
 RESAMPLE_COUNT = 500
@@ -33,13 +42,23 @@ def task_plot_volume_loss(
     ax.set_yscale("asinh")
     ax.grid(True)
 
-    for key, df in data_frames.items():
+    for key, df in data_frames:
         times1, volume_losses1 = get_volume_losses(studies[key], df, PARTICLE1_ID)
-        plot1 = ax.plot(times1, volume_losses1, label=key, alpha=0.5)[0]
+        plot1 = ax.plot(
+            times1,
+            volume_losses1,
+            color=LIMIT_COLORS[studies[key].surface_remesher_limit],
+            linestyle=NODE_COUNT_STYLES[studies[key].node_count],
+            lw=1,
+        )[0]
         times2, volume_losses2 = get_volume_losses(studies[key], df, PARTICLE2_ID)
-        ax.plot(times2, volume_losses2, alpha=0.5, color=plot1.get_color(), ls="--")
+        ax.plot(times2, volume_losses2, color=plot1.get_color(), ls=plot1.get_linestyle(), lw=1)
 
-    ax.legend()
+    handles = [Line2D([], [], color="k", linestyle=NODE_COUNT_STYLES[node_count]) for node_count in NODE_COUNTS] + [
+        Line2D([], [], color=LIMIT_COLORS[limit]) for limit in LIMITS
+    ]
+    labels = [f"n = {node_count}" for node_count in NODE_COUNTS] + [f"limit = {limit}" for limit in LIMITS]
+    ax.legend(handles, labels)
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
     ax.set_ylabel(r"Relative Volume Loss")
     fig.tight_layout()
@@ -49,7 +68,7 @@ def task_plot_volume_loss(
 
 
 def load_data(results_files):
-    return {k: pq.read_table(f).flatten().flatten() for k, f in results_files.items()}
+    return ((k, pq.read_table(f).flatten().flatten()) for k, f in results_files.items())
 
 
 def get_volume_losses(study, df: pa.Table, particle_id: UUID):

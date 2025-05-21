@@ -35,13 +35,13 @@ def task_plot_volume_loss(
 
     for key, df in data_frames:
         times1, volume_losses1 = get_volume_losses(studies[key], df, PARTICLE1_ID)
-        plot1 = ax.plot(times1, volume_losses1, label=key, alpha=0.5)[0]
+        plot1 = ax.plot(times1, volume_losses1, label=key, lw=1)[0]
         times2, volume_losses2 = get_volume_losses(studies[key], df, PARTICLE2_ID)
-        ax.plot(times2, volume_losses2, alpha=0.5, color=plot1.get_color(), ls="--")
+        ax.plot(times2, volume_losses2, color=plot1.get_color(), lw=1)
 
-    ax.legend()
-    ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
-    ax.set_ylabel(r"Relative Volume Loss")
+    ax.legend(title="Maximum Displacement Angle")
+    ax.set_xlabel(r"Normalized Time $\Time / \TimeNorm_{\Surface}$")
+    ax.set_ylabel(r"Relative Volume Loss $(\Volume - \Volume_0) / \Volume_0$")
     ax.set_ylim(0, 1e-3)
     fig.tight_layout()
 

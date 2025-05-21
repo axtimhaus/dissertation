@@ -30,10 +30,9 @@ def task_plot_time_step_width(
     ax.set_yscale("log")
     ax.grid(True)
 
-    for key, df in data_frames.items():
+    for key, df in data_frames:
         times, steps = get_time_steps(studies[key], df)
         p = ax.plot(times, steps, label=key, alpha=0.5)[0]
-        ax.axhline(times.mean(), label="mean", color=p.get_color(), ls="--")
 
     ax.legend()
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
@@ -45,13 +44,13 @@ def task_plot_time_step_width(
 
 
 def load_data(results_files):
-    return {k: pq.read_table(f).flatten().flatten() for k, f in results_files.items()}
+    return ((k, pq.read_table(f).flatten().flatten()) for k, f in results_files.items())
 
 
 def get_time_steps(study, df: pa.Table):
     states = df.group_by(["State.Id"]).aggregate([("State.Time", "one")]).sort_by("State.Time_one").to_pandas()
     times = states["State.Time_one"] / study.input.time_norm_surface
     diffs = np.diff(states["State.Time_one"], append=[0])
-    mask = (diffs > 0)
+    mask = diffs > 0
 
     return times[mask].array, diffs[mask]

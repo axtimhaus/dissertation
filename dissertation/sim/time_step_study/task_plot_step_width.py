@@ -32,12 +32,11 @@ def task_plot_time_step_width(
 
     for key, df in data_frames:
         times, steps = get_time_steps(studies[key], df)
-        p = ax.plot(times, steps, label=key, alpha=0.5)[0]
-        ax.axhline(times.mean(), label="mean", color=p.get_color(), ls="--")
+        p = ax.plot(times, steps, label=key, lw=1)[0]
 
-    ax.legend()
+    ax.legend(title="Maximum Displacement Angle")
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
-    ax.set_ylabel("Shrinkage")
+    ax.set_ylabel("Time Step Width $\\Diff\\Time / \\TimeNorm_{\\Surface}$")
     fig.tight_layout()
 
     for p in produces:
@@ -51,7 +50,7 @@ def load_data(results_files):
 def get_time_steps(study, df: pa.Table):
     states = df.group_by(["State.Id"]).aggregate([("State.Time", "one")]).sort_by("State.Time_one").to_pandas()
     times = states["State.Time_one"] / study.input.time_norm_surface
-    diffs = np.diff(states["State.Time_one"], append=[0])
+    diffs = np.diff(times, append=[0])
     mask = diffs > 0
 
     return times[mask].array, diffs[mask]

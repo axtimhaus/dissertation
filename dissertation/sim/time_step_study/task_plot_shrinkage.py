@@ -34,9 +34,9 @@ def task_plot_shrinkage(
 
     for key, df in data_frames:
         times, shrinkages = get_shrinkages(studies[key], df)
-        ax.plot(times, shrinkages, label=key, alpha=0.5)
+        ax.plot(times, shrinkages, label=key, lw=1)
 
-    ax.legend()
+    ax.legend(title="Maximum Displacement Angle")
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
     ax.set_ylabel("Shrinkage")
     fig.tight_layout()
