@@ -10,7 +10,7 @@ As the normal or tangential displacements of a node in one step are bad measures
 The angle difference is calculated in accordance to the equations in \autoref{sec:surface-evolution} with $\Step\Shift = \dot\Shift \Step\Time$.
 
 \begin{equation}
-    \max_i^{\Nodes} \max_j^{[\Upper, \Lower]} \max_k^{[\Normal, \Tangential]} \arcsin \left( \frac{\SurfaceDistance}{\SurfaceDistance'} \sin \SurfaceVectorAngle_{jk} \right)  < \qtyrange{0.01}{0.1}{\radian}
+    \max_i^{\Nodes} \max_j^{[\Upper, \Lower]} \max_k^{[\Normal, \Tangential]} \arcsin \left( \frac{\SurfaceDistance_{ij}}{\SurfaceDistance'_{ij}} \sin \SurfaceVectorAngle_{ijk} \right)  < \qtyrange{0.01}{0.1}{\radian}
     \label{eq:maximum-angle-difference}
 \end{equation}
 
