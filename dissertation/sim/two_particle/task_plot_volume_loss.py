@@ -1,19 +1,18 @@
-from pathlib import Path
 from uuid import UUID
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pyarrow as pa
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
-from pytask import mark
+from pytask import mark, task
 
 from dissertation.config import image_produces
-from dissertation.sim.two_particle.studies import PARTICLE1_ID, STUDIES, PARTICLE2_ID
+from dissertation.sim.two_particle.studies import PARTICLE1_ID, STUDIES, PARTICLE2_ID, StudyBase
 
 for t in STUDIES:
 
+    @task(id=f"{t.KEY}")
     @mark.plot
     @mark.time_step_study
     def task_plot_volume_loss(

@@ -1,10 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import ClassVar, Sequence, Literal, Callable
+from typing import ClassVar, Sequence, Literal
 from pathlib import Path
 from uuid import UUID
 
 import numpy as np
-from numpy._core.multiarray import _reconstruct
 from pydantic import BaseModel, ConfigDict
 import itertools
 

@@ -1,10 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import pyarrow.compute as pc
 import pyarrow as pa
 import pyarrow.parquet as pq
-from pytask import mark
+from pytask import mark, task
 
 from dissertation.config import image_produces
 from dissertation.sim.two_particle.studies import STUDIES, StudyBase
@@ -13,6 +12,7 @@ BAR_WIDTH = 0.3
 
 for t in STUDIES:
 
+    @task(id=f"{t.KEY}")
     @mark.plot
     @mark.time_step_study
     def task_plot_step_count_and_durations(

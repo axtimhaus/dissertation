@@ -47,8 +47,9 @@ JINJA_ENV = jinja2.Environment(loader=jinja2.FileSystemLoader(ROOT_DIR, encoding
 
 _integers = np.arange(1, 10)
 
+
 def integer_log_space(factor_start: int, exp_start: int, factor_end: int, exp_end: int) -> np.typing.NDArray:
     locs = np.outer(10.0 ** np.arange(exp_start, exp_end + 1), _integers).reshape(-1)
     if factor_end == 9:
-        return locs[factor_start-1:]
-    return locs[factor_start-1:factor_end-9]
+        return locs[factor_start - 1 :]
+    return locs[factor_start - 1 : factor_end - 9]

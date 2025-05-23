@@ -1,16 +1,15 @@
-from pathlib import Path
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
-from pytask import mark
+from pytask import mark, task
 
 from dissertation.config import image_produces
 from dissertation.sim.two_particle.studies import STUDIES, StudyBase
 
 for t in STUDIES:
 
+    @task(id=f"{t.KEY}")
     @mark.plot
     @mark.time_step_study
     def task_plot_time_step_width(

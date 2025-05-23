@@ -8,7 +8,7 @@ import pyarrow.parquet as pq
 from pytask import task, mark
 
 from dissertation.config import image_produces
-from dissertation.sim.two_particle.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES, TimeStepStudy
+from dissertation.sim.two_particle.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES, StudyBase
 
 for t in STUDIES:
     for study in t.INSTANCES:
@@ -17,7 +17,7 @@ for t in STUDIES:
         @mark.plot
         @mark.time_step_study
         def task_plot_evolution(
-            study=study,
+            study: StudyBase = study,
             results_file=study.dir / "output.parquet",
             produces=image_produces(study.dir / "evolution"),
         ):
@@ -47,27 +47,28 @@ for t in STUDIES:
             for p in produces:
                 fig.savefig(p)
 
-    def get_states(df: pa.Table, study: TimeStepStudy):
-        particle1: pd.DataFrame = (
-            df.filter(pc.field("Particle.Id") == PARTICLE1_ID.bytes)
-            .group_by(["State.Id"])
-            .aggregate([("State.Time", "one"), ("Node.Coordinates.X", "list"), ("Node.Coordinates.Y", "list")])
-            .sort_by("State.Time_one")
-            .to_pandas()
-        )
-        particle2: pd.DataFrame = (
-            df.filter(pc.field("Particle.Id") == PARTICLE2_ID.bytes)
-            .group_by(["State.Id"])
-            .aggregate([("State.Time", "one"), ("Node.Coordinates.X", "list"), ("Node.Coordinates.Y", "list")])
-            .sort_by("State.Time_one")
-            .to_pandas()
-        )
 
-        mask = (particle1["State.Time_one"] > 1) & (np.diff(particle1["State.Time_one"], prepend=[0]) > 0)
-        times = particle1["State.Time_one"][mask] / study.input.time_norm_surface
-        particle1_x = particle1["Node.Coordinates.X_list"] * 1e6
-        particle1_y = particle1["Node.Coordinates.Y_list"] * 1e6
-        particle2_x = particle2["Node.Coordinates.X_list"] * 1e6
-        particle2_y = particle2["Node.Coordinates.Y_list"] * 1e6
+def get_states(df: pa.Table, study):
+    particle1: pd.DataFrame = (
+        df.filter(pc.field("Particle.Id") == PARTICLE1_ID.bytes)
+        .group_by(["State.Id"])
+        .aggregate([("State.Time", "one"), ("Node.Coordinates.X", "list"), ("Node.Coordinates.Y", "list")])
+        .sort_by("State.Time_one")
+        .to_pandas()
+    )
+    particle2: pd.DataFrame = (
+        df.filter(pc.field("Particle.Id") == PARTICLE2_ID.bytes)
+        .group_by(["State.Id"])
+        .aggregate([("State.Time", "one"), ("Node.Coordinates.X", "list"), ("Node.Coordinates.Y", "list")])
+        .sort_by("State.Time_one")
+        .to_pandas()
+    )
 
-        return times.array, particle1_x.array, particle1_y.array, particle2_x.array, particle2_y.array
+    mask = (particle1["State.Time_one"] > 1) & (np.diff(particle1["State.Time_one"], prepend=[0]) > 0)
+    times = particle1["State.Time_one"][mask] / study.input.time_norm_surface
+    particle1_x = particle1["Node.Coordinates.X_list"] * 1e6
+    particle1_y = particle1["Node.Coordinates.Y_list"] * 1e6
+    particle2_x = particle2["Node.Coordinates.X_list"] * 1e6
+    particle2_y = particle2["Node.Coordinates.Y_list"] * 1e6
+
+    return times.array, particle1_x.array, particle1_y.array, particle2_x.array, particle2_y.array
