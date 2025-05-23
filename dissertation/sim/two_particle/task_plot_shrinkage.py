@@ -1,5 +1,3 @@
-from pathlib import Path
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -9,44 +7,35 @@ import pyarrow.parquet as pq
 from pytask import mark
 
 from dissertation.config import image_produces
-from dissertation.sim.time_step_study.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES
+from dissertation.sim.two_particle.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES
 
-THIS_DIR = Path(__file__).parent
-RESAMPLE_COUNT = 500
+for t in STUDIES:
 
-PLOTS_DIR = Path(__file__).parent / "plots"
+    @mark.plot
+    def task_plot_shrinkage(
+        produces=image_produces(t.DIR / "shrinkage"),
+        studies={str(study): study for study in t.INSTANCES},
+        results_files={str(study): study.dir / "output.parquet" for study in t.INSTANCES},
+    ):
+        data_frames = ((k, pq.read_table(f).flatten().flatten()) for k, f in results_files.items())
 
+        fig = plt.figure(dpi=600)
+        ax = fig.subplots()
+        ax.set_xscale("log")
+        ax.set_yscale("log")
+        ax.grid(True)
 
-@mark.plot
-@mark.time_step_study
-def task_plot_shrinkage(
-    produces=image_produces(PLOTS_DIR / "shrinkage"),
-    studies={str(study): study for study in STUDIES},
-    results_files={str(study): study.dir() / "output.parquet" for study in STUDIES},
-):
-    data_frames = load_data(results_files)
+        for key, df in data_frames:
+            times, shrinkages = get_shrinkages(studies[key], df)
+            ax.plot(times, shrinkages, label=key, lw=1)
 
-    fig = plt.figure(dpi=600)
-    ax = fig.subplots()
-    ax.set_xscale("log")
-    ax.set_yscale("log")
-    ax.grid(True)
+        ax.legend(title="Maximum Displacement Angle")
+        ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
+        ax.set_ylabel("Shrinkage")
+        fig.tight_layout()
 
-    for key, df in data_frames:
-        times, shrinkages = get_shrinkages(studies[key], df)
-        ax.plot(times, shrinkages, label=key, lw=1)
-
-    ax.legend(title="Maximum Displacement Angle")
-    ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
-    ax.set_ylabel("Shrinkage")
-    fig.tight_layout()
-
-    for p in produces:
-        fig.savefig(p)
-
-
-def load_data(results_files):
-    return ((k, pq.read_table(f).flatten().flatten()) for k, f in results_files.items())
+        for p in produces:
+            fig.savefig(p)
 
 
 def distance(particle1_x, particle1_y, particle2_x, particle2_y):
