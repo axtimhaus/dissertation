@@ -7,7 +7,7 @@ import pyarrow.parquet as pq
 from pytask import mark
 
 from dissertation.config import image_produces
-from dissertation.sim.remeshing_study.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES
+from dissertation.sim.remeshing_study.studies import LINE_LEGEND, STUDIES
 
 THIS_DIR = Path(__file__).parent
 RESAMPLE_COUNT = 500
@@ -24,17 +24,23 @@ def task_plot_time_step_width(
 ):
     data_frames = load_data(results_files)
 
-    fig: plt.Figure = plt.figure(dpi=600)
-    ax: plt.Axes = fig.subplots()
+    fig = plt.figure(dpi=600)
+    ax = fig.subplots()
     ax.set_xscale("log")
     ax.set_yscale("log")
     ax.grid(True)
 
     for key, df in data_frames:
         times, steps = get_time_steps(studies[key], df)
-        p = ax.plot(times, steps, label=key, alpha=0.5)[0]
+        p = ax.plot(
+            times,
+            steps,
+            label=key,
+            lw=1,
+            **studies[key].line_style,
+        )[0]
 
-    ax.legend()
+    ax.legend(**LINE_LEGEND)
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
     ax.set_ylabel("Shrinkage")
     fig.tight_layout()

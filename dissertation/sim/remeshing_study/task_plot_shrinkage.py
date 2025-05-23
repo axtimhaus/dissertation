@@ -10,15 +10,7 @@ import pyarrow.parquet as pq
 from pytask import mark
 
 from dissertation.config import image_produces
-from dissertation.sim.remeshing_study.studies import (
-    LIMIT_COLORS,
-    NODE_COUNT_STYLES,
-    PARTICLE1_ID,
-    PARTICLE2_ID,
-    STUDIES,
-    NODE_COUNTS,
-    LIMITS,
-)
+from dissertation.sim.remeshing_study.studies import LINE_LEGEND, PARTICLE1_ID, PARTICLE2_ID, STUDIES
 
 THIS_DIR = Path(__file__).parent
 RESAMPLE_COUNT = 500
@@ -35,27 +27,17 @@ def task_plot_shrinkage(
 ):
     data_frames = load_data(results_files)
 
-    fig: plt.Figure = plt.figure(dpi=600)
-    ax: plt.Axes = fig.subplots()
+    fig = plt.figure(dpi=600)
+    ax = fig.subplots()
     ax.set_xscale("log")
     ax.set_yscale("log")
     ax.grid(True)
 
     for key, df in data_frames:
         times, shrinkages = get_shrinkages(studies[key], df)
-        ax.plot(
-            times,
-            shrinkages,
-            color=LIMIT_COLORS[studies[key].surface_remesher_limit],
-            linestyle=NODE_COUNT_STYLES[studies[key].node_count],
-            lw=1,
-        )
+        ax.plot(times, shrinkages, lw=1, **studies[key].line_style)
 
-    handles = [Line2D([], [], color="k", linestyle=NODE_COUNT_STYLES[node_count]) for node_count in NODE_COUNTS] + [
-        Line2D([], [], color=LIMIT_COLORS[limit]) for limit in LIMITS
-    ]
-    labels = [f"n = {node_count}" for node_count in NODE_COUNTS] + [f"limit = {limit}" for limit in LIMITS]
-    ax.legend(handles, labels)
+    ax.legend(**LINE_LEGEND)
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
     ax.set_ylabel("Shrinkage")
     fig.tight_layout()

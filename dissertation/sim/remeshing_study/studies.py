@@ -2,6 +2,7 @@ from abc import ABC
 from pathlib import Path
 from uuid import UUID
 import itertools
+from matplotlib.lines import Line2D
 
 import numpy as np
 from pydantic import BaseModel, ConfigDict
@@ -82,6 +83,10 @@ class RemeshingStudy(BaseModel, ABC):
         )
         return model
 
+    @property
+    def line_style(self):
+        return dict(linestyle=NODE_COUNT_STYLES[self.node_count], color=LIMIT_COLORS[self.surface_remesher_limit])
+
 
 NODE_COUNTS = [50, 100, 200]
 LIMITS = [None, 0.01, 0.02, 0.05]
@@ -93,3 +98,10 @@ STUDIES = [
 
 NODE_COUNT_STYLES = {50: "dashed", 100: "solid", 200: "dotted"}
 LIMIT_COLORS = {None: "C0", 0.01: "C1", 0.02: "C2", 0.05: "C3"}
+
+LINE_HANDLES = [Line2D([], [], color="k", linestyle=NODE_COUNT_STYLES[node_count]) for node_count in NODE_COUNTS] + [
+    Line2D([], [], color=LIMIT_COLORS[limit]) for limit in LIMITS
+]
+LINE_LABELS = [f"n = {node_count}" for node_count in NODE_COUNTS] + [f"limit = {limit}" for limit in LIMITS]
+
+LINE_LEGEND = dict(handles=LINE_HANDLES, labels=LINE_LABELS)

@@ -27,8 +27,8 @@ def task_plot_volume_loss(
 ):
     data_frames = load_data(results_files)
 
-    fig: plt.Figure = plt.figure(dpi=600)
-    ax: plt.Axes = fig.subplots()
+    fig = plt.figure(dpi=600)
+    ax = fig.subplots()
     ax.set_xscale("log")
     ax.set_yscale("asinh")
     ax.grid(True)

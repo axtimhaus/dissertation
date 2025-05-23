@@ -11,15 +11,7 @@ import pyarrow.parquet as pq
 from pytask import mark
 
 from dissertation.config import image_produces
-from dissertation.sim.remeshing_study.studies import (
-    LIMIT_COLORS,
-    NODE_COUNT_STYLES,
-    PARTICLE1_ID,
-    PARTICLE2_ID,
-    STUDIES,
-    NODE_COUNTS,
-    LIMITS,
-)
+from dissertation.sim.remeshing_study.studies import LINE_LEGEND, PARTICLE1_ID, PARTICLE2_ID, STUDIES
 
 THIS_DIR = Path(__file__).parent
 RESAMPLE_COUNT = 500
@@ -36,8 +28,8 @@ def task_plot_volume_loss(
 ):
     data_frames = load_data(results_files)
 
-    fig: plt.Figure = plt.figure(dpi=600)
-    ax: plt.Axes = fig.subplots()
+    fig = plt.figure(dpi=600)
+    ax = fig.subplots()
     ax.set_xscale("log")
     ax.set_yscale("asinh")
     ax.grid(True)
@@ -47,18 +39,13 @@ def task_plot_volume_loss(
         plot1 = ax.plot(
             times1,
             volume_losses1,
-            color=LIMIT_COLORS[studies[key].surface_remesher_limit],
-            linestyle=NODE_COUNT_STYLES[studies[key].node_count],
             lw=1,
+            **studies[key].line_style,
         )[0]
         times2, volume_losses2 = get_volume_losses(studies[key], df, PARTICLE2_ID)
         ax.plot(times2, volume_losses2, color=plot1.get_color(), ls=plot1.get_linestyle(), lw=1)
 
-    handles = [Line2D([], [], color="k", linestyle=NODE_COUNT_STYLES[node_count]) for node_count in NODE_COUNTS] + [
-        Line2D([], [], color=LIMIT_COLORS[limit]) for limit in LIMITS
-    ]
-    labels = [f"n = {node_count}" for node_count in NODE_COUNTS] + [f"limit = {limit}" for limit in LIMITS]
-    ax.legend(handles, labels)
+    ax.legend(**LINE_LEGEND)
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
     ax.set_ylabel(r"Relative Volume Loss")
     fig.tight_layout()

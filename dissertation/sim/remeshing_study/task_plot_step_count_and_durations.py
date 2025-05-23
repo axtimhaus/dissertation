@@ -28,10 +28,9 @@ def task_plot_step_count_and_durations(
 ):
     data_frames = load_data(results_files)
 
-    fig: plt.Figure = plt.figure(dpi=600)
-    ax: plt.Axes = fig.subplots()
+    fig = plt.figure(dpi=600)
+    ax = fig.subplots()
     ax2 = ax.twinx()
-    ax.grid(True)
 
     labels = [str(s).replace("_", "\n") for s in studies.values()]
     step_counts = [get_step_count(df) for key, df in data_frames]
@@ -46,6 +45,8 @@ def task_plot_step_count_and_durations(
     ax.tick_params(axis="y", labelcolor="C0")
     ax2.set_ylabel(r"Simulation Duration in $\unit{\second}$", color="C1")
     ax2.tick_params(axis="y", labelcolor="C1")
+    ax2.grid(True)
+
     for p in produces:
         fig.savefig(p)
 

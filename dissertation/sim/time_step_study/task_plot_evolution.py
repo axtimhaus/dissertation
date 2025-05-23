@@ -10,7 +10,7 @@ import pyarrow.parquet as pq
 from pytask import task, mark
 
 from dissertation.config import image_produces
-from dissertation.sim.remeshing_study.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES, RemeshingStudy
+from dissertation.sim.time_step_study.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES, TimeStepStudy
 
 THIS_DIR = Path(__file__).parent
 
@@ -18,7 +18,7 @@ for study in STUDIES:
 
     @task(id=f"{study}")
     @mark.plot
-    @mark.remeshing_study
+    @mark.time_step_study
     def task_plot_evolution(
         study=study,
         produces=image_produces(study.dir() / "evolution"),
@@ -51,7 +51,7 @@ for study in STUDIES:
             fig.savefig(p)
 
 
-def get_states(df: pa.Table, study: RemeshingStudy):
+def get_states(df: pa.Table, study: TimeStepStudy):
     particle1: pd.DataFrame = (
         df.filter(pc.field("Particle.Id") == PARTICLE1_ID.bytes)
         .group_by(["State.Id"])

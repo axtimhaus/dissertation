@@ -1,6 +1,5 @@
 from pathlib import Path
 
-from matplotlib.lines import Line2D
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -10,15 +9,7 @@ import pyarrow.parquet as pq
 from pytask import mark
 
 from dissertation.config import image_produces
-from dissertation.sim.remeshing_study.studies import (
-    LIMIT_COLORS,
-    NODE_COUNT_STYLES,
-    PARTICLE1_ID,
-    PARTICLE2_ID,
-    STUDIES,
-    NODE_COUNTS,
-    LIMITS,
-)
+from dissertation.sim.remeshing_study.studies import PARTICLE1_ID, STUDIES, LINE_LEGEND
 
 THIS_DIR = Path(__file__).parent
 RESAMPLE_COUNT = 500
@@ -35,27 +26,17 @@ def task_plot_neck_size(
 ):
     data_frames = load_data(results_files)
 
-    fig: plt.Figure = plt.figure(dpi=600)
-    ax: plt.Axes = fig.subplots()
+    fig = plt.figure(dpi=600)
+    ax = fig.subplots()
     ax.set_xscale("log")
     ax.set_yscale("log")
     ax.grid(True)
 
     for key, df in data_frames:
         times, neck_sizes = get_neck_sizes(studies[key], df)
-        ax.plot(
-            times,
-            neck_sizes,
-            color=LIMIT_COLORS[studies[key].surface_remesher_limit],
-            linestyle=NODE_COUNT_STYLES[studies[key].node_count],
-            lw=1,
-        )
+        ax.plot(times, neck_sizes, lw=1, **studies[key].line_style)
 
-    handles = [Line2D([], [], color="k", linestyle=NODE_COUNT_STYLES[node_count]) for node_count in NODE_COUNTS] + [
-        Line2D([], [], color=LIMIT_COLORS[limit]) for limit in LIMITS
-    ]
-    labels = [f"n = {node_count}" for node_count in NODE_COUNTS] + [f"limit = {limit}" for limit in LIMITS]
-    ax.legend(handles, labels)
+    ax.legend(**LINE_LEGEND)
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
     ax.set_ylabel(r"Relative Neck Size $\Radius_{\Neck} / \Radius_0$")
     fig.tight_layout()
