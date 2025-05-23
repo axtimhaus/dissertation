@@ -41,19 +41,21 @@ class Input
     public required double GasConstant { get; set; }
 
     public required double Duration { get; set; }
-    
+
     public required FreeSurfaceRemesherOptions? FreeSurfaceRemesherOptions { get; set; }
-    
+
+    public required double NeckDeletionLimit { get; set; }
+
     public required double TimeStepAngleLimit { get; set; }
 }
 
 class FreeSurfaceRemesherOptions
 {
-    public required double DeletionLimit { get; set; } 
+    public required double DeletionLimit { get; set; }
 
     public required double AdditionLimit { get; set; }
 
-    public required double MinWidthFactor { get; set; } 
+    public required double MinWidthFactor { get; set; }
 
     public required double MaxWidthFactor { get; set; }
 

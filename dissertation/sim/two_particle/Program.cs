@@ -140,7 +140,7 @@ IEnumerable<IParticleSystemRemesher> YieldRemeshers()
         );
     }
 
-    yield return new NeckNeighborhoodRemesher(0.4);
+    yield return new NeckNeighborhoodRemesher(input.NeckDeletionLimit);
 }
 
 class PlotEventHandler
