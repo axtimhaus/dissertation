@@ -7,7 +7,7 @@ import pyarrow.parquet as pq
 from pytask import mark
 
 from dissertation.config import image_produces
-from dissertation.sim.two_particle.studies import STUDIES
+from dissertation.sim.two_particle.studies import STUDIES, StudyBase
 
 BAR_WIDTH = 0.3
 
@@ -17,7 +17,8 @@ for t in STUDIES:
     @mark.time_step_study
     def task_plot_step_count_and_durations(
         produces=image_produces(t.DIR / "step_count"),
-        studies={str(study): study for study in t.INSTANCES},
+        study_type: type[StudyBase] = t,
+        studies: dict[str, StudyBase] = {str(study): study for study in t.INSTANCES},
         results_files={str(study): study.dir / "output.parquet" for study in t.INSTANCES},
         time_files={str(study): study.dir / "time.txt" for study in t.INSTANCES},
     ):
@@ -27,15 +28,15 @@ for t in STUDIES:
         ax = fig.subplots()
         ax2 = ax.twinx()
 
-        angle_limits = [str(s.angle_limit) for s in studies.values()]
-        step_counts = [get_step_count(df) for key, df in data_frames]
+        categories = [str(s.display) for s in studies.values()]
 
-        ax.bar(angle_limits, step_counts, label="Step Count", color="C0", width=BAR_WIDTH, align="edge")
+        step_counts = [get_step_count(df) for key, df in data_frames]
+        ax.bar(categories, step_counts, label="Step Count", color="C0", width=BAR_WIDTH, align="edge")
 
         times = [float(f.read_text()) for key, f in time_files.items()]
-        ax2.bar(angle_limits, times, label="Simulation Duration", color="C1", width=-BAR_WIDTH, align="edge")
+        ax2.bar(categories, times, label="Simulation Duration", color="C1", width=-BAR_WIDTH, align="edge")
 
-        ax.set_xlabel("Maximum Displacement Angle")
+        ax.set_xlabel(study_type.TITLE)
         ax.set_ylabel("Step Count", color="C0")
         ax.tick_params(axis="y", labelcolor="C0")
         ax2.set_ylabel(r"Simulation Duration in $\unit{\second}$", color="C1")

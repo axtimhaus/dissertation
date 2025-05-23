@@ -7,7 +7,7 @@ import pyarrow.parquet as pq
 from pytask import mark
 
 from dissertation.config import image_produces
-from dissertation.sim.two_particle.studies import STUDIES
+from dissertation.sim.two_particle.studies import STUDIES, StudyBase
 
 for t in STUDIES:
 
@@ -15,7 +15,8 @@ for t in STUDIES:
     @mark.time_step_study
     def task_plot_time_step_width(
         produces=image_produces(t.DIR / "time_step_width"),
-        studies={str(study): study for study in t.INSTANCES},
+        study_type: type[StudyBase] = t,
+        studies: dict[str, StudyBase] = {str(study): study for study in t.INSTANCES},
         results_files={str(study): study.dir / "output.parquet" for study in t.INSTANCES},
     ):
         data_frames = ((k, pq.read_table(f).flatten().flatten()) for k, f in results_files.items())
@@ -27,10 +28,11 @@ for t in STUDIES:
         ax.grid(True)
 
         for key, df in data_frames:
-            times, steps = get_time_steps(studies[key], df)
-            p = ax.plot(times, steps, label=key, lw=1)[0]
+            study = studies[key]
+            times, values = get_time_steps(study, df)
+            ax.plot(times, values, label=study.display, **study.line_style)
 
-        ax.legend(title="Maximum Displacement Angle")
+        ax.legend(title=study_type.TITLE)
         ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
         ax.set_ylabel("Time Step Width $\\Diff\\Time / \\TimeNorm_{\\Surface}$")
         fig.tight_layout()

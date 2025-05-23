@@ -7,14 +7,15 @@ import pyarrow.parquet as pq
 from pytask import mark
 
 from dissertation.config import image_produces
-from dissertation.sim.two_particle.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES
+from dissertation.sim.two_particle.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES, StudyBase
 
 for t in STUDIES:
 
     @mark.plot
     def task_plot_shrinkage(
         produces=image_produces(t.DIR / "shrinkage"),
-        studies={str(study): study for study in t.INSTANCES},
+        study_type: type[StudyBase] = t,
+        studies: dict[str, StudyBase] = {str(study): study for study in t.INSTANCES},
         results_files={str(study): study.dir / "output.parquet" for study in t.INSTANCES},
     ):
         data_frames = ((k, pq.read_table(f).flatten().flatten()) for k, f in results_files.items())
@@ -26,10 +27,11 @@ for t in STUDIES:
         ax.grid(True)
 
         for key, df in data_frames:
-            times, shrinkages = get_shrinkages(studies[key], df)
-            ax.plot(times, shrinkages, label=key, lw=1)
+            study = studies[key]
+            times, values = get_shrinkages(study, df)
+            ax.plot(times, values, label=study.display, **study.line_style)
 
-        ax.legend(title="Maximum Displacement Angle")
+        ax.legend(title=study_type.TITLE)
         ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
         ax.set_ylabel("Shrinkage")
         fig.tight_layout()

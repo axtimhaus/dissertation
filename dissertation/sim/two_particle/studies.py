@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
-from functools import lru_cache
-from typing import ClassVar, Sequence
+from typing import ClassVar, Sequence, Literal, Callable
 from pathlib import Path
 from uuid import UUID
 
 import numpy as np
+from numpy._core.multiarray import _reconstruct
 from pydantic import BaseModel, ConfigDict
 import itertools
 
@@ -16,6 +16,10 @@ from dissertation.sim.two_particle.input import (
     ParticleInput,
     FreeSurfaceRemesherOptions,
 )
+
+import matplotlib
+import matplotlib.colors
+
 
 THIS_DIR = Path(__file__).parent
 
@@ -60,6 +64,7 @@ class StudyBase(BaseModel, ABC):
     model_config = ConfigDict(frozen=True)
 
     KEY: ClassVar[str]
+    TITLE: ClassVar[str]
     INSTANCES: ClassVar[Sequence["StudyBase"]]
 
     @property
@@ -93,7 +98,8 @@ class StudyBase(BaseModel, ABC):
 
 
 class TimeStepStudy(StudyBase):
-    KEY: ClassVar[str] = "time_step"
+    KEY = "time_step"
+    TITLE = "Max. Displacement Angle"
 
     LIMITS: ClassVar[list[float]] = [0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1]
     COLORS: ClassVar[dict[float, str]] = {lim: f"C{i}" for i, lim in enumerate(LIMITS)}
@@ -117,14 +123,18 @@ class TimeStepStudy(StudyBase):
 
     @property
     def line_style(self) -> dict:
-        return dict(color=TimeStepStudy.COLORS[self.step_angle_limit])
+        return dict(
+            linewidth=1,
+            color=TimeStepStudy.COLORS[self.step_angle_limit],
+        )
 
 
 TimeStepStudy.INSTANCES = [TimeStepStudy(step_angle_limit=lim) for lim in TimeStepStudy.LIMITS]
 
 
 class SurfaceRemeshingStudy(StudyBase):
-    KEY: ClassVar[str] = "surface_remeshing"
+    KEY = "surface_remeshing"
+    TITLE = "Surface Remshing Limit"
 
     NODE_COUNTS: ClassVar[list[int]] = [50, 100, 200]
     LIMITS: ClassVar[list[float | None]] = [None, 0.01, 0.02, 0.05]
@@ -157,6 +167,7 @@ class SurfaceRemeshingStudy(StudyBase):
     @property
     def line_style(self) -> dict:
         return dict(
+            linewidth=1,
             linestyle=SurfaceRemeshingStudy.NODE_COUNT_STYLES[self.node_count],
             color=SurfaceRemeshingStudy.LIMIT_COLORS[self.limit],
         )
@@ -169,7 +180,8 @@ SurfaceRemeshingStudy.INSTANCES = [
 
 
 class NeckRemeshingStudy(StudyBase):
-    KEY: ClassVar[str] = "neck_remeshing"
+    KEY = "neck_remeshing"
+    TITLE = "Neck Remshing Limit"
 
     NODE_COUNTS: ClassVar[list[int]] = [50, 100, 200]
     LIMITS: ClassVar[list[float]] = [0.1, 0.3, 0.5, 0.7]
@@ -199,6 +211,7 @@ class NeckRemeshingStudy(StudyBase):
     @property
     def line_style(self) -> dict:
         return dict(
+            linewidth=1,
             linestyle=NeckRemeshingStudy.NODE_COUNT_STYLES[self.node_count],
             color=NeckRemeshingStudy.LIMIT_COLORS[self.limit],
         )
@@ -209,4 +222,201 @@ NeckRemeshingStudy.INSTANCES = [
     for node_count, limit in itertools.product(NeckRemeshingStudy.NODE_COUNTS, NeckRemeshingStudy.LIMITS)
 ]
 
-STUDIES = [TimeStepStudy, SurfaceRemeshingStudy, NeckRemeshingStudy]
+
+class DimlessParameterStudy(StudyBase, ABC):
+    CMAP: ClassVar[matplotlib.colors.Colormap] = matplotlib.colormaps["copper"]
+
+    MIN: ClassVar[float]
+    MAX: ClassVar[float]
+    COUNT: ClassVar[int] = 11
+    SCALE: ClassVar[Literal["lin", "log", "geom"]]
+
+    value: float
+
+    @property
+    def key(self) -> str:
+        return f"{self.KEY}/{self.value}"
+
+    @property
+    def display(self) -> str:
+        return str(self.value)
+
+    @property
+    def input(self) -> Input:
+        model = BASE_INPUT.model_copy(deep=True)
+        model.particle1.node_count = 50
+        model.particle2.node_count = 50
+        model.time_step_angle_limit = 0.005
+        model.free_surface_remesher_options = FreeSurfaceRemesherOptions(deletion_limit=0.02)
+        model.neck_deletion_limit = 0.5
+        return model
+
+    @property
+    def line_style(self) -> dict:
+        if self.SCALE == "lin" or self.SCALE == "log":
+            return dict(
+                linewidth=1,
+                color=type(self).CMAP((self.value - self.MIN) / (self.MAX - self.MIN)),
+            )
+        if self.SCALE == "geom":
+            return dict(
+                linewidth=1,
+                color=type(self).CMAP((np.log(self.value) - np.log(self.MIN)) / (np.log(self.MAX) - np.log(self.MIN))),
+            )
+        raise ValueError()
+
+    @property
+    def real_value(self):
+        if self.SCALE == "lin" or self.SCALE == "geom":
+            return self.value
+        if self.SCALE == "log":
+            return np.exp(self.value)
+        raise ValueError()
+
+    @classmethod
+    @property
+    def values(cls) -> np.ndarray:
+        if cls.SCALE == "lin":
+            return np.linspace(cls.MIN, cls.MAX, cls.COUNT, True)
+        if cls.SCALE == "geom":
+            return np.geomspace(cls.MIN, cls.MAX, cls.COUNT, True)
+        if cls.SCALE == "log":
+            return np.logspace(cls.MIN, cls.MAX, cls.COUNT, True)
+
+        raise ValueError()
+
+
+class ParticleSizeRatioStudy(DimlessParameterStudy):
+    KEY = "particle_size_ratio"
+    TITLE = r"Particle Size Ratio $\Radius_2 / \Radius_1$"
+    MIN = 1
+    MAX = 10
+    SCALE = "geom"
+
+    @property
+    def input(self) -> Input:
+        model = super().input
+        model.particle2.radius *= self.real_value
+        model.particle2.x = model.particle1.radius * 0.99 + model.particle2.radius
+        model.particle2.node_count = int(model.particle2.node_count * self.real_value)
+        return model
+
+
+ParticleSizeRatioStudy.INSTANCES = [ParticleSizeRatioStudy(value=v) for v in ParticleSizeRatioStudy.values]
+
+
+class SurfaceBoundaryEnergyStudy(DimlessParameterStudy):
+    KEY = "surface_boundary_energy"
+    TITLE = r"Interface Energy Ratio $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface}$"
+    MIN = 0.01
+    MAX = 1
+    SCALE = "geom"
+
+    @property
+    def input(self) -> Input:
+        model = super().input
+        model.grain_boundary.energy = model.material1.surface.energy * self.real_value
+        return model
+
+
+SurfaceBoundaryEnergyStudy.INSTANCES = [SurfaceBoundaryEnergyStudy(value=v) for v in SurfaceBoundaryEnergyStudy.values]
+
+
+class SurfaceBoundaryDiffusionStudy(DimlessParameterStudy):
+    KEY = "surface_boundary_diffusion"
+    TITLE = r"Diffusion Coefficient Ratio $\DiffusionCoefficient_{\GrainBoundary} / \DiffusionCoefficient_{\Surface}$"
+    MIN = 0.01
+    MAX = 1
+    SCALE = "geom"
+
+    @property
+    def input(self) -> Input:
+        model = super().input
+        model.grain_boundary.diffusion_coefficient = model.material1.surface.diffusion_coefficient * self.real_value
+        return model
+
+
+SurfaceBoundaryDiffusionStudy.INSTANCES = [
+    SurfaceBoundaryDiffusionStudy(value=v) for v in SurfaceBoundaryDiffusionStudy.values
+]
+
+
+class OvalityTipTipStudy(DimlessParameterStudy):
+    KEY = "ovality_tip_tip"
+    TITLE = r"Ovality $\Ovality$"
+    MIN = 1.0
+    MAX = 6.0
+    COUNT = 6
+    SCALE = "lin"
+
+    @property
+    def input(self) -> Input:
+        model = super().input
+        model.particle1.ovality = self.real_value
+        model.particle2.ovality = self.real_value
+        model.particle2.x = model.particle1.radius * (1 + model.particle1.ovality) * 0.99 + model.particle2.radius * (
+            1 + model.particle2.ovality
+        )
+        return model
+
+
+OvalityTipTipStudy.INSTANCES = [OvalityTipTipStudy(value=v) for v in OvalityTipTipStudy.values]
+
+
+class OvalityTipFlankStudy(DimlessParameterStudy):
+    KEY = "ovality_tip_flank"
+    TITLE = r"Ovality $\Ovality$"
+    MIN = 1.0
+    MAX = 6.0
+    COUNT = 6
+    SCALE = "lin"
+
+    @property
+    def input(self) -> Input:
+        model = super().input
+        model.particle1.ovality = self.real_value
+        model.particle2.ovality = self.real_value
+        model.particle2.rotation_angle = np.pi / 2
+        model.particle2.x = model.particle1.radius * (1 + model.particle1.ovality) * 0.99 + model.particle2.radius * (
+            1 - model.particle2.ovality
+        )
+        return model
+
+
+OvalityTipFlankStudy.INSTANCES = [OvalityTipFlankStudy(value=v) for v in OvalityTipFlankStudy.values]
+
+
+class OvalityFlankFlankStudy(DimlessParameterStudy):
+    KEY = "ovality_flank_flank"
+    TITLE = r"Ovality $\Ovality$"
+    MIN = 1.0
+    MAX = 6.0
+    COUNT = 6
+    SCALE = "lin"
+
+    @property
+    def input(self) -> Input:
+        model = super().input
+        model.particle1.ovality = self.real_value
+        model.particle2.ovality = self.real_value
+        model.particle1.rotation_angle = np.pi / 2
+        model.particle2.rotation_angle = np.pi / 2
+        model.particle2.x = model.particle1.radius * (1 - model.particle1.ovality) * 0.99 + model.particle2.radius * (
+            1 - model.particle2.ovality
+        )
+        return model
+
+
+OvalityFlankFlankStudy.INSTANCES = [OvalityFlankFlankStudy(value=v) for v in OvalityFlankFlankStudy.values]
+
+STUDIES: list[type[StudyBase]] = [
+    TimeStepStudy,
+    SurfaceRemeshingStudy,
+    NeckRemeshingStudy,
+    ParticleSizeRatioStudy,
+    SurfaceBoundaryEnergyStudy,
+    SurfaceBoundaryDiffusionStudy,
+    OvalityTipTipStudy,
+    OvalityTipFlankStudy,
+    OvalityFlankFlankStudy,
+]
