@@ -1,11 +1,11 @@
-import matplotlib.pyplot as plt
 import matplotlib as mpl
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import pyarrow.compute as pc
 import pyarrow as pa
+import pyarrow.compute as pc
 import pyarrow.parquet as pq
-from pytask import task, mark
+from pytask import mark, task
 
 from dissertation.config import image_produces
 from dissertation.sim.two_particle.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES, StudyBase

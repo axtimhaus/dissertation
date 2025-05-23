@@ -1,24 +1,23 @@
+import itertools
 from abc import ABC, abstractmethod
-from typing import ClassVar, Sequence, Literal
+from collections.abc import Sequence
 from pathlib import Path
+from typing import ClassVar, Literal
 from uuid import UUID
 
+import matplotlib
+import matplotlib.colors
 import numpy as np
 from pydantic import BaseModel, ConfigDict
-import itertools
 
 from dissertation.config import in_build_dir
 from dissertation.sim.two_particle.input import (
+    FreeSurfaceRemesherOptions,
     Input,
     InterfaceInput,
     MaterialInput,
     ParticleInput,
-    FreeSurfaceRemesherOptions,
 )
-
-import matplotlib
-import matplotlib.colors
-
 
 THIS_DIR = Path(__file__).parent
 
@@ -138,7 +137,7 @@ class SurfaceRemeshingStudy(StudyBase):
     NODE_COUNTS: ClassVar[list[int]] = [50, 100, 200]
     LIMITS: ClassVar[list[float | None]] = [None, 0.01, 0.02, 0.05]
     NODE_COUNT_STYLES: ClassVar[dict[float | None, str]] = {
-        n: s for n, s in zip(NODE_COUNTS, ["dashed", "solid", "dotted"])
+        n: s for n, s in zip(NODE_COUNTS, ["dashed", "solid", "dotted"], strict=False)
     }
     LIMIT_COLORS: ClassVar[dict[float | None, str]] = {lim: f"C{i}" for i, lim in enumerate(LIMITS)}
 
@@ -184,7 +183,9 @@ class NeckRemeshingStudy(StudyBase):
 
     NODE_COUNTS: ClassVar[list[int]] = [50, 100, 200]
     LIMITS: ClassVar[list[float]] = [0.1, 0.3, 0.5, 0.7]
-    NODE_COUNT_STYLES: ClassVar[dict[float, str]] = {n: s for n, s in zip(NODE_COUNTS, ["dashed", "solid", "dotted"])}
+    NODE_COUNT_STYLES: ClassVar[dict[float, str]] = {
+        n: s for n, s in zip(NODE_COUNTS, ["dashed", "solid", "dotted"], strict=False)
+    }
     LIMIT_COLORS: ClassVar[dict[float | None, str]] = {lim: f"C{i}" for i, lim in enumerate(LIMITS)}
 
     node_count: int

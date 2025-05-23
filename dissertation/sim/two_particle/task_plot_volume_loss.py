@@ -1,4 +1,5 @@
 from uuid import UUID
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -8,7 +9,7 @@ import pyarrow.parquet as pq
 from pytask import mark, task
 
 from dissertation.config import image_produces
-from dissertation.sim.two_particle.studies import PARTICLE1_ID, STUDIES, PARTICLE2_ID, StudyBase
+from dissertation.sim.two_particle.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES, StudyBase
 
 for t in STUDIES:
 

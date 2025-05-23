@@ -4,12 +4,27 @@ line-length = 120
 docstring-code-format = true
 docstring-code-line-length = 80
 
+[lint]
+ignore = [
+    "B006", # mutable data structures in task arguments
+    "B008", # function calls in task arguments
+    "E501", # long lines (string literals)
+]
+select = [
+    "E",   # pycodestyle
+    "F",   # Pyflakes
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "SIM", # flake8-simplify
+    "I",   # isort
+]
+
+[lint.flake8-pytest-style]
+fixture-parentheses = false
+mark-parentheses = false
+
 [lint.flake8-tidy-imports]
 ban-relative-imports = "all"
 
 [lint.isort]
 known-first-party = ["dissertation"]
-
-[lint.flake8-pytest-style]
-fixture-parentheses = false
-mark-parentheses = false

@@ -1,14 +1,14 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import pyarrow.compute as pc
 import pyarrow as pa
+import pyarrow.compute as pc
 import pyarrow.parquet as pq
-from pytask import mark, task
 from matplotlib import ticker
+from pytask import mark, task
 
 from dissertation.config import image_produces, integer_log_space
-from dissertation.sim.two_particle.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES, StudyBase, DimlessParameterStudy
+from dissertation.sim.two_particle.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES, DimlessParameterStudy, StudyBase
 
 RESAMPLE_COUNT = 500
 

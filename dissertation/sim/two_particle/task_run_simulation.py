@@ -2,10 +2,10 @@ import subprocess
 import time
 from pathlib import Path
 
-from pytask import task, mark
+from pytask import mark, task
+from rich.markup import escape
 
 from dissertation.sim.two_particle.studies import STUDIES
-from rich.markup import escape
 
 THIS_DIR = Path(__file__).parent
 
