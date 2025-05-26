@@ -1,0 +1,56 @@
+\section{Study on the Influence of Neck Remeshing}\label{sec:study-neck-remeshing}
+
+As stated previously, the procedure of remeshing near the neck is absolutely necessary the make the simulation work.
+However, there is a free parameter determining at which distance a surface node near the neck may be deleted.
+Targeting numerical efficiency it is desireable to have this parameter as large as possible as the time step decreases as already noticed in \autoref{sec:study-step-size}.
+Too large limits, however, are expected to decrease the precision especially in regard on geomertical features near the neck.
+In the previous studies the limit was arbitrarily chosen as \num{0.5}.
+In this study the parameter will be altered to get an idea of it's effects.
+
+\subsection{Construction of the Study}
+
+The case matrix of the study has two dimensions.
+The first is the count of nodes per particle in the initial state, which is inverse proportional to the discretization width.
+The levels used are \numlist{50;100;200} nodes per particle.
+The second is the parameterization of the neck remeshing procedure (\autoref{sec:neck-neighborhood-remeshing}).
+The levels of the distance limit parameter used are \qtylist{0.3;0.5;0.7}{\radian}.
+Surface remeshing is deactivated as before.
+
+Targets of investigation are as before the time consumption (duration) of the differently parametrized simulations, the step count needed and the evolution of the step width's during the simulation.
+As measure for precision, their agreement in shrinkage and the overall volume loss are regarded.
+
+\subsection{Discussion of the Results}
+
+\begin{figure}
+    %     \includegraphics{sim/two_particle/studies/neck_remeshing/step_count}
+    \caption{Step Counts and Simulation Time Consumption Used in Dependence on the Maximum Displacement Angle}
+    \label{fig:two_particle/studies/neck_remeshing/step_count}
+\end{figure}
+
+\autoref{fig:two_particle/studies/neck_remeshing/step_count} shows the count of calculated time steps alongside with the total time consumption for the simulations.
+
+\begin{figure}
+    %     \includegraphics{sim/two_particle/studies/neck_remeshing/shrinkage}
+    \caption{Shrinkage Result Curves Obtained from the Simulations in Dependence on the Maximum Displacement Angle}
+    \label{fig:two_particle/studies/neck_remeshing/shrinkage}
+\end{figure}
+
+\autoref{fig:two_particle/studies/neck_remeshing/shrinkage} shows the shrinkage curves obtained from the parameter variation.
+
+\begin{figure}
+    %     \includegraphics{sim/two_particle/studies/neck_remeshing/plots/volume_loss}
+    \caption{Volume Loss During Simulation in Dependence on the Maximum Displacement Angle}
+    \label{fig:two_particle/studies/neck_remeshing/volume_loss}
+\end{figure}
+
+\autoref{fig:two_particle/studies/neck_remeshing/volume_loss} shows the loss of volume for both particles (solid and dashed lines) in the simulations with the varied parameter (color).
+
+\begin{figure}
+    %     \includegraphics{sim/two_particle/studies/neck_remeshing/time_step_width}
+    \caption{Time Step Width During Simulation in Dependence on the Maximum Displacement Angle}
+    \label{fig:two_particle/studies/neck_remeshing/time_step_width}
+\end{figure}
+
+\autoref{fig:two_particle/studies/neck_remeshing/time_step_width} shows the evolution of the time step width used in the simulations for the distinct cases.
+
+\subsection{Summary}

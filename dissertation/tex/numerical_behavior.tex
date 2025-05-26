@@ -1,4 +1,17 @@
 \chapter{Investigation of the Model's Numerical Behavior}\label{ch:numerical-behavior}
 
+The studies performed in this chapter aim at the investigation of the model's numerical behavior before transition to investigations on it's physical implications.
+The test case regarded is identical in all of these.
+A pair of circular particles of equal size and equal material properties is used.
+The material data applied is that of copper (see \autoref{ch:material-data}), however, the exact values of these are not important, as all data is displayed and analysed in dimensionless manner.
+The most important point not covered by the normation is the ratio of grain boundary and surface energy, which is taken as $\frac{\InterfaceEnergy_{\GrainBoundary}}{\InterfaceEnergy_{\Surface}}=\num{0.5}$, as a difference in those is necessary to achieve a main driving force.
+The diffusion coefficents on both types of interfaces are taken as equal.
+
+This coice was made as the case of two equal particles is the standard case of all microscopic sintering models.
+Additonally, during development and testing it has been found that circular particles are more prone to numerical instabilities due to their smooth surface, which is in or near the equilibrium in regions far from the neck.
+This implies that there are always regions of large and of negelctable driving force present in the current state.
+Regions near the local equilibrium tend to show fluctuations with alternating gradient signs and perhaps instabilities, as due to the local formulation this is the only way to represent long-distance effects in the model.
+
 \input{tex/numerical_behavior/time_step_study}
-\input{tex/numerical_behavior/remeshing_study}
+\input{tex/numerical_behavior/neck_remeshing_study}
+\input{tex/numerical_behavior/surface_remeshing_study}
