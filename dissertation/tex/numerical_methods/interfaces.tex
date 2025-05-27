@@ -13,13 +13,16 @@ The approach taken there is also crucial for the used numerical integration proc
 
 The first distinction can be made into approaches with direct and with indirect interface tracking.
 Direct tracking means that the location of the interface is directly defined by discrete points in space, which are moved during the integration procedure to describe the shape evolution of the interface.
+So in this family of approaches there is a sharp interface definition.
+A sharp interface means that the interface is considered as a defined line, where the two phases exist on the one resp.~the other side of.
+The curvature of such an interface can directly be calculated by interpolation of its coordinates, f.e. for use in \autoref{eq:stress-surface-curvature}.
 Direct interface approaches usually use the \glsfirst{FDM} or the \glsfirst{FEM} to represent the particles shape.
 
 Indirect tracking, however, means that the interface location is defined by the value of an auxiliary function.
 The discretization is there connected to the solution space, the points are usually fixed (but must not be) and the motion of the interface is just realized by changes in the auxiliary function values.
 Indirect interface methods can further be classified in methods with sharp and diffuse interfaces.
-A sharp interface means that the interface is considered as a defined line, where the two phases exist on the one resp.~the other side of.
-Here we have the \glsfirst{LSM} (see \autoref{subsec:interfaces-level-set}) and \glsfirstplural{CA} (see \autoref{subsec:interfaces-cellular-automata}) approaches.
+Approaches with a sharp interface definition include the \glsfirst{LSM} (see \autoref{subsec:interfaces-level-set}) and \glsfirstplural{CA} (see \autoref{subsec:interfaces-cellular-automata}) approaches.
+
 Diffuse interfaces mean a more or less smooth transition between two phases, so that the actual position can not directly be located.
 This diffusivity must not be confused with the physical width of the interface.
 The physical width of the interface is the region where the atomic structure significantly deviates from the bulk structure.
