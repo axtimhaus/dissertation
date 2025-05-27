@@ -47,6 +47,7 @@ Pressure = 'p'                                      # pressure
 GasConstant = 'R'                                   # specific gas constant
 BoltzmannConstant = 'k_{\symrm{B}}'                 # Boltzmann's constant
 MolarVolume = 'V_{\symrm{m}}'                       # molar volume
+Density = '\varrho'                                 # mass density
 Flux = 'j'                                          # flux
 Concentration = 'c'                                 # concentration
 VacancyConcentration = '\Concentration_\mathrm{Va}' # vacancy concentration
