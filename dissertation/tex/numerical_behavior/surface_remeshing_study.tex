@@ -26,35 +26,49 @@ As measure for precision, their agreement in shrinkage and the overall volume lo
 \subsection{Discussion of the Results}
 
 \begin{figure}
-    %     \includegraphics{sim/two_particle/studies/surface_remeshing/step_count}
-    \caption{Step Counts and Simulation Time Consumption Used in Dependence on the Maximum Displacement Angle}
+    \includegraphics{sim/two_particle/studies/surface_remeshing/step_count}
+    \caption{Step Counts and Simulation Time Consumption Used in Dependence on the Surface Remeshing Limit}
     \label{fig:two_particle/studies/surface_remeshing/step_count}
 \end{figure}
 
 \autoref{fig:two_particle/studies/surface_remeshing/step_count} shows the count of calculated time steps alongside with the total time consumption for the simulations.
+The general trend is similar to that of neck remeshing discussed in the previous section.
+Step count and time consumption increase with node count and decrease with the limit parameter.
+A special observation here is the \num{200} nodes/\num{0.05} limit run which shows a drastic drop in the effort compared to the other runs.
+The reason for this is, that in this case the limit is high enough to remesh the free surface of the circular shape down to aproximately \num{100} nodes in the first remshing run.
+So this case is roughly equivalent to the \num{100} nodes/\num{0.05} limit run.
 
 \begin{figure}
-    %     \includegraphics{sim/two_particle/studies/surface_remeshing/shrinkage}
-    \caption{Shrinkage Result Curves Obtained from the Simulations in Dependence on the Maximum Displacement Angle}
+    \includegraphics{sim/two_particle/studies/surface_remeshing/shrinkage}
+    \caption{Shrinkage Result Curves Obtained from the Simulations in Dependence on the Surface Remeshing Limit}
     \label{fig:two_particle/studies/surface_remeshing/shrinkage}
 \end{figure}
 
 \autoref{fig:two_particle/studies/surface_remeshing/shrinkage} shows the shrinkage curves obtained from the parameter variation.
+As above, the trend is generally equivalent to the neck remeshing.
+The low count runs show the same errors in the early stages, whereas the good agreement in late stages is present, too.
+Note that the \num{200}/\num{0.05} still shows the accurate results of the other \num{200} nodes runs, despite the agressive remeshing.
 
 \begin{figure}
-    %     \includegraphics{sim/two_particle/studies/surface_remeshing/volume_loss}
-    \caption{Volume Loss During Simulation in Dependence on the Maximum Displacement Angle}
+    \includegraphics{sim/two_particle/studies/surface_remeshing/volume_loss}
+    \caption{Volume Loss During Simulation in Dependence on the Surface Remeshing Limit}
     \label{fig:two_particle/studies/surface_remeshing/volume_loss}
 \end{figure}
 
-\autoref{fig:two_particle/studies/surface_remeshing/volume_loss} shows the loss of volume for both particles (solid and dashed lines) in the simulations with the varied parameter (color).
+\autoref{fig:two_particle/studies/time_step/volume_loss} shows the loss of volume in the system during simulation in dependence on the parameters.
+As to be expected, the general trends are similar to the neck remeshing, too.
+The special \num{200}/\num{0.05} case shows an extraordinarily low volume loss in late stages, as the effect of neck remeshing losses is canceled out by the counter-signed effect of the initial rigorous surface remeshing step, which was noticed above.
 
 \begin{figure}
-    %     \includegraphics{sim/two_particle/studies/surface_remeshing/time_step_width}
-    \caption{Time Step Width During Simulation in Dependence on the Maximum Displacement Angle}
+    \includegraphics{sim/two_particle/studies/surface_remeshing/time_step_width}
+    \caption{Time Step Width During Simulation in Dependence on the Surface Remeshing Limit}
     \label{fig:two_particle/studies/surface_remeshing/time_step_width}
 \end{figure}
 
 \autoref{fig:two_particle/studies/surface_remeshing/time_step_width} shows the evolution of the time step width used in the simulations for the distinct cases.
 
 \subsection{Summary}
+
+The results regarding surface remeshing generally show the same trends as with the neck remeshing.
+The case of high initial node counts and agressive surface remeshing shows, that it could be preferable to use high initial node counts and use an agressive remeshing step to create the intial state.
+With this procedure fine discretization is only maintained in regions where it is necessary (high curvatures).

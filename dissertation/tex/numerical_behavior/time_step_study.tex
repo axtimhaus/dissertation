@@ -16,7 +16,7 @@ As measure for precision, their agreement in shrinkage and the overall volume lo
 \subsection{Discussion of the Results}
 
 \begin{figure}
-    %     \includegraphics{sim/two_particle/studies/time_step/step_count}
+    \includegraphics{sim/two_particle/studies/time_step/step_count}
     \caption{Step Counts and Simulation Time Consumption Used in Dependence on the Maximum Displacement Angle}
     \label{fig:two_particle/studies/time_step/step_count}
 \end{figure}
@@ -32,7 +32,7 @@ This means slower convergence of equation solving.
 Moreover, from the calculation logs can be observed that the convergence to the trivial solution as described in \autoref{subsec:step-system-solution} more frequently occurs when the parameter takes higher values.
 
 \begin{figure}
-    %     \includegraphics{sim/two_particle/studies/time_step/shrinkage}
+    \includegraphics{sim/two_particle/studies/time_step/shrinkage}
     \caption{Shrinkage Result Curves Obtained from the Simulations in Dependence on the Maximum Displacement Angle}
     \label{fig:two_particle/studies/time_step/shrinkage}
 \end{figure}
@@ -44,19 +44,19 @@ In the initial stage, the differences are larger than in the final stages, since
 However, these differences are equalized so that the results are in well agreement in the later stages nevertheless.
 
 \begin{figure}
-    %     \includegraphics{sim/two_particle/studies/time_step/volume_loss}
+    \includegraphics{sim/two_particle/studies/time_step/volume_loss}
     \caption{Volume Loss During Simulation in Dependence on the Maximum Displacement Angle}
     \label{fig:two_particle/studies/time_step/volume_loss}
 \end{figure}
 
-\autoref{fig:two_particle/studies/time_step/volume_loss} shows the loss of volume for both particles (solid and dashed lines) in the simulations with the varied parameter (color).
+\autoref{fig:two_particle/studies/time_step/volume_loss} shows the loss of volume in the system during simulation in dependence on the time step parameter.
 For the values below \qty{0.01}{\radian} the major source of error are the remeshing steps (jumps in the shown curves), between which the error does not alter very much.
 For the higher values the error originating in the actual time integration is much more pronounced.
 Especially for \qty{0.05} and above the error escalates in the later stages.
 This can be explained by the occurrence of significant fluctuations on the particle surface (numerical instabilities).
 
 \begin{figure}
-    %     \includegraphics{sim/two_particle/studies/time_step/time_step_width}
+    \includegraphics{sim/two_particle/studies/time_step/time_step_width}
     \caption{Time Step Width During Simulation in Dependence on the Maximum Displacement Angle}
     \label{fig:two_particle/studies/time_step/time_step_width}
 \end{figure}

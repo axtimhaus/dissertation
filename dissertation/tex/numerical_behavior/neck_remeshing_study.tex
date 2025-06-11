@@ -22,35 +22,50 @@ As measure for precision, their agreement in shrinkage and the overall volume lo
 \subsection{Discussion of the Results}
 
 \begin{figure}
-    %     \includegraphics{sim/two_particle/studies/neck_remeshing/step_count}
-    \caption{Step Counts and Simulation Time Consumption Used in Dependence on the Maximum Displacement Angle}
+    \includegraphics{sim/two_particle/studies/neck_remeshing/step_count}
+    \caption{Step Counts and Simulation Time Consumption Used in Dependence on the Neck Remeshing Limit}
     \label{fig:two_particle/studies/neck_remeshing/step_count}
 \end{figure}
 
 \autoref{fig:two_particle/studies/neck_remeshing/step_count} shows the count of calculated time steps alongside with the total time consumption for the simulations.
+In general, the step count and time consumption show an exponential dependence on the node count.
+Agressive remeshing (higher limit values) is able to decrease the effort by factors from \numrange{2}{5}.
 
 \begin{figure}
-    %     \includegraphics{sim/two_particle/studies/neck_remeshing/shrinkage}
-    \caption{Shrinkage Result Curves Obtained from the Simulations in Dependence on the Maximum Displacement Angle}
+    \includegraphics{sim/two_particle/studies/neck_remeshing/shrinkage}
+    \caption{Shrinkage Result Curves Obtained from the Simulations in Dependence on the Neck Remeshing Limit}
     \label{fig:two_particle/studies/neck_remeshing/shrinkage}
 \end{figure}
 
 \autoref{fig:two_particle/studies/neck_remeshing/shrinkage} shows the shrinkage curves obtained from the parameter variation.
+In late stages the distinct simulations are in good agreement.
+Especially depending on the node count, the agreement in early stages is much weaker.
+This can be explained by the disregardance of local geometrical features near the neck when using coarse discretization.
+When the gradients are smaller in late stages this influence has less effect.
+However, within the node count groups the agreement is good, with low influence of the neck limit parameter.
 
 \begin{figure}
-    %     \includegraphics{sim/two_particle/studies/neck_remeshing/plots/volume_loss}
-    \caption{Volume Loss During Simulation in Dependence on the Maximum Displacement Angle}
+    \includegraphics{sim/two_particle/studies/neck_remeshing/volume_loss}
+    \caption{Volume Loss During Simulation in Dependence on the Neck Remeshing Limit}
     \label{fig:two_particle/studies/neck_remeshing/volume_loss}
 \end{figure}
 
-\autoref{fig:two_particle/studies/neck_remeshing/volume_loss} shows the loss of volume for both particles (solid and dashed lines) in the simulations with the varied parameter (color).
+\autoref{fig:two_particle/studies/time_step/volume_loss} shows the loss of volume in the system during simulation in dependence on the parameters.
+As has to be expected, the numerical volume loss shows significant dependence on the node count and remshing regime.
+Coarse discretization and agressive remeshing lead to higher volume losses.
+All stay in the order of \num{1e-3} and thus far below the shrinkage by diffusional flows observed and can therefore be tolerated.
 
 \begin{figure}
-    %     \includegraphics{sim/two_particle/studies/neck_remeshing/time_step_width}
-    \caption{Time Step Width During Simulation in Dependence on the Maximum Displacement Angle}
+    \includegraphics{sim/two_particle/studies/neck_remeshing/time_step_width}
+    \caption{Time Step Width During Simulation in Dependence on the Neck Remeshing Limit}
     \label{fig:two_particle/studies/neck_remeshing/time_step_width}
 \end{figure}
 
 \autoref{fig:two_particle/studies/neck_remeshing/time_step_width} shows the evolution of the time step width used in the simulations for the distinct cases.
 
 \subsection{Summary}
+
+The obtained results show, that if one is interested in the behavior in early stages, a high node count has to be used.
+If the reagrd is only payed on late stages, low node counts lead to equivalent results.
+The agressiveness of neck remeshing is of minor importance regarding the simulation accuracy, but is able to significantly decrease the computational effort.
+Fot the sake of efficency, as to be expected, node counts as low as possible are preferred, as the effort increases exponentially with the node count.
