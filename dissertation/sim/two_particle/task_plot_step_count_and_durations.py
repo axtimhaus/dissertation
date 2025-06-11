@@ -14,7 +14,6 @@ for t in STUDIES:
 
     @task(id=f"{t.KEY}")
     @mark.plot
-    @mark.time_step_study
     def task_plot_step_count_and_durations(
         produces=image_produces(t.DIR / "step_count"),
         study_type: type[StudyBase] = t,
@@ -28,7 +27,7 @@ for t in STUDIES:
         ax = fig.subplots()
         ax2 = ax.twinx()
 
-        categories = [str(s.display) for s in studies.values()]
+        categories = [s.display.replace("/", "\n") for s in studies.values()]
 
         step_counts = [get_step_count(df) for key, df in data_frames]
         ax.bar(categories, step_counts, label="Step Count", color="C0", width=BAR_WIDTH, align="edge")
@@ -42,9 +41,13 @@ for t in STUDIES:
         ax2.set_ylabel(r"Simulation Duration in $\unit{\second}$", color="C1")
         ax2.tick_params(axis="y", labelcolor="C1")
         ax2.grid(True)
+        ax.set_yscale("log")
+        ax2.set_yscale("log")
 
         for p in produces:
             fig.savefig(p)
+
+        plt.close(fig)
 
 
 def distance(particle1_x, particle1_y, particle2_x, particle2_y):

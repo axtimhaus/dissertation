@@ -34,13 +34,15 @@ for t in STUDIES:
             times, values = get_neck_sizes(study, df)
             ax.plot(times, values, label=study.display, **study.line_style)
 
-        ax.legend(title=study_type.TITLE)
+        ax.legend(title=study_type.TITLE, ncols=3)
         ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
         ax.set_ylabel(r"Relative Neck Size $\Radius_{\Neck} / \Radius_0$")
         fig.tight_layout()
 
         for p in produces:
             fig.savefig(p)
+
+        plt.close(fig)
 
     if issubclass(t, DimlessParameterStudy):
 
@@ -57,7 +59,7 @@ for t in STUDIES:
             fig = plt.figure(dpi=600)
             ax = fig.subplots()
             ax.set_xscale("log")
-            ax.set_yscale("log" if study_type.SCALE == "geom" else study_type.SCALE)
+            ax.set_yscale(study_type.axis_scale)
 
             params = np.array([s.real_value for s in studies.values()])
             times_neck_size = [get_neck_sizes(studies[key], df) for key, df in data_frames]
@@ -80,6 +82,8 @@ for t in STUDIES:
 
             for p in produces:
                 fig.savefig(p)
+
+            plt.close(fig)
 
 
 def get_neck_sizes(study, df: pa.Table):

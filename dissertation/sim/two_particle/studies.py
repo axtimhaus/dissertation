@@ -106,11 +106,11 @@ class TimeStepStudy(StudyBase):
 
     @property
     def key(self) -> str:
-        return f"{TimeStepStudy.KEY}/{self.step_angle_limit}"
+        return f"{TimeStepStudy.KEY}/{self.step_angle_limit:.3f}"
 
     @property
     def display(self) -> str:
-        return rf"{self.step_angle_limit}"
+        return rf"{self.step_angle_limit:.3g}"
 
     @property
     def input(self) -> Input:
@@ -132,10 +132,10 @@ TimeStepStudy.INSTANCES = [TimeStepStudy(step_angle_limit=lim) for lim in TimeSt
 
 class SurfaceRemeshingStudy(StudyBase):
     KEY = "surface_remeshing"
-    TITLE = "Surface Remshing Limit"
+    TITLE = "Node Count / Surface Remeshing Limit"
 
     NODE_COUNTS: ClassVar[list[int]] = [50, 100, 200]
-    LIMITS: ClassVar[list[float | None]] = [None, 0.01, 0.02, 0.05]
+    LIMITS: ClassVar[list[float]] = [0.00, 0.01, 0.02, 0.05]
     NODE_COUNT_STYLES: ClassVar[dict[float | None, str]] = {
         n: s for n, s in zip(NODE_COUNTS, ["dashed", "solid", "dotted"], strict=False)
     }
@@ -146,11 +146,11 @@ class SurfaceRemeshingStudy(StudyBase):
 
     @property
     def key(self) -> str:
-        return f"{SurfaceRemeshingStudy.KEY}/{self.node_count}_{self.limit}"
+        return f"{SurfaceRemeshingStudy.KEY}/{self.node_count}_{self.limit:.2f}"
 
     @property
     def display(self) -> str:
-        return f"n = {self.node_count}, limit = {self.limit}"
+        return f"{self.node_count}/{self.limit:.2g}"
 
     @property
     def input(self) -> Input:
@@ -179,10 +179,10 @@ SurfaceRemeshingStudy.INSTANCES = [
 
 class NeckRemeshingStudy(StudyBase):
     KEY = "neck_remeshing"
-    TITLE = "Neck Remshing Limit"
+    TITLE = "Node Count / Neck Remeshing Limit"
 
     NODE_COUNTS: ClassVar[list[int]] = [50, 100, 200]
-    LIMITS: ClassVar[list[float]] = [0.1, 0.3, 0.5, 0.7]
+    LIMITS: ClassVar[list[float]] = [0.3, 0.5, 0.7]
     NODE_COUNT_STYLES: ClassVar[dict[float, str]] = {
         n: s for n, s in zip(NODE_COUNTS, ["dashed", "solid", "dotted"], strict=False)
     }
@@ -193,11 +193,11 @@ class NeckRemeshingStudy(StudyBase):
 
     @property
     def key(self) -> str:
-        return f"{NeckRemeshingStudy.KEY}/{self.node_count}_{self.limit}"
+        return f"{NeckRemeshingStudy.KEY}/{self.node_count}_{self.limit:.1f}"
 
     @property
     def display(self) -> str:
-        return f"n = {self.node_count}, limit = {self.limit}"
+        return f"{self.node_count}/{self.limit:.1g}"
 
     @property
     def input(self) -> Input:
@@ -235,19 +235,19 @@ class DimlessParameterStudy(StudyBase, ABC):
 
     @property
     def key(self) -> str:
-        return f"{self.KEY}/{self.value}"
+        return f"{self.KEY}/{self.value:.5f}"
 
     @property
     def display(self) -> str:
-        return str(self.value)
+        return f"{self.value:.5g}"
 
     @property
     def input(self) -> Input:
         model = BASE_INPUT.model_copy(deep=True)
-        model.particle1.node_count = 50
-        model.particle2.node_count = 50
+        model.particle1.node_count = 200
+        model.particle2.node_count = 200
         model.time_step_angle_limit = 0.005
-        model.free_surface_remesher_options = FreeSurfaceRemesherOptions(deletion_limit=0.02)
+        model.free_surface_remesher_options = FreeSurfaceRemesherOptions(deletion_limit=0.05)
         model.neck_deletion_limit = 0.5
         return model
 
@@ -285,13 +285,26 @@ class DimlessParameterStudy(StudyBase, ABC):
 
         raise ValueError()
 
+    @classmethod
+    @property
+    def axis_scale(cls) -> str:
+        if cls.SCALE == "lin":
+            return "linear"
+        if cls.SCALE == "geom":
+            return "log"
+        if cls.SCALE == "log":
+            return "log"
+
+        raise ValueError()
+
 
 class ParticleSizeRatioStudy(DimlessParameterStudy):
     KEY = "particle_size_ratio"
     TITLE = r"Particle Size Ratio $\Radius_2 / \Radius_1$"
     MIN = 1
     MAX = 10
-    SCALE = "geom"
+    SCALE = "lin"
+    COUNT = 10
 
     @property
     def input(self) -> Input:
@@ -308,9 +321,10 @@ ParticleSizeRatioStudy.INSTANCES = [ParticleSizeRatioStudy(value=v) for v in Par
 class SurfaceBoundaryEnergyStudy(DimlessParameterStudy):
     KEY = "surface_boundary_energy"
     TITLE = r"Interface Energy Ratio $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface}$"
-    MIN = 0.01
-    MAX = 1
-    SCALE = "geom"
+    MIN = 0.1
+    MAX = 0.9
+    SCALE = "lin"
+    COUNT = 9
 
     @property
     def input(self) -> Input:
@@ -354,9 +368,9 @@ class OvalityTipTipStudy(DimlessParameterStudy):
         model = super().input
         model.particle1.ovality = self.real_value
         model.particle2.ovality = self.real_value
-        model.particle2.x = model.particle1.radius * (1 + model.particle1.ovality) * 0.99 + model.particle2.radius * (
-            1 + model.particle2.ovality
-        )
+        model.particle2.x = model.particle1.radius * np.sqrt(
+            model.particle1.ovality
+        ) * 0.99 + model.particle2.radius * np.sqrt(model.particle2.ovality)
         return model
 
 
@@ -377,9 +391,9 @@ class OvalityTipFlankStudy(DimlessParameterStudy):
         model.particle1.ovality = self.real_value
         model.particle2.ovality = self.real_value
         model.particle2.rotation_angle = np.pi / 2
-        model.particle2.x = model.particle1.radius * (1 + model.particle1.ovality) * 0.99 + model.particle2.radius * (
-            1 - model.particle2.ovality
-        )
+        model.particle2.x = model.particle1.radius * np.sqrt(
+            model.particle1.ovality
+        ) * 0.99 + model.particle2.radius / np.sqrt(model.particle2.ovality)
         return model
 
 
@@ -401,9 +415,9 @@ class OvalityFlankFlankStudy(DimlessParameterStudy):
         model.particle2.ovality = self.real_value
         model.particle1.rotation_angle = np.pi / 2
         model.particle2.rotation_angle = np.pi / 2
-        model.particle2.x = model.particle1.radius * (1 - model.particle1.ovality) * 0.99 + model.particle2.radius * (
-            1 - model.particle2.ovality
-        )
+        model.particle2.x = model.particle1.radius / np.sqrt(
+            model.particle1.ovality
+        ) * 0.99 + model.particle2.radius / np.sqrt(model.particle2.ovality)
         return model
 
 
@@ -416,7 +430,7 @@ STUDIES: list[type[StudyBase]] = [
     ParticleSizeRatioStudy,
     SurfaceBoundaryEnergyStudy,
     SurfaceBoundaryDiffusionStudy,
-    OvalityTipTipStudy,
-    OvalityTipFlankStudy,
-    OvalityFlankFlankStudy,
+    # OvalityTipTipStudy,
+    # OvalityTipFlankStudy,
+    # OvalityFlankFlankStudy,
 ]

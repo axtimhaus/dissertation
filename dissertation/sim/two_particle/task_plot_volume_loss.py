@@ -15,7 +15,6 @@ for t in STUDIES:
 
     @task(id=f"{t.KEY}")
     @mark.plot
-    @mark.time_step_study
     def task_plot_volume_loss(
         produces=image_produces(t.DIR / "volume_loss"),
         study_type: type[StudyBase] = t,
@@ -37,7 +36,7 @@ for t in STUDIES:
             times2, volume_losses2 = get_volume_losses(study, df, PARTICLE2_ID)
             ax.plot(times2, volume_losses2, **study.line_style)
 
-        ax.legend(title=study_type.TITLE)
+        ax.legend(title=study_type.TITLE, ncols=3)
         ax.set_xlabel(r"Normalized Time $\Time / \TimeNorm_{\Surface}$")
         ax.set_ylabel(r"Relative Volume Loss $(\Volume - \Volume_0) / \Volume_0$")
         ax.set_ylim(0, 1e-3)
@@ -45,6 +44,8 @@ for t in STUDIES:
 
         for p in produces:
             fig.savefig(p)
+
+        plt.close(fig)
 
 
 def get_volume_losses(study, df: pa.Table, particle_id: UUID):

@@ -15,7 +15,6 @@ for t in STUDIES:
 
         @task(id=study.key)
         @mark.plot
-        @mark.time_step_study
         def task_plot_evolution(
             study: StudyBase = study,
             results_file=study.dir / "output.parquet",
@@ -40,12 +39,15 @@ for t in STUDIES:
                 ax.fill(particle1_x[i], particle1_y[i], label=f"{times[i]:.2f}", edgecolor=color, fill=False, lw=0.5)
                 ax.fill(particle2_x[i], particle2_y[i], edgecolor=color, fill=False, lw=0.5)
 
+            ax.set_title(f"{study.TITLE}\n{study.display}")
             ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
             ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")
             fig.tight_layout()
 
             for p in produces:
                 fig.savefig(p)
+
+            plt.close(fig)
 
 
 def get_states(df: pa.Table, study):

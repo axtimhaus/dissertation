@@ -24,7 +24,7 @@ for t in STUDIES:
             produces.write_text(study.input.model_dump_json(indent=4))
 
         @task(id=study.key)
-        @mark.persis
+        @mark.persist
         @mark.sim
         def task_run(
             input_file=study.dir / "input.json",

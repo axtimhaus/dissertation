@@ -11,7 +11,6 @@ for t in STUDIES:
 
     @task(id=f"{t.KEY}")
     @mark.plot
-    @mark.time_step_study
     def task_plot_time_step_width(
         produces=image_produces(t.DIR / "time_step_width"),
         study_type: type[StudyBase] = t,
@@ -31,13 +30,15 @@ for t in STUDIES:
             times, values = get_time_steps(study, df)
             ax.plot(times, values, label=study.display, **study.line_style)
 
-        ax.legend(title=study_type.TITLE)
+        ax.legend(title=study_type.TITLE, ncols=3)
         ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
         ax.set_ylabel("Time Step Width $\\Diff\\Time / \\TimeNorm_{\\Surface}$")
         fig.tight_layout()
 
         for p in produces:
             fig.savefig(p)
+
+        plt.close(fig)
 
 
 def get_time_steps(study, df: pa.Table):
