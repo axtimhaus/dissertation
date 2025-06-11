@@ -32,10 +32,11 @@ class MaterialInput(BaseModel):
 
 class FreeSurfaceRemesherOptions(BaseModel):
     deletion_limit: float = Field(ge=0, default=0.01)
-    addition_limit: float = Field(ge=0, default=0.5)
+    addition_limit: float = Field(ge=0, default=10000)
     min_width_factor: float = Field(ge=0, lt=1, default=0.25)
     max_width_factor: float = Field(ge=0, lt=1, default=3.0)
     twin_point_limit: float = Field(ge=0, lt=1, default=0.1)
+    neck_protection_count: int = Field(ge=0, default=10)
 
 
 class Input(BaseModel):

@@ -60,4 +60,6 @@ class FreeSurfaceRemesherOptions
     public required double MaxWidthFactor { get; set; }
 
     public required double TwinPointLimit { get; set; }
+
+    public required double NeckProtectionCount { get; set; }
 }

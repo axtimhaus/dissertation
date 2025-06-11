@@ -104,7 +104,7 @@ var routines = SolverRoutines.Default with
     StepWidthController = new MaximumDisplacementAngleStepWidthController(maximumDisplacementAngle: input.TimeStepAngleLimit)
 };
 
-var solver = new SinteringSolver(routines, remeshingEverySteps: 100);
+var solver = new SinteringSolver(routines, remeshingEverySteps: 50);
 
 var plotHandler = new PlotEventHandler();
 solver.SessionInitialized += plotHandler.HandleSessionInitialized;
@@ -136,7 +136,8 @@ IEnumerable<IParticleSystemRemesher> YieldRemeshers()
             input.FreeSurfaceRemesherOptions.AdditionLimit,
             input.FreeSurfaceRemesherOptions.MinWidthFactor,
             input.FreeSurfaceRemesherOptions.MaxWidthFactor,
-            input.FreeSurfaceRemesherOptions.TwinPointLimit
+            input.FreeSurfaceRemesherOptions.TwinPointLimit,
+            input.FreeSurfaceRemesherOptions.NeckProtectionCount
         );
     }
 
