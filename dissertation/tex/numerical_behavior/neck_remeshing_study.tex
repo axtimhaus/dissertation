@@ -22,20 +22,32 @@ As measure for precision, their agreement in shrinkage and the overall volume lo
 \subsection{Discussion of the Results}
 
 \begin{figure}
-    \includegraphics{sim/two_particle/studies/neck_remeshing/step_count}
-    \caption{Step Counts and Simulation Time Consumption Used in Dependence on the Neck Remeshing Limit}
-    \label{fig:two_particle/studies/neck_remeshing/step_count}
+    \begin{subfigure}{0.5\linewidth}
+        \includegraphics[scale=0.5]{sim/two_particle/studies/neck_remeshing/step_count}
+        \caption{Step Counts and Simulation Time Consumption}
+        \label{fig:two_particle/studies/neck_remeshing/step_count}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\linewidth}
+        \includegraphics[scale=0.5]{sim/two_particle/studies/neck_remeshing/shrinkage}
+        \caption{Shrinkage}
+        \label{fig:two_particle/studies/neck_remeshing/shrinkage}
+    \end{subfigure}
+    \begin{subfigure}{0.5\linewidth}
+        \includegraphics[scale=0.5]{sim/two_particle/studies/neck_remeshing/volume_loss}
+        \caption{Volume Loss}
+        \label{fig:two_particle/studies/neck_remeshing/volume_loss}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\linewidth}
+        \includegraphics[scale=0.5]{sim/two_particle/studies/neck_remeshing/time_step_width}
+        \caption{Time Step Width}
+        \label{fig:two_particle/studies/neck_remeshing/time_step_width}
+    \end{subfigure}
+    \caption{Numerical Behavior of the Simulation in Dependence on the Neck Remeshing Limit}
 \end{figure}
 
 \autoref{fig:two_particle/studies/neck_remeshing/step_count} shows the count of calculated time steps alongside with the total time consumption for the simulations.
 In general, the step count and time consumption show an exponential dependence on the node count.
 Agressive remeshing (higher limit values) is able to decrease the effort by factors from \numrange{2}{5}.
-
-\begin{figure}
-    \includegraphics{sim/two_particle/studies/neck_remeshing/shrinkage}
-    \caption{Shrinkage Result Curves Obtained from the Simulations in Dependence on the Neck Remeshing Limit}
-    \label{fig:two_particle/studies/neck_remeshing/shrinkage}
-\end{figure}
 
 \autoref{fig:two_particle/studies/neck_remeshing/shrinkage} shows the shrinkage curves obtained from the parameter variation.
 In late stages the distinct simulations are in good agreement.
@@ -44,22 +56,10 @@ This can be explained by the disregardance of local geometrical features near th
 When the gradients are smaller in late stages this influence has less effect.
 However, within the node count groups the agreement is good, with low influence of the neck limit parameter.
 
-\begin{figure}
-    \includegraphics{sim/two_particle/studies/neck_remeshing/volume_loss}
-    \caption{Volume Loss During Simulation in Dependence on the Neck Remeshing Limit}
-    \label{fig:two_particle/studies/neck_remeshing/volume_loss}
-\end{figure}
-
 \autoref{fig:two_particle/studies/time_step/volume_loss} shows the loss of volume in the system during simulation in dependence on the parameters.
 As has to be expected, the numerical volume loss shows significant dependence on the node count and remshing regime.
 Coarse discretization and agressive remeshing lead to higher volume losses.
 All stay in the order of \num{1e-3} and thus far below the shrinkage by diffusional flows observed and can therefore be tolerated.
-
-\begin{figure}
-    \includegraphics{sim/two_particle/studies/neck_remeshing/time_step_width}
-    \caption{Time Step Width During Simulation in Dependence on the Neck Remeshing Limit}
-    \label{fig:two_particle/studies/neck_remeshing/time_step_width}
-\end{figure}
 
 \autoref{fig:two_particle/studies/neck_remeshing/time_step_width} shows the evolution of the time step width used in the simulations for the distinct cases.
 
