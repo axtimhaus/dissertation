@@ -7,7 +7,7 @@ import pyarrow.compute as pc
 import pyarrow.parquet as pq
 from pytask import mark, task
 
-from dissertation.config import image_produces
+from dissertation.config import FIGSIZE_INCH, image_produces
 from dissertation.sim.two_particle.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES, StudyBase
 
 for t in STUDIES:
@@ -22,9 +22,9 @@ for t in STUDIES:
         ):
             df = pq.read_table(results_file).flatten().flatten()
 
-            fig = plt.figure(dpi=600)
+            fig = plt.figure(figsize=(FIGSIZE_INCH[0], 4))
             ax = fig.subplots()
-            ax.set_aspect("equal")
+            ax.set_aspect("equal", adjustable="datalim")
             viridis = mpl.colormaps["viridis"]
 
             times, particle1_x, particle1_y, particle2_x, particle2_y = get_states(df, study)
@@ -39,7 +39,7 @@ for t in STUDIES:
                 ax.fill(particle1_x[i], particle1_y[i], label=f"{times[i]:.2f}", edgecolor=color, fill=False, lw=0.5)
                 ax.fill(particle2_x[i], particle2_y[i], edgecolor=color, fill=False, lw=0.5)
 
-            ax.set_title(f"{study.TITLE}\n{study.display}")
+            # ax.set_title(f"{study.TITLE}\n{study.display}")
             ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
             ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")
             fig.tight_layout()
