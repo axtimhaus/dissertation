@@ -1,6 +1,8 @@
 from uuid import UUID
 
+from matplotlib.lines import Line2D
 import matplotlib.pyplot as plt
+from matplotlib.transforms import IdentityTransform
 import numpy as np
 import pandas as pd
 import pyarrow as pa
@@ -32,14 +34,22 @@ for t in STUDIES:
         for key, df in data_frames:
             study = studies[key]
             times1, volume_losses1 = get_volume_losses(study, df, PARTICLE1_ID)
-            ax.plot(times1, volume_losses1, label=study.display, **study.line_style)[0]
+            ax.plot(times1, volume_losses1, **study.line_style, markevery=0.1, marker="x")[0]
             times2, volume_losses2 = get_volume_losses(study, df, PARTICLE2_ID)
-            ax.plot(times2, volume_losses2, **study.line_style)
+            ax.plot(times2, volume_losses2, **study.line_style, markevery=0.1, marker="+")
 
-        ax.legend(title=study_type.TITLE, ncols=3)
+        legend_items = [Line2D([], [], **study.line_style, label=study.display) for study in studies.values()]
+        ax.add_artist(ax.legend(title=study_type.TITLE, ncols=3, handles=legend_items, loc="upper left"))
+        ax.legend(
+            handles=[
+                Line2D([], [], color="k", marker="x", lw=0, label="Particle 1"),
+                Line2D([], [], color="k", marker="+", lw=0, label="Particle 2"),
+            ],
+            loc="upper right",
+        )
         ax.set_xlabel(r"Normalized Time $\Time / \TimeNorm_{\Surface}$")
         ax.set_ylabel(r"Relative Volume Loss $(\Volume - \Volume_0) / \Volume_0$")
-        ax.set_ylim(0, 1e-3)
+        ax.set_ylim(-1e-3, 1e-3)
         fig.tight_layout()
 
         for p in produces:
