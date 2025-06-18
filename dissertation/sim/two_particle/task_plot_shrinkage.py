@@ -114,8 +114,8 @@ def get_shrinkages(study, df: pa.Table):
     )
     distance0 = distances[0]
 
-    mask = (particle1["State.Time_one"] > 1) & (np.diff(particle1["State.Time_one"], prepend=[0]) > 0)
-    times = particle1["State.Time_one"][mask] / study.input.time_norm_surface
+    times = particle1["State.Time_one"] / study.input.time_norm_surface
+    mask = (times > 1e-6) & (np.diff(times, prepend=[0]) > 0)
     shrinkages = (distance0 - distances[mask]) / distance0
 
-    return times.array, shrinkages.array
+    return times[mask].to_numpy(), shrinkages.to_numpy()

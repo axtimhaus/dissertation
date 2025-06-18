@@ -101,11 +101,11 @@ def get_neck_sizes(study, df: pa.Table):
         .to_pandas()
     )
 
-    mask = (grain_boundary["State.Time_one"] > 1) & (np.diff(grain_boundary["State.Time_one"], prepend=[0]) > 0)
-    times = grain_boundary["State.Time_one"][mask] / study.input.time_norm_surface
+    times = grain_boundary["State.Time_one"] / study.input.time_norm_surface
+    mask = (times > 1e-6) & (np.diff(times, prepend=[0]) > 0)
     neck_sizes = (
         grain_boundary["Node.SurfaceDistance.ToUpper_one"][mask]
         + grain_boundary["Node.SurfaceDistance.ToLower_one"][mask] / study.input.particle1.radius
     )
 
-    return times.array, neck_sizes.array
+    return times[mask].to_numpy(), neck_sizes.to_numpy()
