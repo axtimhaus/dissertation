@@ -355,6 +355,45 @@ SurfaceBoundaryDiffusionStudy.INSTANCES = [
 ]
 
 
+class SurfaceDiffusionAsymmetricStudy(DimlessParameterStudy):
+    KEY = "surface_diffusion_asymmetric"
+    TITLE = r"Diffusion Coefficient Ratio $\DiffusionCoefficient_{\Surface2} / \DiffusionCoefficient_{\Surface1}$"
+    MIN = 1
+    MAX = 100
+    SCALE = "geom"
+
+    @property
+    def input(self) -> Input:
+        model = super().input
+        model.material2.surface.diffusion_coefficient = model.material1.surface.diffusion_coefficient * self.real_value
+        return model
+
+
+SurfaceDiffusionAsymmetricStudy.INSTANCES = [
+    SurfaceDiffusionAsymmetricStudy(value=v) for v in SurfaceDiffusionAsymmetricStudy.values
+]
+
+
+class SurfaceEnergyAsymmetricStudy(DimlessParameterStudy):
+    KEY = "surface_energy_asymmetric"
+    TITLE = r"Surface Energy Ratio $\InterfaceEnergy_{\Surface2} / \InterfaceEnergy_{\Surface1}$"
+    MIN = 1
+    MAX = 10
+    SCALE = "lin"
+    COUNT = 10
+
+    @property
+    def input(self) -> Input:
+        model = super().input
+        model.material2.surface.energy = model.material1.surface.energy * self.real_value
+        return model
+
+
+SurfaceEnergyAsymmetricStudy.INSTANCES = [
+    SurfaceEnergyAsymmetricStudy(value=v) for v in SurfaceEnergyAsymmetricStudy.values
+]
+
+
 class OvalityTipTipStudy(DimlessParameterStudy):
     KEY = "ovality_tip_tip"
     TITLE = r"Ovality $\Ovality$"
