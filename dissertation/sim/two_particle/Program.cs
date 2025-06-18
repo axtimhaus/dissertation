@@ -92,7 +92,7 @@ ParticlePlot.PlotParticles<IParticle<IParticleNode>, IParticleNode>(initialState
 var compactedState = new FocalCompactionStep(
     new AbsolutePoint(0, 0),
     stepDistance: input.Particle1.Radius / 100,
-    minimumRelativeIntrusion: 0.5,
+    minimumRelativeIntrusion: 0.05,
     maxStepCount: 1
 ).Solve(initialState);
 

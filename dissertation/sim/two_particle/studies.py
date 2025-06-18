@@ -38,13 +38,15 @@ BASE_MATERIAL = MaterialInput(
     molar_mass=101.96e-3,
 )
 
+INTRUSION = BASE_PARTICLE.radius * 0.01
+
 BASE_INPUT = Input(
     particle1=BASE_PARTICLE.model_copy(deep=True),
     particle2=BASE_PARTICLE.model_copy(
         deep=True,
         update={
             "id": PARTICLE2_ID,
-            "x": 1.99 * BASE_PARTICLE.radius,
+            "x": 2 * BASE_PARTICLE.radius - INTRUSION,
             "rotation_angle": np.pi,
         },
     ),
@@ -224,7 +226,7 @@ NeckRemeshingStudy.INSTANCES = [
 
 
 class DimlessParameterStudy(StudyBase, ABC):
-    CMAP: ClassVar[matplotlib.colors.Colormap] = matplotlib.colormaps["copper"]
+    CMAP: ClassVar[matplotlib.colors.Colormap] = matplotlib.colormaps["viridis"]
 
     MIN: ClassVar[float]
     MAX: ClassVar[float]
@@ -310,7 +312,7 @@ class ParticleSizeRatioStudy(DimlessParameterStudy):
     def input(self) -> Input:
         model = super().input
         model.particle2.radius *= self.real_value
-        model.particle2.x = model.particle1.radius * 0.99 + model.particle2.radius
+        model.particle2.x = model.particle1.radius + model.particle2.radius - INTRUSION
         model.particle2.node_count = int(model.particle2.node_count * self.real_value)
         return model
 
@@ -398,8 +400,8 @@ class OvalityTipTipStudy(DimlessParameterStudy):
     KEY = "ovality_tip_tip"
     TITLE = r"Ovality $\Ovality$"
     MIN = 1.0
-    MAX = 6.0
-    COUNT = 6
+    MAX = 3.0
+    COUNT = 5
     SCALE = "lin"
 
     @property
@@ -407,9 +409,11 @@ class OvalityTipTipStudy(DimlessParameterStudy):
         model = super().input
         model.particle1.ovality = self.real_value
         model.particle2.ovality = self.real_value
-        model.particle2.x = model.particle1.radius * np.sqrt(
-            model.particle1.ovality
-        ) * 0.99 + model.particle2.radius * np.sqrt(model.particle2.ovality)
+        model.particle2.x = (
+            model.particle1.radius * np.sqrt(model.particle1.ovality)
+            + model.particle2.radius * np.sqrt(model.particle2.ovality)
+            - INTRUSION
+        )
         return model
 
 
@@ -420,8 +424,8 @@ class OvalityTipFlankStudy(DimlessParameterStudy):
     KEY = "ovality_tip_flank"
     TITLE = r"Ovality $\Ovality$"
     MIN = 1.0
-    MAX = 6.0
-    COUNT = 6
+    MAX = 3.0
+    COUNT = 5
     SCALE = "lin"
 
     @property
@@ -430,9 +434,11 @@ class OvalityTipFlankStudy(DimlessParameterStudy):
         model.particle1.ovality = self.real_value
         model.particle2.ovality = self.real_value
         model.particle2.rotation_angle = np.pi / 2
-        model.particle2.x = model.particle1.radius * np.sqrt(
-            model.particle1.ovality
-        ) * 0.99 + model.particle2.radius / np.sqrt(model.particle2.ovality)
+        model.particle2.x = (
+            model.particle1.radius * np.sqrt(model.particle1.ovality)
+            + model.particle2.radius / np.sqrt(model.particle2.ovality)
+            - INTRUSION
+        )
         return model
 
 
@@ -443,8 +449,8 @@ class OvalityFlankFlankStudy(DimlessParameterStudy):
     KEY = "ovality_flank_flank"
     TITLE = r"Ovality $\Ovality$"
     MIN = 1.0
-    MAX = 6.0
-    COUNT = 6
+    MAX = 3.0
+    COUNT = 5
     SCALE = "lin"
 
     @property
@@ -454,9 +460,11 @@ class OvalityFlankFlankStudy(DimlessParameterStudy):
         model.particle2.ovality = self.real_value
         model.particle1.rotation_angle = np.pi / 2
         model.particle2.rotation_angle = np.pi / 2
-        model.particle2.x = model.particle1.radius / np.sqrt(
-            model.particle1.ovality
-        ) * 0.99 + model.particle2.radius / np.sqrt(model.particle2.ovality)
+        model.particle2.x = (
+            model.particle1.radius / np.sqrt(model.particle1.ovality)
+            + model.particle2.radius / np.sqrt(model.particle2.ovality)
+            - INTRUSION
+        )
         return model
 
 
@@ -469,7 +477,9 @@ STUDIES: list[type[StudyBase]] = [
     ParticleSizeRatioStudy,
     SurfaceBoundaryEnergyStudy,
     SurfaceBoundaryDiffusionStudy,
-    # OvalityTipTipStudy,
-    # OvalityTipFlankStudy,
-    # OvalityFlankFlankStudy,
+    SurfaceEnergyAsymmetricStudy,
+    SurfaceDiffusionAsymmetricStudy,
+    OvalityTipTipStudy,
+    OvalityTipFlankStudy,
+    OvalityFlankFlankStudy,
 ]
