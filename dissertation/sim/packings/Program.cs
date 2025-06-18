@@ -49,7 +49,7 @@ var material = new Material(
     new Dictionary<Guid, IInterfaceProperties> { { materialId, grainBoundary } }
 );
 
-var particles = input.Particles.Select(p => new 
+var particles = input.Particles.Select(p => new
     ShapeFunctionParticleFactoryEllipseOvalityCosPeaks(
     materialId,
     (p.X, p.Y),
@@ -67,9 +67,9 @@ ParticlePlot.PlotParticles<IParticle<IParticleNode>, IParticleNode>(initialState
 
 var compactedState = new FocalCompactionStep(
     new AbsolutePoint(0, 0),
-    stepDistance: input.Particles[0].Radius / 100,
-    minimumRelativeIntrusion: 0.5,
-    maxStepCount: 1
+    stepDistance: 0,
+    minimumRelativeIntrusion: 0.05,
+    maxStepCount: 2
 ).Solve(initialState);
 
 ParticlePlot.PlotParticles<IParticle<IParticleNode>, IParticleNode>(compactedState.Particles).SaveHtml("compactedState.html");
