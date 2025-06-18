@@ -49,7 +49,7 @@ The shifting of nodes is separated into two components as shown in \autoref{fig:
 The normal vector points under an angle of $\SurfaceVectorAngle_\Normal$ acc.~to~\autoref{eq:delta-surface-normal} to both surface lines.
 
 \begin{equation}
-    \SurfaceVectorAngle_{\Normal} = \pi - \frac{1}{2} \left(\SurfaceRadiusAngle_{\Upper} + \SurfaceRadiusAngle_{\Lower} \right)
+    \SurfaceVectorAngle_{\Normal} = \PI - \frac{1}{2} \left(\SurfaceRadiusAngle_{\Upper} + \SurfaceRadiusAngle_{\Lower} \right)
     \label{eq:delta-surface-normal}
 \end{equation}
 
@@ -80,7 +80,7 @@ Note, that the slope is dependent on the sum of ${\InterfaceEnergy}_{\Upper}$ an
 Regarding the tangential shifting, the direction vector is under an angle of $\SurfaceVectorAngle_{\Tangential}$ acc.~to.~\autoref{eq:delta-surface-tangential} to the upper surface line.
 
 \begin{equation}
-    \SurfaceVectorAngle_{\Tangential} = \SurfaceVectorAngle_{\Normal} - \frac{\pi}{2}
+    \SurfaceVectorAngle_{\Tangential} = \SurfaceVectorAngle_{\Normal} - \frac{\PI}{2}
     \label{eq:delta-surface-tangential}
 \end{equation}
 
@@ -111,7 +111,7 @@ This is the case on all nodes except neck nodes.
 \end{equation}
 
 \begin{equation}
-    \frac{\partial \Volume}{\partial {\Shift}_{\Tangential}} = \frac{1}{2} \left( \SurfaceDistance_{\Lower} - \SurfaceDistance_{\Upper} \right) \sin \SurfaceVectorAngle_{\Tangential}
+    \frac{\partial \Volume}{\partial {\Shift}_{\Tangential}} = \frac{1}{2} \left( \SurfaceDistance_{\Upper} - \SurfaceDistance_{\Lower} \right) \sin \SurfaceVectorAngle_{\Tangential}
     \label{eq:volume-partial-surface-tangential}
 \end{equation}
 
