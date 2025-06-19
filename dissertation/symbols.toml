@@ -40,6 +40,7 @@ RotationAngle = '\omega'      # rotation
 Diameter = 'd'                # diameter
 Ovality = 'o'                 # ovality of particle
 InterfaceThickness = '\delta' # thickness of an interface
+Distance = 'd'                # arbitrary distance
 
 # Thermodynamics
 Temperature = 'T'                                   # absolute temperature
