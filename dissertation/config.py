@@ -35,11 +35,15 @@ if PREAMBLE_FILE.exists():
     preamble = PREAMBLE_FILE.read_text()
     mpl.rcParams.update({"pgf.preamble": preamble, "text.latex.preamble": preamble})
 
+FIGSIZE_INCH = (6.299212598, 4.724409449)
+
 mpl.rcParams.update(
     {
         "pgf.texsystem": "lualatex",
         "pgf.rcfonts": False,
         "figure.autolayout": True,
+        "figure.dpi": 600,
+        "figure.figsize": FIGSIZE_INCH,
     }
 )
 
@@ -54,5 +58,12 @@ def integer_log_space(factor_start: int, exp_start: int, factor_end: int, exp_en
     if factor_end == 9:
         return locs[factor_start - 1 :]
     return locs[factor_start - 1 : factor_end - 9]
+
+
+def integer_log_space125(exp_start: int, exp_end: int) -> np.typing.NDArray:
+    magnitudes = np.logspace(exp_start, exp_end, (exp_end - exp_start) + 1)
+    factors = [1, 2, 5]
+    return np.tile(factors, len(magnitudes)) * np.repeat(magnitudes, len(factors))
+
 
 ROOT_NAMESPACE_UUID = UUID("d0996f2c-be1f-4d09-9b1f-0ec5ff7ab6ca")
