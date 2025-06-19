@@ -69,7 +69,7 @@ Note that the velocities $\Vect{\InternalStateVelocity}$ are \emph{not} required
 The connections between the velocities $\Vect{\InternalStateVelocity}$ and the fluxes $\Vect\Flux$ are introduced by the constraints $\Vect\RequiredConstraint$ as in \autoref{eq:required-constraints}.
 These are required to be able to solve the problem, so they shall be called \emph{required} constraints hereinafter.
 $\Vect\RequiredConstraint$ and $\Vect\InternalStateVelocity$ must be of the same size.
-But it is also possible to include several \emph{additional} constraints $\Vect\AddionalConstraint$.
+But it is also possible to include several \emph{additional} constraints $\Vect\AdditionalConstraint$.
 These may be used for other requirements on the validity of the model, for example geometric constraints.
 The constraints may include several \emph{auxiliary variables} $\Vect\AuxiliaryVariable$ that are not part of $\Vect\InternalStateVariable$ or $\Vect\Flux$ and occur therefore neither in $\Dissipation$ nor $\DissipationFunction$.
 See \autoref{sec:extremal-principle-application} for details on their application.
@@ -79,20 +79,20 @@ See \autoref{sec:extremal-principle-application} for details on their applicatio
         \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) = -\frac{\partial\GibbsEnergy(\Vect\ExternalStateVariable, \Vect\InternalStateVariable)}{\partial \Vect\InternalStateVariable} \cdot \Vect{\InternalStateVelocity} &\rightarrow \max_{\Vect{\InternalStateVelocity}} \\
         \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) - \DissipationFunction(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\Flux}) &= 0 \label{eq:dissipation-function-general} \\
         \Vect\RequiredConstraint(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable) &= 0 \label{eq:required-constraints} \\
-        \Vect\AddionalConstraint(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable) &= 0 \label{eq:additonal-constraints}
+        \Vect\AdditionalConstraint(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable) &= 0 \label{eq:additonal-constraints}
     \end{align}
 \end{subequations}
 
 With this generalized formulation the Lagrange functional writes as in \autoref{eq:tep-general-lagrange}.
 Here we have more Lagrange parameters.
 $\LagrangeParameter_1$ is equivalent to the classic formulation.
-The vector parameters $\Vect{\LagrangeParameter_2}$ and $\Vect{\LagrangeParameter_3}$ for the required and additional constraints are of the same size as $\Vect\RequiredConstraint$ resp. $\Vect\AddionalConstraint$.
+The vector parameters $\Vect{\LagrangeParameter_2}$ and $\Vect{\LagrangeParameter_3}$ for the required and additional constraints are of the same size as $\Vect\RequiredConstraint$ resp. $\Vect\AdditionalConstraint$.
 
 \begin{equation}
     \LagrangeFunction = \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity})
     + \left( \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) - \DissipationFunction(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\Flux}) \right) \LagrangeParameter_1
     + \Transposed{\Vect\RequiredConstraint}(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable) \cdot \Vect{\LagrangeParameter_2}
-    + \Transposed{\Vect\AddionalConstraint}(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable) \cdot \Vect{\LagrangeParameter_3}
+    + \Transposed{\Vect\AdditionalConstraint}(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable) \cdot \Vect{\LagrangeParameter_3}
     \label{eq:tep-general-lagrange}
 \end{equation}
 
@@ -104,24 +104,24 @@ Finding a simplified equation system as done above (\autoref{eq:tep-classic-solu
         &\LagrangeFunction_{\Vect\InternalStateVelocity} &&=
         -\frac{\partial\GibbsEnergy(\Vect\ExternalStateVariable, \Vect\InternalStateVariable)}{\partial \Vect\InternalStateVariable} \left(1 + \LagrangeParameter_1 \right)
         + \frac{\partial\Transposed{\Vect\RequiredConstraint}(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable)}{\partial \Vect{\InternalStateVelocity}} \cdot \Vect{\LagrangeParameter_2}
-        + \frac{\partial\Transposed{\Vect\AddionalConstraint}(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable)}{\partial \Vect{\InternalStateVelocity}} \cdot \Vect{\LagrangeParameter_3}
+        + \frac{\partial\Transposed{\Vect\AdditionalConstraint}(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable)}{\partial \Vect{\InternalStateVelocity}} \cdot \Vect{\LagrangeParameter_3}
         &&\stackrel{!}{=} 0 \\
         %
         &\LagrangeFunction_{\Vect\Flux} &&=
         - \frac{\partial\DissipationFunction(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\Flux})}{\partial \Vect{\Flux}} \LagrangeParameter_1
         + \frac{\partial\Transposed{\Vect\RequiredConstraint}(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable)}{\partial \Vect{\Flux}} \cdot \Vect{\LagrangeParameter_2}
-        + \frac{\partial\Transposed{\Vect\AddionalConstraint}(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable)}{\partial \Vect{\Flux}} \cdot \Vect{\LagrangeParameter_3}
+        + \frac{\partial\Transposed{\Vect\AdditionalConstraint}(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable)}{\partial \Vect{\Flux}} \cdot \Vect{\LagrangeParameter_3}
         &&\stackrel{!}{=} 0 \\
         %
         &\LagrangeFunction_{\Vect\AuxiliaryVariable} &&=
         \frac{\partial\Transposed{\Vect\RequiredConstraint}(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable)}{\partial \Vect{\AuxiliaryVariable}} \cdot \Vect{\LagrangeParameter_2}
-        + \frac{\partial\Transposed{\Vect\AddionalConstraint}(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable)}{\partial \Vect{\AuxiliaryVariable}} \cdot \Vect{\LagrangeParameter_3}
+        + \frac{\partial\Transposed{\Vect\AdditionalConstraint}(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable)}{\partial \Vect{\AuxiliaryVariable}} \cdot \Vect{\LagrangeParameter_3}
         &&\stackrel{!}{=} 0 \\
         %
         &\LagrangeFunction_{\LagrangeParameter_1} &&= \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) - \DissipationFunction(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\Flux}) &&\stackrel{!}{=} 0 \\
         %
         &\LagrangeFunction_{\Vect\LagrangeParameter_2} &&= \Vect\RequiredConstraint(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable) &&\stackrel{!}{=} 0 \\
         %
-        &\LagrangeFunction_{\Vect\LagrangeParameter_3} &&= \Vect\AddionalConstraint(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable) &&\stackrel{!}{=} 0
+        &\LagrangeFunction_{\Vect\LagrangeParameter_3} &&= \Vect\AdditionalConstraint(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\AuxiliaryVariable) &&\stackrel{!}{=} 0
     \end{align}
 \end{subequations}
