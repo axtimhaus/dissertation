@@ -1,0 +1,17 @@
+words = [
+    "includegraphics",
+    "autoref",
+    "subfigure",
+    "subtable",
+    "sec",
+    "subsec",
+    "subsubsec",
+    "subsection",
+    "subsubsection",
+    "num",
+    "numlist",
+    "numrange",
+    "qty",
+    "qtylist",
+    "qtyrange",
+]

@@ -1,0 +1,150 @@
+using System.Text;
+using System.Text.Json;
+using parameter_study;
+using Plotly.NET;
+using RefraSin.Compaction.ProcessModel;
+using RefraSin.Coordinates.Absolute;
+using RefraSin.MaterialData;
+using RefraSin.ParquetStorage;
+using RefraSin.ParticleModel.Nodes;
+using RefraSin.ParticleModel.ParticleFactories;
+using RefraSin.ParticleModel.Particles;
+using RefraSin.ParticleModel.Remeshing;
+using RefraSin.Plotting;
+using RefraSin.ProcessModel;
+using RefraSin.ProcessModel.Sintering;
+using RefraSin.Storage;
+using RefraSin.TEPSolver;
+using Serilog;
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.File("run.log")
+    .WriteTo.Console()
+    .CreateLogger();
+
+var inputFile = args[0];
+var outputFile = args[1];
+
+var inputText = File.ReadAllText(inputFile, encoding: Encoding.UTF8);
+
+var input =
+    JsonSerializer.Deserialize<Input>(
+        inputText,
+        new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower }
+    ) ?? throw new ArgumentNullException("input");
+
+var materials = input
+    .Particles.Select(p => new ParticleMaterial(
+        p.Id,
+        "material",
+        SubstanceProperties.FromDensityAndMolarMass(p.Material.Density, p.Material.MolarMass),
+        new InterfaceProperties(p.Material.Surface.DiffusionCoefficient, p.Material.Surface.Energy),
+        p.GrainBoundaries.Select(kvp => new KeyValuePair<Guid, IInterfaceProperties>(
+                kvp.Key,
+                new InterfaceProperties(kvp.Value.DiffusionCoefficient, kvp.Value.Energy)
+            ))
+            .ToDictionary()
+    ))
+    .ToArray();
+
+var particles = input
+    .Particles.Select(p =>
+        new ShapeFunctionParticleFactoryEllipseOvalityCosPeaks(
+            p.Id,
+            (p.X, p.Y),
+            p.RotationAngle,
+            p.NodeCount,
+            p.Radius,
+            p.Ovality,
+            p.PeakCount,
+            p.PeakHeight
+        ).GetParticle(p.Id)
+    )
+    .ToArray();
+
+var initialState = new SystemState(Guid.Empty, 0, particles);
+
+ParticlePlot
+    .PlotParticles<IParticle<IParticleNode>, IParticleNode>(initialState.Particles)
+    .SaveHtml("initialState.html");
+
+var compactedState = new OneByOneCompactionStep(
+    stepDistance: 0.2e-6,
+    minimumIntrusion: 0.15e-6,
+    maxStepCount: 10000
+).Solve(initialState);
+
+ParticlePlot
+    .PlotParticles<IParticle<IParticleNode>, IParticleNode>(compactedState.Particles)
+    .SaveHtml("compactedState.html");
+
+if (compactedState.Nodes.Where(n => n.Type is NodeType.GrainBoundary).Count() / 2 < 3)
+    throw new Exception("contact creation failed, too few grain boundaries present");
+
+var solver = new SinteringSolver(SolverRoutines.Default, remeshingEverySteps: 50);
+
+var plotHandler = new PlotEventHandler();
+solver.SessionInitialized += plotHandler.HandleSessionInitialized;
+
+var process = new SinteringStep(
+    input.Duration,
+    input.Temperature,
+    solver,
+    materials,
+    input.GasConstant
+);
+
+var storage = new ParquetStorage(outputFile);
+process.UseStorage(storage);
+
+try
+{
+    var finalState = process.Solve(compactedState);
+    ParticlePlot
+        .PlotParticles<IParticle<IParticleNode>, IParticleNode>(finalState.Particles)
+        .SaveHtml("finalState.html");
+}
+finally
+{
+    storage.Dispose();
+    Log.CloseAndFlush();
+}
+
+class PlotEventHandler
+{
+    private int _counter;
+
+    public void HandleSessionInitialized(
+        object? sender,
+        SinteringSolver.SessionInitializedEventArgs e
+    )
+    {
+        ParticlePlot
+            .PlotParticles<IParticle<IParticleNode>, IParticleNode>(
+                e.SolverSession.CurrentState.Particles
+            )
+            .SaveHtml($"session_{_counter}.html");
+        _counter++;
+    }
+
+    public void HandleStepCalculated(
+        object? sender,
+        SinteringSolver.StepSuccessfullyCalculatedEventArgs e
+    )
+    {
+        Chart
+            .Combine(
+                [
+                    ParticlePlot.PlotParticles<IParticle<IParticleNode>, IParticleNode>(
+                        e.OldState.Particles
+                    ),
+                    ParticlePlot.PlotParticles<IParticle<IParticleNode>, IParticleNode>(
+                        e.NewState.Particles
+                    ),
+                ]
+            )
+            .SaveHtml($"step_{_counter}.html");
+        _counter++;
+    }
+}
