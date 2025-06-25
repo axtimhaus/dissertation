@@ -36,8 +36,6 @@ class Input
 
     public required double Temperature { get; set; }
 
-    public required double VacancyConcentration { get; set; }
-
     public required double GasConstant { get; set; }
 
     public required double Duration { get; set; }

@@ -48,7 +48,6 @@ class Input(BaseModel):
     gas_constant: float
     temperature: float
     duration: float
-    vacancy_concentration: float
     free_surface_remesher_options: FreeSurfaceRemesherOptions | None = None
     neck_deletion_limit: float = 0.5
     time_step_angle_limit: float = 0.005

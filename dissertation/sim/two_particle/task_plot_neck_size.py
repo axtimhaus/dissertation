@@ -4,12 +4,15 @@ import pandas as pd
 import pyarrow as pa
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
+from matplotlib import ticker
 from pytask import mark, task
 
-from dissertation.config import image_produces, integer_log_space
+from dissertation.config import image_produces, integer_log_space125
 from dissertation.sim.two_particle.studies import PARTICLE1_ID, STUDIES, DimlessParameterStudy, StudyBase
+from dissertation.sim.two_particle.helper import ashby_grid
 
-RESAMPLE_COUNT = 500
+RESAMPLE_COUNT = 100
+NECK_SIZE_LIMITS = (2e-1, 8e-1)
 
 for t in STUDIES:
 
@@ -28,15 +31,19 @@ for t in STUDIES:
         ax.set_xscale("log")
         ax.set_yscale("log")
         ax.grid(True)
+        upper_mag = -6
 
         for key, df in data_frames:
             study = studies[key]
             times, values = get_neck_sizes(study, df)
             ax.plot(times, values, label=study.display, **study.line_style)
+            upper_mag = max(upper_mag, int(np.floor(np.log10(np.max(times)))))
 
         ax.legend(title=study_type.TITLE, ncols=3)
         ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
         ax.set_ylabel(r"Relative Neck Size $\Radius_{\Neck} / \Radius_0$")
+        ax.set_xlim(1e-6, 10**upper_mag)
+        ax.set_ylim(*NECK_SIZE_LIMITS)
         fig.tight_layout()
 
         for p in produces:
@@ -58,27 +65,26 @@ for t in STUDIES:
 
             fig = plt.figure(dpi=600)
             ax = fig.subplots()
-            ax.set_xscale("log")
-            ax.set_yscale(study_type.axis_scale)
+            ax.set_xscale(study_type.axis_scale)
 
-            params = np.array([s.real_value for s in studies.values()])
-            times_neck_size = [get_neck_sizes(studies[key], df) for key, df in data_frames]
+            study_params = np.array([s.real_value for s in studies.values()])
+            params = (np.linspace if study_type.axis_scale == "linear" else np.geomspace)(
+                study_params.min(), study_params.max(), RESAMPLE_COUNT
+            )
+            neck_sizes = np.geomspace(*NECK_SIZE_LIMITS, RESAMPLE_COUNT)
+            neck_size_curves = [get_neck_sizes(studies[key], df) for key, df in data_frames]
+            grid_x, grid_y, times = ashby_grid(study_params, neck_size_curves, params, neck_sizes)
 
-            start_time = max([t[0] for t, _ in times_neck_size])
-            end_time = max([t[-1] for t, _ in times_neck_size])
+            lower_mag = -6
+            upper_mag = int(np.floor(np.log10(np.max(times))))
+            locs = integer_log_space125(lower_mag, upper_mag)
+            formatter = ticker.LogFormatterSciNotation()
 
-            times = np.geomspace(start_time, end_time, RESAMPLE_COUNT)
-            neck_sizes = np.array([np.interp(times, t, s) for t, s in times_neck_size])
+            cs = ax.contour(grid_x, grid_y, times, levels=locs, norm="log", cmap=study_type.CMAP)
+            ax.clabel(cs, fmt=lambda level: formatter(level))
 
-            grid_x, grid_y = np.meshgrid(times, params)
-
-            locs = integer_log_space(1, -1, 1, 0)
-
-            cs = ax.contour(grid_x, grid_y, neck_sizes, levels=locs, norm="log", cmap=study_type.CMAP)
-            ax.clabel(cs, fmt=lambda level: f"{level:g}")
-
-            ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
-            ax.set_ylabel(study_type.TITLE)
+            ax.set_xlabel(study_type.TITLE)
+            ax.set_ylabel(r"Relative Neck Size $\Radius_{\Neck} / \Radius_0$")
 
             for p in produces:
                 fig.savefig(p)
@@ -102,7 +108,7 @@ def get_neck_sizes(study, df: pa.Table):
     )
 
     times = grain_boundary["State.Time_one"] / study.input.time_norm_surface
-    mask = (times > 1e-6) & (np.diff(times, prepend=[0]) > 0)
+    mask = np.diff(times, prepend=[0]) > 0
     neck_sizes = (
         grain_boundary["Node.SurfaceDistance.ToUpper_one"][mask]
         + grain_boundary["Node.SurfaceDistance.ToLower_one"][mask] / study.input.particle1.radius

@@ -26,7 +26,7 @@ PARTICLE2_ID = UUID("10cac1cc-6205-4b91-85b4-4e9d6f126274")
 
 BASE_PARTICLE = ParticleInput(id=PARTICLE1_ID, radius=100e-6)
 
-BASE_SURFACE = InterfaceInput(energy=0.9, diffusion_coefficient=1.65e-10)
+BASE_SURFACE = InterfaceInput(energy=0.9, diffusion_coefficient=1.65e-14)
 BASE_GRAIN_BOUNDARY = InterfaceInput(
     energy=BASE_SURFACE.energy * 0.5,
     diffusion_coefficient=BASE_SURFACE.diffusion_coefficient,
@@ -55,7 +55,6 @@ BASE_INPUT = Input(
     grain_boundary=BASE_GRAIN_BOUNDARY.model_copy(deep=True),
     gas_constant=8.31446261815324,
     temperature=1273,
-    vacancy_concentration=1e-4,
     duration=3.6e3,
 )
 

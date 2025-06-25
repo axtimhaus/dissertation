@@ -18,7 +18,11 @@ using RefraSin.TEPSolver;
 using RefraSin.TEPSolver.StepWidthControllers;
 using Serilog;
 
-Log.Logger = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File("run.log").WriteTo.Console().CreateLogger();
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.File("run.log")
+    .WriteTo.Console()
+    .CreateLogger();
 
 var inputFile = args[0];
 var outputFile = args[1];
@@ -42,8 +46,7 @@ var material2Id = Guid.NewGuid();
 var material1 = new Material(
     material1Id,
     "material1",
-    new BulkProperties(0, input.VacancyConcentration),
-    new SubstanceProperties(input.Material1.Density, input.Material1.MolarMass),
+    SubstanceProperties.FromDensityAndMolarMass(input.Material1.Density, input.Material1.MolarMass),
     new InterfaceProperties(
         input.Material1.Surface.DiffusionCoefficient,
         input.Material1.Surface.Energy
@@ -54,8 +57,10 @@ var material1 = new Material(
 var material2 = new Material(
     material2Id,
     "material2",
-    new BulkProperties(0, input.VacancyConcentration),
-    new SubstanceProperties(input.Material2.Density, input.Material1.MolarMass),
+    SubstanceProperties.FromDensityAndMolarVolume(
+        input.Material2.Density,
+        input.Material1.MolarMass
+    ),
     new InterfaceProperties(
         input.Material2.Surface.DiffusionCoefficient,
         input.Material2.Surface.Energy
@@ -87,21 +92,27 @@ var particle2 = new ShapeFunctionParticleFactoryEllipseOvalityCosPeaks(
 
 var initialState = new SystemState(Guid.Empty, 0, [particle1, particle2]);
 
-ParticlePlot.PlotParticles<IParticle<IParticleNode>, IParticleNode>(initialState.Particles).SaveHtml("initialState.html");
+ParticlePlot
+    .PlotParticles<IParticle<IParticleNode>, IParticleNode>(initialState.Particles)
+    .SaveHtml("initialState.html");
 
 var compactedState = new FocalCompactionStep(
     new AbsolutePoint(0, 0),
-    stepDistance: input.Particle1.Radius / 100,
-    minimumRelativeIntrusion: 0.05,
+    stepDistance: 0,
+    minimumIntrusion: 0.5e-6,
     maxStepCount: 1
 ).Solve(initialState);
 
-ParticlePlot.PlotParticles<IParticle<IParticleNode>, IParticleNode>(compactedState.Particles).SaveHtml("compactedState.html");
+ParticlePlot
+    .PlotParticles<IParticle<IParticleNode>, IParticleNode>(compactedState.Particles)
+    .SaveHtml("compactedState.html");
 
 var routines = SolverRoutines.Default with
 {
     Remeshers = YieldRemeshers(),
-    StepWidthController = new MaximumDisplacementAngleStepWidthController(maximumDisplacementAngle: input.TimeStepAngleLimit)
+    StepWidthController = new MaximumDisplacementAngleStepWidthController(
+        maximumDisplacementAngle: input.TimeStepAngleLimit
+    ),
 };
 
 var solver = new SinteringSolver(routines, remeshingEverySteps: 50);
@@ -120,12 +131,18 @@ var process = new SinteringStep(
 var storage = new ParquetStorage(outputFile);
 process.UseStorage(storage);
 
-var finalState = process.Solve(compactedState);
-
-ParticlePlot.PlotParticles<IParticle<IParticleNode>, IParticleNode>(finalState.Particles).SaveHtml("finalState.html");
-
-storage.Dispose();
-Log.CloseAndFlush();
+try
+{
+    var finalState = process.Solve(compactedState);
+    ParticlePlot
+        .PlotParticles<IParticle<IParticleNode>, IParticleNode>(finalState.Particles)
+        .SaveHtml("finalState.html");
+}
+finally
+{
+    storage.Dispose();
+    Log.CloseAndFlush();
+}
 
 IEnumerable<IParticleSystemRemesher> YieldRemeshers()
 {
@@ -148,19 +165,35 @@ class PlotEventHandler
 {
     private int _counter;
 
-    public void HandleSessionInitialized(object? sender, SinteringSolver.SessionInitializedEventArgs e)
+    public void HandleSessionInitialized(
+        object? sender,
+        SinteringSolver.SessionInitializedEventArgs e
+    )
     {
-        ParticlePlot.PlotParticles<IParticle<IParticleNode>, IParticleNode>(e.SolverSession.CurrentState.Particles)
+        ParticlePlot
+            .PlotParticles<IParticle<IParticleNode>, IParticleNode>(
+                e.SolverSession.CurrentState.Particles
+            )
             .SaveHtml($"session_{_counter}.html");
         _counter++;
     }
 
-    public void HandleStepCalculated(object? sender, SinteringSolver.StepSuccessfullyCalculatedEventArgs e)
+    public void HandleStepCalculated(
+        object? sender,
+        SinteringSolver.StepSuccessfullyCalculatedEventArgs e
+    )
     {
-        Chart.Combine([
-                ParticlePlot.PlotParticles<IParticle<IParticleNode>, IParticleNode>(e.OldState.Particles),
-                ParticlePlot.PlotParticles<IParticle<IParticleNode>, IParticleNode>(e.NewState.Particles)
-            ])
+        Chart
+            .Combine(
+                [
+                    ParticlePlot.PlotParticles<IParticle<IParticleNode>, IParticleNode>(
+                        e.OldState.Particles
+                    ),
+                    ParticlePlot.PlotParticles<IParticle<IParticleNode>, IParticleNode>(
+                        e.NewState.Particles
+                    ),
+                ]
+            )
             .SaveHtml($"step_{_counter}.html");
         _counter++;
     }
