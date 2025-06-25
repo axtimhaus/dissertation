@@ -37,15 +37,13 @@ class Input(BaseModel):
     gas_constant: float
     temperature: float
     duration: float
-    vacancy_concentration: float
 
     @property
     def _time_norm_common(self):
         return (
             self.gas_constant
             * self.temperature
-            / self.vacancy_concentration
-            * self.particles[0].radius**4
+            * self.particles[0].radius ** 4
             / self.material.molar_mass
             * self.material.density
         )

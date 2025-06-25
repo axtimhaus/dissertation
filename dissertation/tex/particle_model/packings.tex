@@ -27,12 +27,13 @@ This area is calculated by use of \autoref{eq:polygon-shoelace}, which is common
     \Area = \frac12 \sum_i^{\Nodes} \left( \Y_i + \Y_{i+1} \right) \left( \X_i - \X_{i+1} \right)
     \label{eq:polygon-shoelace}
 \end{equation}
+To be able to compare this approach to shrinkages obtained by distance reduction, the square root of the polygon area is used as a measure of characteristic length in the system.
 Then the shrinkage calculates as in \autoref{eq:shrinkage-multiple-particle}, with $\Area_0$ as the polygon area in the initial state.
 \begin{equation}
-    \Shrinkage = \frac{\Area - \Area_0}{\Area_0}
+    \Shrinkage = \frac{\sqrt{\Area} - \sqrt{\Area_0}}{\sqrt{\Area_0}}
     \label{eq:shrinkage-multiple-particle}
 \end{equation}
-These two approaches are not directly comparable, as will be discussed in \autoref{sec:contact-study}.
+Comparability of these two approaches will be discussed in \autoref{sec:contact-study}.
 
 Neck size as the second key property is commonly described by the radius of the neck for circular or spherical models.
 In the current case, non-circular particle shape will be investigated and asymmetrical contacts will form curved neck shapes.

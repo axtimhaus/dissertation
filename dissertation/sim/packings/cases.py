@@ -37,7 +37,7 @@ def create_particle(index: int, x: float, y: float, rotation_angle: float = 0):
     )
 
 
-BASE_SURFACE = InterfaceInput(energy=0.9, diffusion_coefficient=1.65e-10)
+BASE_SURFACE = InterfaceInput(energy=0.9, diffusion_coefficient=1.65e-14)
 BASE_GRAIN_BOUNDARY = InterfaceInput(
     energy=BASE_SURFACE.energy * 0.5,
     diffusion_coefficient=BASE_SURFACE.diffusion_coefficient,
@@ -55,8 +55,7 @@ BASE_INPUT = Input(
     grain_boundary=BASE_GRAIN_BOUNDARY.model_copy(deep=True),
     gas_constant=8.31446261815324,
     temperature=1273,
-    vacancy_concentration=1e-4,
-    duration=3.6e3,
+    duration=3.6e4,
 )
 
 
@@ -101,7 +100,7 @@ SQUARE_INPUT.particles = [
 ]
 SQUARE_CASE = Case(key="square", display="Square", input=SQUARE_INPUT, line_style=_COMMON_STYLE | dict(color="C2"))
 
-RHOMBUS_ANGLE = np.deg2rad(80)
+RHOMBUS_ANGLE = np.deg2rad(70)
 _RHOMBUS_LARGE_DIAG = 2 * np.cos(RHOMBUS_ANGLE / 2)
 _RHOMBUS_SMALL_DIAG = 2 * np.sin(RHOMBUS_ANGLE / 2)
 RHOMBUS_INPUT = BASE_INPUT.model_copy(deep=True)

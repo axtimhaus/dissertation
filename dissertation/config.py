@@ -63,7 +63,7 @@ def integer_log_space(factor_start: int, exp_start: int, factor_end: int, exp_en
 def integer_log_space125(exp_start: int, exp_end: int) -> np.typing.NDArray:
     magnitudes = np.logspace(exp_start, exp_end, (exp_end - exp_start) + 1)
     factors = [1, 2, 5]
-    return np.tile(factors, len(magnitudes)) * np.repeat(magnitudes, len(factors))
+    return (np.tile(factors, len(magnitudes)) * np.repeat(magnitudes, len(factors)))[:-2]
 
 
 ROOT_NAMESPACE_UUID = UUID("d0996f2c-be1f-4d09-9b1f-0ec5ff7ab6ca")

@@ -11,45 +11,47 @@ from dissertation.config import image_produces
 from dissertation.sim.packings.cases import CASES, Case
 
 for case in CASES:
-        @task(id=case.key)
-        @mark.plot
-        def task_plot_evolution_packings(
-            case: Case = case,
-            results_file=case.dir / "output.parquet",
-            produces=image_produces(case.dir / "evolution"),
-        ):
-            df = pq.read_table(results_file).flatten().flatten()
 
-            fig = plt.figure(dpi=600)
-            ax = fig.subplots()
-            ax.set_aspect("equal")
-            viridis = mpl.colormaps["viridis"]
+    @task(id=case.key)
+    @mark.plot
+    def task_plot_evolution_packings(
+        case: Case = case,
+        results_file=case.dir / "output.parquet",
+        produces=image_produces(case.dir / "evolution"),
+    ):
+        df = pq.read_table(results_file).flatten().flatten()
 
-            particles = [get_states(df, case, i) for i in range(len(case.input.particles))]
-            times= particles[0][0]
+        fig = plt.figure(dpi=600)
+        ax = fig.subplots()
+        ax.set_aspect("equal")
+        viridis = mpl.colormaps["viridis"]
 
-            num = 10
+        particles = [get_states(df, case, i) for i in range(len(case.input.particles))]
+        times = particles[0][0]
 
-            times_to_plot = np.geomspace(times[0], times[-1], 10)
+        num = 10
 
-            for j, t in enumerate(times_to_plot):
-                color = viridis(float(j) / num)
-                i = np.searchsorted(times, t)
-                label = f"{times[i]:.2f}"
+        times_to_plot = np.geomspace(times[0], times[-1], 10)
 
-                for p in particles:
-                    ax.fill(p[1][i], p[2][i], label=label, edgecolor=color, fill=False, lw=0.5)
-                    label=None
+        for j, t in enumerate(times_to_plot):
+            color = viridis(float(j) / num)
+            i = np.searchsorted(times, t)
+            label = f"{i}/{len(times)}"
 
-            ax.set_title(f"{case.display}")
-            ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
-            ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")
-            fig.tight_layout()
+            for p in particles:
+                ax.fill(p[1][i], p[2][i], label=label, edgecolor=color, fill=False, lw=0.5)
+                label = None
 
-            for p in produces:
-                fig.savefig(p)
+        ax.set_title(f"{case.display}")
+        ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
+        ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")
+        fig.tight_layout()
+        ax.legend()
 
-            plt.close(fig)
+        for p in produces:
+            fig.savefig(p)
+
+        plt.close(fig)
 
 
 def get_states(df: pa.Table, case: Case, particle_index: int):
