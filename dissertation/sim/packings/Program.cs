@@ -47,7 +47,7 @@ var material = new ParticleMaterial(
     SubstanceProperties.FromDensityAndMolarMass(input.Material.Density, input.Material.MolarMass),
     new InterfaceProperties(
         input.Material.Surface.DiffusionCoefficient,
-        input.Material.Surface.Energy
+        input.Material.Surface.Energy / 2
     ),
     new Dictionary<Guid, IInterfaceProperties> { { materialId, grainBoundary } }
 );

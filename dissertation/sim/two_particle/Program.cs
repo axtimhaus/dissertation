@@ -37,13 +37,13 @@ var input =
 
 var grainBoundary = new InterfaceProperties(
     input.GrainBoundary.DiffusionCoefficient,
-    input.GrainBoundary.Energy
+    input.GrainBoundary.Energy / 2
 );
 
 var material1Id = Guid.NewGuid();
 var material2Id = Guid.NewGuid();
 
-var material1 = new Material(
+var material1 = new ParticleMaterial(
     material1Id,
     "material1",
     SubstanceProperties.FromDensityAndMolarMass(input.Material1.Density, input.Material1.MolarMass),
@@ -54,13 +54,10 @@ var material1 = new Material(
     new Dictionary<Guid, IInterfaceProperties> { { material2Id, grainBoundary } }
 );
 
-var material2 = new Material(
+var material2 = new ParticleMaterial(
     material2Id,
     "material2",
-    SubstanceProperties.FromDensityAndMolarVolume(
-        input.Material2.Density,
-        input.Material1.MolarMass
-    ),
+    SubstanceProperties.FromDensityAndMolarMass(input.Material2.Density, input.Material2.MolarMass),
     new InterfaceProperties(
         input.Material2.Surface.DiffusionCoefficient,
         input.Material2.Surface.Energy

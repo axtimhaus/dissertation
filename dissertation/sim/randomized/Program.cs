@@ -42,7 +42,7 @@ var materials = input
         new InterfaceProperties(p.Material.Surface.DiffusionCoefficient, p.Material.Surface.Energy),
         p.GrainBoundaries.Select(kvp => new KeyValuePair<Guid, IInterfaceProperties>(
                 kvp.Key,
-                new InterfaceProperties(kvp.Value.DiffusionCoefficient, kvp.Value.Energy)
+                new InterfaceProperties(kvp.Value.DiffusionCoefficient, kvp.Value.Energy / 2)
             ))
             .ToDictionary()
     ))
