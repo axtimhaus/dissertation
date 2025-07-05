@@ -11,6 +11,7 @@ Abs = '\lvert#1\rvert'
 Projected = '\bar'                   # projected value
 Mean = '\overbar{#1}'
 Normalized = '#1^\star'
+To = '{\ldotp}{\ldotp}'
 
 # Polar Coordinates
 Radius = 'r'      # radius coordinate
@@ -38,7 +39,6 @@ SurfaceVectorAngle = '\beta'  # angle between surface line and surface normal re
 Shift = 's'                   # shift (displacement) of a node or particle
 RotationAngle = '\omega'      # rotation
 Diameter = 'd'                # diameter
-Ovality = 'o'                 # ovality of particle
 InterfaceThickness = '\delta' # thickness of an interface
 Distance = 'd'                # arbitrary distance
 
@@ -97,6 +97,9 @@ Equilibrium = '\mathrm{eq}'  # index for thermodynamic equilibrium
 Nodes = '\symbb{N}'     # set of nodes
 Particles = '\symbb{P}' # set of particles
 Contacts = '\symbb{C}'  # set of contacts
+Integers = '\symbb{Z}'  # set of integer numbers
+PositiveIntegers = '\symbb{Z}^{+}'  # set of integer numbers
+Reals = '\symbb{R}'  # set of integer numbers
 
 # Mechanics
 Stress = '\sigma' # normal stress
@@ -112,3 +115,12 @@ CumulativeProbability = 'P'  # cumulative probability
 Shrinkage = '\varepsilon'
 NeckRadius = '\Radius_{\Neck}'
 NeckArea = '\Area_{\Neck}'
+
+# Powder Properties
+Ovality = 'o'                   # ovality of particle
+WaveHeight = 'h'                # relative height of first order waves
+WaveCount = 'n'                 # count of first order waves
+WaveShift = 'p'            # phase shift of first order waves
+ShapeFunction = 'f'             # shape function
+MixtureFraction = 'x' # fractional amount in a powder mixture
+ParticleCount = 'N' # particle count
