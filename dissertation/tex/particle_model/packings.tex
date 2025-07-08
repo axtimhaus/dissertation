@@ -23,8 +23,10 @@ However, since multiple-particle-packings have the important feature that they a
 
 Here, the area covered by the polygon built by the centers of the particles shall be used as a measure of the systems current size.
 This area is calculated by use of \autoref{eq:polygon-shoelace}, which is commonly known as shoelace formula.
+For more than 3 particles in the system, only the convex hull of the particle center points must be used in this calculation, or there will be negative contributions by inner particles.
+Note that the points have to be ordered in mathematical rotation direction or the result will be negative.
 \begin{equation}
-    \Area = \frac12 \sum_i^{\Nodes} \left( \Y_i + \Y_{i+1} \right) \left( \X_i - \X_{i+1} \right)
+    \Area = \frac12 \sum_i^{\Particles} \left( \Y_i + \Y_{i+1} \right) \left( \X_i - \X_{i+1} \right)
     \label{eq:polygon-shoelace}
 \end{equation}
 To be able to compare this approach to shrinkages obtained by distance reduction, the square root of the polygon area is used as a measure of characteristic length in the system.
@@ -36,7 +38,7 @@ Then the shrinkage calculates as in \autoref{eq:shrinkage-multiple-particle}, wi
 Comparability of these two approaches will be discussed in \autoref{sec:contact-study}.
 
 Neck size as the second key property is commonly described by the radius of the neck for circular or spherical models.
-In the current case, non-circular particle shape will be investigated and asymmetrical contacts will form curved neck shapes.
+In the current case, non-circular particle shapes will be investigated and asymmetrical contacts will form curved neck shapes.
 The neck size is here defined as the half of the grain boundary length between two particles to be comparable to classic two-sphere results.
 \autoref{eq:neck-size} formulates this approach as the sum over the set of all grain boundary nodes in the neck $\Nodes_{\GrainBoundary}$ (excluding the neck nodes).
 Note that each surface distance is counted twice in this formula (therefore the factor $\frac14$), but this avoids special casing of either the lower or upper neck node limiting the regarded grain boundary.

@@ -16,13 +16,14 @@ Starting from a compact grain boundary, meaning that there are no holes and/or o
 
 But in reality the positions of particles to each other change, which can be observed macroscopically as shrinkage.
 So we formulate instead the total displacement of a node in absolute cartesian space, which must be equal regarded from both particles.
+The total node displacement includes contributions from particle displacement (index $\Particle$), normal node displacement (index $\Normal$) and tangential node displacement (index $\Tangential$).
 
 \begin{subequations}
     \begin{align}
-        \Step\X_{\Particle1} + \Step\X_{\Normal}^{\Regarding1} + \Step\Y_{\Normal}^{\Regarding1}
-        &= \Step\X_{\Particle2} + \Step\X_{\Normal}^{\Regarding2} + \Step\Y_{\Normal}^{\Regarding2}\\
-        \Step\X_{\Particle1} + \Step\X_{\Tangential}^{\Regarding1} + \Step\Y_{\Tangential}^{\Regarding1}
-        &= \Step\X_{\Particle2} + \Step\X_{\Tangential}^{\Regarding2} + \Step\Y_{\Tangential}^{\Regarding2}
+        \Step\X_{\Particle1} + \Step\X_{\Normal}^{\Regarding1} + \Step\X_{\Tangential}^{\Regarding1} + \Step\X_{\RotationAngle}^{\Regarding1}
+        &= \Step\X_{\Particle2} + \Step\X_{\Normal}^{\Regarding2} + \Step\X_{\Tangential}^{\Regarding2} + \Step\X_{\RotationAngle}^{\Regarding2}\\
+        \Step\Y_{\Particle1} + \Step\Y_{\Normal}^{\Regarding1} + \Step\Y_{\Tangential}^{\Regarding1} + \Step\Y_{\RotationAngle}^{\Regarding1}
+        &= \Step\Y_{\Particle2} + \Step\Y_{\Normal}^{\Regarding2} + \Step\Y_{\Tangential}^{\Regarding2} + \Step\Y_{\RotationAngle}^{\Regarding2}
         \label{eq:absolute-displacement-contact-constraints}
     \end{align}
 \end{subequations}
