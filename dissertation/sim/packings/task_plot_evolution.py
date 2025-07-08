@@ -9,6 +9,7 @@ from pytask import mark, task
 
 from dissertation.config import image_produces
 from dissertation.sim.packings.cases import CASES, Case
+from dissertation.config import FIGSIZE_INCH
 
 for case in CASES:
 
@@ -21,9 +22,9 @@ for case in CASES:
     ):
         df = pq.read_table(results_file).flatten().flatten()
 
-        fig = plt.figure(dpi=600)
+        fig = plt.figure(figsize=(FIGSIZE_INCH[0], 4))
         ax = fig.subplots()
-        ax.set_aspect("equal")
+        ax.set_aspect("equal", adjustable="datalim")
         viridis = mpl.colormaps["viridis"]
 
         particles = [get_states(df, case, i) for i in range(len(case.input.particles))]
@@ -42,11 +43,10 @@ for case in CASES:
                 ax.fill(p[1][i], p[2][i], label=label, edgecolor=color, fill=False, lw=0.5)
                 label = None
 
-        ax.set_title(f"{case.display}")
+        # ax.set_title(f"{case.display}")
         ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
         ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")
         fig.tight_layout()
-        ax.legend()
 
         for p in produces:
             fig.savefig(p)

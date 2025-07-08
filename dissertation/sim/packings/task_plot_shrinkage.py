@@ -26,24 +26,16 @@ def task_plot_shrinkage_packings(
     ax = fig.subplots()
     ax.set_xscale("log")
     ax.set_yscale("log")
-    ax.grid(True)
+    ax.grid(True, "both")
 
     for key, df in data_frames:
         case = cases[key]
-        times, shrinkages_distance, shrinkages_shoelace = get_shrinkages(case, df)
-        ax.plot(times, shrinkages_distance, **case.line_style | dict(ls="dashed"))
-        if shrinkages_shoelace is not None:
-            ax.plot(times, shrinkages_shoelace, **case.line_style)
+        times, shrinkages = get_shrinkages(case, df)
+        ax.plot(times, shrinkages, **case.line_style, label=case.display)
 
-    ax.legend(
-        handles=[Line2D([], [], **c.line_style, label=c.display) for c in cases.values()]
-        + [
-            Line2D([], [], color="k", ls="solid", label="via Polygon"),
-            Line2D([], [], color="k", ls="dashed", label="via Distance"),
-        ]
-    )
+    ax.legend()
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
-    ax.set_ylabel("Shrinkage")
+    ax.set_ylabel("Shrinkage $\\Shrinkage$")
     fig.tight_layout()
 
     for p in produces:
@@ -73,22 +65,20 @@ def get_shrinkages(case: Case, df: pa.Table):
     mask = (times > 1) & (np.diff(times, prepend=[0]) > 0)
     times = times[mask] / case.input.time_norm_surface
 
-    distances = distance(
-        particles[0]["Particle.Coordinates.X_one"].to_numpy(),
-        particles[0]["Particle.Coordinates.Y_one"].to_numpy(),
-        particles[1]["Particle.Coordinates.X_one"].to_numpy(),
-        particles[1]["Particle.Coordinates.Y_one"].to_numpy(),
-    )
-    distance0 = distances[0]
-    shrinkages_distance = (distance0 - distances[mask]) / distance0
-
     if len(particles) > 2:
         x = np.array([p["Particle.Coordinates.X_one"].to_numpy() for p in particles]).T
         y = np.array([p["Particle.Coordinates.Y_one"].to_numpy() for p in particles]).T
         volumes = np.array([shoelace(x_, y_) for x_, y_ in zip(x, y, strict=False)])
         sqrt_volume0 = np.sqrt(volumes[0])
-        shrinkages_shoelace = (sqrt_volume0 - np.sqrt(volumes[mask])) / sqrt_volume0
+        shrinkages = (sqrt_volume0 - np.sqrt(volumes[mask])) / sqrt_volume0
     else:
-        shrinkages_shoelace = None
+        distances = distance(
+            particles[0]["Particle.Coordinates.X_one"].to_numpy(),
+            particles[0]["Particle.Coordinates.Y_one"].to_numpy(),
+            particles[1]["Particle.Coordinates.X_one"].to_numpy(),
+            particles[1]["Particle.Coordinates.Y_one"].to_numpy(),
+        )
+        distance0 = distances[0]
+        shrinkages = (distance0 - distances[mask]) / distance0
 
-    return times, shrinkages_distance, shrinkages_shoelace
+    return times, shrinkages

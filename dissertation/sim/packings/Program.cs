@@ -36,10 +36,16 @@ var input =
 
 var grainBoundary = new InterfaceProperties(
     input.GrainBoundary.DiffusionCoefficient,
-    input.GrainBoundary.Energy
+    input.GrainBoundary.Energy / 2
+);
+
+var inertGrainBoundary = new InterfaceProperties(
+    input.GrainBoundary.DiffusionCoefficient / 1e3,
+    input.GrainBoundary.Energy / 2
 );
 
 var materialId = Guid.NewGuid();
+var inertMaterialId = Guid.NewGuid();
 
 var material = new ParticleMaterial(
     materialId,
@@ -47,15 +53,32 @@ var material = new ParticleMaterial(
     SubstanceProperties.FromDensityAndMolarMass(input.Material.Density, input.Material.MolarMass),
     new InterfaceProperties(
         input.Material.Surface.DiffusionCoefficient,
-        input.Material.Surface.Energy / 2
+        input.Material.Surface.Energy
     ),
-    new Dictionary<Guid, IInterfaceProperties> { { materialId, grainBoundary } }
+    new Dictionary<Guid, IInterfaceProperties> {
+        { materialId, grainBoundary },
+        { inertMaterialId, grainBoundary }
+    }
+);
+
+var inertMaterial = new ParticleMaterial(
+    inertMaterialId,
+    "inert_material",
+    SubstanceProperties.FromDensityAndMolarMass(input.Material.Density, input.Material.MolarMass),
+    new InterfaceProperties(
+        input.Material.Surface.DiffusionCoefficient / 1e3,
+        input.Material.Surface.Energy
+    ),
+    new Dictionary<Guid, IInterfaceProperties> {
+        { materialId, inertGrainBoundary },
+        { inertMaterialId, inertGrainBoundary }
+    }
 );
 
 var particles = input
-    .Particles.Select(p =>
+    .Particles.Select( (p, i) =>
         new ShapeFunctionParticleFactoryEllipseOvalityCosPeaks(
-            materialId,
+            i == input.InertParticleId ? inertMaterialId : materialId,
             (p.X, p.Y),
             p.RotationAngle,
             p.NodeCount,
@@ -93,7 +116,7 @@ var process = new SinteringStep(
     input.Duration,
     input.Temperature,
     solver,
-    [material],
+    [material, inertMaterial],
     input.GasConstant
 );
 

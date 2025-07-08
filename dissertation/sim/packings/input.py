@@ -32,6 +32,7 @@ class MaterialInput(BaseModel):
 
 class Input(BaseModel):
     particles: list[ParticleInput]
+    inert_particle_id: int = -1
     material: MaterialInput
     grain_boundary: InterfaceInput
     gas_constant: float

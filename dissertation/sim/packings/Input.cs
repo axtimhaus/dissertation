@@ -29,6 +29,7 @@ class MaterialInput
 class Input
 {
     public required ParticleInput[] Particles { get; set; }
+    public required int InertParticleId { get; set; }
     public required MaterialInput Material { get; set; }
     public required InterfaceInput GrainBoundary { get; set; }
 

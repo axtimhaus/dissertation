@@ -8,7 +8,7 @@
     \end{subfigure}%
     \begin{subfigure}{0.5\linewidth}
         \includegraphics[scale=0.5]{sim/two_particle/studies/surface_energy_asymmetric/shrinkage_map}
-        \caption{Isolines}
+        \caption{Time Isolines}
         \label{fig:two_particle/studies/surface_energy_asymmetric/shrinkage_map}
     \end{subfigure}
     \caption{Shrinkage in Dependence on Asymmetric Surface Energy Ratio}
@@ -22,7 +22,7 @@
     \end{subfigure}%
     \begin{subfigure}{0.5\linewidth}
         \includegraphics[scale=0.5]{sim/two_particle/studies/surface_energy_asymmetric/neck_size_map}
-        \caption{Isolines}
+        \caption{Time Isolines}
         \label{fig:two_particle/studies/surface_energy_asymmetric/neck_size_map}
     \end{subfigure}
     \caption{Neck Size in Dependence on Asymmetric Surface Energy Ratio}
@@ -35,9 +35,26 @@
         \label{fig:two_particle/studies/surface_energy_asymmetric/2.00000/evolution}
     \end{subfigure}%
     \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_energy_asymmetric/10.00000/evolution}
-        \caption{$\InterfaceEnergy_{\Surface2} / \InterfaceEnergy_{\Surface1} = \num{10}$}
-        \label{fig:two_particle/studies/surface_energy_asymmetric/10.00000/evolution}
+        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_energy_asymmetric/3.00000/evolution}
+        \caption{$\InterfaceEnergy_{\Surface2} / \InterfaceEnergy_{\Surface1} = \num{3}$}
+        \label{fig:two_particle/studies/surface_energy_asymmetric/3.00000/evolution}
     \end{subfigure}
     \caption{Geometry Evolutions for Selected Asymmetric Surface Energy Ratios}
+    \label{fig:two_particle/studies/surface_energy_asymmetric/evolution}
 \end{figure}
+
+This study investigates the effect of sintering particles of different substance by means of a difference in their surface energy.
+The initial particle geometry and remaining material parameters are taken equal on both particles with an grain boundary energy of $\InterfaceEnergy_{\GrainBoundary} = \num{0.5}\InterfaceEnergy_{\Surface}$.
+The study is limited to ratios up to $\InterfaceEnergy_{\Surface2}/\InterfaceEnergy_{\Surface1} = \num{3}$, because above this point the model showed numerical instability as will be discussed below with the geometric evolutions.
+
+\autoref{fig:two_particle/studies/surface_energy_asymmetric/neck_size} shows the dependence of the neck size on the asymmetric surface energy ratio.
+
+\autoref{fig:two_particle/studies/surface_energy_asymmetric/shrinkage} shows the dependence of the shrinkage on the asymmetric surface energy ratio.
+
+\autoref{fig:two_particle/studies/surface_energy_asymmetric/evolution} shows two selected evolutions of the contact geometry.
+Note especially the undercut occurring in \autoref{fig:two_particle/studies/surface_energy_asymmetric/evolution} near the neck on the surface of particle 1.
+Due to the high surface energy of the second particle it is thermodynamical beneficial to grow the neck while creating additional surface of the first particle.
+As the surface diffusion is to slow to deliver enough volume to the neck, an undercut evolves.
+Due to the mathematical construction of the model volume can be removed from a surface node in such an undercut despite there is too few left between the surface and the grain boundary, so after a critical time step, surface line and grain boundary cross.
+This happens on energy ratios $\InterfaceEnergy_{\Surface2}/\InterfaceEnergy_{\Surface1} > \num{3}$ as mentioned above.
+This is of course physically impossible, but at the time of writing this thesis, the issue was not solved.

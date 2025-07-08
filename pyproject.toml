@@ -26,6 +26,7 @@ dependencies = [
 [tool.pytask.ini_options]
 editor_url_scheme = "pycharm"
 paths = ["dissertation"]
+ignore = ["**/.*", "**/_*"]
 
 [tool.pytask.ini_options.markers]
 sim = "Simulation task"

@@ -57,7 +57,6 @@ class Input(BaseModel):
         return (
             self.gas_constant
             * self.temperature
-            / self.vacancy_concentration
             * self.particle1.radius**4
             / self.material1.molar_mass
             * self.material1.density

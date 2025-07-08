@@ -1,1 +1,27 @@
 \chapter{Conclusions and Outlook}\label{ch:conclusions-and-outlook}
+
+A novel approach to model sintering behavior of two or multiple particles in 2D space has been developed which supports asymmetric geometry and substance conditions.
+The approach uses sharp interfaces and a finite difference approximation of the particle surfaces.
+The model was based on the \gls{TEP} to obtain a concise and flexible formulation of the evolution equations.
+The model allows direct identification of physical interface properties due to the sharp interface formulation.
+Additional requirements such as contact conditions are to be formulated as equality constraints an can be implicitly ensured by the solution procedure.
+
+The numerical behavior of the model has been examined to define feasible parameters for numerical routines such as time step control and remeshing procedures.
+The computational effort for time integration of the model equation can be heavily lowered by feasible time step control and rigorous remeshing procedures.
+In early stages of the simulation remeshing has to be done with care to keep the fine details of geometry, in later stages however remeshing can be aggressive to reduce the system size and accelerate the solution procedure.
+The latter is an significant improvement counter state-of-the-art phase field approaches, which usually have larger system sizes in general and may not reduce the system size during the simulation, as the discretization sizes are determined by the phase field gradient requirements, rather than the interface geometry as in the current case.
+
+The model has then be used to conduct extensive parameter studies on two-particle configurations.
+The varied parameters include classic ones like the ratio of surface energy to grain boundary energy or the ratio of surface and grain boundary diffusion rate, for which previous results have been confirmed and the new model has been validated.
+Other parameters, for which no previous results could be found in literature, have been investigated regarding the influence of asymmetric substance pairings and particle geometries.
+As validation against findings from the literature was not possible here, explanations of the observed behavior have been attempted.
+
+In a third step, the behavior of powder mixtures has been investigated by simulating the sintering of random arrangements of three particles.
+\todo{Conclude about randomized simulations.}
+
+In the current state of the model, several incompletenesses have been observed during the investigations conducted:
+\begin{enumerate}
+    \item Triple points where three grain boundaries meet are currently not supported. This limits the applicability till the closing of the first pore present in the system.
+    \item In contacts between particles with high difference in surface energy a drastic undercut near the neck occurs, which eventually leads to a crossing between grain boundary and surface, which is obviously unphysical. This is an numerical effect due to the removal of volume from a node, where in fact no volume is left.
+    \item
+\end{enumerate}

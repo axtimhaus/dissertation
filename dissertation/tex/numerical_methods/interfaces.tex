@@ -160,7 +160,7 @@ These common laws are in fact just special cases of the Cahn-Hillard (\autoref{e
 \end{equation}
 
 The phase field method offers a flexible approach to the description of heterogeneous thermodynamic systems, as additional energy contributions can be included easily as additonal terms in the energy functional \autoref{eq:phase-field-helmholtz-functional}.
-Additonal phases can be included by introduction of additonal order parameters.
+Additional phases can be included by introduction of additional order parameters.
 Additional internal processes like chemical reactions can be regarded in the same way.
 The numerical treatment of all state variables in the system is very similar, the only important distinction is the for conserved fields (e.g. concentrations) and non-conserved fields (e.g. phase variables).
 Numerical difficulties occur due to the varying magnitude of the involved gradients.
@@ -172,21 +172,21 @@ The main reason for this seems to be its flexibility and clean and easy formulat
 
 The main disadvantage of phase field models is the unphysical wide interface caused by the continuous description of phase composition by the order parameters.
 Therefore, material parameters in energy and kinetic functions are not directly identifiable with actual physical quantities.
-They depend not only on the actaul material properties, but also on the numerical properties of the model, such as interface width and discretization width.
+They depend not only on the actual material properties, but also on the numerical properties of the model, such as interface width and discretization width.
 This is natural, since the local characteristics of the (approximately) sharp real interface must be transformed to the diffuse interface while maintaining the globally observable behavior.
 Applications of this method to sintering problems often on general observations on sintering behavior far from any real material data~\cite{Deng2012, Wang2006, Asp2006, Jing2003, Kumar2010, Kumar2011, Shinagawa2014}.
 \textcite{Biswas2016, Biswas2017} determined the mobilities $\Mobility$ from the corresponding diffusion coefficients by use of a method by \textcite{Moelans2008}.
-Several authors~\cite{Chockalingam2016, Biswas2016, Biswas2017, Choudhuri2021} used an equation system developed by \textcite{Ahmed2013} to determine the gradient coefficents $\kappa$ and from actual material data, however still including the numerical properties.
+Several authors~\cite{Chockalingam2016, Biswas2016, Biswas2017, Choudhuri2021} used an equation system developed by \textcite{Ahmed2013} to determine the gradient coefficients $\kappa$ and from actual material data, however still including the numerical properties.
 
 A major difficulty in application to sintering problems is the description of rigid body motion.
-For modelling dense microstructures, the only possible changes are due to phase transformations and diffusional flows, since the space is fully occupied by matter.
+For modeling dense microstructures, the only possible changes are due to phase transformations and diffusional flows, since the space is fully occupied by matter.
 In sintering, however, the is usually a significant amount of void (or atmosphere), which is not able to withstand the motion of a solid body.
-The distict grains may (and do) move relative to each other due to changes in their contact geometry effected by diffusional flows along the grain boundaries.
+The distinct grains may (and do) move relative to each other due to changes in their contact geometry effected by diffusional flows along the grain boundaries.
 This is observed macroscopically as shrinkage, a main phenomenon of sintering processes.
 The movement is not directly driven by diffusional flows or phase transformations, so it cannot be included directly in the grand energy functional.
 Some phase-field-based sintering model neglect this mechanism, therefore not regarding the phenomenon of shrinkage \cite{Asp2006, Chockalingam2016, Hotzer2019, Jing2003, Kumar2010, Kumar2011, Deng2012, Zhang2014, Yang2020, Choudhuri2021}.
 
-An approach by \textcite{Wang2006} (and adopted by others~\cite{Termuhlen2021, Biswas2016, Biswas2017}) regards the rigid body motion by additonal terms in the Allen-Cahn and Cahn-Hillard equations including an advection velocity of the particles.
+An approach by \textcite{Wang2006} (and adopted by others~\cite{Termuhlen2021, Biswas2016, Biswas2017}) regards the rigid body motion by additional terms in the Allen-Cahn and Cahn-Hillard equations including an advection velocity of the particles.
 This advection velocity is calculated from the force and torque balance on the particle volume.
 Forces and torques are obtained from the order parameter gradient.
 \textcite{Shinagawa2014} used a coupled \gls{DEM} model to determine the rigid body motion independently from the phase field.
@@ -194,5 +194,7 @@ Both models are updated from the other by an iterational process.
 \textcite{Ivannikov2021} introduced a grain boundary force similar to that of \textcite{Wang2006}, but did not include it in the kinetics equation, rather they set a constraint on it to be always zero.
 If the constraint is violated, they calculate and apply an advection vector to restore it.
 
-The undelying numerical method to solve the field equations is usually a \gls{FDM}~\cite{Wang2006, Hotzer2019, Jing2003, Kumar2010, Kumar2011, Zhang2014} or \gls{FEM}~\cite{Asp2006, Chockalingam2016, Biswas2016, Biswas2017, Greenquist2020, Ivannikov2021} scheme.
+The underlying numerical method to solve the field equations is usually a \gls{FDM}~\cite{Wang2006, Hotzer2019, Jing2003, Kumar2010, Kumar2011, Zhang2014} or \gls{FEM}~\cite{Asp2006, Chockalingam2016, Biswas2016, Biswas2017, Greenquist2020, Ivannikov2021} scheme.
 Most models are formulated in 2D, only a few in 3D space~\cite{Greenquist2020, Termuhlen2021}
+
+\todo{Review remeshing in phase field.}

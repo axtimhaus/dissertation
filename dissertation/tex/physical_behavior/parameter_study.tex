@@ -6,14 +6,6 @@ The following study investigates the influence of the dimensionless parameters p
 
 \subsection{Construction of the Study}
 
-The shape of a particle is here modeled as an ellipse an parameterized with the equivalent circular radius $\Radius_{\Particle}$ and the ovality $\Ovality \in [ 1, \infty ) $ (as the standard excentricity is an hardly illustrative value for the current purpose).
-The local polar radius coordinate of a node is then given by \autoref{eq:parameter_study_ellipse_function}, with the main radii defined by $a = \Radius_{\Particle} \sqrt{\Ovality}$ and $b = \Radius_{\Particle} / \sqrt{\Ovality}$ with $a/b = o$.
-
-\begin{equation}
-    \Radius(\Angle) = \frac{a b}{\sqrt{\left( a \sin \Angle \right)^2 + \left( b \cos \Angle \right)^2  }}
-    \label{eq:parameter_study_ellipse_function}
-\end{equation}
-
 \begin{table}
     \caption{Investigated Dimensionless Parameters and their Range}
     \label{tab:parameter_study_conditions}
@@ -21,14 +13,12 @@ The local polar radius coordinate of a node is then given by \autoref{eq:paramet
         \toprule
         Parameter & Min & Max & Scale & remarks \\
         \midrule
-        $\Radius_1 / \Radius_2$ & \num{1} & \num{10} & lin & equal material\\
-        $\DiffusionCoefficient_{\GrainBoundary} / \DiffusionCoefficient_{\Surface}$  & \num{0.01} & \num{1} & log & equal material\\
-        $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface}$ & \num{0.1} & \num{0.9} & lin & equal material \\
-        $\DiffusionCoefficient_{\Surface2} / \DiffusionCoefficient_{\Surface1} $ & \num{1} & \num{100} & log & $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface1} = \num{0.5}$, $\DiffusionCoefficient_{\GrainBoundary} / \DiffusionCoefficient_{\Surface1} = \num{1}$ \\
-        $\InterfaceEnergy_{\Surface2} / \InterfaceEnergy_{\Surface1}$ & \num{1} & \num{10} & lin & $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface1} = \num{0.5}$, $\DiffusionCoefficient_{\GrainBoundary} / \DiffusionCoefficient_{\Surface1} = \num{1}$ \\
-        $o$ & \num{1} & \num{6} & lin & tip/tip contact, equal material \\
-        $o$ & \num{1} & \num{6} & lin & tip/flank contact, equal material \\
-        $o$ & \num{1} & \num{6} & lin & flank/flank contact, equal material \\
+        $\DiffusionCoefficient_{\GrainBoundary} / \DiffusionCoefficient_{\Surface}$  & \num{0.01} & \num{1} & log & \\
+        $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface}$ & \num{0.1} & \num{0.9} & lin & \\
+        $\Radius_2 / \Radius_1$ & \num{1} & \num{10} & lin & \\
+        $\DiffusionCoefficient_{2} / \DiffusionCoefficient_{1} $ & \num{1} & \num{100} & log & surface and grain boundary diffusion scaled equally \\
+        $\InterfaceEnergy_{\Surface2} / \InterfaceEnergy_{\Surface1}$ & \num{1} & \num{10} & lin & \\
+        $o$ & \num{1} & \num{3} & lin & several contacts tip vs. flank \\
         \bottomrule
     \end{tblr}
 \end{table}
@@ -36,20 +26,18 @@ The local polar radius coordinate of a node is then given by \autoref{eq:paramet
 \autoref{tab:parameter_study_conditions} lists the varied dimensionless parameters and their respective value ranges, where the indices 1 and 2 denote the first resp. the second particle.
 The study includes:
 \begin{description}
-    \item[symmetrical contacts] with varied ratios of interface energies and diffusion coefficients between surface and grain boundary
-    \item[asymmetrical geometry contacts] with circular particles of different sizes and oval particles in different contact modes
-    \item[asymmetrical material contacts] with varied ratios of interface energies and diffusion coefficients on both sides
+    \item[Symmetrical Contacts] with varied ratios of interface energies and diffusion coefficients between surface and grain boundary
+    \item[Asymmetrical Geometry Contacts] with circular particles of different sizes and oval particles in different contact modes
+    \item[Asymmetrical Material Contacts] with varied ratios of interface energies and diffusion coefficients on both sides
 \end{description}
+Further details on the study conditions are given in the following respective sections.
 
 The initial contact of the particles is always taken in that way, that the distance of the particles equals \qty{1}{\percent} of the reference particle's radius $\Radius_1$.
 Then, the intersection of the particle's is calculated and the grain boundary is placed as a straight line between the surface line intersection points.
 
-\subsection{Discussion of the Results}
-
-The results will be displayed as isoline-plots for shrinkage and neck size with the normalized time on the horizontal axis and the regarded dimensionless parameter on the vertical axis.
-
-\input{tex/physical_behavior/parameter_study/particle_size_ratio}
 \input{tex/physical_behavior/parameter_study/surface_boundary_diffusion_ratio}
 \input{tex/physical_behavior/parameter_study/surface_boundary_energy_ratio}
+\input{tex/physical_behavior/parameter_study/particle_size_ratio}
 \input{tex/physical_behavior/parameter_study/asymmetric_surface_diffusion_ratio}
 \input{tex/physical_behavior/parameter_study/asymmetric_surface_energy_ratio}
+\input{tex/physical_behavior/parameter_study/ovality}

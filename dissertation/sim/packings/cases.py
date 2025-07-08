@@ -79,7 +79,18 @@ PAIR_INPUT.particles = [
     create_particle(0, 0, 0),
     create_particle(1, 1, 0),
 ]
-PAIR_CASE = Case(key="pair", display="Pair", input=PAIR_INPUT, line_style=_COMMON_STYLE | dict(color="C0"))
+PAIR_CASE = Case(
+    key="pair",
+    display="Pair",
+    input=PAIR_INPUT,
+    line_style=_COMMON_STYLE | dict(color="C0"),
+)
+PAIR_CASE_INERT = Case(
+    key="pair_inert",
+    display="Pair with Inert",
+    input=PAIR_INPUT.model_copy(update=dict(inert_particle_id=1)),
+    line_style=_COMMON_STYLE | dict(color="C0", linestyle="dashed"),
+)
 
 TRIANGLE_INPUT = BASE_INPUT.model_copy(deep=True)
 TRIANGLE_INPUT.particles = [
@@ -88,7 +99,16 @@ TRIANGLE_INPUT.particles = [
     create_particle(2, 0.5, np.sqrt(3) / 2, np.deg2rad(270)),
 ]
 TRIANGLE_CASE = Case(
-    key="triangle", display="Triangle", input=TRIANGLE_INPUT, line_style=_COMMON_STYLE | dict(color="C1")
+    key="triangle",
+    display="Triangle",
+    input=TRIANGLE_INPUT,
+    line_style=_COMMON_STYLE | dict(color="C1"),
+)
+TRIANGLE_CASE_INERT = Case(
+    key="triangle_inert",
+    display="Triangle with Inert",
+    input=TRIANGLE_INPUT.model_copy(update=dict(inert_particle_id=2)),
+    line_style=_COMMON_STYLE | dict(color="C1", linestyle="dashed"),
 )
 
 SQUARE_INPUT = BASE_INPUT.model_copy(deep=True)
@@ -98,7 +118,25 @@ SQUARE_INPUT.particles = [
     create_particle(2, 1, 1),
     create_particle(3, 0, 1),
 ]
-SQUARE_CASE = Case(key="square", display="Square", input=SQUARE_INPUT, line_style=_COMMON_STYLE | dict(color="C2"))
+SQUARE_CASE = Case(
+    key="square",
+    display="Square",
+    input=SQUARE_INPUT,
+    line_style=_COMMON_STYLE
+    | dict(
+        color="C2",
+    ),
+)
+SQUARE_CASE_INERT = Case(
+    key="square_inert",
+    display="Square with Inert",
+    input=SQUARE_INPUT.model_copy(update=dict(inert_particle_id=2)),
+    line_style=_COMMON_STYLE
+    | dict(
+        color="C2",
+        linestyle="dashed",
+    ),
+)
 
 RHOMBUS_ANGLE = np.deg2rad(70)
 _RHOMBUS_LARGE_DIAG = 2 * np.cos(RHOMBUS_ANGLE / 2)
@@ -110,11 +148,33 @@ RHOMBUS_INPUT.particles = [
     create_particle(2, _RHOMBUS_LARGE_DIAG, 0, np.deg2rad(180)),
     create_particle(3, _RHOMBUS_LARGE_DIAG / 2, _RHOMBUS_SMALL_DIAG / 2, np.deg2rad(270)),
 ]
-RHOMBUS_CASE = Case(key="rhombus", display="Rhombus", input=RHOMBUS_INPUT, line_style=_COMMON_STYLE | dict(color="C3"))
+RHOMBUS_CASE = Case(
+    key="rhombus",
+    display="Rhombus",
+    input=RHOMBUS_INPUT,
+    line_style=_COMMON_STYLE
+    | dict(
+        color="C3",
+    ),
+)
+RHOMBUS_CASE_INERT = Case(
+    key="rhombus_inert",
+    display="Rhombus with Inert",
+    input=RHOMBUS_INPUT.model_copy(update=dict(inert_particle_id=3)),
+    line_style=_COMMON_STYLE
+    | dict(
+        color="C3",
+        linestyle="dashed",
+    ),
+)
 
 CASES = [
     PAIR_CASE,
     TRIANGLE_CASE,
     SQUARE_CASE,
     RHOMBUS_CASE,
+    PAIR_CASE_INERT,
+    TRIANGLE_CASE_INERT,
+    SQUARE_CASE_INERT,
+    RHOMBUS_CASE_INERT,
 ]

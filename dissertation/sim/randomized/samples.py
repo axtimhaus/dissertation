@@ -21,7 +21,7 @@ PARTICLE_COUNT = 3
 
 PARTICLE_SIZE = norm(loc=100e-6, scale=30e-6)
 INITIAL_DISTANCE = 400e-6
-COORDS = [(0,0), (INITIAL_DISTANCE, 0), (INITIAL_DISTANCE /2, INITIAL_DISTANCE / 2 * np.sqrt(3))]
+COORDS = [(0, 0), (INITIAL_DISTANCE, 0), (INITIAL_DISTANCE / 2, INITIAL_DISTANCE / 2 * np.sqrt(3))]
 
 
 def create_input(sample: int):

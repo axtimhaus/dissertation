@@ -48,7 +48,7 @@ If there aren't any $f_i$, the model will fall back to the usual circular shape 
 The $f_i$ will generally include some unknown parameters which can be used to characterize the particle shape later on.
 If the $f_i$ parameters have a notion of neutrality or deactivation, the value of $f_i$ must be 1 in this cases.
 
-For the regard of ovality, we define a parameter $\Ovality \in [ 1, \infty ] $, which shall follow the common sense that
+For the regard of ovality, we define a parameter $\Ovality \in [ 1, \infty ) $, which shall follow the common sense that
 \begin{equation}
     \Ovality = \frac{a}{b}
     \label{eq:ovality-o}
@@ -75,7 +75,7 @@ we obtain, when inserting \autoref{eq:ellipse-a-b-by-ovality}, the equation for 
 \autoref{fig:model_development/particle_shape_function_o} displays the influence of the ovality parameter on the resulting shape.
 
 First order waves shall be modeled using a cosine function.
-With a relative height of the peaks $\WaveHeight_1 \in ]0, 1]$, a count of peaks $\WaveCount_1 \in [1 \To]$ and a relative phase shift $\WaveShift_1 \in [0, 0.5[$ we define
+With a relative height of the peaks $\WaveHeight_1 \in [0, 1)$, a count of peaks $\WaveCount_1 \in [1 \To)$ and a relative phase shift $\WaveShift_1 \in [0, 0.5)$ we define
 \begin{equation}
     \ShapeFunction_1 = \WaveHeight_1 \cdot \cos \left( \WaveCount_1\Angle + 2\PI \WaveShift_1\right) + 1
     \label{eq:f-first-order-waves}
@@ -90,7 +90,7 @@ So the allowed value range given above must be ensured to avoid ambiguity.
 
 \section{Modeling of Powders and Powder Mixtures}\label{sec:powders-powder-mixtures}
 
-A single powder fraction can be modelled using the shape function given above by defining the statistical distribution of the base radius $\Radius_0$, and the respective shape function parameters.
+A single powder fraction can be modeled using the shape function given above by defining the statistical distribution of the base radius $\Radius_0$, and the respective shape function parameters.
 This implicitly assumes, that the shape features follow the same characteristic in all particle sizes.
 The particle size (represented by $\Radius_0$) often follows complicated distributions in real world scenarios, sometimes multi-modal.
 So the most practical approach is to use the empirical distribution here.

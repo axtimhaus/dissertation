@@ -29,12 +29,12 @@ for t in STUDIES:
 
             times, particle1_x, particle1_y, particle2_x, particle2_y = get_states(df, study)
 
-            num = 10
-
             times_to_plot = np.geomspace(times[0], times[-1], 10)
+            log_time_min = np.log(1 / study.input.time_norm_surface)
+            log_time_max = np.log(study.input.duration / study.input.time_norm_surface)
 
             for j, t in enumerate(times_to_plot):
-                color = viridis(float(j) / num)
+                color = viridis((np.log(t) - log_time_min) / (log_time_max - log_time_min))
                 i = np.searchsorted(times, t)
                 ax.fill(particle1_x[i], particle1_y[i], label=f"{times[i]:.2f}", edgecolor=color, fill=False, lw=0.5)
                 ax.fill(particle2_x[i], particle2_y[i], edgecolor=color, fill=False, lw=0.5)

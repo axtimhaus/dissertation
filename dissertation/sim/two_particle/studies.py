@@ -224,6 +224,39 @@ NeckRemeshingStudy.INSTANCES = [
 ]
 
 
+class LongRunStudy(StudyBase):
+    KEY = "long_run"
+    TITLE = "Long Run"
+
+    @property
+    def key(self) -> str:
+        return f"{LongRunStudy.KEY}/run"
+
+    @property
+    def display(self) -> str:
+        return f"{LongRunStudy.KEY}"
+
+    @property
+    def input(self) -> Input:
+        model = BASE_INPUT.model_copy(deep=True)
+        model.particle1.node_count = 200
+        model.particle2.node_count = 200
+        model.time_step_angle_limit = 0.005
+        model.free_surface_remesher_options = FreeSurfaceRemesherOptions(deletion_limit=0.05)
+        model.neck_deletion_limit = 0.5
+        model.duration = 3.6e3 * 1e3
+        return model
+
+    @property
+    def line_style(self) -> dict:
+        return dict(
+            linewidth=1,
+        )
+
+
+LongRunStudy.INSTANCES = [LongRunStudy()]
+
+
 class DimlessParameterStudy(StudyBase, ABC):
     CMAP: ClassVar[matplotlib.colors.Colormap] = matplotlib.colormaps["viridis"]
 
@@ -379,9 +412,9 @@ class SurfaceEnergyAsymmetricStudy(DimlessParameterStudy):
     KEY = "surface_energy_asymmetric"
     TITLE = r"Surface Energy Ratio $\InterfaceEnergy_{\Surface2} / \InterfaceEnergy_{\Surface1}$"
     MIN = 1
-    MAX = 10
+    MAX = 3
     SCALE = "lin"
-    COUNT = 10
+    COUNT = 5
 
     @property
     def input(self) -> Input:
@@ -473,6 +506,7 @@ STUDIES: list[type[StudyBase]] = [
     TimeStepStudy,
     SurfaceRemeshingStudy,
     NeckRemeshingStudy,
+    LongRunStudy,
     ParticleSizeRatioStudy,
     SurfaceBoundaryEnergyStudy,
     SurfaceBoundaryDiffusionStudy,

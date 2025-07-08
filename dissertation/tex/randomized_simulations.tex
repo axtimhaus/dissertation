@@ -4,4 +4,60 @@ In the previous chapter the numerical and physical behavior of the model was ana
 Thereby, the transition from a two-particle-model to a multi-particle-model was performed.
 The results of \autoref{sec:contact-study} show, that the effects of pore closure can be incoporated by investigating a particle arrangement of at least three particles.
 The sintering behavior of all investigated arrangements was the same except for the region where the pore is almost closed.
+Also, the effects of multi-material contacts can be regarded.
 In the following investigation, the particle arrangement shall be randomized using statistically generated particles as developed in \autoref{ch:statistical-powder-modeling}.
+
+\section{Construction of the Study}
+
+The study will stick to three-particle arrangements to avoid major difficulties in construction of the initial state.
+As the size and shape of the particles will now be variable, the initial position can not be given a-priori but must be determined numerically.
+The study will compare three cases: three powders with equal particle size distribution but one assumed to have circular particles,
+one where only an ovality according to \autoref{eq:f-ovality} is considered
+and one where also first order waves according to \autoref{eq:f-first-order-waves} are considered.
+The differences and similarities of the three cases will be investigated to rate the need for inclusion of this data into sintering simulations.
+The core question is if the first order waves have major influence or if regard on ovality is enough, since ovality is a parameter that can be measured without problems using state of the art automatic particle classifiers.
+First order waves, however, require an high amount of manual work.
+The author has already published a paper describing a method to obtain these for aggregate particles via laser scanning microscopy images and leat-square fitting in \textcite{Weiner2022a}, but there an another approach of sintering model is used.
+
+\subsection{Statistical Description of the Example Powder}
+
+The values used in this study do not represent a real powder, but are crafted to illustrate the procedure and reveal the influence of the particle shape counter classic circular shapes.
+The results will be normalized as was done in the previous studies, so the distributions in the following are designed to support this.
+
+The particle size distribution for all powders is taken as a Weibull distribution (\autoref{eq:weibull-particle-size}) with expectation $\Expectation(\Radius_0)$, which will be used as the reference radius to calculate the characteristic time norm according to \autoref{eq:normalized_time}.
+The shape parameter $k$ is taken as \num{3.602} to achieve a non-skewed distribution.
+Then, the scale parameter $\lambda$ can directly be obtained from the expectation as given below.
+$\Gamma$ is the gamma function.
+\begin{equation}
+    \Probability(\Radius_0) = \lambda k (\lambda \Radius_0)^{k-1} \exp -(\lambda \Radius_0)^k \qquad \text{with} \qquad \lambda = \frac{\Gamma(1+\frac1k)}{\Expectation(\Radius_0)}
+    \label{eq:weibull-particle-size}
+\end{equation}
+
+The ovality is modeled using an exponential distribution which is shifted by \num{1} and has the expectation $\Expectation{\Ovality}= \num{1.5}$:
+\begin{equation}
+    \Probability(\Ovality)  = \frac{1}{\lambda} \exp -\lambda \left( \Ovality - 1 \right) \qquad \text{with} \qquad \lambda = \frac{1}{\Expectation(\Ovality) - 1}
+    \label{eq:exponential-ovality}
+\end{equation}
+
+The wave height is modeled using a beta distribution:\todo{Explain reasoning of distribution choice.}
+\begin{equation}
+    \Probability(\WaveHeight) = \frac{1}{\Beta(\alpha, \beta)} \WaveHeight^{\alpha - 1} \left( 1 - \WaveHeight \right) ^ {\beta - 1}
+    \label{eq:beta-wave-height}
+\end{equation}
+
+\subsection{Creation of the Initial State}
+
+The intial state generation starts by sampling three particles randomly.
+For each a radius $\Radius_0$ and one of every shape parameter is sampled from the given distribution.
+Also, the rotation of each particle is sampled from a uniform distribution with value range $\RotationAngle \in [0, 2\PI)$.
+The initial position of the particles is created in enough distance to each other, so that it is impossible for them to be in contact.
+
+The first particle is kept fixed in space.
+Then, the second is moved along the vector towards the center of the first in small steps until contact is created by a defined minimum intersection of the two surfaces.
+Then the third is moved along the sum of of the vectors from the thirds center to the others' centers.
+If contact with one is created, then the vector towards this particle is counted negative to allow sideward movement.
+When the third particle has contact to both, the procedure is completed.
+
+\section{Discussion of the Results}
+
+\todo{Add and discuss results. (Simulation not conducted yet.)}

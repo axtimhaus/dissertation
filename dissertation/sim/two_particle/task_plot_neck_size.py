@@ -30,7 +30,7 @@ for t in STUDIES:
         ax = fig.subplots()
         ax.set_xscale("log")
         ax.set_yscale("log")
-        ax.grid(True)
+        ax.grid(True, "both")
         upper_mag = -6
 
         for key, df in data_frames:
@@ -66,6 +66,7 @@ for t in STUDIES:
             fig = plt.figure(dpi=600)
             ax = fig.subplots()
             ax.set_xscale(study_type.axis_scale)
+            ax.grid(True, "both")
 
             study_params = np.array([s.real_value for s in studies.values()])
             params = (np.linspace if study_type.axis_scale == "linear" else np.geomspace)(
@@ -110,8 +111,12 @@ def get_neck_sizes(study, df: pa.Table):
     times = grain_boundary["State.Time_one"] / study.input.time_norm_surface
     mask = np.diff(times, prepend=[0]) > 0
     neck_sizes = (
-        grain_boundary["Node.SurfaceDistance.ToUpper_one"][mask]
-        + grain_boundary["Node.SurfaceDistance.ToLower_one"][mask] / study.input.particle1.radius
+        (
+            grain_boundary["Node.SurfaceDistance.ToUpper_one"][mask]
+            + grain_boundary["Node.SurfaceDistance.ToLower_one"][mask]
+        )
+        / study.input.particle1.radius
+        / 2
     )
 
     return times[mask].to_numpy(), neck_sizes.to_numpy()

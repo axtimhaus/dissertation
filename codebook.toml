@@ -14,4 +14,7 @@ words = [
     "qty",
     "qtylist",
     "qtyrange",
+    "ovality",
+    "ovalities",
+    "remeshing",
 ]
