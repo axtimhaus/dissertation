@@ -42,3 +42,14 @@ The stress by a curved surface is given as in \autoref{eq:stress-surface-curvatu
 
 Other stresses present affect the progress of sintering nevertheless.
 The reason for pressure assisted sintering can directly be seen from these equations, since the applied pressure drives the diffusion from the inner of the grain boundaries to the necks.
+
+In the triple point, where three interfaces meet, the dihedral angles between the interfaces $\DihedralAngle_i$ will follow Young's equation (\autoref{eq:youngs-dihedral}) in equilibrium with $\DihedralAngle_1 + \DihedralAngle_2 + \DihedralAngle_3 = 2\PI$,
+where the $\InterfaceEnergy_i$ are the interface energies of the interface opposed to the angle with the same index.
+\begin{equation}
+    \frac{\InterfaceEnergy_1}{\sin \DihedralAngle_1} = \frac{\InterfaceEnergy_2}{\sin \DihedralAngle_2} = \frac{\InterfaceEnergy_3}{\sin \DihedralAngle_3}
+    \label{eq:youngs-dihedral}
+\end{equation}
+This is equivalent to a triangle with side lengths $\InterfaceEnergy_i$ and the respective opposite angles $\PI - \DihedralAngle_i$ \cite{Hoffman1972}.
+From this can directly be seen, that the sum of either two surface energies must be larger than the third, or this triangle does not exist and \autoref{eq:youngs-dihedral} can not be solved.
+The non-existence of the triangle implies that such a junction can never be in equilibrium, if no other forces on the junction are present (like pinning forces) \cite{King1999}.
+So in this case, it is always beneficial from energetic point of view to consume the boundary with the largest interface energy while enlarging the others.

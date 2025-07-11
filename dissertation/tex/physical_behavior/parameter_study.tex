@@ -11,14 +11,14 @@ The following study investigates the influence of the dimensionless parameters p
     \label{tab:parameter_study_conditions}
     \begin{tblr}{colspec={lrrlX}, row{1}={l}}
         \toprule
-        Parameter & Min & Max & Scale & remarks \\
+        Parameter & Min & Max & Scale & Remarks \\
         \midrule
-        $\DiffusionCoefficient_{\GrainBoundary} / \DiffusionCoefficient_{\Surface}$  & \num{0.01} & \num{1} & log & \\
         $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface}$ & \num{0.1} & \num{0.9} & lin & \\
+        $\DiffusionCoefficient_{\GrainBoundary} / \DiffusionCoefficient_{\Surface}$  & \num{0.01} & \num{10} & log & \\
         $\Radius_2 / \Radius_1$ & \num{1} & \num{10} & lin & \\
-        $\DiffusionCoefficient_{2} / \DiffusionCoefficient_{1} $ & \num{1} & \num{100} & log & surface and grain boundary diffusion scaled equally \\
         $\InterfaceEnergy_{\Surface2} / \InterfaceEnergy_{\Surface1}$ & \num{1} & \num{10} & lin & \\
-        $o$ & \num{1} & \num{3} & lin & several contacts tip vs. flank \\
+        $\DiffusionCoefficient_{2} / \DiffusionCoefficient_{1} $ & \num{1} & \num{100} & log & surface and grain boundary diffusion scaled equally \\
+        $\Ovality$ & \num{1} & \num{3} & lin & several contacts tip vs. flank \\
         \bottomrule
     \end{tblr}
 \end{table}
@@ -35,9 +35,9 @@ Further details on the study conditions are given in the following respective se
 The initial contact of the particles is always taken in that way, that the distance of the particles equals \qty{1}{\percent} of the reference particle's radius $\Radius_1$.
 Then, the intersection of the particle's is calculated and the grain boundary is placed as a straight line between the surface line intersection points.
 
-\input{tex/physical_behavior/parameter_study/surface_boundary_diffusion_ratio}
 \input{tex/physical_behavior/parameter_study/surface_boundary_energy_ratio}
+\input{tex/physical_behavior/parameter_study/surface_boundary_diffusion_ratio}
 \input{tex/physical_behavior/parameter_study/particle_size_ratio}
-\input{tex/physical_behavior/parameter_study/asymmetric_surface_diffusion_ratio}
 \input{tex/physical_behavior/parameter_study/asymmetric_surface_energy_ratio}
+\input{tex/physical_behavior/parameter_study/asymmetric_diffusion_ratio}
 \input{tex/physical_behavior/parameter_study/ovality}

@@ -2,7 +2,7 @@
 
 In the following the necessary equations shall be composed.
 This includes the definition of the dissipation $\Dissipation$, the dissipation function $\DissipationFunction$, required constraints and additional constraints.
-The resulting components of the Lagrangian gradient and the respective Jacobian matrix are omitted here for brevity, but listed in \autoref{app:equation-system}.
+The resulting components of the Lagrangian gradient and the respective Jacobian matrix are omitted here for brevity, but their general structure is discussed in \autoref{sec:solution}.
 
 \minisec{Dissipation $\Dissipation$}
 
@@ -18,45 +18,51 @@ Shifting of particles alone does not follow a thermodynamic force, but is determ
 
 \minisec{Dissipation Function $\DissipationFunction$}
 
-The dissipation function as formulation of the dissipation in terms of fluxes involves the square of fluxes,
+The dissipation function as formulation of the dissipation in terms of fluxes is defined in \autoref{eq:dissipation-function-nodes-def} as the sum of the product of all fluxes with their corresponding potential difference,
+with $\ChemicalPotential$ as the (unknown) chemical potential at a respective node, $\Flux_{\Upper}$ as the diffusive flux to the upper node and the molar volume $\MolarVolume$ of the particle substance.
+Regarding only the fluxes to the upper node is sufficient, since the fluxes to the lower are regarded from the lower node on.
+\begin{equation}
+    \DissipationFunction = \sum^{\Nodes} \frac{\ChemicalPotential_{\Upper} - \ChemicalPotential}{\MolarVolume} {\Flux}_{\Upper}
+    \label{eq:dissipation-function-nodes-def}
+\end{equation}
+
+The potential difference is obtained from the flux kinetics according to Fick's law (see \autoref{sec:diffusion}) as in \autoref{eq:chemical-potential-by-flux} with
 the surface distance $\SurfaceDistance_{\Upper}$,
 the diffusion coefficient along the interface $\DiffusionCoefficient_{\Upper}$,
 the interface thickness $\InterfaceThickness_{\Upper}$,
-the molar volume $\MolarVolume$ of the particle substance,
 the thermal vacancy concentration $\VacancyConcentration^{\Standard}$ at the respective temperature,
 the universal gas constant $\GasConstant$
 and the absolute temperature $\Temperature$.
-Regarding only the fluxes to the upper node is sufficient, since the fluxes to the lower are regarded from the lower node on.
-
 \begin{equation}
-    \DissipationFunction = \sum^{\Nodes} \frac{\GasConstant\Temperature}{\MolarVolume{\VacancyConcentration}^\Standard} \frac{\SurfaceDistance_{\Upper} {\Flux}_{\Upper}^2}{{\InterfaceThickness_{\Upper}\DiffusionCoefficient}_{\Upper}}
+    \ChemicalPotential_{\Upper} - \ChemicalPotential = \frac{\GasConstant\Temperature\Flux_{\Upper}\SurfaceDistance_{\Upper}}{{\VacancyConcentration}^\Standard\InterfaceThickness_{\Upper}\DiffusionCoefficient_{\Upper}}
+    \label{eq:chemical-potential-by-flux}
+\end{equation}
+
+Inserting \autoref{eq:chemical-potential-by-flux} in \autoref{eq:dissipation-function-nodes-def} leads to the final formulation of the dissipation function in \autoref{eq:dissipation-function-node} which is a quadratic form of $\Flux_{\Upper}$.
+\begin{equation}
+    \DissipationFunction = \sum^{\Nodes} \frac{\GasConstant\Temperature}{\MolarVolume{\VacancyConcentration}^\Standard} \frac{\SurfaceDistance_{\Upper} {\Flux}_{\Upper}^2}{\InterfaceThickness_{\Upper}\DiffusionCoefficient_{\Upper}}
     \label{eq:dissipation-function-node}
 \end{equation}
 
 The Langrangian multiplicator for the equality constraint of both dissipation formulations (\autoref{eq:constraint-dissipation-equality}) will be denoted as $\LagrangeParameter_{\Dissipation}$ in the following.
-
 \begin{equation}
     \Dissipation = \DissipationFunction
     \label{eq:constraint-dissipation-equality}
 \end{equation}
 
-\minisec{Required Constraints $\Vect\RequiredConstraint$}
+\minisec{Constraints $\Vect\Constraint$}
 
-The required constraints needed to link internal state velocities and fluxes are given by the constancy of volume respectively mass at each node.
+The required constraints needed to link node displacements and fluxes are given by the constancy of volume respectively mass at each node.
 The volume change at the node given by its displacement must be equal to the divergence of fluxes from and to this node.
 The partial derivatives of volume will be derived in \autoref{sec:surface-evolution}.
-
 \begin{equation}
     \frac{\partial\Volume}{\partial{\Shift}_{\Normal}} {\dot\Shift}_{\Normal} + \frac{\partial\Volume}{\partial{\Shift}_{\Tangential}} {\dot\Shift}_{\Tangential} = \dot\Volume = \left( {\Flux}_{\Upper} + {\Flux}_{\Lower} \right)
     \label{eq:required-constraint-flux-shift}
 \end{equation}
-
 The Langrangian multiplicator for this constraint will be denoted as $\LagrangeParameter_\Volume$ in the following.
 
-\minisec{Additional Constraints $\Vect\AdditionalConstraint$}
-
-To fix a group of particles' position in space, one of them has to be constrained at a fixed position, so that the other ones are able to move relatively to this one.
-This is done by a constraints setting it's displacement to zero as in \autoref{eq:fixed-particle-constraints}.
+To pin a group of particles' position in space, one of them has to be constrained at a fixed position, so that the other ones are able to move relatively to this one.
+This is done by constraints setting it's displacement to zero as in \autoref{eq:fixed-particle-constraints}.
 
 \begin{subequations}
     \begin{align}

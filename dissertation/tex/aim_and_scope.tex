@@ -1,55 +1,56 @@
 \chapter{Aim and Scope}\label{ch:aim-and-scope}
 
-\section{Circumstances of the Work Within the RefraBund Project}\label{sec:circumstances-within-refrabund}
+The work aims on the following goals:
+\begin{enumerate}
+    \item Develop a model for the microscopic sintering behavior of mutliple particles.
+    \item Implement a reusable software framework for its application.
+    \item Investigate its numerical behavior and define feasible numerical control parameters.
+    \item Investigate its physical predictions, explain and compare them with literature results.
+    \item Develop a method for statistical representation of powders using the sintering model to allow design of powder mixtures.
+\end{enumerate}
 
 \section{Requirements to the Model}\label{sec:requirements}
 
-This work is intended to create and evaluate a novel model approach for sintering of irregularly shaped particles.
-The model is based on a \emph{finite differences} (FD) approach of particle description, thus the interfaces are described as sharp lines.
-FOr the solution of the complicated partial differential equation system describing the diffusional flows and geometry evolution, the \emph{thermodynamic extremal principle} (TEP) shall be applied.
-The model shall be restricted to 2D-space as a proof of concept, but may be extended to 3D-space as well.
-The latter is out of scope of this work.
-
-The work resides under the circumstances of the RefraBund project.
-Therefore, the following influences shall be included in the model and investigated by simulation as well experiment.
+The work resides under the circumstances of the RefraBund project, where a composite refractory material consisting of alumina and metallic niobium or tantalum is developed.
+From these circumstances the following requirements and assumptions are derived:
 \begin{description}
-    \item[Multi-Material Powder] The investigated material consists of aluminium oxide powder as well as metallic niobium resp.~tantalum powder.
+    \item[Diffusion Mechanisms] The model shall regard surface and grain boundary diffusion as the two main mechanisms of solid state sintering for metallic and ceramic materials.
+        Volume diffusion is neglected, as it is commonly slow compared to surface or grain boundary.
+        The effect of grain boundary diffusion was compared by \textcite{Fisher1951} with \emph{the heat flux in a foil of copper embeded in cork}.
+        Other mechanisms like evaporation-condensation or vicose flow do not have to be expected.
+    \item[Asymmetric Geometry Contacts] The model shall support particles of arbitrary shape and different size.
+        The first shall allow the investigation of the influence of non-ideal particle geometries.
+        Size differences are to be limited to one or two orders of magnitude to avoid major numerical complications in terms of discretization widths.
+        These requirements drop the use of any symmetry assumptions which are often applied in literature models.
+    \item[Asymmetric Material Contacts] The investigated material consists of alumina powder as well as metallic niobium resp.~tantalum powder.
         The model must therefore be able to respect different material properties on particles in contact to each other with their implication of grain boundary shape and kinetic behavior.
-    \item[Multi-Scale Powder] For achieving good thermal shock properties a component shall consist of coarse-grained material with fine-grained additions as filler and bonder.
-        The model must be able to deal with particle sizes that differ by several orders of magnitude, which is mainly a topic of computational effort and numerical stability.
-    \item[Aggregate Powders] The coarse grained powder is obtained by sintering of fine-grained composite powders to produce aggregate particles.
-        The aggregate particles are not homogeneous in their properties and include a certain porosity.
-        However, the aggregate grains have been proven to be internally almost inert, especially they do not show any further shrinkage in the second sintering step.
-        The model must include contacts of aggregate particles by average approaches to circumvent the need of local structure description and modelling.
+        However, the materials are assumed to be insoluable in each other to avoid regard on concentration gradients within the particles.
+        Mass transfer between particles is therefore also disregarded.
+    \item[Multi-Particle-Contacts] As the often applied two-particle approach neglects important influences, especially pore closing and mutual hindering of particles in their evolution.
+        The latter is referred to the mutual influence of multiple contacts, which differ in their geometry and/or material characteristic and so can not be regarded as isolated anymore.
     \item[Powder Mixture] The production process involves mixing of different powder fractions to obtain optimal properties in processing and application.
         The development of a sintered material and its processing heavily resides on determining the ideal mixture to be used for the regarded application.
         The model should be able to regard different mixtures to try them out in simulation instead of laboratory.
 \end{description}
-
-The predictions of the model shall be characterized in this work in comparison to other models.
-The model shall be validated against sintering experiments under consideration of microstructure and physical material properties.
+The model shall be restricted to 2D-space as a proof of concept, but may be extended to 3D-space as well.
+The latter is out of scope of this work.
 
 \section{Rational on Approach and Methods}\label{sec:rational-on-approach-and-methods}
 
-The model development of the current work shall reside on a direct interface description by using the \glsfirst{FDM}.
-The main main reason for this is the avoidance of a unphysically wide diffuse interface, as would come with the application of the major competitor: the \glsfirst{PFM}.
-The work shall explore the influence of concrete physical material parameters, which are included in sharp interface approaches directly, rather then requiring an additonal mapping to fit into the numeric scheme.
-The latter would introduce additonal errors that could be avoided.
+The model development of the current work shall reside on a direct and sharp interface description by using the \glsfirst{FDM}.
+The main reason for this is the avoidance of a unphysically wide diffuse interface, as would come with the application of the major competitor: the \glsfirst{PFM}.
+The work shall explore the influence of concrete physical material parameters, which are included in sharp interface approaches directly, rather then requiring an additional mapping to fit into the numeric scheme.
+The latter would introduce additional errors that could be avoided.
 Volume diffusion is not needed, so no discretization of the bulk material.
 Therefore, choosing a \gls{FEM} discretization instead of \gls{FDM} for the surface line only seems to be to much effort.
 Application of the \glsfirst{LSM} can be discarded due to the lack of support for multiple phases and grains.
 
-For getting a clean and concise thermodynamic formulation, as would come with the \gls{PFM}, on top of this numerical system representation the \glsfirst{TEP} shall be applied to construct the governing equations of temporal system evolution.
-This concept has already been sucessfully applied to similar problems.
+For getting a clean and concise mathematical formulation, as would come with the \gls{PFM}, on top of this numerical system representation the \glsfirst{TEP} shall be applied to construct the governing equations of temporal system evolution.
+This concept has already been successfully applied to similar problems.
 In the current case the complexity of the system will significantly rise in comparison to earlier applications, since the number of state variables will drastically increase.
-The concept has the main benefit of easy implicit incoporation of additonal constraints arising from contact geometry requirements and boundary conditions.
-
-To circumvent the problem of multi-scale powder a multi-scale approach shall be developed.
-Contacts between particles of large difference in diameter and/or discretization width can be avoided by treating very fine particles as continuum in comparison to the coarse ones.
+The concept has the main benefit of easy implicit incorporation of additional constraints arising from contact geometry requirements and boundary conditions.
 
 To model the powder properties regarding size and shape of the particles, a statistical approach based on the \glsfirst{MCM} shall be taken.
 Random generation of particles subject to a statistical representation of the powder characteristics shall link the microscopic model, restricted to small counts of particles, to the macroscopic world.
 Independent simulation of multiple draws enable furthermore parallel computing with low effort, since now attention has to be given to concurrent memory access.
-The problem of calculating a large \glsfirst{RVE} with many particles shall be reduced to calculating multiple \glsplural{RVE} with fewer particles and characterizing their behavior by methods of desriptive statistics.
-
-The following chapters will develop this model step-by-step to incoporate and couple the mentioned approaches.
+The problem of calculating a large \glsfirst{RVE} with many particles shall be reduced to calculating multiple \glsplural{RVE} with fewer particles and characterizing their behavior by methods of descriptive statistics.

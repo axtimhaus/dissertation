@@ -28,12 +28,13 @@ BASE_PARTICLE = ParticleInput(id=PARTICLE1_ID, radius=100e-6)
 
 BASE_SURFACE = InterfaceInput(energy=0.9, diffusion_coefficient=1.65e-14)
 BASE_GRAIN_BOUNDARY = InterfaceInput(
-    energy=BASE_SURFACE.energy * 0.5,
+    energy=BASE_SURFACE.energy * 0.5 / 2,
     diffusion_coefficient=BASE_SURFACE.diffusion_coefficient,
 )
 
 BASE_MATERIAL = MaterialInput(
     surface=BASE_SURFACE.model_copy(),
+    grain_boundary=BASE_GRAIN_BOUNDARY.model_copy(deep=True),
     density=1.8e3,
     molar_mass=101.96e-3,
 )
@@ -52,7 +53,6 @@ BASE_INPUT = Input(
     ),
     material1=BASE_MATERIAL.model_copy(deep=True),
     material2=BASE_MATERIAL.model_copy(deep=True),
-    grain_boundary=BASE_GRAIN_BOUNDARY.model_copy(deep=True),
     gas_constant=8.31446261815324,
     temperature=1273,
     duration=3.6e3,
@@ -356,14 +356,15 @@ class SurfaceBoundaryEnergyStudy(DimlessParameterStudy):
     KEY = "surface_boundary_energy"
     TITLE = r"Interface Energy Ratio $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface}$"
     MIN = 0.1
-    MAX = 0.9
+    MAX = 1.9
     SCALE = "lin"
-    COUNT = 9
+    COUNT = 19
 
     @property
     def input(self) -> Input:
         model = super().input
-        model.grain_boundary.energy = model.material1.surface.energy * self.real_value
+        model.material1.grain_boundary.energy = model.material1.surface.energy * self.real_value / 2
+        model.material2.grain_boundary.energy = model.material2.surface.energy * self.real_value / 2
         return model
 
 
@@ -374,13 +375,19 @@ class SurfaceBoundaryDiffusionStudy(DimlessParameterStudy):
     KEY = "surface_boundary_diffusion"
     TITLE = r"Diffusion Coefficient Ratio $\DiffusionCoefficient_{\GrainBoundary} / \DiffusionCoefficient_{\Surface}$"
     MIN = 0.01
-    MAX = 1
+    MAX = 10
     SCALE = "geom"
+    COUNT = 16
 
     @property
     def input(self) -> Input:
         model = super().input
-        model.grain_boundary.diffusion_coefficient = model.material1.surface.diffusion_coefficient * self.real_value
+        model.material1.grain_boundary.diffusion_coefficient = (
+            model.material1.surface.diffusion_coefficient * self.real_value / 2
+        )
+        model.material2.grain_boundary.diffusion_coefficient = (
+            model.material2.surface.diffusion_coefficient * self.real_value / 2
+        )
         return model
 
 
@@ -389,9 +396,9 @@ SurfaceBoundaryDiffusionStudy.INSTANCES = [
 ]
 
 
-class SurfaceDiffusionAsymmetricStudy(DimlessParameterStudy):
-    KEY = "surface_diffusion_asymmetric"
-    TITLE = r"Diffusion Coefficient Ratio $\DiffusionCoefficient_{\Surface2} / \DiffusionCoefficient_{\Surface1}$"
+class DiffusionAsymmetricStudy(DimlessParameterStudy):
+    KEY = "diffusion_asymmetric"
+    TITLE = r"Diffusion Coefficient Ratio $\DiffusionCoefficient_{2} / \DiffusionCoefficient_{1}$"
     MIN = 1
     MAX = 100
     SCALE = "geom"
@@ -400,12 +407,13 @@ class SurfaceDiffusionAsymmetricStudy(DimlessParameterStudy):
     def input(self) -> Input:
         model = super().input
         model.material2.surface.diffusion_coefficient = model.material1.surface.diffusion_coefficient * self.real_value
+        model.material2.grain_boundary.diffusion_coefficient = (
+            model.material1.grain_boundary.diffusion_coefficient * self.real_value
+        )
         return model
 
 
-SurfaceDiffusionAsymmetricStudy.INSTANCES = [
-    SurfaceDiffusionAsymmetricStudy(value=v) for v in SurfaceDiffusionAsymmetricStudy.values
-]
+DiffusionAsymmetricStudy.INSTANCES = [DiffusionAsymmetricStudy(value=v) for v in DiffusionAsymmetricStudy.values]
 
 
 class SurfaceEnergyAsymmetricStudy(DimlessParameterStudy):
@@ -414,11 +422,12 @@ class SurfaceEnergyAsymmetricStudy(DimlessParameterStudy):
     MIN = 1
     MAX = 3
     SCALE = "lin"
-    COUNT = 5
+    COUNT = 9
 
     @property
     def input(self) -> Input:
         model = super().input
+        model.duration *= 1e1
         model.material2.surface.energy = model.material1.surface.energy * self.real_value
         return model
 
@@ -511,7 +520,7 @@ STUDIES: list[type[StudyBase]] = [
     SurfaceBoundaryEnergyStudy,
     SurfaceBoundaryDiffusionStudy,
     SurfaceEnergyAsymmetricStudy,
-    SurfaceDiffusionAsymmetricStudy,
+    DiffusionAsymmetricStudy,
     OvalityTipTipStudy,
     OvalityTipFlankStudy,
     OvalityFlankFlankStudy,

@@ -24,6 +24,7 @@ class MaterialInput
     public required double Density { get; set; }
     public required double MolarMass { get; set; }
     public required InterfaceInput Surface { get; set; }
+    public required InterfaceInput GrainBoundary { get; set; }
 }
 
 class Input
@@ -32,7 +33,6 @@ class Input
     public required ParticleInput Particle2 { get; set; }
     public required MaterialInput Material1 { get; set; }
     public required MaterialInput Material2 { get; set; }
-    public required InterfaceInput GrainBoundary { get; set; }
 
     public required double Temperature { get; set; }
 

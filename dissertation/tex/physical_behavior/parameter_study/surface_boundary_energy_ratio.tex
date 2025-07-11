@@ -1,4 +1,19 @@
-\subsubsection{Surface-Boundary Energy Ratio $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface}$}\label{subsubsec:parameter-study-surface-boundary-energy}
+\subsection{Surface-Boundary Energy Ratio \texorpdfstring{$\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface}$}{γGB/γS}}\label{subsec:parameter-study-surface-boundary-energy}
+
+\begin{figure}[p]
+    \begin{subfigure}{0.5\linewidth}
+        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/0.10000/evolution}
+        \caption{$\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface} = \num{0.1}$}
+        \label{fig:two_particle/studies/surface_boundary_energy/0.10000/evolution}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\linewidth}
+        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/0.90000/evolution}
+        \caption{$\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface} = \num{0.9}$}
+        \label{fig:two_particle/studies/surface_boundary_energy/0.90000/evolution}
+    \end{subfigure}
+    \caption{Geometry Evolutions for Selected Surface-Boundary Energy Ratios}
+    \label{fig:two_particle/studies/surface_boundary_energy/evolution}
+\end{figure}
 
 \begin{figure}[p]
     \begin{subfigure}{0.5\linewidth}
@@ -28,30 +43,27 @@
     \caption{Neck Size in Dependence on Surface-Boundary Energy Ratio}
 \end{figure}
 
-\begin{figure}[p]
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/0.10000/evolution}
-        \caption{$\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface} = \num{0.1}$}
-        \label{fig:two_particle/studies/surface_boundary_energy/0.10000/evolution}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/0.90000/evolution}
-        \caption{$\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface} = \num{0.9}$}
-        \label{fig:two_particle/studies/surface_boundary_energy/0.90000/evolution}
-    \end{subfigure}
-    \caption{Geometry Evolutions for Selected Surface-Boundary Energy Ratios}
-    \label{fig:two_particle/studies/surface_boundary_energy/evolution}
-\end{figure}
-
 This study investigates the effect of the ratio between grain boundary and surface energy.
+Low values mean a high driving force for generating a grain boundary in favor of surface consumption.
+Values near \num{1.0} mean their is no energetic benefit of creating a grain boundary and any driving force is purely of geometric nature.
+In reality, usually $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface} < \num{0.5}$ for metallic and ceramic substances \cite{Exner1978}.
 The initial particle geometry and the material parameters are taken equal on both particles.
 
-\autoref{fig:two_particle/studies/surface_boundary_energy/shrinkage} shows the dependence of the shrinkage on the interface energy ratio.
-With increasing energy ratio the shrinkage is decreased and tends to flatten at earlier times.
-The similar holds for the neck size as is shown in \autoref{fig:two_particle/studies/surface_boundary_energy/neck_size}.
-Both is due to the decreased driving force as the interface energy ratio increases.
-
 \autoref{fig:two_particle/studies/surface_boundary_energy/evolution} shows two selected evolutions of the contact geometry.
-Note the large dihedral angle at low interface energy ratios and the small one at high ratios, since in the latter case the local staionary state around the neck is reached earlier.
+Note the large dihedral angle at low interface energy ratios and the small one at high ratios, since in the latter case the local stationary state around the neck is reached earlier.
+When $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface} \rightarrow \num{1}$ the dihedral angle approaches \ang{120} as is proposed by \autoref{eq:youngs-dihedral}.
+Accordingly, when $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface} \rightarrow \num{0}$ the dihedral angle approaches \ang{180}.
+With high energy ratio (large dihedral angle), the particle surface around the neck has a smooth concavely curved shape.
+With low energy ratio (small dihedral angle) the surface near the neck appears almost flat with transition into the convex surface on the backside of the particles.
+The large dihedral angle also corresponds with large achievable neck sizes.
 
-\todo{Compare against literature results.}
+\autoref{fig:two_particle/studies/surface_boundary_energy/shrinkage} shows the dependence of the shrinkage on the interface energy ratio.
+With increasing energy ratio the shrinkage is decreasing.
+A sudden decrease as the energy ratio approaches \num{2}.
+Two counteracting influences can be identified.
+Shrinkage is accelerated by the increase in driving force (decrease of $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface}$), but it is decelerated by the longer diffusion path along the larger neck.
+As $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface} \rightarrow \num{2}$, the driving force vanishes completely, as there is no energetic benefit in growing the neck in all possible geometric configurations.
+The neck size decreases notably with the energy ratio as is shown in \autoref{fig:two_particle/studies/surface_boundary_energy/neck_size}.
+The main influences suspected here are the decrease in driving force in conjunction with the geometric effect of the smaller dihedral angle which have additive effect.
+
+These findings are in accordance to several other studies on the influence of the grain boundary energy ratio such as \cite{Pask1975, Cannon1989, Kellett1989, Lange1989, Delannay2015, Gouvea2024}.

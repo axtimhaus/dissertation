@@ -35,11 +35,6 @@ var input =
         new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower }
     ) ?? throw new ArgumentNullException("input");
 
-var grainBoundary = new InterfaceProperties(
-    input.GrainBoundary.DiffusionCoefficient,
-    input.GrainBoundary.Energy / 2
-);
-
 var material1Id = Guid.NewGuid();
 var material2Id = Guid.NewGuid();
 
@@ -51,7 +46,16 @@ var material1 = new ParticleMaterial(
         input.Material1.Surface.DiffusionCoefficient,
         input.Material1.Surface.Energy
     ),
-    new Dictionary<Guid, IInterfaceProperties> { { material2Id, grainBoundary } }
+    new Dictionary<Guid, IInterfaceProperties>
+    {
+        {
+            material2Id,
+            new InterfaceProperties(
+                input.Material1.GrainBoundary.DiffusionCoefficient,
+                input.Material1.GrainBoundary.Energy
+            )
+        },
+    }
 );
 
 var material2 = new ParticleMaterial(
@@ -62,7 +66,16 @@ var material2 = new ParticleMaterial(
         input.Material2.Surface.DiffusionCoefficient,
         input.Material2.Surface.Energy
     ),
-    new Dictionary<Guid, IInterfaceProperties> { { material1Id, grainBoundary } }
+    new Dictionary<Guid, IInterfaceProperties>
+    {
+        {
+            material1Id,
+            new InterfaceProperties(
+                input.Material2.GrainBoundary.DiffusionCoefficient,
+                input.Material2.GrainBoundary.Energy
+            )
+        },
+    }
 );
 
 var particle1 = new ShapeFunctionParticleFactoryEllipseOvalityCosPeaks(

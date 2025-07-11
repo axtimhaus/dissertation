@@ -5,7 +5,7 @@ Thereby, the transition from a two-particle-model to a multi-particle-model was 
 The results of \autoref{sec:contact-study} show, that the effects of pore closure can be incoporated by investigating a particle arrangement of at least three particles.
 The sintering behavior of all investigated arrangements was the same except for the region where the pore is almost closed.
 Also, the effects of multi-material contacts can be regarded.
-In the following investigation, the particle arrangement shall be randomized using statistically generated particles as developed in \autoref{ch:statistical-powder-modeling}.
+In the following investigation, the particle arrangement shall be randomized using statistically generated particles as developed in \autoref{sec:statistical-powder-modeling}.
 
 \section{Construction of the Study}
 
@@ -24,26 +24,28 @@ The author has already published a paper describing a method to obtain these for
 The values used in this study do not represent a real powder, but are crafted to illustrate the procedure and reveal the influence of the particle shape counter classic circular shapes.
 The results will be normalized as was done in the previous studies, so the distributions in the following are designed to support this.
 
-The particle size distribution for all powders is taken as a Weibull distribution (\autoref{eq:weibull-particle-size}) with expectation $\Expectation(\Radius_0)$, which will be used as the reference radius to calculate the characteristic time norm according to \autoref{eq:normalized_time}.
-The shape parameter $k$ is taken as \num{3.602} to achieve a non-skewed distribution.
-Then, the scale parameter $\lambda$ can directly be obtained from the expectation as given below.
-$\Gamma$ is the gamma function.
-\begin{equation}
-    \Probability(\Radius_0) = \lambda k (\lambda \Radius_0)^{k-1} \exp -(\lambda \Radius_0)^k \qquad \text{with} \qquad \lambda = \frac{\Gamma(1+\frac1k)}{\Expectation(\Radius_0)}
-    \label{eq:weibull-particle-size}
-\end{equation}
+% The particle size distribution for all powders is taken as a Weibull distribution (\autoref{eq:weibull-particle-size}) with expectation $\Expectation(\Radius_0)$, which will be used as the reference radius to calculate the characteristic time norm according to \autoref{eq:normalized_time}.
+% The shape parameter $k$ is taken as \num{3.602} to achieve a non-skewed distribution.
+% Then, the scale parameter $\lambda$ can directly be obtained from the expectation as given below.
+% $\Gamma$ is the gamma function.
+% \begin{equation}
+%     \Probability(\Radius_0) = \lambda k (\lambda \Radius_0)^{k-1} \exp -(\lambda \Radius_0)^k \qquad \text{with} \qquad \lambda = \frac{\Gamma(1+\frac1k)}{\Expectation(\Radius_0)}
+%     \label{eq:weibull-particle-size}
+% \end{equation}
 
-The ovality is modeled using an exponential distribution which is shifted by \num{1} and has the expectation $\Expectation{\Ovality}= \num{1.5}$:
-\begin{equation}
-    \Probability(\Ovality)  = \frac{1}{\lambda} \exp -\lambda \left( \Ovality - 1 \right) \qquad \text{with} \qquad \lambda = \frac{1}{\Expectation(\Ovality) - 1}
-    \label{eq:exponential-ovality}
-\end{equation}
+% The ovality is modeled using an exponential distribution which is shifted by \num{1} and has the expectation $\Expectation{\Ovality}= \num{1.5}$:
+% \begin{equation}
+%     \Probability(\Ovality)  = \frac{1}{\lambda} \exp -\lambda \left( \Ovality - 1 \right) \qquad \text{with} \qquad \lambda = \frac{1}{\Expectation(\Ovality) - 1}
+%     \label{eq:exponential-ovality}
+% \end{equation}
 
-The wave height is modeled using a beta distribution:\todo{Explain reasoning of distribution choice.}
-\begin{equation}
-    \Probability(\WaveHeight) = \frac{1}{\Beta(\alpha, \beta)} \WaveHeight^{\alpha - 1} \left( 1 - \WaveHeight \right) ^ {\beta - 1}
-    \label{eq:beta-wave-height}
-\end{equation}
+% The wave height is modeled using a beta distribution:\todo{Explain reasoning of distribution choice.}
+% \begin{equation}
+%     \Probability(\WaveHeight) = \frac{1}{\Beta(\alpha, \beta)} \WaveHeight^{\alpha - 1} \left( 1 - \WaveHeight \right) ^ {\beta - 1}
+%     \label{eq:beta-wave-height}
+% \end{equation}
+
+\todo{State about the distributions chosen to represent the powder.}
 
 \subsection{Creation of the Initial State}
 

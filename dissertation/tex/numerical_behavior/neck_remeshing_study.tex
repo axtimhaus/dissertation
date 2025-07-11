@@ -2,8 +2,8 @@
 
 As stated previously, the procedure of remeshing near the neck is absolutely necessary the make the simulation work.
 However, there is a free parameter determining at which distance a surface node near the neck may be deleted.
-Targeting numerical efficiency it is desireable to have this parameter as large as possible as the time step decreases as already noticed in \autoref{sec:study-step-size}.
-Too large limits, however, are expected to decrease the precision especially in regard on geomertical features near the neck.
+Targeting numerical efficiency it is desirable to have this parameter as large as possible as the time step decreases as already noticed in \autoref{sec:study-step-size}.
+Too large limits, however, are expected to decrease the precision especially in regard on geometrical features near the neck.
 In the previous studies the limit was arbitrarily chosen as \num{0.5}.
 In this study the parameter will be altered to get an idea of it's effects.
 
@@ -47,7 +47,7 @@ As measure for precision, their agreement in shrinkage and the overall volume lo
 
 \autoref{fig:two_particle/studies/neck_remeshing/step_count} shows the count of calculated time steps alongside with the total time consumption for the simulations.
 In general, the step count and time consumption show an exponential dependence on the node count.
-Agressive remeshing (higher limit values) is able to decrease the effort by factors from \numrange{2}{5}.
+Aggressive remeshing (higher limit values) is able to decrease the effort by factors from \numrange{2}{5}.
 
 \autoref{fig:two_particle/studies/neck_remeshing/shrinkage} shows the shrinkage curves obtained from the parameter variation.
 In late stages the distinct simulations are in good agreement.
@@ -57,8 +57,8 @@ When the gradients are smaller in late stages this influence has less effect.
 However, within the node count groups the agreement is good, with low influence of the neck limit parameter.
 
 \autoref{fig:two_particle/studies/time_step/volume_loss} shows the loss of volume in the system during simulation in dependence on the parameters.
-As has to be expected, the numerical volume loss shows significant dependence on the node count and remshing regime.
-Coarse discretization and agressive remeshing lead to higher volume losses.
+As has to be expected, the numerical volume loss shows significant dependence on the node count and remeshing regime.
+Coarse discretization and aggressive remeshing lead to higher volume losses.
 All stay in the order of \num{1e-3} and thus far below the shrinkage by diffusional flows observed and can therefore be tolerated.
 
 \autoref{fig:two_particle/studies/neck_remeshing/time_step_width} shows the evolution of the time step width used in the simulations for the distinct cases.
@@ -66,6 +66,6 @@ All stay in the order of \num{1e-3} and thus far below the shrinkage by diffusio
 \subsection{Summary}
 
 The obtained results show, that if one is interested in the behavior in early stages, a high node count has to be used.
-If the reagrd is only payed on late stages, low node counts lead to equivalent results.
-The agressiveness of neck remeshing is of minor importance regarding the simulation accuracy, but is able to significantly decrease the computational effort.
-Fot the sake of efficency, as to be expected, node counts as low as possible are preferred, as the effort increases exponentially with the node count.
+If the regard is only payed on late stages, low node counts lead to equivalent results.
+The aggressiveness of neck remeshing is of minor importance regarding the simulation accuracy, but is able to significantly decrease the computational effort.
+For the sake of efficiency, as to be expected, node counts as low as possible are preferred, as the effort increases exponentially with the node count.

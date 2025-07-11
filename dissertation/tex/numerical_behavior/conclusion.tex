@@ -6,8 +6,8 @@ From the previous investigations the overall strategy applied in the following i
     \item aggressive remeshing of the free surface to allow for large time steps in late stages
     \item aggressive remeshing of the neck neighborhood to avoid small time steps while running into the singularity
 \end{enumerate}
-A fourth stategy is derived from these to combine the advantages of fine and coarse discretization where needed:
+A fourth strategy is derived from these to combine the advantages of fine and coarse discretization where needed:
 \begin{enumerate}[resume]
-    \item introduce a protected region of about \num{10} nodes around the neck where surface remeshing is supressed
+    \item introduce a protected region of about \num{10} nodes around the neck where surface remeshing is suppressed
 \end{enumerate}
-This last strategy enables taking advantage of coarsening free surfaces by remeshing agressively but preventing removing too much nodes near the neck to be able to represent the neck geometry precisely.
+This last strategy enables taking advantage of coarsening free surfaces by remeshing aggressively but preventing removing too much nodes near the neck to be able to represent the neck geometry precisely.

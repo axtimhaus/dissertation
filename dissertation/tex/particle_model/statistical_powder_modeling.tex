@@ -5,7 +5,7 @@ As every particle is unique, the only way to characterize a powder is by statist
 In this chapter, a statistical approach directly based on the distribution of size, shape and substance parameters shall be developed to generate inputs for the simulation.
 The approach resides on random sampling of particles obeying these distributions.
 
-\section{Modeling of Particle Shape Properties by a Shape Function}\label{sec:particle-shape-function}
+\subsection{Modeling of Particle Shape Properties by a Shape Function}\label{subsec:particle-shape-function}
 
 \begin{figure}
     \begin{subfigure}{0.5\linewidth}
@@ -88,7 +88,7 @@ Due to it's nature as an argument to the cosine function, it's effect is periodi
 If also bringing particle rotation in consideration, also values $\WaveShift_1 \ge \num{0.5}$ are ambiguous, as the same effect can be achieved by using $\WaveShift_1 - \num{0.5}$ and rotating the whole particle by \ang{180}.
 So the allowed value range given above must be ensured to avoid ambiguity.
 
-\section{Modeling of Powders and Powder Mixtures}\label{sec:powders-powder-mixtures}
+\subsection{Modeling of Powders and Powder Mixtures}\label{subsec:powders-powder-mixtures}
 
 A single powder fraction can be modeled using the shape function given above by defining the statistical distribution of the base radius $\Radius_0$, and the respective shape function parameters.
 This implicitly assumes, that the shape features follow the same characteristic in all particle sizes.

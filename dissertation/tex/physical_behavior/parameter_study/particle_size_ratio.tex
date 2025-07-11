@@ -1,4 +1,19 @@
-\subsection{Particle Size Ratio $\Radius_1 / \Radius_2$}\label{subsec:parameter-study-particle-size-ratio}
+\subsection{Particle Size Ratio \texorpdfstring{$\Radius_1 / \Radius_2$}{r2/r1}}\label{subsec:parameter-study-particle-size-ratio}
+
+\begin{figure}[p]
+    \begin{subfigure}{0.5\linewidth}
+        \includegraphics[scale=0.5]{sim/two_particle/studies/particle_size_ratio/2.00000/evolution}
+        \caption{$\Radius_1 / \Radius_2 = \num{2}$}
+        \label{fig:two_particle/studies/particle_size_ratio/2.00000/evolution}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\linewidth}
+        \includegraphics[scale=0.5]{sim/two_particle/studies/particle_size_ratio/4.00000/evolution}
+        \caption{$\Radius_1 / \Radius_2 = \num{4}$}
+        \label{fig:two_particle/studies/particle_size_ratio/4.00000/evolution}
+    \end{subfigure}
+    \caption{Geometry Evolutions for Selected Particle Size Ratios}
+    \label{fig:two_particle/studies/particle_size_ratio/evolution}
+\end{figure}
 
 \begin{figure}[p]
     \begin{subfigure}{0.5\linewidth}
@@ -30,23 +45,15 @@
     \label{fig:two_particle/studies/particle_size_ratio/neck_size}
 \end{figure}
 
-\begin{figure}[p]
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/particle_size_ratio/1.00000/evolution}
-        \caption{$\Radius_1 / \Radius_2 = \num{1}$}
-        \label{fig:two_particle/studies/particle_size_ratio/1.00000/evolution}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/particle_size_ratio/3.00000/evolution}
-        \caption{$\Radius_1 / \Radius_2 = \num{3}$}
-        \label{fig:two_particle/studies/particle_size_ratio/3.00000/evolution}
-    \end{subfigure}
-    \caption{Geometry Evolutions for Selected Particle Size Ratios}
-    \label{fig:two_particle/studies/particle_size_ratio/evolution}
-\end{figure}
-
 This study investigates the effect of sintering unequally sized circular particles.
 The material parameters are taken equal on both particles with an grain boundary energy of $\InterfaceEnergy_{\GrainBoundary} = \num{0.5}\InterfaceEnergy_{\Surface}$.
+
+\autoref{fig:two_particle/studies/particle_size_ratio/evolution} shows two selected evolutions of the contact geometry.
+At particle size ratio of \num{1} the contact is and stays symmetrical during the whole process, as expected.
+When increasing the size ratio, the contact becomes asymmetric and the grain boundary between the particles shows a curvature.
+This curvature is what would drive the consumption of the smaller particle by the larger, what is generally referred to as grain growth.
+However, the present model does not include diffusional fluxes cross the grain boundary.
+\autoref{fig:two_particle/studies/particle_size_ratio/4.00000/evolution} shows in later stages the limitation of the achievable neck size by the size of the smaller particle.
 
 \autoref{fig:two_particle/studies/particle_size_ratio/shrinkage} shows the dependence of the shrinkage on the particle size ratio.
 Generally, the shrinkage observed decreases with the size ratio, where the influence is higher at low ratios than on high ones.
@@ -54,12 +61,5 @@ Both can be explained by the higher proportion of inner particle volume in the d
 Altering the particle size ratio causes approximately a parallel shift of the evolution curves in double logarithmic space.
 
 \autoref{fig:two_particle/studies/particle_size_ratio/neck_size} shows the dependence of the neck size on the particle size ratio.
-Until ratios of \numrange{2}{3} the neck growth is accelerated, as the gap between the particles is narrowed by the flatter surface of the large particle, thus fewer volume displacement is necessary to grow the neck.
+Until ratios of \numrange{2}{3} the neck growth is accelerated, as the gap between the particles is narrowed by the flatter surface of the large particle, thus fewer volume is necessary to grow the neck.
 Above, no further acceleration can be observed, as the neck size is strongly limited by the size of the smaller particle.
-
-\autoref{fig:two_particle/studies/particle_size_ratio/evolution} shows two selected evolutions of the contact geometry.
-At particle size ratio of \num{1} the contact is and stays symmetrical during the whole process, as expected.
-When increasing the size ratio, the contact becomes asymmetric and the grain boundary between the particles shows a curvature.
-This curvature is what would drive the consumption of the smaller particle by the larger, what is generally referred to as grain growth.
-However, the present model does not include diffusional fluxes cross the grain boundary.
-\autoref{fig:two_particle/studies/particle_size_ratio/3.00000/evolution} shoes in later stages the limitation of the achievable neck size by the size of the smaller particle.

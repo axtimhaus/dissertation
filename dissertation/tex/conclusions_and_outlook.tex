@@ -19,9 +19,36 @@ As validation against findings from the literature was not possible here, explan
 In a third step, the behavior of powder mixtures has been investigated by simulating the sintering of random arrangements of three particles.
 \todo{Conclude about randomized simulations.}
 
+\begin{figure}
+    \includegraphics{img/conclusions/shrinkage_influences}
+    \caption{Influence of Dimensionless Parameters and Packing Properties on Shrinkage Summarized from Investigations in This Work}
+    \label{fig:conclusions/shrinkage_influences}
+\end{figure}
+
+\begin{figure}
+    \includegraphics{img/conclusions/neck_size_influences}
+    \caption{Influence of Dimensionless Parameters and Packing Properties on Neck Size Evolution Summarized from Investigations in This Work}
+    \label{fig:conclusions/neck_size_influences}
+\end{figure}
+
+The dimensionless parameter studies, as well as the investigations of crafted and random packings have lead to several general statements about the influence on shrinkage and neck size evolution during sintering.
+The results are summarized graphically in \autoref{fig:conclusions/shrinkage_influences} for the shrinkage and \autoref{fig:conclusions/neck_size_influences} for the neck size.
+
 In the current state of the model, several incompletenesses have been observed during the investigations conducted:
 \begin{enumerate}
-    \item Triple points where three grain boundaries meet are currently not supported. This limits the applicability till the closing of the first pore present in the system.
-    \item In contacts between particles with high difference in surface energy a drastic undercut near the neck occurs, which eventually leads to a crossing between grain boundary and surface, which is obviously unphysical. This is an numerical effect due to the removal of volume from a node, where in fact no volume is left.
-    \item
+    \item Triple points where three grain boundaries meet are currently not supported.
+        This limits the applicability till the closing of the first pore present in the system.
+    \item In contacts between particles with high difference in surface energy, a drastic undercut near the neck occurs as discussed in \autoref{subsec:parameter-study-asymmetric-surface-energy-ratio},
+        which eventually leads to a crossing between grain boundary and surface, which is obviously unphysical.
+        This is an numerical effect due to the removal of volume from a node, where in fact no volume is left.
+    \item The grain boundary can currently only consist of a single node (plus the two neck nodes) as was discussed in \autoref{sec:contact-conditions},
+        as otherwise the contact conditions create collinear rows in the system matrix.
+    \item Transfer between particles was neglected, which disallowed the occurrence of grain growth in the parameter studies of asymmetric geometry (\autoref{subsec:parameter-study-particle-size-ratio} and \autoref{subsec:parameter-study-ovality}),
+        but allowed to disregard concentration gradients within the particle volume for the case of unequal substances.
+\end{enumerate}
+
+Beside fixing those, further development of the model can include in the future:
+\begin{enumerate}
+    \item Introduction of an multi-scale approach that models fine-grained powder fractions as a solid continuum of viscoelastic behavior filling the pores with ability to apply a pressure on the large particles' surfaces and transfer mass to them.
+    \item Transfer the approach for simulation of microstructure evolution of compact polycrystals regarding recrystallization, but also possibly with phase transformations.
 \end{enumerate}

@@ -46,6 +46,14 @@ for case in CASES:
         # ax.set_title(f"{case.display}")
         ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
         ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")
+
+        min_x = min(p.x for p in case.input.particles) * 1e6
+        max_x = max(p.x for p in case.input.particles) * 1e6
+        ax.set_xlim(min_x, max_x)
+        min_y = min(p.y for p in case.input.particles) * 1e6
+        max_y = max(p.y for p in case.input.particles) * 1e6
+        ax.set_ylim(min_y, max_y if not np.isclose(max_y, min_y) else None)
+
         fig.tight_layout()
 
         for p in produces:

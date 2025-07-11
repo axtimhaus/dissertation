@@ -8,8 +8,8 @@ One has two diffusional fluxes from each node $\Flux_{\Upper}$ and $\Flux_{\Lowe
 So in the following only $\Flux_{\Upper}$ shall be regarded and $\Flux_{\Lower}$ is substituted by $-\Flux_{\Upper}$ where necessary.
 
 The internal state variables are the polar coordinates of the nodes $\left[ \Radius, \Angle \right]$ with pole in their particle's center, since they determine the thermodynamic forces and the main aim of the simulation is to follow the time evolution of the particles and nodes.
-The coordinates of the particles $\left[ \X_{\Particle}, \Y_{\Particle} \right]$ are not used as internal state variables, since they are unambiguously defined, if the coordinates of all nodes relative to their particle are known and also which nodes are in contact to each other.
-Moreover, the velocities of particle coordinates $\dot\X_{\Particle}$ and $\dot\Y_{\Particle}$ are auxiliary variables (included in $\Vect\AuxiliaryVariable$) to ease formulation of the geometric constraints.
+The coordinates of the particles $\left[ \X_{\Particle}, \Y_{\Particle} \right]$ are internal degrees of freedom, since they are unambiguously defined, if the coordinates of all nodes relative to their particle are known and also which nodes are in contact to each other.
+Also, they have no inherent driving force in case of pressureless sintering, for the case of pressure assisted sintering, the pressure potential can be applied as their driving force (not covered in this work).
 
 For numerical and equation formulation reasons, the internal state velocities $\dot\Radius$ and $\dot\Angle$ are replaced by the velocities of node shift along normal and tangential surface vectors $\dot\Shift_{\Normal}$ and $\dot\Shift_{\Tangential}$.
 As they are determined, translation into new coordinates is directly possible using the relations obtained in the following sections.

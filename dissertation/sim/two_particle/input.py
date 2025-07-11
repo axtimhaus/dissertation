@@ -26,6 +26,7 @@ class InterfaceInput(BaseModel):
 
 class MaterialInput(BaseModel):
     surface: InterfaceInput
+    grain_boundary: InterfaceInput
     density: float = Field(gt=0)
     molar_mass: float = Field(gt=0)
 
@@ -44,7 +45,6 @@ class Input(BaseModel):
     particle2: ParticleInput
     material1: MaterialInput
     material2: MaterialInput
-    grain_boundary: InterfaceInput
     gas_constant: float
     temperature: float
     duration: float
@@ -68,4 +68,6 @@ class Input(BaseModel):
 
     @property
     def time_norm_grain_boundary(self):
-        return self._time_norm_common / (self.grain_boundary.diffusion_coefficient * self.grain_boundary.energy)
+        return self._time_norm_common / (
+            self.material1.grain_boundary.diffusion_coefficient * self.material1.grain_boundary.energy
+        )

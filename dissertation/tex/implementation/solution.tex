@@ -3,7 +3,7 @@
 \subsection{Time Integration Scheme}\label{subsec:time-integration-scheme}
 
 The time integration scheme follows a simple explicit Eulerian forward procedure.
-This method, however, is prone to numerical instabilities, which are often observed as alternating zick-zack like surface structures (see \autoref{sec:numerical-behavior}).
+This method, however, is prone to numerical instabilities, which are often observed as alternating zick-zack like surface structures (see \autoref{ch:numerical-behavior}).
 Therefore, the time step width must be limited.
 As the normal or tangential displacements of a node in one step are bad measures due to the varying distances between the nodes, it was chosen to use the surface angles (which are a measure for curvature) as indicator for time step width.
 
@@ -21,7 +21,6 @@ The system size is dependent on the count of particles present in the simulation
 Typically, it contains from a few hundred to a few thousands of components.
 Solution of this system is accomplished using the standard Newton method, as this method is known for fast convergence thus sparing evaluations of the system.
 This method requires the evaluation of the systems gradient resp.~it's Jacobian matrix, which is sparse and follows the general structure shown in \autoref{fig:implementation/sparse_structure}.
-The complete set of components for the Jacobian are given in \autoref{sec:components-of-the-lagrangian-gradients-jacobian}.
 Newton's method is, however, also known for its vulnerability to the choice of the initial solution estimation (see \autoref{subsubsec:solution-estimation}).
 As the regarded system only includes linear, bilinear and quadratic terms, non-convergence does not have to be expected here.
 However, the system may have two solutions caused by the quadratic terms, so the procedure may converge to the wrong one.

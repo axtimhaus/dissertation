@@ -4,7 +4,7 @@ The choice of discretization width is always a trade-off between precision of th
 Usually one aims at the finest discretization required and the coarsest possible.
 Often in simulation tasks, this choice has to be made one time before running the simulation.
 In the current case, these needs and possibilities highly vary during progress of simulation.
-So in the beginning of the sintering process, where curvatures are high a fine discretization is desireable to not miss the details.
+So in the beginning of the sintering process, where curvatures are high a fine discretization is desirable to not miss the details.
 In later stages, curvatures have decreased and fine discretization leads to unnecessarily high effort.
 
 This study aims on evaluating the influence of the surface remeshing procedure described in \autoref{sec:remeshing-procedures} on the precision of time integration and providing a decent choice of the parameters to use in the following investigations.
@@ -53,7 +53,7 @@ As measure for precision, their agreement in shrinkage and the overall volume lo
 The general trend is similar to that of neck remeshing discussed in the previous section.
 Step count and time consumption increase with node count and decrease with the limit parameter.
 A special observation here is the \num{200} nodes/\num{0.05} limit run which shows a drastic drop in the effort compared to the other runs.
-The reason for this is, that in this case the limit is high enough to remesh the free surface of the circular shape down to aproximately \num{100} nodes in the first remshing run.
+The reason for this is, that in this case the limit is high enough to remesh the free surface of the circular shape down to approximately \num{100} nodes in the first remeshing run.
 So this case is roughly equivalent to the \num{100} nodes/\num{0.05} limit run.
 
 \autoref{fig:two_particle/studies/surface_remeshing/shrinkage} shows the shrinkage curves obtained from the parameter variation.
@@ -70,5 +70,5 @@ The special \num{200}/\num{0.05} case shows an extraordinarily low volume loss i
 \subsection{Summary}
 
 The results regarding surface remeshing generally show the same trends as with the neck remeshing.
-The case of high initial node counts and agressive surface remeshing shows, that it could be preferable to use high initial node counts and use an agressive remeshing step to create the intial state.
+The case of high initial node counts and agressive surface remeshing shows, that it could be preferable to use high initial node counts and use an aggressive remeshing step to create the initial state.
 With this procedure fine discretization is only maintained in regions where it is necessary (high curvatures).

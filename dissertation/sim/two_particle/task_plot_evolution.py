@@ -36,12 +36,21 @@ for t in STUDIES:
             for j, t in enumerate(times_to_plot):
                 color = viridis((np.log(t) - log_time_min) / (log_time_max - log_time_min))
                 i = np.searchsorted(times, t)
-                ax.fill(particle1_x[i], particle1_y[i], label=f"{times[i]:.2f}", edgecolor=color, fill=False, lw=0.5)
-                ax.fill(particle2_x[i], particle2_y[i], edgecolor=color, fill=False, lw=0.5)
+                ax.fill(particle1_x[i], particle1_y[i], label=f"{times[i]:.2f}", edgecolor=color, fill=False, lw=1)
+                ax.fill(particle2_x[i], particle2_y[i], edgecolor=color, fill=False, lw=1)
 
             # ax.set_title(f"{study.TITLE}\n{study.display}")
+            ax.axhline(0, color="red", lw=0.5)
             ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
             ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")
+
+            min_x = np.max(particle1_x[0]) - 100
+            max_x = min_x + 200
+            max_y = np.max(particle2_y[0][particle2_x[0] < max_x])
+
+            ax.set_xlim(0, max_x)
+            ax.set_ylim(-5, max_y)
+            ax.grid(True)
             fig.tight_layout()
 
             for p in produces:

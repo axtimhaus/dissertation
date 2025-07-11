@@ -41,6 +41,7 @@ RotationAngle = '\omega'      # rotation
 Diameter = 'd'                # diameter
 InterfaceThickness = '\delta' # thickness of an interface
 Distance = 'd'                # arbitrary distance
+DihedralAngle = '\psi'
 
 # Thermodynamics
 Temperature = 'T'                                   # absolute temperature
@@ -58,9 +59,8 @@ Mobility = 'M'                                      # mobility coefficient
 InternalStateVariable = 'x'                         # internal variable of state
 InternalStateVelocity = '\dot{x}'                   # internal velocity of state
 ExternalStateVariable = 'X'                         # external variable of state
-RequiredConstraint = 'f'                            # required constraint to TEP
-AdditionalConstraint = 'g'                          # additional constraint to TEP
-AuxiliaryVariable = '\xi'                           # auxiliary variable in TEP
+Constraint = 'g'                                    # constraint to TEP
+InternalDegreeOfFreedom = '\xi'                     # internal degree of freedom in TEP
 
 # Energy
 GibbsEnergy = 'G'                     # Gibbs energy (free enthalpy)

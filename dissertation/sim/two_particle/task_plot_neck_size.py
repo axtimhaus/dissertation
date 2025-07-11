@@ -12,7 +12,7 @@ from dissertation.sim.two_particle.studies import PARTICLE1_ID, STUDIES, Dimless
 from dissertation.sim.two_particle.helper import ashby_grid
 
 RESAMPLE_COUNT = 100
-NECK_SIZE_LIMITS = (2e-1, 8e-1)
+NECK_SIZE_LIMITS = (2e-1, 1)
 
 for t in STUDIES:
 
@@ -30,7 +30,7 @@ for t in STUDIES:
         ax = fig.subplots()
         ax.set_xscale("log")
         ax.set_yscale("log")
-        ax.grid(True, "both")
+        # ax.grid(True, "both")
         upper_mag = -6
 
         for key, df in data_frames:
@@ -66,7 +66,8 @@ for t in STUDIES:
             fig = plt.figure(dpi=600)
             ax = fig.subplots()
             ax.set_xscale(study_type.axis_scale)
-            ax.grid(True, "both")
+            ax.set_yscale("log")
+            # ax.grid(True, "both")
 
             study_params = np.array([s.real_value for s in studies.values()])
             params = (np.linspace if study_type.axis_scale == "linear" else np.geomspace)(
@@ -82,7 +83,8 @@ for t in STUDIES:
             formatter = ticker.LogFormatterSciNotation()
 
             cs = ax.contour(grid_x, grid_y, times, levels=locs, norm="log", cmap=study_type.CMAP)
-            ax.clabel(cs, fmt=lambda level: formatter(level))
+            # ax.clabel(cs, fmt=lambda level: formatter(level))
+            fig.colorbar(cs, format=formatter, label="Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
 
             ax.set_xlabel(study_type.TITLE)
             ax.set_ylabel(r"Relative Neck Size $\Radius_{\Neck} / \Radius_0$")
