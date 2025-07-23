@@ -29,7 +29,9 @@ for b, files in BATCHES.items():
     @mark.persist
     def task_fit_morphology_circular(files=files, produces=in_build_dir(BATCHES_DIR / "fits_circular" / f"{b}.csv")):
         files = list(files)
-        df = pd.DataFrame(columns=pd.Index(["r0"]), index=pd.Index([f.stem for f in files], dtype=str))
+        df = pd.DataFrame(
+            columns=pd.Index(["r0"]), index=pd.Index([f"{f.parent.name}/{f.stem}" for f in files], dtype=str)
+        )
 
         for i, file in zip(df.index, files, strict=True):
             data = pd.read_csv(
@@ -77,7 +79,9 @@ for b, files in BATCHES.items():
     @mark.persist
     def task_fit_morphology_oval(files=files, produces=in_build_dir(BATCHES_DIR / "fits_oval" / f"{b}.csv")):
         files = list(files)
-        df = pd.DataFrame(columns=pd.Index(["r0", "o"]), index=pd.Index([f.stem for f in files], dtype=str))
+        df = pd.DataFrame(
+            columns=pd.Index(["r0", "o"]), index=pd.Index([f"{f.parent.name}/{f.stem}" for f in files], dtype=str)
+        )
 
         for i, file in zip(df.index, files, strict=True):
             data = pd.read_csv(
@@ -144,7 +148,8 @@ for b, files in BATCHES.items():
     def task_fit_morphology_shape(files=files, produces=in_build_dir(BATCHES_DIR / "fits_shape" / f"{b}.csv")):
         files = list(files)
         df = pd.DataFrame(
-            columns=pd.Index(["r0", "o", "h", "p", "n"]), index=pd.Index([f.stem for f in files], dtype=str)
+            columns=pd.Index(["r0", "o", "h", "p", "n"]),
+            index=pd.Index([f"{f.parent.name}/{f.stem}" for f in files], dtype=str),
         )
 
         for i, file in zip(df.index, files, strict=True):
