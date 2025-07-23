@@ -41,7 +41,7 @@ mpl.rcParams.update(
     {
         "pgf.texsystem": "lualatex",
         "pgf.rcfonts": False,
-        "figure.autolayout": True,
+        "figure.constrained_layout.use": True,
         "figure.dpi": 600,
         "figure.figsize": FIGSIZE_INCH,
     }

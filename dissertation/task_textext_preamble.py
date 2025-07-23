@@ -4,7 +4,7 @@ PREAMBLE = r"""
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage[math-style=ISO]{unicode-math}
-\usepackage{siunitx}
+\usepackage[mode=match]{siunitx}
 \usepackage{fontspec}
 \setmainfont{TeX Gyre Termes}
 \setmathfont{TeX Gyre Termes Math}
