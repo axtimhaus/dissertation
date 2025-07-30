@@ -1,0 +1,126 @@
+\chapter{Introduction to Sintering Technology}\label{ch:sintering-introduction}
+
+The following elaborations on the basics of sintering are summaries from standard literature for the topic.
+Some notable textbooks are those of \textcite{German1996, German2014}, \textcite{Geguzin1973}, \textcite{Kang2005}, \textcite{Exner1978}, \textcite{Fang2010}, \textcite{Rahaman2017} and \textcite{Routschka2017}.
+
+Sintering in general is a process, where compacted powders are densified and strengthened by the application of a high temperature heat treatment.
+The actual mechanisms acting therein are discussed in \autoref{sec:mechanisms}.
+Sintering allows near-net shaping of possibly otherwise hard-to-shape materials, as well as creation of composites or alloys that are not possible to be produced via the melt route.
+To achieve required tolerances in geometry and material properties, a precise control resp.~prediction of the density evolution (shrinkage) during the heat treatment is necessary.
+In industrial practice, this is often done using empirical approaches due to the complexity of the process (see \autoref{sec:process-influences}),
+but physical modeling is required to improve understanding of mechanisms and observed effects and thereby allowing to design novel processing strategies and material concepts.
+\cite{German1996}
+
+\section{Process Steps for Manufacturing of Sintered Products}
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{img/sintering_introduction/sintering_process_steps}
+    \caption{Chart of Common Process Steps for Sintered Products}
+    \label{fig:sintering_introduction/sintering_process_steps}
+\end{figure}
+
+In the following, the principal processing steps involved in manufacturing of sintered products shall be briefly discussed.
+\autoref{fig:sintering_introduction/sintering_process_steps} visualizes the process via a flow chart.
+
+\begin{description}
+    \item[Powder Mixing] Powders of differing particle size distribution, particle shape or even substance are mixed to achieve the desired sintering behavior resp.~product properties.
+        Optionally, additives are added to to facilitate compaction or achieve particular processing behavior (polymer resins, water, \ldots).
+    \item[Compaction] The loose powder must be compacted to obtain a green body of sufficient density and strength. This can be accomplished by casting with or without vibrational assist, pressurized compaction, injection molding, or others.
+        Usually, this step defines the desired shape of the product.
+        Attention have to be paid to possible segregation of particles of distinct size or substance.
+    \item[Sintering] The green body is heat treated to allow for diffusional processes bonding the distinct powder particles together and achieve the desired strength and final density.
+        During sintering the body usually shrinks in its dimensions, pore volume is reduced and the density increases due to internal volume displacement.
+        When resin binders were used in the powder mixture, the have to be removed from the body by a low temperature heat treatment which pyrolyses and evaporates the binder, otherwise the component will crack during sintering due to fast gas formation which effect high stress.
+        In some advanced processes, compaction and sintering is accomplished in one single step (pressure assisted sintering, field assisted sintering, \ldots).
+    \item[Post-Processing] If required, the sintered body is machined to meet requested tolerances or surface properties. Porous parts for bearings are often infiltrated with lubricant.
+\end{description}
+
+In some cases, especially for refractory materials, where coarse grained microstructures are desirable for thermal shock resistance, aggregate particles are formed by sintering simple bodies, crushing them, sieving the fragments and using them in mixing a novel powder for the actual component manufacturing.
+The aggregate particle are characterized by low internal sintering activity, so fresh active powder fractions have to be added to the mixture.
+\cite{Routschka2017}
+
+\section{Influencing Factors on Sintering Processes}\label{sec:process-influences}
+
+The actual behavior of a sintering process is a complex problem, as there are many factors that influence the process and some of them are hard to describe or even quantify.
+Most of them are interrelated.
+They have been grouped to geometry, material and process related factors by \textcite{German2014}.
+In the following, the most important of these factors will be described, important interrelations are \emph{emphasized}.
+
+\subsection{Geometric Factors}
+
+These factors involve both, the particle geometry and the geometry of the macroscopic sintering body.
+
+\begin{description}
+    \item[Particle Size]
+        The particle size is the main geometric factor influencing sintering.
+        Sintering is mainly driven by reduction of energy bound in interfaces either surfaces or grain boundaries.
+        The mean particle sizes gives a rough estimate of the total energy bound by such in the system and thus of the available driving force.
+        It determines also the length of diffusion paths and the amount of volume to be displaced to achieve a certain macroscopic response.
+        The particle size determines the maximum achievable \emph{density} before sintering, where inhomogeneous size distributions aid to achieve high densities as pores can be filled by small particles.
+    \item[Particle Shape]
+        While \emph{particle size} affects the overall mean curvature of the particle, the local curvature and thus driving force is determined by the actual shape of the particles.
+        Shape deviations from ideal sphere let particles behave locally like larger or smaller ones in certain aspects.
+    \item[Density and Porosity]
+        The current relative density respectively its additional inverse the porosity determine the still available volume reduction.
+        With increasing density during sintering with \emph{time} the typical shape characteristic of pores changes from interconected pore networks, to tube-like networks and finally isolated pores.
+        The latter may be thermodynamically stable, especially when they are filled with gas due to trapped \emph{atmosphere}.
+    \item[Neck Size]
+        The current size of sinter necks (grain boundaries between particles) determine the mechanical strength of the body and the length of grain boundary diffusion paths as well as the required volume to be displaced for certain shrinkage response.
+        It also determines the available cross-section for inter particle mass flows.
+    \item[Particle Packing]
+        Depending on \emph{particle size} and \emph{particle shape} the packing may be more dense or loose and the coordination number of particle contacts changes.
+        This affects \emph{density} and the mutual hindering of particles in their movement during sintering.
+        Cracks may form due to inconvenient packings around diffusional inert particles.
+        Aggregate particle may form large pores between and small ones within the aggregates were the former are stable due to internal stability of the aggregates.
+\end{description}
+
+\subsection{Material Factors}
+
+These factors are related to the substance of the powder particles.
+
+\begin{description}
+    \item[Surface and Interface Energies]
+        As the main driving force for sintering is the energy bound in interfaces, the energy per unit area in those interfaces plays a major role.
+        Not only their absolute values, but also the ratio between distinct types of interfaces determines how the \emph{geometry} may evolve,
+        as creation of a low-energy interface in favor of consuming a high-energy one may be thermodynamically beneficial.
+    \item[Diffusivity]
+        The advance of sintering in \emph{time} is heavily determined by the speed of the various diffusional process acting (see \autoref{sec:mechanisms}).
+        Diffusional speed is dependent on the required activation energy and thus on \emph{temperature}.
+        The ratio of distinct mechanism's diffusivities affect the evolution and final state of \emph{geometry}.
+    \item[Vapor Pressure]
+        A seldom encountered mechanism is evaporation/condensation of particle substance and transport via the gas phase (possibly with chemical reactions in reactive \emph{atmospheres}) as discussed in \autoref{sec:mechanisms}.
+        The actual vapor pressure at the respective \emph{temperature} dtermine the importance of this mechanism.
+        Sometimes, only parts of the powder substance (impurities, specific alloying elements, binder resins) evaporate during the sintering process which may change chemical compostion, create defects in the microstructure or facilitate corrosion of the product (for example zinc in brass).
+    \item[Melting]
+        Low-melting phases may be formed and accelerate sintering and facilitate achievement of near-full density (liquid phase sintering) as the liquid is able to fill pores rapidly by viscous flow.
+    \item[Flow Stress]
+        In processes with high \emph{pressure} plastic yielding may occur as an addiotnal mechanisms for \emph{densification}.
+    \item[Crystal Structure]
+        Depending on the crystal structure, material properties like \emph{surface and interface energies} and \emph{diffusivities} may be significantly anisotropic.
+        This leads in effect to non-spherical equilibrium \emph{particle shape}.
+    \item[Chemical Interaction]
+        Particles of different substance may be soluable or insoluable in each other, or may form new chemical substances through reactions.
+        Concentrations gradients within the particles or compond formation affects driving force and \emph{diffusivities}.
+        Common chemical interactions are present with the \emph{atmosphere}.
+\end{description}
+
+\subsection{Processing Factors}
+
+These factors describe the process setup.
+
+\begin{description}
+    \item[Temperature]
+        The acting mechanisms are activated by elevated temperature to overcome their respective activation energy.
+        So, temperature determines the occurrence and speed of mechanisms, as well as their relative importance.
+        Key factors that are dependent on temperatures are the \emph{interface energies} and \emph{diffusivities}.
+        In addition temperature may activate several (maybe unwanted) side processes like \emph{melting}, chemical reactions with \emph{atmosphere} or affect \emph{chemical interaction} of different substances present.
+    \item[Time]
+        With advancing process time, the \emph{geometry} of the system evolves especially by increasing \emph{neck size} and \emph{density}.
+        Time principally affects all conditions in the system as the state of the system evolves towards a lower energy configuration.
+    \item[Pressure]
+        Outer pressure on the compact during sintering acts as an additional driving force for \emph{densification} (pressure assisted sintering).
+        Atmospheric pressure may act counter the \emph{vapor pressure}, thus inhibiting gas phase mechanisms.
+    \item[Atmosphere]
+        The surrounding atmosphere may cause \emph{chemical reactions} with the solid (especially oxidation).
+        Gas adsorption affects surface \emph{diffusivities} and gas atoms may also diffuse through grain boundaries, possibly altering the interface properties or form new substances.
+\end{description}

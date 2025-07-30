@@ -126,13 +126,17 @@ The general trends are the same as for shrinkage.
 The beginning of pore closing can be noticed earlier in the neck size evolution by an deviation to the lower from the straight line.
 As the pore closes further the neck growth rate increases drastically so that the neck size curve crosses the straight again.
 
-The cases with an inert particle show a significantly lower shrinkage and neck size compared to the equal material ones, since the contribution of volume removed from the grain boundary of the inert particle is missing.
+The cases with an inert particle show a significantly lower shrinkage and neck size compared to the equal material ones, since the contribution of volume removed from the grain boundary of the inert particle is missing,
+this is in accordance with experimental observations \cite{German2014}.
 The numerical behavior of all cases with an inert is remarkably worse than of the pure active cases, as can be seen from the kinks in the result curves.
 A look into the detailed logs of the simulation suggest the reason to lie in the neck remeshing being more erratic on the inert particle.
 The pore closing is delayed to later times as the pore is kept open by the inert particle's surface.
 The three multiple-particle packings with an inert behave similarly, show equal behavior in early stages and pore closing occurs in the same order as for the pure active ones.
 The pair with an inert shows a distinct behavior an even lower shrinkage.
 An correlation with the count of active particles present seems unlikely, since the two-particle case is the only one behaving differently.
+\textcite{German2014} reported possible crack formation between the active particles and the active and inert ones when inert particles are present.
+This did not occur in the current investigations, likely because the inert particle was not fully surrounded by active particles.
+Nevertheless, the simulation would currently cancel if a neck shrinks and approaches zero width, as contact release is not implemented.
 
 Looking at the geometry evolutions in \autoref{fig:packings/evolution/triangles} to \autoref{fig:packings/evolution/rhombii}, the convexity respectively concavity of the pore can clearly be observed.
 The pore surface to the inert particle stays concave during the whole process.

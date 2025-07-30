@@ -1,0 +1,9 @@
+flowchart LR
+    powder(Powder) --> mix["Powder Mixing"]
+    mix --> compact[Compaction]
+    compact --> sinter[Sintering]
+    sinter --> post[Post Processing]
+    post --> product(Finished Product)
+    sinter --> crush[Crushing]
+    crush --> sieve[Sieving]
+    sieve -- aggregate powders --> mix
