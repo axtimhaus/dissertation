@@ -1,0 +1,115 @@
+\section{Aquisition of Particle Shape Data}\label{sec:randomized/data_aquisition}
+
+The underlying data is the same as in \textcite{Weiner2022a}, but there a different shape function has been used.
+The fits are therefore repeated with the current shape function as discussed in \autoref{sec:statistical-powder-modeling}.
+The dataset (available in \cite{Weiner2025ThesisSupp}) includes contours of aggregate composite particles produced by sintering, crushing and sieving as decribed in \textcite{Zienert2022, Zienert2022a}, which have been extracted from laser scanning micrographs.
+
+The fit is accomplished in all cases by least squares optimization on the euclidian distance between data points and the model function predictions.
+The experimental particle contour is shifted prior to fitting, so that its barycenter is in $(0, 0)$.
+
+\subsection{Circular Particles}
+
+\begin{figure}
+    \includegraphics{data/morphology/batches/hist_circular/all}
+    \caption{Particle Size Distribution when Assuming Circular Particles}
+    \label{fig:morphology/batches/hist_circular/all}
+\end{figure}
+
+In the first case, all shape terms are deativated in the function and fitting is solely done assuming circular particle shape.
+So, the only parameter regarded is the particle radius $\Radius_0$.
+\autoref{fig:morphology/batches/hist_circular/all} shows the histogram of the fit results alongside the theoretical distribution fit.
+Note the bimodal distribution shape of the histogram.
+
+For particle size distributions it is common to use a Weibull distribution (\autoref{eq:weibull-particle-size}), with the shape parameter $k$, the scale parameter $S$ and the location parameter $L$.
+The support of the distribution is $x \in [L, \infty)$.
+As particle sizes must always be $> 0$, the location $L=0$ is used here.
+\begin{equation}
+    \Probability(x) = \frac{k}{S} (\frac{x - L}{S})^{k-1} \exp -(\frac{x - L}{T})^k
+    \label{eq:weibull}
+\end{equation}
+The expectation $\Expectation$ of the Weibull distribution is given by \autoref{eq:weibull-expectation} with the gamma function $\GammaFunction$.
+The expected radius $\Expectation{\Radius_0}$ will be used as the reference radius to calculate the characteristic time norm according to \autoref{eq:normalized_time}.
+\begin{equation}
+    \Expectation = S \cdot \GammaFunction \left( 1 + \frac1k \right)
+    \label{eq:weibull-expectation}
+\end{equation}
+
+To obtain a bimodal distribution, a mixture distribution of two Weibull distributions is used with parameters $(k_1, S_1)$ and $(k_2, S_2)$.
+The probability of sampling from the first one is the weight $w$, whereas of choosing the second $1-w$, respectively.
+
+\subsection{Oval Particles}
+
+\begin{figure}
+    \includegraphics{data/morphology/batches/hist_oval/all}
+    \caption{Particle Size adn Ovality Distributions when Assuming Oval Particles}
+    \label{fig:morphology/batches/hist_oval/all}
+\end{figure}
+
+In the second case, the ovality term (\autoref{eq:f-ovality}) is added to the shape function.
+Beneath the ovality $\Ovality$, also the rotation $\RotationAngle$ of the particle has to be fitted, since the shape function is no longer invariate counter rotation.
+As the latter is needed for correct fitting but represents no actual particle shape feature but the placement of the particle, it is not analysed futher in the following.
+Fitting the rotation is numerically unstable as there are many local extrema.
+To get all local extrema a brute force method is applied which chooses a couple of linearly spaced initial values for the rotaion parameter and selects the best achieved fit afterwards.
+This method is simple and easy to implement while the impact of computational effort hardly matters here.
+\autoref{fig:morphology/batches/hist_oval/all} shows the histograms of the fit results alongside the theoretical distribution fits.
+The ovality $\Ovality$ is modelled by a single Weibull distribution.
+In contrast to particle size, here a location $L=1$ is used, as ovality $\Ovality \ge 1$.
+
+\subsection{First-Order-Waved Particles}
+
+\begin{figure}
+    \includegraphics{data/morphology/batches/hist_shape/all}
+    \caption{Particle Size adn Ovality Distributions when Assuming Oval Particles with First Order Waves}
+    \label{fig:morphology/batches/hist_shape/all}
+\end{figure}
+
+In the third case, first-order waves according to \autoref{eq:f-first-order-waves} are considered, too.
+So, the fit additioally includes the parameters wave height $\WaveHeight$, wave count $\WaveCount$ and wave shift $\WaveShift$.
+As before the rotation has to be fitted accordingly.
+As $\WaveCount$ is integer valued and only few distinct values have to be expected, it is treated similarly to the rotation by a brute force method.
+Mixed continuous and integer optimization is a generally hard problem, were several sophisticated algorithms exist.
+For the current case they have no computational benefit, as they have typically high effort per step and the value range of $\WaveCount$ is small.
+\autoref{fig:morphology/batches/hist_shape/all} shows the histograms of the fit results alongside the theoretical distribution fits.
+
+The wave height $\WaveHeight$ is modeled using a beta distribution, which supports a variety of shapes and has a defined support for $[0, 1]$ which fits ideally to the parameter.
+$\alpha$ and $\beta$ are the free parameters of the distribution.
+\begin{equation}
+    \Probability(\WaveHeight) = \frac{1}{\Beta(\alpha, \beta)} \WaveHeight^{\alpha - 1} \left( 1 - \WaveHeight \right) ^ {\beta - 1}
+    \label{eq:beta-wave-height}
+\end{equation}
+
+The wave count parameter $\WaveCount$ is of discrete nature and only few distinct values were present in the data.
+So, the parameter is not modelled by a theoretical distribution but handeled as a categorical variable with defined relative frequencies.
+The wave shift $\WaveShift$ is suprisingly close to a uniform distribution, so no fitting of an distribution function is required here.
+
+\subsection{Comparison of the Three Approaches}
+
+%1694-48 as example
+
+\begin{figure}
+    \begin{subfigure}{0.333\linewidth}
+        \includegraphics[scale=0.5]{img/randomized/1694_48_circular}
+        \caption{Circular}
+        \label{fig:comparison-particle-shape-fits-circular}
+    \end{subfigure}%
+    \begin{subfigure}{0.333\linewidth}
+        \includegraphics[scale=0.5]{img/randomized/1694_48_oval}
+        \caption{Oval}
+        \label{fig:comparison-particle-shape-fits-oval}
+    \end{subfigure}%
+    \begin{subfigure}{0.333\linewidth}
+        \includegraphics[scale=0.5]{img/randomized/1694_48_shape}
+        \caption{First-Order Waves}
+        \label{fig:comparison-particle-shape-fits-shape}
+    \end{subfigure}%
+    \caption{Comparison of the Three Shape Fit Approaches for a Typical Particle}
+    \label{fig:comparison-particle-shape-fits}
+\end{figure}
+
+The obtained particle size distributions from the three aproaches are quite similar, despite the changes in the shape descriptions.
+Due to improved shape accuracy, the mean of particle size $\Radius_0$ is slightly decreasing from \qtyrange{767}{754}{\micro\meter}.
+To ensure comparability, the reference radius for normalization will be fixed to the value of \qty{760}{\micro\meter} for the rest of this chapter.
+
+\autoref{fig:comparison-particle-shape-fits} shows a typical particle from the dataset, which has been fitted by the three distinct approaches.
+One could clearly observe the improved shape representation when adding the additional terms.
+Fine surface structures obviously can not be represented by the models, but the overall shape characteristic is well modeled by the complete shape function with ovality and first-order waves.

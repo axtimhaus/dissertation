@@ -1,3 +1,4 @@
+from pydantic.main import ModelT
 from pytask import task, mark
 import pandas as pd
 import numpy as np
@@ -60,16 +61,13 @@ for b, files in BATCHES.items():
                 bounds=np.array([0, r_max]),
             )
 
-            fig, ax = plt.subplots()
-            ax.set_aspect("equal", adjustable="datalim")
-            ax.plot(centralized_geom.exterior.xy[0], centralized_geom.exterior.xy[1])
             model_geom = create_model_geom(np.linspace(0, 2 * np.pi, 401), 0, best_fit.x[0], 1, 0, 0, 0)
-            ax.plot(model_geom.exterior.xy[0], model_geom.exterior.xy[1])
-            ax.text(0, 0, str(best_fit.x), horizontalalignment="center", verticalalignment="center")
-            img_file = produces.parent / produces.stem / f"{file.parent.name}_{file.stem}.png"
-            img_file.parent.mkdir(exist_ok=True, parents=True)
-            fig.savefig(img_file)
-            plt.close(fig)
+            plot_fit(
+                produces.parent / produces.stem / f"{file.parent.name}_{file.stem}.png",
+                centralized_geom,
+                model_geom,
+                f"$\\Radius_0 = \\num{{{best_fit.x[0]:.3f}}}$",
+            )
 
             df.at[i, "r0"] = best_fit.x[0]
 
@@ -125,18 +123,15 @@ for b, files in BATCHES.items():
             ]
             best_fit = min(fits, key=lambda f: f.cost)
 
-            fig, ax = plt.subplots()
-            ax.set_aspect("equal", adjustable="datalim")
-            ax.plot(centralized_geom.exterior.xy[0], centralized_geom.exterior.xy[1])
             model_geom = create_model_geom(
                 np.linspace(0, 2 * np.pi, 401), 0, best_fit.x[0], best_fit.x[1], 0, 0, best_fit.x[2]
             )
-            ax.plot(model_geom.exterior.xy[0], model_geom.exterior.xy[1])
-            ax.text(0, 0, str(best_fit.x), horizontalalignment="center", verticalalignment="center")
-            img_file = produces.parent / produces.stem / f"{file.parent.name}_{file.stem}.png"
-            img_file.parent.mkdir(exist_ok=True, parents=True)
-            fig.savefig(img_file)
-            plt.close(fig)
+            plot_fit(
+                produces.parent / produces.stem / f"{file.parent.name}_{file.stem}.png",
+                centralized_geom,
+                model_geom,
+                f"$\\Radius_0 = \\num{{{best_fit.x[0]:.3f}}}$\n$\\Ovality = \\num{{{best_fit.x[1]:.3f}}}$\n$\\RotationAngle = \\num{{{best_fit.x[2]:.3f}}}$",
+            )
 
             df.at[i, "r0"] = best_fit.x[0]
             df.at[i, "o"] = best_fit.x[1]
@@ -203,16 +198,13 @@ for b, files in BATCHES.items():
             ]
             best_n, best_fit = min(fits, key=lambda f: f[1].cost)
 
-            fig, ax = plt.subplots()
-            ax.set_aspect("equal", adjustable="datalim")
-            ax.plot(centralized_geom.exterior.xy[0], centralized_geom.exterior.xy[1])
             model_geom = create_model_geom(np.linspace(0, 2 * np.pi, 401), best_n, *best_fit.x)
-            ax.plot(model_geom.exterior.xy[0], model_geom.exterior.xy[1])
-            ax.text(0, 0, str(best_fit.x), horizontalalignment="center", verticalalignment="center")
-            img_file = produces.parent / produces.stem / f"{file.parent.name}_{file.stem}.png"
-            img_file.parent.mkdir(exist_ok=True, parents=True)
-            fig.savefig(img_file)
-            plt.close(fig)
+            plot_fit(
+                produces.parent / produces.stem / f"{file.parent.name}_{file.stem}.png",
+                centralized_geom,
+                model_geom,
+                f"$\\Radius_0 = \\num{{{best_fit.x[0]:.3f}}}$\n$\\Ovality = \\num{{{best_fit.x[1]:.3f}}}$\n$\\WaveHeight = \\num{{{best_fit.x[2]:.3f}}}$\n$\\WaveShift = \\num{{{best_fit.x[3]:.3f}}}$\n$\\WaveCount = \\num{{{best_n}}}$\n$\\RotationAngle = \\num{{{best_fit.x[4]:.3f}}}$",
+            )
 
             df.at[i, "r0"] = best_fit.x[0]
             df.at[i, "o"] = best_fit.x[1]
@@ -221,3 +213,16 @@ for b, files in BATCHES.items():
             df.at[i, "n"] = best_n
 
         df.to_csv(produces)
+
+
+def plot_fit(file, orig_geom, model_geom, param_text):
+    fig, ax = plt.subplots()
+    ax.set_aspect("equal", adjustable="datalim")
+    ax.plot(orig_geom.exterior.xy[0], orig_geom.exterior.xy[1])
+    ax.plot(model_geom.exterior.xy[0], model_geom.exterior.xy[1])
+    ax.text(0, 0, param_text, horizontalalignment="center", verticalalignment="center")
+    file.parent.mkdir(exist_ok=True, parents=True)
+    ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
+    ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")
+    fig.savefig(file)
+    plt.close(fig)

@@ -21,7 +21,8 @@ for b in BATCHES:
     ):
         df = pd.read_csv(fits_file, header=0, index_col=0)
 
-        fig, ax = plt.subplots()
+        fig = plt.figure(figsize=(FIGSIZE_INCH[0], FIGSIZE_INCH[1] / 2))
+        ax = fig.subplots()
         twin = ax.twinx()
 
         r0_dist, r0_dist_text = fit_weibull_mix2(df["r0"], 0, bins=100)
@@ -35,9 +36,9 @@ for b in BATCHES:
         ax.yaxis.label.set_color(DENSITY_COLOR)
         ax.set_ylabel(r"probability density")
 
-        ax.tick_params(axis="y", colors=CUMULATIVE_COLOR)
-        ax.yaxis.label.set_color(CUMULATIVE_COLOR)
-        ax.set_ylabel(r"cumulative density")
+        twin.tick_params(axis="y", colors=CUMULATIVE_COLOR)
+        twin.yaxis.label.set_color(CUMULATIVE_COLOR)
+        twin.set_ylabel(r"cumulative density")
 
         for p in produces:
             fig.savefig(p)
@@ -112,8 +113,8 @@ for b in BATCHES:
         twins[2].annotate(h_dist_text, (0.5, 0.5), xycoords="axes fraction")
 
         p_dist = uniform(0, 0.5)
-        pdf(axs[3], df["p"], p_dist)
-        cdf(twins[3], df["p"], p_dist)
+        pdf(axs[3], df["p"], p_dist, lower=0, upper=0.5)
+        cdf(twins[3], df["p"], p_dist, lower=0, upper=0.5)
         twins[3].annotate("uniform", (0.5, 0.1), xycoords="axes fraction")
 
         pdf_int(axs[4], df["n"])
@@ -153,7 +154,7 @@ def fit_weibull(data, lower: float, bins=20):
     )
     return weibull_min(
         c=fit.x[0], scale=fit.x[1], loc=lower
-    ), f"$k = \\num{{{fit.x[0]:.6f}}}$\n$S = \\num{{{fit.x[1]:.6f}}}$\n$L = \\num{{1}}$"
+    ), f"$k = \\num{{{fit.x[0]:.3f}}}$\n$S = \\num{{{fit.x[1]:.3f}}}$\n$L = \\num{{1}}$"
 
 
 def fit_beta(data, bins=20):
@@ -166,7 +167,7 @@ def fit_beta(data, bins=20):
         x0=[1, 1],
     )
 
-    return beta(a=fit.x[0], b=fit.x[1]), f"$\\alpha = \\num{{{fit.x[0]:.6f}}}$\n$\\beta = \\num{{{fit.x[1]:.6f}}}$"
+    return beta(a=fit.x[0], b=fit.x[1]), f"$\\alpha = \\num{{{fit.x[0]:.3f}}}$\n$\\beta = \\num{{{fit.x[1]:.3f}}}$"
 
 
 def fit_weibull_mix2(data, lower: float, bins=100):
@@ -185,33 +186,36 @@ def fit_weibull_mix2(data, lower: float, bins=100):
         bounds=np.transpose([(0, np.inf)] * 4 + [(0, 1)]),
     )
 
+    dist = weibull_mix2(*fit.x)
     return (
-        weibull_mix2(*fit.x),
-        f"$k_1 = \\num{{{fit.x[0]:.6f}}}$\n$S_1 = \\num{{{fit.x[1]:.6f}}}$\n$k_2 = \\num{{{fit.x[2]:.6f}}}$\n$S_2 = \\num{{{fit.x[3]:.6f}}}$\n$w = \\num{{{fit.x[4]:.6f}}}$\n$L_1 = L_2 = \\num{{0}}$",
+        dist,
+        f"$\\Expectation = \\num{{{dist.mean():.3f}}}$\n$k_1 = \\num{{{fit.x[0]:.3f}}}$\n$S_1 = \\num{{{fit.x[1]:.3f}}}$\n$k_2 = \\num{{{fit.x[2]:.3f}}}$\n$S_2 = \\num{{{fit.x[3]:.3f}}}$\n$w = \\num{{{fit.x[4]:.3f}}}$\n$L_1 = L_2 = \\num{{0}}$",
     )
 
 
-def pdf(ax, data, dist, bins=20, lower=0):
+def pdf(ax, data, dist, bins=20, lower=0, upper=None):
     ax.hist(data, bins=bins, density=True, alpha=0.5, color=DENSITY_COLOR)
     if dist:
-        x = np.linspace(lower, data.max(), 201)
+        x = np.linspace(lower, upper or data.max(), 201)
         ax.plot(x, dist.pdf(x), c=DENSITY_COLOR)
 
 
-def cdf(ax, data, dist, bins=20, lower=0):
+def cdf(ax, data, dist, bins=20, lower=0, upper=None):
     ax.hist(data, bins=bins, density=True, alpha=0.5, color=CUMULATIVE_COLOR, cumulative=True)
     if dist:
-        x = np.linspace(lower, data.max(), 201)
+        x = np.linspace(lower, upper or data.max(), 201)
         ax.plot(x, dist.cdf(x), c=CUMULATIVE_COLOR)
 
 
 def pdf_int(ax, data):
     locs, heights = np.unique_counts(data)
     heights = heights / np.sum(heights)
-    ax.bar(locs, heights, alpha=0.5, color=DENSITY_COLOR)
+    bars = ax.bar(locs, heights, alpha=0.5, color=DENSITY_COLOR)
+    ax.bar_label(bars, fmt="{:.3f}", padding=2, color=DENSITY_COLOR)
 
 
 def cdf_int(ax, data):
     locs, heights = np.unique_counts(data)
     heights = np.cumsum(heights) / np.sum(heights)
-    ax.bar(locs, heights, alpha=0.5, color=CUMULATIVE_COLOR)
+    bars = ax.bar(locs, heights, alpha=0.5, color=CUMULATIVE_COLOR)
+    ax.bar_label(bars, fmt="{:.3f}", padding=2, color=CUMULATIVE_COLOR)
