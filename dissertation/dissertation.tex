@@ -14,7 +14,7 @@
 \renewcommand{\familydefault}{\sfdefault}
 \setmathfont{TeX Gyre Termes Math}
 
-\usepackage[mode=match]{siunitx}
+\usepackage[mode=match, separate-uncertainty=true]{siunitx}
 
 \usepackage{graphicx}
 \usepackage{subcaption}
@@ -46,6 +46,7 @@
 
 \renewcommand\emph[1]{\textcolor{darkgray}{#1}}
 
+\usepackage{chemmacros}
 \usepackage{todonotes}
 
 \begin{document}
@@ -85,7 +86,5 @@
 \listoftables
 
 \printbibliography
-
-% \input{tex/appendix}
 
 \end{document}

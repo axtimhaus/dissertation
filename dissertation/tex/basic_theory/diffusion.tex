@@ -1,13 +1,17 @@
 \section{Mathematical Description of Diffusion}\label{sec:diffusion}
 
-The classic description of diffusional processes is done by Fick's laws \textcite{Fick1855}, which have the same mathematical form as the heat conduction laws by \textcite{Fourier1888}.
-\autoref{eq:fick-first} shows Fick's first law for description of the diffusional flux $\Flux$ for the one-dimensional case.
+The classic description of diffusional processes is done by Fick's laws \cite{Fick1855}, which have the same mathematical form as the heat conduction laws by \textcite{Fourier1888}.
+\autoref{eq:fick-first} shows Fick's first law as description of the diffusional flux $\Flux$ for the one-dimensional case.
 It proposes a linear relationship between the concentration gradient and the flux.
 For the concentration here the vacancy concentration $\VacancyConcentration$ is taken, as we assume only one diffusing species.
 The flux of vacancies equals the negative flux of atoms.
+The law includes an empirical scaling coefficient commonly referred to as the diffusion coefficient $\DiffusionCoefficient$ which has the dimension of $[\DiffusionCoefficient] = \DimLength^2\DimTime^{-1}$.
+$\InterfaceThickness$ is the thickness of the diffusion layer resp.~the interface.
+In some publications $\InterfaceThickness$ is directly included in the diffusion coefficient for interface diffusion as $\DiffusionCoefficient' = \DiffusionCoefficient\InterfaceThickness$ with the dimension $[\DiffusionCoefficient'] = \DimLength^3\DimTime^{-1}$.
+The interface thickness $\InterfaceThickness$ is hard to determine, often it is estimated by the size of one or two atom layers.
 
 \begin{equation}
-    \Flux = - \DiffusionCoefficient \frac{\Deriv\VacancyConcentration}{\Deriv\X}
+    \Flux = - \DiffusionCoefficient\InterfaceThickness \frac{\Deriv\VacancyConcentration}{\Deriv\X}
     \label{eq:fick-first}
 \end{equation}
 

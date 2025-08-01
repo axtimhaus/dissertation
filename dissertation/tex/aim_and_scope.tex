@@ -9,26 +9,149 @@ The work aims on the following goals:
     \item Develop a method for statistical representation of powders using the sintering model to allow design of powder mixtures.
 \end{enumerate}
 
+\section{Integration of the Work Within the Refrabund Project}
+
+\begin{table}
+    \caption{Material Data of Alumina, Niobium and Tantalum from Literature}
+    \label{tab:material-data}
+    \begin{subtable}{\linewidth}
+        \caption{Interface Energies}
+        \label{tab:material-data-interface-energy}
+        \centering
+        \begin{tblr}{
+                colspec={llrrr},
+                row{1-2}={l}
+            }
+            \toprule
+            \SetCell[c=2]{l} Interface &
+            & Temperature $\Temperature$
+            & Energy per Unit Area $\InterfaceEnergy$
+            & Ref. \\
+            & & \unit{\kelvin} & \unit{\joule\per\square\meter} & \\
+            \midrule
+            \ch{Al2O3} & vac. & \num{2123} & \num{0.905} & \cite{Kingery1954} \\
+            \ch{Al2O3} & \ch{Al2O3} & \num{2123} & \num{0.440} & \cite{Kingery1954} \\
+            \ch{Al2O3} & vac. & \num{1923} & \num{1.061 +- 0.061} & \cite{Nikolopoulos1985} \\
+            \ch{Al2O3} & \ch{Al2O3} & \num{1923} & \num{0.747 +- 0.044} & \cite{Nikolopoulos1985} \\
+            \ch{Nb} & vac. & \num{2523} & \num{2.10} & \cite{Radcliffe1961} \\
+            \ch{Nb} & \ch{Nb} & \num{2523} & \num{0.76} & \cite{Radcliffe1961} \\
+            \ch{Nb} & vac. & \num{1773} & \num{2.55 +- 0.55} & \cite{Hodkin1970} \\
+            \ch{Nb} & \ch{Nb} & \num{1773} & \num{0.79 +- 0.13} & \cite{Hodkin1970} \\
+            \ch{Ta} & vac. & \num{1773} & \num{2.68 +- 0.50} & \cite{Hodkin1970} \\
+            \ch{Ta} & \ch{Ta} & \num{1773} & \num{0.74 +- 0.08} & \cite{Hodkin1970} \\
+            \bottomrule
+        \end{tblr}
+    \end{subtable}
+    \\
+
+    \begin{subtable}{\linewidth}
+        \caption{Interface Diffusion Coefficients}
+        \label{tab:material-data-diffusion}
+        \begin{talltblr}[
+                entry=none,
+                label=none,
+                note{a}={Converted under assumption of an interface thickness of $\InterfaceThickness = \AtomVolume^{\frac13} = \qty{2.76e-10}{\meter}$ with the atom volume $\AtomVolume = \qty{2.11e-29}{\cubic\meter}$ \cite{Robertson1966}.},
+            ]{
+                colspec={llrrX[r]X[r]r},
+                row{1-3}={l},
+            }
+            \toprule
+            \SetCell[c=2]{l} Interface &
+            & Pre-Exp. Factor $\DiffusionCoefficient_0$
+            & Act. Energy $\ActivationEnergy$
+            & \SetCell[c=2]{l} Diff. Coeff. $\DiffusionCoefficient$ after Eq.~\ref{eq:diffusion-coefficient-arrhenius} &
+            & Ref. \\
+            & & & & at \qty{1873}{\kelvin} & at \qty{2273}{\kelvin} \\
+            & &\unit{\square\meter\per\second} &\unit{\kilo\joule\per\mole} & \unit{\square\meter\per\second} & \unit{\square\meter\per\second} \\
+            \midrule
+            \ch{Al2O3} & air & \num{7 +- 5 e-2} & \num{314 +- 21} & \num{1.22e-8} & \num{4.25e-7} & \cite{Robertson1966} \\
+            \ch{Al2O3} & air & \num{1.5e6} & \num{544} & \num{1.01e-9} & \num{4.73e-7} & \cite{Maruyama1975} \\
+            \ch{Al2O3} & vac. & \num{50} & \num{460} & \num{7.42e-12} & \num{1.34e-9} & \cite{Shackelford1968} \\
+            \ch{Al2O3} & vac. & \num{1e3} & \num{690} & \num{5.72e-17} & \num{1.39e-13} & \cite{Coble1958} \\
+            \ch{Al2O3} & wet \ch{H2} & \num{2.5} & \num{565} & \num{4.38e-16} & \num{2.59e-13} & \cite{Kuczynski1959} \\
+            \ch{Al2O3} & dry \ch{H2} & \num{5e14} & \num{962} & \num{7.43e-13} & \num{3.91e-8} & \cite{Kuczynski1959} \\
+            \ch{Al2O3} & vac. & \num{40.5} & \num{452} & \num{1.01e-11} & \num{1.66e-9} & \cite{Gaddipati1986} \\
+            \ch{Al2O3} & vac. & \num{4.2e2} & \num{494 +- 52} & \num{7.03e-12} & \num{1.87e-9} & \cite{Gupta1978} \\
+            \ch{Al2O3} & \ch{Al2O3} & \num{3.11}\TblrNote{a} & \num{419} & \num{6.42e-12} & \num{7.31e-10} & \cite{Cannon1975} \\
+            \ch{Nb} & vac. & \num{0.43} & \num{193 +- 11} & \num{1.78e-6} & \num{1.58e-5} & \cite{Allen1972} \\
+            \ch{Nb} & vac. & -- & \num{229} & -- & -- & \cite{Odishariya1967} \\
+            \ch{Ta} & vac. & \num{22e-4} & \num{267} & \num{7.88e-11} & \num{1.61e-9} & \cite{Hok1981} \\
+            \ch{Ta} & vac. & -- & \num{279} & -- & -- & \cite{Bettler1974} \\
+            \bottomrule
+        \end{talltblr}
+    \end{subtable}
+\end{table}
+
+In the research group FOR3010 Refrabund funded by the German Research Foundation (DFG), a novel refractory composite material is developed, which consists of alumina and metallic niobium respectively tantalum.
+The current work was conducted with a project part aimed on developing fast physically based model approaches of sintering, which are able to describe specialties of the investigated material system.
+These specialties are as follows:
+\begin{description}
+    \item[Multi-Material-Powder]
+        The composite material consists of non-metallic (alumina) and metallic (niobium, tantalum) substances.
+        These differ widely in their properties as interface energies and diffusivities.
+        Especially the metallic components are prone to oxidization at high temperatures, but this atmospheric influence is out of the scope of this work.
+    \item[Multi-Scale Powder]
+        Some of the developed process routes use aggregate particles which itself are alumina-metal composites \cite{Zienert2022, Zienert2022a}.
+        For the final sintering, fine grained binder and filler powder must be added to achieve sufficient density and bonding.
+        These large scale differences (aggregates $\sim$\qty{1}{\milli\meter}, binder $\sim$\qty{10}{\micro\meter}) have drastic numerical implications in terms of appropriate discetization.
+        There is a multi-scale approach in development to model these fine grained fractions counter the aggregates as a continuum, but this work was not finished at the time writing this document.
+        This approach will be published in later publications.
+    \item[Complex Particle Shape]
+        Aggregate particles produced by crushing and sieving show complex irregular shapes \cite{Zienert2022, Zienert2022a}.
+        Another route is used to produce near-spherical beads by alginate gelation \cite{Storti2021, Storti2022}.
+        Experimentally, differences in their sintering behavior have been noticed as can be explained by varying driving forces due to local geometry, but also by their surface condition.
+    \item[Chemical Interactions]
+        Investigation in other project parts have shown that the components form ternary oxides at interfaces \cite{Eusterholz2022, Eusterholz2023, Eusterholz2024}.
+        This influence will be neglected in the current model as this would require an enormous dataset about the thermodynamics of those reactions and would therfore be far beyond the scope of this work.
+        However, the same investigation showed negligible solubility of the components in each other, so that absence of mass transfer between particle of different substance can be assumed.
+\end{description}
+
+Extensive literature research has been conducted for acquisition of material data (interface energies, diffusion coefficients for surface and grain boundary diffusion) but especially the data for niobium and tantalum is very sparse.
+Alumina is a well investigated system, with contradictory results published.
+Some literature results have been collected in \autoref{tab:material-data}.
+
+The available data of diffusion coefficients varies dramatically between the available sources.
+This is likely related to differing measurement procedures, purities of the substances and surface conditions.
+Alumina diffusion has an activation energy approximately twice as high as those of the metals, so that its diffusion coefficients vary much more pronounced with temperature.
+Because alumina as ionic substance consists of two elements rather then one, the question arises, whether the here used notion of diffusion as displacement of volume is limited by either the one or the other species.
+\textcite{Prot1996} and \textcite{Doremus2006} state that both must be the same to be able to maintain the ionic crystal structure.
+\cite{Paladino1963, Cannon1975} state, however, that diffusion along grain boundaries in alumina limited by diffusion of \ch{Al} atoms, as diffusion of \ch{O} atoms is much faster.
+The latter result was explained by \textcite{Doremus2006} by the occurrence of glasses formed by impurity elements at the grain boundaries, which would break the mentioned condition.
+For this work, diffusion coefficients of \ch{Al} and \ch{O} in alumina will be considered equivalent.
+Diffusion rates for the metal-metal and the metal-alumina interfaces are missing.
+As an overall picture, diffusion of niobium is several magnitudes faster than of alumina.
+The picture on tantalum is indifferent, depending on the regarded reference, it diffuses faster, equivalently or slower than alumina, also depending on temperature.
+
+The surface energies of the metals are approximately twice as high as of alumina at sintering temperature.
+Grain boundary energies for the metal-alumina interfaces are missing.
+Own measurements of those data were not planned within the research group and also not possible for instrumentation and resource reasons.
+Therefore, the results presented in \autoref{part:model-application-and-validation} will reside on dimensionless quantities and parameters to avoid the necessity of actual material data.
+
 \section{Requirements to the Model}\label{sec:requirements}
 
 The work resides under the circumstances of the RefraBund project, where a composite refractory material consisting of alumina and metallic niobium or tantalum is developed.
 From these circumstances the following requirements and assumptions are derived:
 \begin{description}
-    \item[Diffusion Mechanisms] The model shall regard surface and grain boundary diffusion as the two main mechanisms of solid state sintering for metallic and ceramic materials.
-        Volume diffusion is neglected, as it is commonly slow compared to surface or grain boundary.
-        The effect of grain boundary diffusion was compared by \textcite{Fisher1951} with \emph{the heat flux in a foil of copper embeded in cork}.
-        Other mechanisms like evaporation-condensation or vicose flow do not have to be expected.
-    \item[Asymmetric Geometry Contacts] The model shall support particles of arbitrary shape and different size.
+    \item[Diffusion Mechanisms]
+        The model shall regard surface and grain boundary diffusion as the two main mechanisms of solid state sintering for metallic and ceramic materials.
+        Volume diffusion is neglected, as it is commonly slow compared to such along surface or grain boundary.
+        The effect of grain boundary diffusion was compared by \textcite{Fisher1951} with \emph{the heat flux in a foil of copper embedded in cork}.
+        Other mechanisms like evaporation-condensation or viscose flow do not have to be expected.
+    \item[Asymmetric Geometry Contacts]
+        The model shall support particles of arbitrary shape and different size.
         The first shall allow the investigation of the influence of non-ideal particle geometries.
         Size differences are to be limited to one or two orders of magnitude to avoid major numerical complications in terms of discretization widths.
         These requirements drop the use of any symmetry assumptions which are often applied in literature models.
-    \item[Asymmetric Material Contacts] The investigated material consists of alumina powder as well as metallic niobium resp.~tantalum powder.
+    \item[Asymmetric Material Contacts]
+        The investigated material consists of alumina powder as well as metallic niobium resp.~tantalum powder.
         The model must therefore be able to respect different material properties on particles in contact to each other with their implication of grain boundary shape and kinetic behavior.
-        However, the materials are assumed to be insoluable in each other to avoid regard on concentration gradients within the particles.
+        However, the materials are assumed to be insoluble in each other to avoid regard on concentration gradients within the particles.
         Mass transfer between particles is therefore also disregarded.
-    \item[Multi-Particle-Contacts] As the often applied two-particle approach neglects important influences, especially pore closing and mutual hindering of particles in their evolution.
+    \item[Multi-Particle-Contacts]
+        As the often applied two-particle approach neglects important influences, especially pore closing and mutual hindering of particles in their evolution.
         The latter is referred to the mutual influence of multiple contacts, which differ in their geometry and/or material characteristic and so can not be regarded as isolated anymore.
-    \item[Powder Mixture] The production process involves mixing of different powder fractions to obtain optimal properties in processing and application.
+    \item[Powder Mixture]
+        The production process involves mixing of different powder fractions to obtain optimal properties in processing and application.
         The development of a sintered material and its processing heavily resides on determining the ideal mixture to be used for the regarded application.
         The model should be able to regard different mixtures to try them out in simulation instead of laboratory.
 \end{description}
@@ -38,10 +161,10 @@ The latter is out of scope of this work.
 \section{Rational on Approach and Methods}\label{sec:rational-on-approach-and-methods}
 
 The model development of the current work shall reside on a direct and sharp interface description by using the \glsfirst{FDM}.
-The main reason for this is the avoidance of a unphysically wide diffuse interface, as would come with the application of the major competitor: the \glsfirst{PFM}.
+The main reason for this is the avoidance of a non-physically wide diffuse interface, as would come with the application of the major competitor: the \glsfirst{PFM}.
 The work shall explore the influence of concrete physical material parameters, which are included in sharp interface approaches directly, rather then requiring an additional mapping to fit into the numeric scheme.
 The latter would introduce additional errors that could be avoided.
-Volume diffusion is not needed, so no discretization of the bulk material.
+Discretization of the bulk material is not needed, as volume diffusion is disregarded.
 Therefore, choosing a \gls{FEM} discretization instead of \gls{FDM} for the surface line only seems to be to much effort.
 Application of the \glsfirst{LSM} can be discarded due to the lack of support for multiple phases and grains.
 

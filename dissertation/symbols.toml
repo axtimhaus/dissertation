@@ -13,6 +13,11 @@ Mean = '\overbar{#1}'
 Normalized = '#1^\star'
 To = '{\ldotp}{\ldotp}'
 
+# Dimensions
+DimTime = '\symsfup{T}'
+DimLength = '\symsfup{L}'
+DimMass = '\symsfup{M}'
+
 # Polar Coordinates
 Radius = 'r'      # radius coordinate
 Angle = '\varphi' # angle coordinate
@@ -50,6 +55,7 @@ Pressure = 'p'                                      # pressure
 GasConstant = 'R'                                   # specific gas constant
 BoltzmannConstant = 'k_{\symrm{B}}'                 # Boltzmann's constant
 MolarVolume = 'V_{\symrm{m}}'                       # molar volume
+AtomVolume = '\Omega'                               # atom volume
 Density = '\varrho'                                 # mass density
 Flux = 'j'                                          # flux
 Concentration = 'c'                                 # concentration
@@ -94,24 +100,24 @@ Regarding = '^{|#1}'         # index specifying the coordinate system
 Equilibrium = '\mathrm{eq}'  # index for thermodynamic equilibrium
 
 # Sets
-Nodes = '\symbb{N}'     # set of nodes
-Particles = '\symbb{P}' # set of particles
-Contacts = '\symbb{C}'  # set of contacts
-Integers = '\symbb{Z}'  # set of integer numbers
-PositiveIntegers = '\symbb{Z}^{+}'  # set of integer numbers
-Reals = '\symbb{R}'  # set of integer numbers
+Nodes = '\symbb{N}'                # set of nodes
+Particles = '\symbb{P}'            # set of particles
+Contacts = '\symbb{C}'             # set of contacts
+Integers = '\symbb{Z}'             # set of integer numbers
+PositiveIntegers = '\symbb{Z}^{+}' # set of integer numbers
+Reals = '\symbb{R}'                # set of integer numbers
 
 # Mechanics
 Stress = '\sigma' # normal stress
 
 # Statistics and Monte Carlo
-Expectation = '\mu'          # stochastic expectation
-StandardDeviation = '\sigma' # standard deviation
+Expectation = '\mu'               # stochastic expectation
+StandardDeviation = '\sigma'      # standard deviation
 Variance = '\StandardDeviation^2' # variance
-Estimated = '\hat'           # estimation of the respected value
-Probability = 'p'            # probability
-CumulativeProbability = 'P'  # cumulative probability
-GammaFunction = '\symrm{\Gamma}' # gamma function
+Estimated = '\hat'                # estimation of the respected value
+Probability = 'p'                 # probability
+CumulativeProbability = 'P'       # cumulative probability
+GammaFunction = '\symrm{\Gamma}'  # gamma function
 
 # Features
 Shrinkage = '\varepsilon'
@@ -119,10 +125,10 @@ NeckRadius = '\Radius_{\Neck}'
 NeckArea = '\Area_{\Neck}'
 
 # Powder Properties
-Ovality = 'o'                   # ovality of particle
-WaveHeight = 'h'                # relative height of first order waves
-WaveCount = 'n'                 # count of first order waves
-WaveShift = 'p'            # phase shift of first order waves
-ShapeFunction = 'f'             # shape function
+Ovality = 'o'         # ovality of particle
+WaveHeight = 'h'      # relative height of first order waves
+WaveCount = 'n'       # count of first order waves
+WaveShift = 'p'       # phase shift of first order waves
+ShapeFunction = 'f'   # shape function
 MixtureFraction = 'x' # fractional amount in a powder mixture
-ParticleCount = 'N' # particle count
+ParticleCount = 'N'   # particle count
