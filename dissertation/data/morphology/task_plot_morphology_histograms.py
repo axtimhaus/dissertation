@@ -1,13 +1,13 @@
-from pytask import task
-from dissertation.config import FIGSIZE_INCH, ROOT_DIR, image_produces, in_build_dir
-from dissertation.data.morphology.batches import BATCHES, BATCHES_DIR
 import matplotlib.pyplot as plt
-import pandas as pd
 import numpy as np
-from matplotlib.axes import Axes
+import pandas as pd
 from matplotlib.gridspec import GridSpec
-from scipy.stats import Mixture, make_distribution, norm, beta, weibull_min, uniform
+from pytask import task
 from scipy.optimize import least_squares
+from scipy.stats import Mixture, beta, make_distribution, uniform, weibull_min
+
+from dissertation.config import FIGSIZE_INCH, image_produces, in_build_dir
+from dissertation.data.morphology.batches import BATCHES, BATCHES_DIR
 
 DENSITY_COLOR = "C0"
 CUMULATIVE_COLOR = "C1"
@@ -100,7 +100,7 @@ for b in BATCHES:
         r0_dist, r0_dist_text = fit_weibull_mix2(df["r0"], 0, bins=100)
         pdf(axs[0], df["r0"], r0_dist, bins=100)
         cdf(twins[0], df["r0"], r0_dist, bins=100)
-        twins[0].annotate(r0_dist_text, (0.6, 0.3), xycoords="axes fraction")
+        twins[0].annotate(r0_dist_text, (0.8, 0.3), xycoords="axes fraction")
 
         o_dist, o_dist_text = fit_weibull(df["o"], 1)
         pdf(axs[1], df["o"], o_dist, lower=1)

@@ -2,7 +2,7 @@
 
 The work aims on the following goals:
 \begin{enumerate}
-    \item Develop a model for the microscopic sintering behavior of mutliple particles.
+    \item Develop a model for the microscopic sintering behavior of multiple particles.
     \item Implement a reusable software framework for its application.
     \item Investigate its numerical behavior and define feasible numerical control parameters.
     \item Investigate its physical predictions, explain and compare them with literature results.
@@ -168,7 +168,7 @@ Discretization of the bulk material is not needed, as volume diffusion is disreg
 Therefore, choosing a \gls{FEM} discretization instead of \gls{FDM} for the surface line only seems to be to much effort.
 Application of the \glsfirst{LSM} can be discarded due to the lack of support for multiple phases and grains.
 
-For getting a clean and concise mathematical formulation, as would come with the \gls{PFM}, on top of this numerical system representation the \glsfirst{TEP} shall be applied to construct the governing equations of temporal system evolution.
+For getting a clean and concise mathematical formulation, as would come with the \gls{PFM}, on top of the \gls{FDM} representation, the \glsfirst{TEP} shall be applied to construct the governing equations of temporal system evolution.
 This concept has already been successfully applied to similar problems.
 In the current case the complexity of the system will significantly rise in comparison to earlier applications, since the number of state variables will drastically increase.
 The concept has the main benefit of easy implicit incorporation of additional constraints arising from contact geometry requirements and boundary conditions.
