@@ -67,6 +67,7 @@ InternalStateVelocity = '\dot{x}'                   # internal velocity of state
 ExternalStateVariable = 'X'                         # external variable of state
 Constraint = 'g'                                    # constraint to TEP
 InternalDegreeOfFreedom = '\xi'                     # internal degree of freedom in TEP
+DeborahNumber = '\symrm{De}'                        # Deborah number
 
 # Energy
 GibbsEnergy = 'G'                     # Gibbs energy (free enthalpy)

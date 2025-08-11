@@ -1,8 +1,4 @@
-\section{The Thermodynamic Extremal Principle}\label{sec:extremal-priciple}
-
-\todo{Brief introduction to non-equilibrium and internal state variables}
-
-\subsubsection{Classic Formulation}\label{subsubsec:extremal-priciple-classic}
+\section{The Thermodynamic Extremal Principle}\label{sec:extremal-principle}
 
 The classic formulation of the \gls{TEP} was basically formulated by \textcite{Svoboda1991}, however dependent on the works of \textcite{Ziegler1983, Ziegler1963, Onsager1931}.
 It is based on the assumption, that the dissipation in the system is always maximized with respect to thermodynamic and kinetic constraints.
@@ -12,7 +8,7 @@ There are several distinct formulations of the \gls{TEP}, they differ mainly in 
 The other's can be derived from that.
 The following elaborations are based on Ziegler's priciple in the formulation by \textcite{Svoboda1991} with own modifications to meet the requirements of the current work.
 
-The dissipation $\Dissipation$ can be formulated as in \autoref{eq:dissipation} in dependence on the vector of external state variables $\Vect\ExternalStateVariable$, the vector of internal state variables $\Vect\InternalStateVariable$ and the velocity vector of internal state variables $\Vect{\InternalStateVelocity}$.
+The dissipation $\Dissipation$ can be formulated as in \autoref{eq:dissipation} in dependence on the vector of \gls{EVS} $\Vect\ExternalStateVariable$, the vector of \gls{IVS} $\Vect\InternalStateVariable$ and the velocity vector of \gls{IVS} $\Vect{\InternalStateVelocity}$, see \autoref{subsec:internal-variables-of-state} for a brief introduction on \gls{IVS}.
 It is a bilinear form in the velocity vector of internal state variables and the vector of thermodynamic forces.
 The latter can be expressed as $\partial\GibbsEnergy(\Vect\ExternalStateVariable, \Vect\InternalStateVariable)/\partial \Vect\InternalStateVariable$, where $\GibbsEnergy$ is the Gibbs energy of the system.
 Note the minus sign, as the dissipation is being maximized, where the change in Gibbs energy is defined negative for spontaneous processes.
@@ -58,17 +54,15 @@ Compare \textcite{Svoboda1991, Fischer2014} on this.
 Note, that for this formulation it is required, that the dissipation $\Dissipation$ and the dissipation function $\DissipationFunction$ must depend on the same kinetic variables $\Vect{\InternalStateVelocity}$.
 Often the fluxes $\Vect\Flux$ are used therein.
 
-\subsubsection{Generalized Formulation}\label{subsubsec:extremal-priciple-generalized}
-
 Recently, \textcite{Hackl2020a} published a generalized formulation of the principle breaking up the need to have the same kinetic variables in the dissipation $\Dissipation$ and the dissipation function $\DissipationFunction$.
 The following elaborations use a different notation than in the reference, which fits better to the needs of the application in \autoref{ch:tep_application}, but the meaning is generally equivalent.
 The dissipation $\Dissipation$ is defined in the same way as before, but the dissipation function $\DissipationFunction$ does not include the velocities of internal state $\Vect{\InternalStateVelocity}$, but instead the fluxes $\Vect\Flux$ as in \autoref{eq:dissipation-function-general}.
 Note that in this formulation the velocities $\Vect{\InternalStateVelocity}$ are \emph{not} required to be identical to the fluxes $\Vect\Flux$, neither must they have the same size.
 The relations between the velocities $\Vect{\InternalStateVelocity}$ and the fluxes $\Vect\Flux$ are introduced by the constraints $\Vect\Constraint$ as in \autoref{eq:constraints}.
-These are required to be able to solve the problem, as the dissipation function $\DissipationFunction$ includes non-linear forms of the fluxes $\Vect\Flux$ and so the fluxes are feasible targets to optimization.
+The dissipation function $\DissipationFunction$ includes non-linear forms of the fluxes $\Vect\Flux$ and so the fluxes are feasible targets to optimization.
 The state velocities $\Vect\InternalStateVelocity$ are only present as linear forms in $\Dissipation$, so for each component of $\Vect\InternalStateVelocity$ a constraint in $\Vect\Constraint$ must be present which relates it either directly or indirectly to the fluxes $\Vect\Flux$.
 \textcite{Maugin2015} clearly distinguishes between internal variables of state and internal degrees of freedom, where the first \emph{must} be of pure dissipative nature and the latter follow defined laws but may also have a dissipative part.
-Internal degrees of freedom will be collected in $\Vect\InternalDegreeOfFreedom$ to incoporate their dissipative contributions.
+Internal degrees of freedom will be collected in $\Vect\InternalDegreeOfFreedom$ to incorporate their dissipative contributions.
 The associate laws must be formulated within the constraints $\Vect\Constraint$.
 
 \begin{subequations}
