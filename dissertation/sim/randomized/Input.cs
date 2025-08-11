@@ -10,6 +10,7 @@ class ParticleInput
     public required double Ovality { get; set; }
     public required int PeakCount { get; set; }
     public required double PeakHeight { get; set; }
+    public required double PeakShift { get; set; }
     public required int NodeCount { get; set; }
     public required MaterialInput Material { get; set; }
     public required Dictionary<Guid, InterfaceInput> GrainBoundaries { get; set; }

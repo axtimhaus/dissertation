@@ -55,9 +55,10 @@ var material = new ParticleMaterial(
         input.Material.Surface.DiffusionCoefficient,
         input.Material.Surface.Energy
     ),
-    new Dictionary<Guid, IInterfaceProperties> {
+    new Dictionary<Guid, IInterfaceProperties>
+    {
         { materialId, grainBoundary },
-        { inertMaterialId, grainBoundary }
+        { inertMaterialId, grainBoundary },
     }
 );
 
@@ -69,24 +70,26 @@ var inertMaterial = new ParticleMaterial(
         input.Material.Surface.DiffusionCoefficient / 1e3,
         input.Material.Surface.Energy
     ),
-    new Dictionary<Guid, IInterfaceProperties> {
+    new Dictionary<Guid, IInterfaceProperties>
+    {
         { materialId, inertGrainBoundary },
-        { inertMaterialId, inertGrainBoundary }
+        { inertMaterialId, inertGrainBoundary },
     }
 );
 
 var particles = input
-    .Particles.Select( (p, i) =>
-        new ShapeFunctionParticleFactoryEllipseOvalityCosPeaks(
-            i == input.InertParticleId ? inertMaterialId : materialId,
-            (p.X, p.Y),
-            p.RotationAngle,
-            p.NodeCount,
-            p.Radius,
-            p.Ovality,
-            p.PeakCount,
-            p.PeakHeight
-        ).GetParticle(p.Id)
+    .Particles.Select(
+        (p, i) =>
+            new ShapeFunctionParticleFactoryEllipseOvalityCosPeaks(
+                i == input.InertParticleId ? inertMaterialId : materialId,
+                (p.X, p.Y),
+                p.RotationAngle,
+                p.NodeCount,
+                p.Radius,
+                p.Ovality,
+                p.PeakCount,
+                p.PeakHeight
+            ).GetParticle(p.Id)
     )
     .ToArray();
 

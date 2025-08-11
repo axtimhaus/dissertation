@@ -1,17 +1,10 @@
-import itertools
-from abc import ABC, abstractmethod
-from collections.abc import Sequence
-from os import P_PID
 from pathlib import Path
-from typing import ClassVar, Literal
-from uuid import UUID, uuid5
+from uuid import uuid5
 
-import matplotlib
-import matplotlib.colors
 import numpy as np
 from pydantic import BaseModel, ConfigDict
 
-from dissertation.config import in_build_dir, ROOT_NAMESPACE_UUID
+from dissertation.config import ROOT_NAMESPACE_UUID, in_build_dir
 from dissertation.sim.packings.input import (
     Input,
     InterfaceInput,
@@ -59,7 +52,7 @@ BASE_INPUT = Input(
 )
 
 
-class Case(BaseModel, ABC):
+class Case(BaseModel):
     model_config = ConfigDict(frozen=True)
 
     key: str

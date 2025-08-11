@@ -1,69 +1,72 @@
-# import matplotlib as mpl
-# import matplotlib.pyplot as plt
-# import numpy as np
-# import pandas as pd
-# import pyarrow as pa
-# import pyarrow.compute as pc
-# import pyarrow.parquet as pq
-# from pytask import mark, task
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import pyarrow as pa
+import pyarrow.compute as pc
+import pyarrow.parquet as pq
+from pytask import mark, task
 
-# from dissertation.config import image_produces
-# from dissertation.sim.packings.cases import CASES, Case
+from dissertation.config import FIGSIZE_INCH, image_produces
+from dissertation.sim.randomized.cases import CASES, Case
+from dissertation.sim.randomized.input import TIME_NORM_SURFACE, Input
 
-# for case in CASES:
-#         @task(id=case.key)
-#         @mark.plot
-#         def task_plot_evolution_packings(
-#             case: Case = case,
-#             results_file=case.dir / "output.parquet",
-#             produces=image_produces(case.dir / "evolution"),
-#         ):
-#             df = pq.read_table(results_file).flatten().flatten()
+for case in CASES:
+    for i, sample in enumerate(case.samples):
 
-#             fig = plt.figure(dpi=600)
-#             ax = fig.subplots()
-#             ax.set_aspect("equal")
-#             viridis = mpl.colormaps["viridis"]
+        @task(id=f"{case.key}/{i}")
+        @mark.plot
+        def task_plot_evolution_randomized(
+            case: Case = case,
+            sample: Input = sample,
+            results_file=case.dir(i) / "output.parquet",
+            produces=image_produces(case.dir(i) / "evolution"),
+        ):
+            df = pq.read_table(results_file).flatten().flatten()
 
-#             particles = [get_states(df, case, i) for i in range(len(case.input.particles))]
-#             times= particles[0][0]
+            fig = plt.figure(figsize=(FIGSIZE_INCH[0], 4))
+            ax = fig.subplots()
+            ax.set_aspect("equal", adjustable="datalim")
+            viridis = mpl.colormaps["viridis"]
 
-#             num = 10
+            particles = [get_states(df, sample, i) for i in range(len(sample.particles))]
+            times = particles[0][0]
 
-#             times_to_plot = np.geomspace(times[0], times[-1], 10)
+            num = 10
 
-#             for j, t in enumerate(times_to_plot):
-#                 color = viridis(float(j) / num)
-#                 i = np.searchsorted(times, t)
-#                 label = f"{times[i]:.2f}"
+            times_to_plot = np.geomspace(times[0], times[-1], 10)
 
-#                 for p in particles:
-#                     ax.fill(p[1][i], p[2][i], label=label, edgecolor=color, fill=False, lw=0.5)
-#                     label=None
+            for j, t in enumerate(times_to_plot):
+                color = viridis(float(j) / num)
+                i = np.searchsorted(times, t)
+                label = f"{i}/{len(times)}"
 
-#             ax.set_title(f"{case.display}")
-#             ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
-#             ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")
-#             fig.tight_layout()
+                for p in particles:
+                    ax.fill(p[1][i], p[2][i], label=label, edgecolor=color, fill=False, lw=0.5)
+                    label = None
 
-#             for p in produces:
-#                 fig.savefig(p)
+            ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
+            ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")
 
-#             plt.close(fig)
+            fig.tight_layout()
 
+            for p in produces:
+                fig.savefig(p)
 
-# def get_states(df: pa.Table, case: Case, particle_index: int):
-#     particle: pd.DataFrame = (
-#         df.filter(pc.field("Particle.Id") == case.input.particles[particle_index].id.bytes)
-#         .group_by(["State.Id"])
-#         .aggregate([("State.Time", "one"), ("Node.Coordinates.X", "list"), ("Node.Coordinates.Y", "list")])
-#         .sort_by("State.Time_one")
-#         .to_pandas()
-#     )
+            plt.close(fig)
 
-#     mask = (particle["State.Time_one"] > 1) & (np.diff(particle["State.Time_one"], prepend=[0]) > 0)
-#     times = particle["State.Time_one"][mask] / case.input.time_norm_surface
-#     particle_x = particle["Node.Coordinates.X_list"] * 1e6
-#     particle_y = particle["Node.Coordinates.Y_list"] * 1e6
+    def get_states(df: pa.Table, sample: Input, particle_index: int):
+        particle: pd.DataFrame = (
+            df.filter(pc.field("Particle.Id") == sample.particles[particle_index].id.bytes)
+            .group_by(["State.Id"])
+            .aggregate([("State.Time", "one"), ("Node.Coordinates.X", "list"), ("Node.Coordinates.Y", "list")])
+            .sort_by("State.Time_one")
+            .to_pandas()
+        )
 
-#     return times.array, particle_x.array, particle_y.array
+        mask = (particle["State.Time_one"] > 1) & (np.diff(particle["State.Time_one"], prepend=[0]) > 0)
+        times = np.asarray(particle["State.Time_one"][mask] / TIME_NORM_SURFACE)
+        particle_x = np.asarray(particle["Node.Coordinates.X_list"] * 1e6)
+        particle_y = np.asarray(particle["Node.Coordinates.Y_list"] * 1e6)
+
+        return times, particle_x, particle_y

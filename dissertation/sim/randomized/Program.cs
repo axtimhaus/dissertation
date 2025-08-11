@@ -10,12 +10,15 @@ using RefraSin.ParticleModel.Nodes;
 using RefraSin.ParticleModel.ParticleFactories;
 using RefraSin.ParticleModel.Particles;
 using RefraSin.ParticleModel.Remeshing;
+using RefraSin.ParticleModel.System;
 using RefraSin.Plotting;
 using RefraSin.ProcessModel;
 using RefraSin.ProcessModel.Sintering;
 using RefraSin.Storage;
 using RefraSin.TEPSolver;
+using RefraSin.TEPSolver.BreakConditions;
 using Serilog;
+using Serilog.Formatting.Display;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
@@ -23,8 +26,8 @@ Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateLogger();
 
-var inputFile = args[0];
-var outputFile = args[1];
+const string inputFile = "input.json";
+const string outputFile = "output.parquet";
 
 var inputText = File.ReadAllText(inputFile, encoding: Encoding.UTF8);
 
@@ -58,7 +61,8 @@ var particles = input
             p.Radius,
             p.Ovality,
             p.PeakCount,
-            p.PeakHeight
+            p.PeakHeight,
+            p.PeakShift
         ).GetParticle(p.Id)
     )
     .ToArray();
@@ -69,11 +73,17 @@ ParticlePlot
     .PlotParticles<IParticle<IParticleNode>, IParticleNode>(initialState.Particles)
     .SaveHtml("initialState.html");
 
-var compactedState = new OneByOneCompactionStep(
-    stepDistance: 0.2e-6,
-    minimumIntrusion: 0.15e-6,
+var compactionStep = new OneByOneCompactionStep(
+    stepDistance: 2e-6,
+    minimumIntrusion: 1.5e-6,
     maxStepCount: 10000
-).Solve(initialState);
+);
+
+var plotHandler = new PlotEventHandler();
+
+// compactionStep.SystemStateReported += plotHandler.HandleReportSystemState;
+
+var compactedState = compactionStep.Solve(initialState);
 
 ParticlePlot
     .PlotParticles<IParticle<IParticleNode>, IParticleNode>(compactedState.Particles)
@@ -82,9 +92,34 @@ ParticlePlot
 if (compactedState.Nodes.Where(n => n.Type is NodeType.GrainBoundary).Count() / 2 < 3)
     throw new Exception("contact creation failed, too few grain boundaries present");
 
-var solver = new SinteringSolver(SolverRoutines.Default, remeshingEverySteps: 50);
+var solver = new SinteringSolver(
+    SolverRoutines.Default with
+    {
+        Remeshers =
+        [
+            new FreeSurfaceRemesher(deletionLimit: 0.15, neckProtectionCount: 10),
+            new NeckNeighborhoodRemesher(),
+            new LastSurfaceNodeRemesher(),
+        ],
+        BreakConditions = [new PoreClosedCondition(20e-6 / input.Particles[0].Radius)],
+    },
+    remeshingEverySteps: 50
+);
 
-var plotHandler = new PlotEventHandler();
+var remeshedState = new SystemState(
+    Guid.NewGuid(),
+    compactedState.Time,
+    solver.Routines.Remeshers.Aggregate<
+        IParticleSystemRemesher,
+        IParticleSystem<IParticle<IParticleNode>, IParticleNode>
+    >(compactedState, (state, remesher) => remesher.RemeshSystem(state))
+);
+
+ParticlePlot
+    .PlotParticles<IParticle<IParticleNode>, IParticleNode>(remeshedState.Particles)
+    .SaveHtml("remeshedState.html");
+
+plotHandler = new PlotEventHandler();
 solver.SessionInitialized += plotHandler.HandleSessionInitialized;
 
 var process = new SinteringStep(
@@ -100,7 +135,7 @@ process.UseStorage(storage);
 
 try
 {
-    var finalState = process.Solve(compactedState);
+    var finalState = process.Solve(remeshedState);
     ParticlePlot
         .PlotParticles<IParticle<IParticleNode>, IParticleNode>(finalState.Particles)
         .SaveHtml("finalState.html");
@@ -145,6 +180,14 @@ class PlotEventHandler
                 ]
             )
             .SaveHtml($"step_{_counter}.html");
+        _counter++;
+    }
+
+    public void HandleReportSystemState(object? sender, IProcessStep.SystemStateReportedEventArgs e)
+    {
+        ParticlePlot
+            .PlotParticles<IParticle<IParticleNode>, IParticleNode>(e.State.Particles)
+            .SaveHtml($"state_{_counter}.html");
         _counter++;
     }
 }
