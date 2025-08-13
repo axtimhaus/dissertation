@@ -1,8 +1,11 @@
+ensure_path("TEXINPUTS", '../tubaf/');
+ensure_path("TEXINPUTS", '.');
+ensure_path("TEXINPUTS", './.build/');
+
+$do_cd = 1;
+$silent_mode = 1;
 $pdf_mode = 4;
 @default_files = ("dissertation.tex");
-ensure_path("TEXINPUTS", ".", ".build/");
-$do_cd=1;
-$silent_mode=1;
 
 add_cus_dep('aux', 'glstex', 0, 'run_bib2gls');
 

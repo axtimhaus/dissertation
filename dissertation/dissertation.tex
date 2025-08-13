@@ -1,18 +1,13 @@
-%! Compiler = latexmk -f -r .latexmkrc
-
 \documentclass[
     DIV=13,
     listof=totoc,
     bibliography=totoc,
-]{scrreport}
+]{tubaf-thesis}
+\usepackage[sans]{tubaf-fonts}
+\usepackage[footmark=author-subject]{tubaf-marks}
+\usepackage{tubaf-logoext-faculty-five}
 
-\usepackage[math-style=ISO]{unicode-math}
-\usepackage{fontspec}
-\setmainfont{TeX Gyre Termes}
-\setsansfont{TeX Gyre Heros}
-\setmonofont{TeX Gyre Cursor}
-\renewcommand{\familydefault}{\sfdefault}
-\setmathfont{TeX Gyre Termes Math}
+\usepackage[ngerman,english]{babel}
 
 \usepackage[mode=match, separate-uncertainty=true]{siunitx}
 
@@ -52,9 +47,22 @@
 \begin{document}
 \title{Microscopic Simulation of Solid State Sintering Regarding Irregularly Shaped Powder Particles}
 \author{Max Weiner}
+\birthdate{22.03.1996}
+\birthplace{Meißen}
+\faculty{Fakultät für Werkstoffwissenschaft und Werkstofftechnologie\\der Technischen Universität Bergakademie Freiberg}
 \date{\today}
+\subject{Dissertation}
+\currentdegree{Dipl.-Ing.}
+\attaineddegree[Dr.-Ing.]{Doktor-Ingenieur}
+\logo{\tubaflogoimf{2cm}{!}}
 
+\selectlanguage{ngerman}
 \maketitle
+
+\selectlanguage{english}
+\maketitle
+
+\pagenumbering{arabic}
 
 \tableofcontents
 

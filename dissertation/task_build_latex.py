@@ -11,11 +11,11 @@ from dissertation.config import ROOT_DIR
     script=Path("dissertation.tex"),
     document=Path("dissertation.pdf"),
     compilation_steps=cs.latexmk(
-        options=(
+        options=[
             "-r",
-            ROOT_DIR / "latexmkrc",
+            str(ROOT_DIR / "latexmkrc"),
             "-g",
-        ),
+        ],
     ),
 )
 def task_build_latex(
