@@ -28,7 +28,7 @@ for b in BATCHES:
         r0_dist, r0_dist_text = fit_weibull_mix2(df["r0"], 0, bins=100)
         pdf(ax, df["r0"], r0_dist, bins=100)
         cdf(twin, df["r0"], r0_dist, bins=100)
-        twin.annotate(r0_dist_text, (0.6, 0.3), xycoords="axes fraction")
+        twin.annotate(r0_dist_text, (0.75, 0.3), xycoords="axes fraction")
 
         ax.set_xlabel(r"$\Radius_0$ in \unit{\micro\meter}")
 
@@ -43,6 +43,8 @@ for b in BATCHES:
         for p in produces:
             fig.savefig(p)
 
+        plt.close(fig)
+
     @task(id=b)
     def task_plot_morphology_histograms_oval(
         fits_file=in_build_dir(BATCHES_DIR / "fits_oval" / f"{b}.csv"),
@@ -56,7 +58,7 @@ for b in BATCHES:
         r0_dist, r0_dist_text = fit_weibull_mix2(df["r0"], 0, bins=100)
         pdf(axs[0], df["r0"], r0_dist, bins=100)
         cdf(twins[0], df["r0"], r0_dist, bins=100)
-        twins[0].annotate(r0_dist_text, (0.6, 0.3), xycoords="axes fraction")
+        twins[0].annotate(r0_dist_text, (0.75, 0.3), xycoords="axes fraction")
 
         o_dist, o_dist_text = fit_weibull(df["o"], 1)
         pdf(axs[1], df["o"], o_dist, lower=1)
@@ -79,6 +81,8 @@ for b in BATCHES:
         for p in produces:
             fig.savefig(p)
 
+        plt.close(fig)
+
     @task(id=b)
     def task_plot_morphology_histograms_shape(
         fits_file=in_build_dir(BATCHES_DIR / "fits_shape" / f"{b}.csv"),
@@ -100,7 +104,7 @@ for b in BATCHES:
         r0_dist, r0_dist_text = fit_weibull_mix2(df["r0"], 0, bins=100)
         pdf(axs[0], df["r0"], r0_dist, bins=100)
         cdf(twins[0], df["r0"], r0_dist, bins=100)
-        twins[0].annotate(r0_dist_text, (0.8, 0.3), xycoords="axes fraction")
+        twins[0].annotate(r0_dist_text, (0.75, 0.3), xycoords="axes fraction")
 
         o_dist, o_dist_text = fit_weibull(df["o"], 1)
         pdf(axs[1], df["o"], o_dist, lower=1)
@@ -141,6 +145,8 @@ for b in BATCHES:
 
         for p in produces:
             fig.savefig(p)
+
+        plt.close(fig)
 
 
 def fit_weibull(data, lower: float, bins=20):

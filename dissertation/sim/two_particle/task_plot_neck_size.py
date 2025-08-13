@@ -8,8 +8,8 @@ from matplotlib import ticker
 from pytask import mark, task
 
 from dissertation.config import image_produces, integer_log_space125
-from dissertation.sim.two_particle.studies import PARTICLE1_ID, STUDIES, DimlessParameterStudy, StudyBase
 from dissertation.sim.two_particle.helper import ashby_grid
+from dissertation.sim.two_particle.studies import PARTICLE1_ID, STUDIES, DimlessParameterStudy, StudyBase
 
 RESAMPLE_COUNT = 100
 NECK_SIZE_LIMITS = (2e-1, 1)
@@ -30,7 +30,7 @@ for t in STUDIES:
         ax = fig.subplots()
         ax.set_xscale("log")
         ax.set_yscale("log")
-        # ax.grid(True, "both")
+        ax.grid(True, "both")
         upper_mag = -6
 
         for key, df in data_frames:
@@ -67,7 +67,7 @@ for t in STUDIES:
             ax = fig.subplots()
             ax.set_xscale(study_type.axis_scale)
             ax.set_yscale("log")
-            # ax.grid(True, "both")
+            ax.grid(True, "both")
 
             study_params = np.array([s.real_value for s in studies.values()])
             params = (np.linspace if study_type.axis_scale == "linear" else np.geomspace)(

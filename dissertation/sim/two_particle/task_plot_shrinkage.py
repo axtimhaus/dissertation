@@ -30,7 +30,7 @@ for t in STUDIES:
         ax = fig.subplots()
         ax.set_xscale("log")
         ax.set_yscale("log")
-        # ax.grid(True, "both")
+        ax.grid(True, "both")
         upper_mag = -6
 
         for key, df in data_frames:
@@ -68,7 +68,7 @@ for t in STUDIES:
             ax = fig.subplots()
             ax.set_xscale(study_type.axis_scale)
             ax.set_yscale("log")
-            # ax.grid(True, "both")
+            ax.grid(True, "both")
 
             study_params = np.array([s.real_value for s in studies.values()])
             params = (np.linspace if study_type.axis_scale == "linear" else np.geomspace)(

@@ -1,11 +1,17 @@
 \section{Contact Conditions Between Particles}\label{sec:contact-conditions}
 
+\begin{figure}
+    \centering
+    \includegraphics{img/model_development/node_shift_global}
+    \caption{Geometric Conditions for Global Node Displacement}
+    \label{fig:model_development/node_shift_global}
+\end{figure}
+
 In contrast to free surfaces, where the geometric evolution of a node is not constrained by the surrounding space, in grain boundaries the node shifting acts counter the solid material of the other particle.
 This introduces additional constraints, since the grain boundary must not form voids and must not overlap.
 The geometric constraints are dependent on the local evolution of the grain boundary nodes, as well as the relative position change of the particles.
 
 Starting from a compact grain boundary, meaning that there are no holes and/or overlap present within it, the condition of maintaining the compactness of the grain boundary can be formulated as follows, if the postions of the particles are fixed.
-
 \begin{subequations}
     \begin{align}
         \Step\Shift_{\Normal}\Regarding1 = \Step\Shift_{\Normal}\Regarding2 \\
@@ -17,7 +23,6 @@ Starting from a compact grain boundary, meaning that there are no holes and/or o
 But in reality the positions of particles to each other change, which can be observed macroscopically as shrinkage.
 So we formulate instead the total displacement of a node in absolute cartesian space, which must be equal regarded from both particles.
 The total node displacement includes contributions from particle displacement (index $\Particle$), normal node displacement (index $\Normal$) and tangential node displacement (index $\Tangential$).
-
 \begin{subequations}
     \begin{align}
         \Step\X_{\Particle1} + \Step\X_{\Normal}^{\Regarding1} + \Step\X_{\Tangential}^{\Regarding1} + \Step\X_{\RotationAngle}^{\Regarding1}
@@ -28,15 +33,7 @@ The total node displacement includes contributions from particle displacement (i
     \end{align}
 \end{subequations}
 
-\begin{figure}
-    \centering
-    \includegraphics{img/model_development/node_shift_global}
-    \caption{Geometric Conditions for Global Node Displacement}
-    \label{fig:model_development/node_shift_global}
-\end{figure}
-
 As can be seen from \autoref{fig:model_development/node_shift_global}, the angles of projection of the normal and tangential node shifting to the global cartesian axes are as follows:
-
 \begin{subequations}
     \begin{align}
         \eta_{\Normal} &= \RotationAngle + \Angle + \left( \SurfaceRadiusAngle_{\Lower} + \SurfaceVectorAngle_{\Normal\Lower} - \PI \right)
@@ -47,7 +44,6 @@ As can be seen from \autoref{fig:model_development/node_shift_global}, the angle
 \end{subequations}
 
 With these and further identities on the trigonometric functions the displacements of the node are given as follows:
-
 \begin{subequations}
     \begin{align}
         \Step\X_{\Normal} &= -\Step\Shift_{\Normal} \cos \left( \RotationAngle + \Angle + \SurfaceRadiusAngle + \SurfaceVectorAngle \right)

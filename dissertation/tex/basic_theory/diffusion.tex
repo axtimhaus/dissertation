@@ -9,36 +9,31 @@ The law includes an empirical scaling coefficient commonly referred to as the di
 $\InterfaceThickness$ is the thickness of the diffusion layer resp.~the interface.
 In some publications $\InterfaceThickness$ is directly included in the diffusion coefficient for interface diffusion as $\DiffusionCoefficient' = \DiffusionCoefficient\InterfaceThickness$ with the dimension $[\DiffusionCoefficient'] = \DimLength^3\DimTime^{-1}$.
 The interface thickness $\InterfaceThickness$ is hard to determine, often it is estimated by the size of one or two atom layers.
-
 \begin{equation}
     \Flux = - \DiffusionCoefficient\InterfaceThickness \frac{\Deriv\VacancyConcentration}{\Deriv\X}
     \label{eq:fick-first}
 \end{equation}
 
-The diffusion coefficient heavily varies with temperature.
+The diffusion coefficient $\DiffusionCoefficient$ heavily varies with temperature.
 Its temperature dependence is usually described by an Arrhenius-type equation as in \autoref{eq:diffusion-coefficient-arrhenius} with a pre-exponential factor $\DiffusionCoefficient_0$ and the activation energy $\ActivationEnergy$.
-
 \begin{equation}
     \DiffusionCoefficient = \DiffusionCoefficient_0 \exp \left( -\frac{\ActivationEnergy}{\GasConstant\Temperature} \right)
     \label{eq:diffusion-coefficient-arrhenius}
 \end{equation}
 
-The local vacancy concentration as driving force of the diffusion, however, depends on the thermal equilibrium vacancy concentration $\VacancyConcentration^\Standard$ and the local chemical potential $\ChemicalPotential$ as in \autoref{eq:vacancy-concentration}.
-
+The local vacancy concentration $\VacancyConcentration$, however, depends on the thermal equilibrium vacancy concentration $\VacancyConcentration^\Standard$ and the local chemical potential $\ChemicalPotential$ as in \autoref{eq:vacancy-concentration}.
 \begin{equation}
     \VacancyConcentration = \VacancyConcentration^\Standard \left( 1 - \frac{\ChemicalPotential - \ChemicalPotential^\Standard}{\GasConstant\Temperature} \right)
     \label{eq:vacancy-concentration}
 \end{equation}
 
 The main factor influencing the chemical potential in the regarded sintering processes are stresses, especially stresses originating from curved surfaces or interfaces (also known as surface tensions). The local chemical potential by a stress $\Stress$ is given as in \autoref{eq:potential-stress} with the molar volume $\MolarVolume$.
-
 \begin{equation}
     \ChemicalPotential = \ChemicalPotential^\Standard + \Stress \MolarVolume
     \label{eq:potential-stress}
 \end{equation}
 
 The stress by a curved surface is given as in \autoref{eq:stress-surface-curvature} with the surface resp.\ interface energy $\InterfaceEnergy$ and the curvature $\Curvature$.
-
 \begin{equation}
     \Stress = \InterfaceEnergy \Curvature
     \label{eq:stress-surface-curvature}
@@ -53,7 +48,7 @@ where the $\InterfaceEnergy_i$ are the interface energies of the interface oppos
     \frac{\InterfaceEnergy_1}{\sin \DihedralAngle_1} = \frac{\InterfaceEnergy_2}{\sin \DihedralAngle_2} = \frac{\InterfaceEnergy_3}{\sin \DihedralAngle_3}
     \label{eq:youngs-dihedral}
 \end{equation}
-This is equivalent to a triangle with side lengths $\InterfaceEnergy_i$ and the respective opposite angles $\PI - \DihedralAngle_i$ \cite{Hoffman1972}.
-From this can directly be seen, that the sum of either two surface energies must be larger than the third, or this triangle does not exist and \autoref{eq:youngs-dihedral} can not be solved.
-The non-existence of the triangle implies that such a junction can never be in equilibrium, if no other forces on the junction are present (like pinning forces) \cite{King1999}.
+This is equivalent to a triangle with side lengths $\InterfaceEnergy_i$ and the respective opposite angles $\PI - \DihedralAngle_i$, as \textcite{Hoffman1972} explains.
+This leads to the condition that the sum of either two surface energies must be larger than the third, or this triangle does not exist and \autoref{eq:youngs-dihedral} can not be solved.
+The non-existence of the triangle implies that such a junction can never be in equilibrium, if no other forces on the junction are present (like pinning forces), as was investigated by \textcite{King1999}.
 So in this case, it is always beneficial from energetic point of view to consume the boundary with the largest interface energy while enlarging the others.

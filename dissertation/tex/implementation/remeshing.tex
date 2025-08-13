@@ -15,7 +15,6 @@ The flatness of a surface at a node is measured by the angle between its adjacen
 At surface is flat, if this angle equals \qty{180}{\degree} and is curved if this angle deviates from that.
 Positive and regative curvatures are treated equally.
 So, with an threshold chosen by the user, the criterion for considering a node for deletion is:
-
 \begin{equation}
     \Abs{\SurfaceRadiusAngle_{\Upper} + \SurfaceRadiusAngle_{\Lower} - \PI} < \qtyrange{0.01}{0.05}{\radian}
     \label{eq:free-surface-remeshing-deletion-criterion-angle}
@@ -26,7 +25,6 @@ This mechanism typically limits the time step width to avoid instable escalation
 To avoid to fast coarsening and lack of incluence of the chosen initial discretization width, a second check is applied if the deletion would not lead to too large distance between the remaining nodes.
 $\Mean\SurfaceDistance$ is the current mean distance between the surface nodes of the regarded particle.
 The allowed relative distance can be chosen to control the speed of discretization coarsening during simulation.
-
 \begin{equation}
     \frac12 \left( \SurfaceDistance_{\Upper} + \SurfaceDistance_{\Lower} \right) < (\numrange{1.5}{3}) \Mean\SurfaceDistance
     \label{eq:free-surface-remeshing-deletion-criterion-distance}
@@ -37,7 +35,6 @@ Surface nodes directly adjacent to a neck are excluded, since they are treated b
 
 If the local curvature is high, new nodes are inserted in the middle of the adjacent surface lines above and below.
 Lower values of the control parameter lead to finer discretization of curved surfaces.
-
 \begin{equation}
     \Abs{\SurfaceRadiusAngle_{\Upper} + \SurfaceRadiusAngle_{\Lower} - \PI} > \qtyrange{0.5}{0.8}{\radian}
     \label{eq:free-surface-remeshing-addition-criterion-angle}
@@ -48,7 +45,6 @@ Lower values of the control parameter lead to finer discretization of curved sur
 This procedure is required to make the simulation work as the neck nodes approach their adjacent surface nodes when the neck is growing.
 If they come to close, the respective surface node must be deleted or the simulation gets stuck in an singularity.
 The surface node is deleted if the distance between it and the neck node falls below an adjustable fraction of the mean surface distance $\Mean\SurfaceDistance$.
-
 \begin{equation}
     \SurfaceDistance_{\Neck\Surface} < (\numrange{0.3}{0.5}) \Mean\SurfaceDistance
     \label{eq:neck-remeshing-deletion-criterion-distance}

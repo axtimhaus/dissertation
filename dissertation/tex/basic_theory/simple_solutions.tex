@@ -18,27 +18,22 @@ Often, only a single pair of particles of the same size and material properties 
 These simplifications allow the analytical solution of the governing differential equations and lead to equation of potential type as in \autoref{eq:inital-stage-neck-size} for neck radius and \autoref{eq:inital-stage-shrinkage} for shrinkage.
 Therein, $\Time$ denotes the sinter duration, $\NeckRadius$ the neck radius, $\Radius_{\Particle}$ the particle radius and $B$, $m$ and $n$ are parameters depending on the acting transport mechanisms.
 Notable examples of such models are given by \textcite{Kuczynski1949, Johnson1963, Kingery1955, Coblenz1980, German2017}.
-
-\begin{equation}
-    \left( \frac{\NeckRadius}{\Radius_{\Particle}} \right)^n = \frac{B \Time}{\left( 2 \Radius_{\Particle} \right)^m}
-    \label{eq:inital-stage-neck-size}
-\end{equation}
-
-\begin{equation}
-    \Shrinkage^n = \frac{B \Time}{\left( 2 \Radius_{\Particle} \right)^m}
+\begin{align}
+    \left( \frac{\NeckRadius}{\Radius_{\Particle}} \right)^n &= \frac{B \Time}{\left( 2 \Radius_{\Particle} \right)^m}
+    \label{eq:inital-stage-neck-size}\\
+    \Shrinkage^n &= \frac{B \Time}{\left( 2 \Radius_{\Particle} \right)^m}
     \label{eq:inital-stage-shrinkage}
-\end{equation}
+\end{align}
 
 A common result, also influencing more advanced approaches, from these models alongside with dimensionless parameter studies is the definition of the dimensionless time scale for two-particle-sintering processes as given in \autoref{eq:normalized_time}.
-Often the surface energy $\InterfaceEnergy_{\Surface}$ and surface diffusion coefficient $\DiffusionCoefficient{\Surface}$ are referenced, but the equal is possible using the properties of the grain boundary.
-
+Often the surface energy $\InterfaceEnergy_{\Surface}$ and surface diffusion coefficient $\DiffusionCoefficient_{\Surface}$ are referenced, but the equal is possible using the properties of the grain boundary.
 \begin{equation}
     \Normalized\Time = \frac{\MolarVolume\VacancyConcentration^\Standard\DiffusionCoefficient_{\Surface}\InterfaceEnergy_{\Surface}}{\GasConstant\Temperature\Radius_{\Particle}^4} \cdot \Time
     \label{eq:normalized_time}
 \end{equation}
 
 Similar treatments have been given for the intermediate and final stages of sintering.
-In these stages the particle are usually assumed as polyhedra with cylindrical or spherical pores on the boundaries.
+In these stages the particles are usually assumed as polyhedra with cylindrical or spherical pores on the boundaries.
 Since these stages are mainly characterized by the decrease in pore volume, they are formulated in terms of densification.
 Examples for such models are \textcite{Coble1961a} and \textcite{Swinkels1981}.
 

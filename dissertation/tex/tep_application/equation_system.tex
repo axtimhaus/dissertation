@@ -10,7 +10,6 @@ The dissipation at one node is given by the product of node shifts and the respe
 The Gibbs energy derivatives are derived in \autoref{sec:surface-evolution} for the different node types.
 The dissipation of the whole system is the sum of all node dissipations, since all thermodynamic forces occur at nodes.
 Shifting of particles alone does not follow a thermodynamic force, but is determined by the ensemble of the involved nodes.
-
 \begin{equation}
     \Dissipation = -\sum^{\Nodes} \left[ \frac{\partial \GibbsEnergy}{\partial \Shift_{\Normal}} \dot\Shift_{\Normal} + \frac{\partial \GibbsEnergy}{\partial \Shift_{\Tangential}} \dot\Shift_{\Tangential} \right]
     \label{eq:dissipation-node}
@@ -63,7 +62,6 @@ The Langrangian multiplicator for this constraint will be denoted as $\LagrangeP
 
 To pin a group of particles' position in space, one of them has to be constrained at a fixed position, so that the other ones are able to move relatively to this one.
 This is done by constraints setting it's displacement to zero as in \autoref{eq:fixed-particle-constraints}.
-
 \begin{subequations}
     \begin{align}
         \Step\X_{\Particle} = 0 \\

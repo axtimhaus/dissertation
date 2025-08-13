@@ -6,8 +6,8 @@ Commonly, a distinction is made between Monte-Carlo sampling and Monte-Carlo sim
 The former uses random numbers following a certain distribution as input to a function to explore the values of the function in the regarded argument space.
 The latter uses sampling from distributions to model actual random processes.
 According to \textcite{Lemieux2009} these are in fact just two different ways of viewing the problem, the formulation can be converted into each other.
-Both will be discuseed in \autoref{subsec:monte-carlo-classic}.
-A method of this type will be applied for powder modelling in \autoref{sec:statistical-powder-modeling}.
+Both will be discussed in \autoref{subsec:monte-carlo-classic}.
+A method of this type will be applied for powder modeling in \autoref{sec:statistical-powder-modeling}.
 Another class of methods is often referred to as kinetic \gls{MCM}.
 This term refers to modelling the evolution of a system in time by altering the system state in each time step based on random numbers and the probabilities of state change.
 This method was used for modelling of sintering and microstructure evolution before (e.g. \cite{Braginsky2005, Luque2010, Tikare2003, Wang2018}), were the probability of state change usually correlates to the local chemical potential.
@@ -15,15 +15,13 @@ These methods will be briefly discussed in \autoref{subsec:monte-carlo-kinetic-s
 
 \subsection{Classic Monte Carlo Methods}\label{subsec:monte-carlo-classic}
 
-The basic idea behind classic \glspl{MCM} is to use randomly sampled values as input to a function and analysing the distribution of result values afterwards using the methods of descriptive statistics.
-The
+The basic idea behind classic \glspl{MCM} is to use randomly sampled values as input to a function and analyzing the distribution of result values afterwards using the methods of descriptive statistics.
 A classic application is the integration of multidimensional functions.
 Especially for higher dimensional functions, \glspl{MCM} are much more effective than deterministic, raster-based integration methods like the Newton-Cotes or Gaussian formulae \cite{Lemieux2009}.
 \glspl{MCM} need fewer function evaluations to obtain a certain precision than the deterministic raster methods.
 The principle is to calculate the average of the function in the regarded interval by estimating the expectation value of the result observations.
 
 Let us consider a function $f$ which is deterministic, but is feeded with a stochastic variable $X$ and maps this to another stochastic variable $Y$ as shown in \autoref{eq:monte-carlo-function}.
-
 \begin{equation}
     Y = f(X)
     \label{eq:monte-carlo-function}
@@ -35,7 +33,6 @@ The most straightforward way to accomplish this is inversion.
 Given a uniformly distributed variable $U$ with samples $u_i$ one may obtain samples of $X$ by applying the inverse of the \gls{CDF} $D_X^{-1}$ as in \autoref{eq:monte-carlo-inversion}.
 This method is the simplest and computationally cheapest way of generating such a sample if the inverse \gls{CDF} is available and cheap to compute.
 For some distributions, there is no explicit formulation of the \gls{CDF}, most notable for the widely used normal distribution.
-
 \begin{equation}
     x_i = D_X^{-1}(u_i)
     \label{eq:monte-carlo-inversion}
@@ -48,7 +45,7 @@ To obtain a sample $u_i$ of the uniform variable $U$ one needs a sufficiently go
 One may use lists of real random numbers or hardware random number generators, but usually \gls{PRNG} algorithms are applied.
 These are in fact not random, rather deterministic, but the number sequences generated resemble real random sequences well enough.
 The main advantage of these algorithms over true random number generators is their repeatability, which means, that the same sequence can be generated multiple times if the same start conditions (seeds) are used.
-This enable reproducible calculation results, which is especially useful for debugging und assessment.
+This enables reproducible calculation results, which is especially useful for debugging und assessment.
 Good \gls{PRNG} are characterized by good uniformity of the distribution and high cycle periods.
 The actual quality assessment of such generators is a complicated task and out of the scope here.
 \textcite{Lemieux2009} gives a brief introduction to this topic and references a large number of more detailed publications.
@@ -61,12 +58,10 @@ Those can be estimated from the sample by \autoref{eq:estimator-expectation} and
 Note the $N-1$ in \autoref{eq:estimator-variance} for the sample standard deviation, because the naive approach with just $N$ would introduce a bias into the estimation caused by the linking to the estimated expectation $\Estimated\Expectation(Y)$.
 There are several other possibilities to construct estimators for those properties, which may be more efficient (converge to required precision with fewer computational effort) depending on the characteristics of the problem.
 Such estimators are known under the term variance reduction techniques, see again \textcite{Lemieux2009} for a overview on these.
-
 \begin{equation}
     \Estimated\Expectation(Y) = \frac{1}{N} \sum_i^N y_i
     \label{eq:estimator-expectation}
 \end{equation}
-
 \begin{equation}
     \Estimated\StandardDeviation^2(Y) = \frac{1}{N-1} \sum_i^N \left( y_i - \Estimated\Expectation(Y) \right)^2
     \label{eq:estimator-variance}
@@ -74,7 +69,7 @@ Such estimators are known under the term variance reduction techniques, see agai
 
 \subsection{Sintering Simulation by Kinetic Monte Carlo Methods}\label{subsec:monte-carlo-kinetic-sintering}
 
-The basic idea behind most kinetic \glspl{MCM} (f.e. \cite{Braginsky2005, Luque2010, Tikare2003, Wang2018, Bjork2012}) is to discretize the model space into finite volumes (voxels) with a defined discrete state, which may change with a defined probability.
+The basic idea behind most kinetic \glspl{MCM} (e.g.~\cite{Braginsky2005, Luque2010, Tikare2003, Wang2018, Bjork2012}) is to discretize the model space into finite volumes (voxels) with a defined discrete state, which may change with a defined probability.
 This type of system discretization is also referred to as cellular automaton.
 In each step, a voxel is chosen randomly and the probability of changing its state is calculated.
 Then, the state is changed conditionally by comparing the probability to the value of a random number.
@@ -82,9 +77,8 @@ The term "kinetic" refers hereby to the correlation of the number of steps perfo
 This correlation is usually not directly obtainable, but has to be determined by comparison to experimental results, if desired.
 
 The way to determine the probability of state changes varies in the published models.
-\citeauthor{Tikare2003}\cite{Braginsky2005, Tikare2003, Bjork2012, Tikare2010} evaluate the energy change $\Diff E$ of the system for the case the state change has actually happened.
+\citeauthor{Tikare2003}~\cite{Braginsky2005, Tikare2003, Bjork2012, Tikare2010} evaluate the energy change $\Diff E$ of the system for the case that the state change has actually happened.
 The energy change is then correlated to the probability by \autoref{eq:kinetic-monte-carlo-energy-probability}, where a negative energy change (reduction of system energy) is always accepted, however positive ones tend to zero probability by an exponential law.
-
 \begin{equation}
     \Probability =
     \begin{cases}
@@ -95,9 +89,9 @@ The energy change is then correlated to the probability by \autoref{eq:kinetic-m
 \end{equation}
 
 Another way correlates the probability to the local surface geometry, which resembles classic sintering theory.
-\textcite{Luque2010} (although for liquid phase sintering) evaluates the number of neighboring voxels with the same or different state and correlate the probability with that count.
+\textcite{Luque2010} (although for liquid phase sintering) evaluate the number of neighboring voxels with the same or different state and correlate the probability with that count.
 High count of non-solid (in this case liquid, but void also imaginable) voxels beneath a solid mean a high convex curvature at this point.
-In contrast, a high count of solids beneath a non-solid one mean a high concave curvature.
+In contrast, a high count of solid voxels beneath a non-solid one mean a high concave curvature.
 In \textcite{Luque2005}, they evaluate a number of different approaches for the correlation between these counts and the probability.
 They remark, that although lots of different approaches could be chosen, only few are feasible due to the danger of generating numerical artifacts in the system state.
 A similar approach was taken by \textcite{Wang2018}.

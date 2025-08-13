@@ -1,13 +1,12 @@
 from uuid import UUID
 
-from matplotlib.lines import Line2D
 import matplotlib.pyplot as plt
-from matplotlib.transforms import IdentityTransform
 import numpy as np
 import pandas as pd
 import pyarrow as pa
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
+from matplotlib.lines import Line2D
 from pytask import mark, task
 
 from dissertation.config import image_produces
@@ -30,6 +29,7 @@ for t in STUDIES:
         ax.set_xscale("log")
         ax.set_yscale("asinh")
         ax.grid(True)
+        ax.grid(True, "both", "y")
 
         for key, df in data_frames:
             study = studies[key]
