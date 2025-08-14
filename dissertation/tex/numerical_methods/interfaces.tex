@@ -194,7 +194,7 @@ Especially in sintering models there are regions where the phase field function 
 Using a fine discretization as required to decribe the gradient correctly in the whole domain means a huge waste of computational efficiency.
 However on sintering models, remeshing procedures applied are poorly discussed.
 Some authors~\cite{Asp2006, Greenquist2020, Ivannikov2021} just claim that they have used it, without any further specification.
-\textcite{Chockalingam2016} and \textcite{Biswas2016, Biswas2017} adopted a method of \textcite{Tonks2012} on quadrilateral elements to refine near the interface based on the current gradient of the phase field variables.
+Others~\cite{Chockalingam2016, Biswas2016, Biswas2017} adopted a method of \textcite{Tonks2012} on quadrilateral elements to refine near the interface based on the current gradient of the phase field variables.
 \textcite{Moelans2008} recommend a spectral moving mesh method of \textcite{Feng2006}, but without any own results supporting this recommendation.
 Larger efforts on this topic have been conducted in the field of fracture respectively crack propagation modeling, which generally has the same caveats as the damage variable is widely constant except in the crack region.
 Several approaches~\cite{Burke2010, Artina2015, Ferro2018, Micheletti2018, Hirshikesh2019, Goswami2019} use the estimated discretization error effected by the current mesh to determine the required refinement.
