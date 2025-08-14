@@ -16,7 +16,7 @@ This study shall demonstrate and evaluate this issue on the example of regular s
 \end{figure}
 
 In a regular packing of equal circles each pore in the packing shows equal evolution due to symmetry.
-Four different packings, displayed in \autoref{fig:parameter_study/packings}, shall be investigated here, which resemble common configurations of sphere packings:
+Four different packings, displayed in \cref{fig:parameter_study/packings}, shall be investigated here, which resemble common configurations of sphere packings:
 \begin{description}
     \item[Pair] the usual two-particle packing as a reference
     \item[Triangle] the densest possible packing of circles with particles at the corners of an equal sided triangle, resembles a $\left\{ 111 \right\}$ cut through a face-centered cubic cell
@@ -28,7 +28,7 @@ The main difference between these packings is the size and the shape of the pore
 These packings are expected to show only effects of pore closing, but otherwise behave in a fully symmetric way equivalently to the pair case, as all particles are of equal size, shape and material properties.
 So in a second step, one of the particles will be given a surface and grain boundary diffusion coefficient \num{1000} times smaller than the other ones to regard hindering of sintering by the presence of an inert particle.
 The term inert shall be used here for a particle with remarkably lower diffusion rate on it's surface as well the grain boundary.
-This particle is shown with brown stroke in \autoref{fig:parameter_study/packings}.
+This particle is shown with brown stroke in \cref{fig:parameter_study/packings}.
 The other ones will be referred as active ones.
 
 \subsection{Discussion of the Results}
@@ -107,8 +107,8 @@ The other ones will be referred as active ones.
     \label{fig:packings/evolution/rhombii}
 \end{figure}
 
-\autoref{fig:packings/shrinkage} shows the shrinkage for the distinct packings obtained from the simulations.
-The shrinkage is calculated in all cases using the polygon approach as discussed in \autoref{sec:packings}, except for the pair for which the polygon approach is not applicable and so the distance approach is used.
+\Cref{fig:packings/shrinkage} shows the shrinkage for the distinct packings obtained from the simulations.
+The shrinkage is calculated in all cases using the polygon approach as discussed in \cref{sec:packings}, except for the pair for which the polygon approach is not applicable and so the distance approach is used.
 Note, that the distinct cases all show the equal behavior in early stages and the two approaches to shrinkage calculation are equivalent.
 At some point, specific for the respective case, the curve deviates rapidly to higher shrinkages from the reference two-particle model.
 This point is related to the pore closing and the change of its shape characteristic from concave to convex, as is discussed in \textcite{Tikare2003}.
@@ -116,11 +116,11 @@ Therefore, the deviation occurs earlier for the more dense packed cases, in orde
 
 At the point where the pore was completely closed, the simulations were cancelled, as the current model does not support triple points yet.
 Complete closure was determined at the point, were the last surface node between two neck nodes was removed by the neck remeshing procedure.
-This situation is displayed in \autoref{fig:packings/evolution/pairs} to \autoref{fig:packings/evolution/rhombii} by the most yellowish line, which is the last state of the simulation.
+This situation is displayed in \crefrange{fig:packings/evolution/pairs}{fig:packings/evolution/rhombii} by the most yellowish line, which is the last state of the simulation.
 Note that equal colors represent equal times in all cases.
 As the model is only aimed at initial and intermediate sintering stages, this problem can be neglected.
 
-\autoref{fig:packings/neck_size} shows the neck sizes for the distinct packings obtained from the simulations.
+\Cref{fig:packings/neck_size} shows the neck sizes for the distinct packings obtained from the simulations.
 The curve drawn represents the average of all necks for the multiple-particle cases.
 The general trends are the same as for shrinkage.
 The beginning of pore closing can be noticed earlier in the neck size evolution by an deviation to the lower from the straight line.
@@ -138,8 +138,8 @@ An correlation with the count of active particles present seems unlikely, since 
 This did not occur in the current investigations, likely because the inert particle was not fully surrounded by active particles.
 Nevertheless, the simulation would currently cancel if a neck shrinks and approaches zero width, as contact release is not implemented.
 
-Looking at the geometry evolutions in \autoref{fig:packings/evolution/triangles} to \autoref{fig:packings/evolution/rhombii}, the convexity respectively concavity of the pore can clearly be observed.
+Looking at the geometry evolutions in \crefrange{fig:packings/evolution/triangles}{fig:packings/evolution/rhombii}, the convexity respectively concavity of the pore can clearly be observed.
 The pore surface to the inert particle stays concave during the whole process.
-As previously observed in \autoref{subsec:parameter-study-asymmetric-surface-diffusion-ratio}, the grain boundaries between inert and active particles are curved, since the active particle creeps around the inert one.
+As previously observed in \cref{subsec:parameter-study-asymmetric-surface-diffusion-ratio}, the grain boundaries between inert and active particles are curved, since the active particle creeps around the inert one.
 On the inert particle an undercut evolves near the neck.
 The remaining pore volume at the state of simulation cancellation is significantly higher than in the pure active cases.

@@ -7,18 +7,18 @@ In the current case, these needs and possibilities highly vary during progress o
 So in the beginning of the sintering process, where curvatures are high a fine discretization is desirable to not miss the details.
 In later stages, curvatures have decreased and fine discretization leads to unnecessarily high effort.
 
-This study aims on evaluating the influence of the surface remeshing procedure described in \autoref{sec:remeshing-procedures} on the precision of time integration and providing a decent choice of the parameters to use in the following investigations.
+This study aims on evaluating the influence of the surface remeshing procedure described in \cref{sec:remeshing-procedures} on the precision of time integration and providing a decent choice of the parameters to use in the following investigations.
 
 \subsection{Construction of the Study}
 
 The case matrix of the study has two dimensions.
 The first is the count of nodes per particle in the initial state, which is inverse proportional to the mean discretization width.
 The levels used are \numlist{50;100;200} nodes per particle.
-The second is the activation and parameterization of the surface remeshing procedure (\autoref{sec:free-surface-remeshing}).
+The second is the activation and parameterization of the surface remeshing procedure (\cref{sec:free-surface-remeshing}).
 The levels used are deactivated and the angle thresholds of \qtylist{0.01;0.02;0.05}{\radian}.
 As the surface follows a circular shape, high influence of node adding has not to be expected here, so it is disregarded.
 The surface distance limit is fixed to the default of \num{3.0}.
-Neck remeshing is necessarily activated with a distance limit parameter of \num{0.5}, as was determined as appropriate in \autoref{sec:study-neck-remeshing}.
+Neck remeshing is necessarily activated with a distance limit parameter of \num{0.5}, as was determined as appropriate in \cref{sec:study-neck-remeshing}.
 
 Targets of investigation are as before the time consumption (duration) of the simulations, the step count needed and the evolution of the step width's during the simulation.
 As measure for precision, their agreement in shrinkage and the overall volume loss are regarded.
@@ -49,23 +49,23 @@ As measure for precision, their agreement in shrinkage and the overall volume lo
     \caption{Numerical Behavior of the Simulation in Dependence on the Surface Remeshing Limit}
 \end{figure}
 
-\autoref{fig:two_particle/studies/surface_remeshing/step_count} shows the count of calculated time steps alongside with the total time consumption for the simulations.
+\Cref{fig:two_particle/studies/surface_remeshing/step_count} shows the count of calculated time steps alongside with the total time consumption for the simulations.
 The general trend is similar to that of neck remeshing discussed in the previous section.
 Step count and time consumption increase with node count and decrease with the limit parameter.
 A special observation here is the \num{200} nodes/\qty{0.05}{\radian} limit run which shows a drastic drop in the effort compared to the other runs.
 The reason for this is, that in this case the limit is high enough to remesh the free surface of the circular shape down to approximately \num{100} nodes in the first remeshing run.
 So this case is roughly equivalent to the \num{100} nodes/\qty{0.05}{\radian} limit run.
 
-\autoref{fig:two_particle/studies/surface_remeshing/shrinkage} shows the shrinkage curves obtained from the parameter variation.
+\Cref{fig:two_particle/studies/surface_remeshing/shrinkage} shows the shrinkage curves obtained from the parameter variation.
 As above, the trend is generally equivalent to the neck remeshing.
 The low count runs show the same errors in the early stages, whereas the good agreement in late stages is present, too.
 Note that the \num{200} nodes/\qty{0.05}{\radian} still shows the accurate results of the other \num{200} nodes runs, despite the agressive remeshing.
 
-\autoref{fig:two_particle/studies/time_step/volume_loss} shows the loss of volume in the system during simulation in dependence on the parameters.
+\Cref{fig:two_particle/studies/time_step/volume_loss} shows the loss of volume in the system during simulation in dependence on the parameters.
 As to be expected, the general trends are similar to the neck remeshing, too.
 The special \num{200} nodes/\qty{0.05}{\radian} case shows an extraordinarily low volume loss in late stages, as the effect of neck remeshing losses is canceled out by the counter-signed effect of the initial rigorous surface remeshing step, which was noticed above.
 
-\autoref{fig:two_particle/studies/surface_remeshing/time_step_width} shows the evolution of the time step width used in the simulations for the distinct cases.
+\Cref{fig:two_particle/studies/surface_remeshing/time_step_width} shows the evolution of the time step width used in the simulations for the distinct cases.
 As to be expected, the general trends are similar to the neck remeshing, too.
 The special \num{200} nodes/\qty{0.05}{\radian} case shows the same bahvior as the other \num{200} nodes cases in the early stages but much higher time steps than those in later stages.
 

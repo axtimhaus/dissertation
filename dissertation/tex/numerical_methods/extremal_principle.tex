@@ -8,13 +8,13 @@ There are several distinct formulations of the \gls{TEP}, they differ mainly in 
 The other's can be derived from that.
 The following elaborations are based on Ziegler's priciple in the formulation by \textcite{Svoboda1991} with own modifications to meet the requirements of the current work.
 
-The dissipation $\Dissipation$ can be formulated as in \autoref{eq:dissipation} in dependence on the vector of \gls{EVS} $\Vect\ExternalStateVariable$, the vector of \gls{IVS} $\Vect\InternalStateVariable$ and the velocity vector of \gls{IVS} $\Vect{\InternalStateVelocity}$, see \autoref{subsec:internal-variables-of-state} for a brief introduction on \gls{IVS}.
+The dissipation $\Dissipation$ can be formulated as in \cref{eq:dissipation} in dependence on the vector of \gls{EVS} $\Vect\ExternalStateVariable$, the vector of \gls{IVS} $\Vect\InternalStateVariable$ and the velocity vector of \gls{IVS} $\Vect{\InternalStateVelocity}$, see \cref{subsec:internal-variables-of-state} for a brief introduction on \gls{IVS}.
 It is a bilinear form in the velocity vector of internal state variables and the vector of thermodynamic forces.
 The latter can be expressed as $\partial\GibbsEnergy(\Vect\ExternalStateVariable, \Vect\InternalStateVariable)/\partial \Vect\InternalStateVariable$, where $\GibbsEnergy$ is the Gibbs energy of the system.
 Note the minus sign, as the dissipation is being maximized, where the change in Gibbs energy is defined negative for spontaneous processes.
 The Gibbs energy is as state function only dependent on the current state of the system, thus the thermodynamic forces do not include any kinetic constraints.
 Since $\Dissipation$ is linear in $\Vect{\InternalStateVelocity}$, maximizing without further constraints is not meaningful.
-Therefore, an additional dissipation function $\DissipationFunction$ is introduced, which must be always equal to $\Dissipation$, since both describe the dissipation of the process (compare \autoref{eq:dissipation-function}).
+Therefore, an additional dissipation function $\DissipationFunction$ is introduced, which must be always equal to $\Dissipation$, since both describe the dissipation of the process (compare \cref{eq:dissipation-function}).
 However, $\DissipationFunction$ is formulated in terms of the kinetic conditions of the process and is generally and non-linear form in $\Vect{\InternalStateVelocity}$, often a quadratic form.
 The actual form of $\DissipationFunction$ heavily depends on the regarded process, but it commonly includes empirical kinetic material parameters such as diffusion coefficients or mobilities.
 
@@ -25,8 +25,8 @@ The actual form of $\DissipationFunction$ heavily depends on the regarded proces
     \end{align} \label{eq:tep-classic}
 \end{subequations}
 
-The constrained optimization problem in \autoref{eq:tep-classic} can be solved using the Lagrange formalism.
-The problem is reformulated as the Lagrange functional $\LagrangeFunction$ in \autoref{eq:tep-classic-lagrange} with the additional parameter $\LagrangeParameter$.
+The constrained optimization problem in \cref{eq:tep-classic} can be solved using the Lagrange formalism.
+The problem is reformulated as the Lagrange functional $\LagrangeFunction$ in \cref{eq:tep-classic-lagrange} with the additional parameter $\LagrangeParameter$.
 
 \begin{equation}
     \LagrangeFunction = \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) + \LagrangeParameter \left( \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) - \DissipationFunction(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) \right)
@@ -43,7 +43,7 @@ Note that the derivative with respect to $\LagrangeParameter$ is always identica
     \end{align} \label{eq: tep-classic-gradient}
 \end{subequations}
 
-For the simple case of $\DissipationFunction$ being quadratic in $\Vect{\InternalStateVelocity}$ the solution of the system is given in \autoref{eq:tep-classic-solution}, which is a linear system of equations of the same size as $\Vect{\InternalStateVelocity}$.
+For the simple case of $\DissipationFunction$ being quadratic in $\Vect{\InternalStateVelocity}$ the solution of the system is given in \cref{eq:tep-classic-solution}, which is a linear system of equations of the same size as $\Vect{\InternalStateVelocity}$.
 Compare \textcite{Svoboda1991, Fischer2014} on this.
 
 \begin{equation}
@@ -55,10 +55,10 @@ Note, that for this formulation it is required, that the dissipation $\Dissipati
 Often the fluxes $\Vect\Flux$ are used therein.
 
 Recently, \textcite{Hackl2020a} published a generalized formulation of the principle breaking up the need to have the same kinetic variables in the dissipation $\Dissipation$ and the dissipation function $\DissipationFunction$.
-The following elaborations use a different notation than in the reference, which fits better to the needs of the application in \autoref{ch:tep_application}, but the meaning is generally equivalent.
-The dissipation $\Dissipation$ is defined in the same way as before, but the dissipation function $\DissipationFunction$ does not include the velocities of internal state $\Vect{\InternalStateVelocity}$, but instead the fluxes $\Vect\Flux$ as in \autoref{eq:dissipation-function-general}.
+The following elaborations use a different notation than in the reference, which fits better to the needs of the application in \cref{ch:tep_application}, but the meaning is generally equivalent.
+The dissipation $\Dissipation$ is defined in the same way as before, but the dissipation function $\DissipationFunction$ does not include the velocities of internal state $\Vect{\InternalStateVelocity}$, but instead the fluxes $\Vect\Flux$ as in \cref{eq:dissipation-function-general}.
 Note that in this formulation the velocities $\Vect{\InternalStateVelocity}$ are \emph{not} required to be identical to the fluxes $\Vect\Flux$, neither must they have the same size.
-The relations between the velocities $\Vect{\InternalStateVelocity}$ and the fluxes $\Vect\Flux$ are introduced by the constraints $\Vect\Constraint$ as in \autoref{eq:constraints}.
+The relations between the velocities $\Vect{\InternalStateVelocity}$ and the fluxes $\Vect\Flux$ are introduced by the constraints $\Vect\Constraint$ as in \cref{eq:constraints}.
 The dissipation function $\DissipationFunction$ includes non-linear forms of the fluxes $\Vect\Flux$ and so the fluxes are feasible targets to optimization.
 The state velocities $\Vect\InternalStateVelocity$ are only present as linear forms in $\Dissipation$, so for each component of $\Vect\InternalStateVelocity$ a constraint in $\Vect\Constraint$ must be present which relates it either directly or indirectly to the fluxes $\Vect\Flux$.
 \textcite{Maugin2015} clearly distinguishes between internal variables of state and internal degrees of freedom, where the first \emph{must} be of pure dissipative nature and the latter follow defined laws but may also have a dissipative part.
@@ -73,7 +73,7 @@ The associate laws must be formulated within the constraints $\Vect\Constraint$.
     \end{align}
 \end{subequations}
 
-With this generalized formulation the Lagrange functional writes as in \autoref{eq:tep-general-lagrange}.
+With this generalized formulation the Lagrange functional writes as in \cref{eq:tep-general-lagrange}.
 Here we have more Lagrange parameters.
 $\LagrangeParameter_1$ is equivalent to the classic formulation.
 The vector parameter $\Vect{\LagrangeParameter_2}$ for the required constraints is of the same size as $\Vect\Constraint$.
@@ -87,7 +87,7 @@ The vector parameter $\Vect{\LagrangeParameter_2}$ for the required constraints 
 
 As before, the gradient of $\LagrangeFunction$ is set equal to zero to obtain the constrained optimum.
 The Jacobian matrix of this equation system is only invertible, if $\Vect\Constraint$ provides a number of linearly independent constraints equal to the combined size of $\Vect\InternalStateVelocity$ and $\Vect\InternalDegreeOfFreedom$.
-Finding a general simplified equation system as done above (\autoref{eq:tep-classic-solution}) is here not possible due to the constraints.
+Finding a general simplified equation system as done above (\cref{eq:tep-classic-solution}) is here not possible due to the constraints.
 
 \begin{subequations}
     \begin{align}

@@ -34,18 +34,18 @@ In a third step, the behavior of powder mixtures has been investigated by simula
 \end{figure}
 
 The dimensionless parameter studies, as well as the investigations of crafted and random packings have lead to several general statements about the influence on shrinkage and neck size evolution during sintering.
-The results are summarized graphically in \autoref{fig:conclusions/shrinkage_influences} for the shrinkage and \autoref{fig:conclusions/neck_size_influences} for the neck size.
+The results are summarized graphically in \cref{fig:conclusions/shrinkage_influences} for the shrinkage and \cref{fig:conclusions/neck_size_influences} for the neck size.
 
 In the current state of the model, several incompletenesses have been observed during the investigations conducted:
 \begin{enumerate}
     \item Triple points where three grain boundaries meet are currently not supported.
         This limits the applicability till the closing of the first pore present in the system.
-    \item In contacts between particles with high difference in surface energy, a drastic undercut near the neck occurs as discussed in \autoref{subsec:parameter-study-asymmetric-surface-energy-ratio},
+    \item In contacts between particles with high difference in surface energy, a drastic undercut near the neck occurs as discussed in \cref{subsec:parameter-study-asymmetric-surface-energy-ratio},
         which eventually leads to a crossing between grain boundary and surface, which is obviously unphysical.
         This is an numerical effect due to the removal of volume from a node, where in fact no volume is left.
-    \item The grain boundary can currently only consist of a single node (plus the two neck nodes) as was discussed in \autoref{sec:contact-conditions},
+    \item The grain boundary can currently only consist of a single node (plus the two neck nodes) as was discussed in \cref{sec:contact-conditions},
         as otherwise the contact conditions create collinear rows in the system matrix.
-    \item Transfer between particles was neglected, which disallowed the occurrence of grain growth in the parameter studies of asymmetric geometry (\autoref{subsec:parameter-study-particle-size-ratio} and \autoref{subsec:parameter-study-ovality}),
+    \item Transfer between particles was neglected, which disallowed the occurrence of grain growth in the parameter studies of asymmetric geometry (\cref{subsec:parameter-study-particle-size-ratio, subsec:parameter-study-ovality}),
         but allowed to disregard concentration gradients within the particle volume for the case of unequal substances.
 \end{enumerate}
 

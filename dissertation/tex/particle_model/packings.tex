@@ -6,12 +6,12 @@ In the following, the equations to calculate these in the current model will be 
 
 For two-particle models, the classic way to determine a measure for shrinkage is to calculate the decrease in distance between the particles.
 Most simple approaches directly include the particle distance as a state variable.
-For the current case it is calculated as the Euclidian distance between the centers of two particles as in \autoref{eq:eucliadian-particle-distance}.
+For the current case it is calculated as the Euclidian distance between the centers of two particles as in \cref{eq:eucliadian-particle-distance}.
 \begin{equation}
     \Distance = \sqrt{\left( \X_2 - \X_1 \right)^2 + \left( \Y_2 - \Y_1 \right)^2}
     \label{eq:eucliadian-particle-distance}
 \end{equation}
-The shrinkage is then directly obtained via \autoref{eq:shrinkage-two-particle} with $\Distance_0$ as the distance in the initial state.
+The shrinkage is then directly obtained via \cref{eq:shrinkage-two-particle} with $\Distance_0$ as the distance in the initial state.
 \begin{equation}
     \Shrinkage = \frac{\Distance - \Distance_0}{\Distance_0}
     \label{eq:shrinkage-two-particle}
@@ -22,7 +22,7 @@ One may calculate pairwise distances and the respective shrinkages.
 However, since multiple-particle-packings have the important feature that they are able to represent pores or voids, another approach has to be found which incorporates those.
 
 Here, the area covered by the polygon built by the centers of the particles shall be used as a measure of the systems current size.
-This area is calculated by use of \autoref{eq:polygon-shoelace}, which is commonly known as shoelace formula.
+This area is calculated by use of \cref{eq:polygon-shoelace}, which is commonly known as shoelace formula.
 For more than 3 particles in the system, only the convex hull of the particle center points must be used in this calculation, or there will be negative contributions by inner particles.
 Note that the points have to be ordered in mathematical rotation direction or the result will be negative.
 \begin{equation}
@@ -30,17 +30,17 @@ Note that the points have to be ordered in mathematical rotation direction or th
     \label{eq:polygon-shoelace}
 \end{equation}
 To be able to compare this approach to shrinkages obtained by distance reduction, the square root of the polygon area is used as a measure of characteristic length in the system.
-Then the shrinkage calculates as in \autoref{eq:shrinkage-multiple-particle}, with $\Area_0$ as the polygon area in the initial state.
+Then the shrinkage calculates as in \cref{eq:shrinkage-multiple-particle}, with $\Area_0$ as the polygon area in the initial state.
 \begin{equation}
     \Shrinkage = \frac{\sqrt{\Area} - \sqrt{\Area_0}}{\sqrt{\Area_0}}
     \label{eq:shrinkage-multiple-particle}
 \end{equation}
-Comparability of these two approaches will be discussed in \autoref{sec:contact-study}.
+Comparability of these two approaches will be discussed in \cref{sec:contact-study}.
 
 Neck size as the second key property is commonly described by the radius of the neck for circular or spherical models.
 In the current case, non-circular particle shapes will be investigated and asymmetrical contacts will form curved neck shapes.
 The neck size is here defined as the half of the grain boundary length between two particles to be comparable to classic two-sphere results.
-\autoref{eq:neck-size} formulates this approach as the sum over the set of all grain boundary nodes in the neck $\Nodes_{\GrainBoundary}$ (excluding the neck nodes).
+\Cref{eq:neck-size} formulates this approach as the sum over the set of all grain boundary nodes in the neck $\Nodes_{\GrainBoundary}$ (excluding the neck nodes).
 Note that each surface distance is counted twice in this formula (therefore the factor $\frac14$), but this avoids special casing of either the lower or upper neck node limiting the regarded grain boundary.
 \begin{equation}
     \Radius_{\Neck} = \frac14 \sum^{\Nodes_{\GrainBoundary}} \SurfaceDistance_{\Upper} + \SurfaceDistance_{\Lower}
@@ -49,4 +49,4 @@ Note that each surface distance is counted twice in this formula (therefore the 
 
 For comparability, the neck size is often given as fraction of the particle radius $\Radius_{\Particle}$.
 Since in this work often multiple particles of arbitrary shape are present, this radius will always be a defined reference radius.
-This allows for comparability in parameter studies as in \autoref{ch:physical-behavior} and randomized approaches as in \autoref{ch:randomized-simulations}.
+This allows for comparability in parameter studies as in \cref{ch:physical-behavior} and randomized approaches as in \cref{ch:randomized-simulations}.

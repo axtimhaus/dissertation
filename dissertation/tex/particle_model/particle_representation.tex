@@ -27,12 +27,12 @@ Particle movement occurs due to diffusional fluxes in the grain boundaries, whic
 The location of a particle is defined by the cartesian coordinates of its center $\X$ and $\Y$, as well as a rotation angle $\RotationAngle$ with the center as pole.
 The rotation angle always counts from the $\X$-axis on in mathematical direction.
 The rotation angle also defines the origin axis of the particles local coordinate system.
-See \autoref{fig:model_development/particle_coordinates} for illustration on this.
+See \cref{fig:model_development/particle_coordinates} for illustration on this.
 
 In regard of sintering processes, the contact properties of multiple particles are investigated.
 The common interface of two particles in contact is commonly called a sinter neck.
 It consists of a grain boundary bounded by the triple points between the grain boundary and the two adjacent free surfaces.
-\autoref{fig:model_development/two_particle_contact} shows such a contact of two particles.
+\Cref{fig:model_development/two_particle_contact} shows such a contact of two particles.
 Until here, three types of nodes can be identified:
 \begin{description}
     \item[Surface Nodes] forming the free surface of a particle in contact to atmosphere or vacuum (black).
@@ -41,6 +41,6 @@ Until here, three types of nodes can be identified:
 \end{description}
 Details on the conditions at those nodes are given in the following sections.
 Since every particle has its own polar coordinate system, the node coordinates involved can be regarded in either the one's or the other's coordinate system.
-The coordinate system used shall be denoted hereinafter by $\ldots^{|\ldots}$ superscripts where necessary as done in \autoref{fig:model_development/two_particle_contact}.
+The coordinate system used shall be denoted hereinafter by $\ldots^{|\ldots}$ superscripts where necessary as done in \cref{fig:model_development/two_particle_contact}.
 As example, the coordinates of one neck node are shown in the figure as $(\Angle^{\Regarding 1}, \Radius^{\Regarding 1})$ and $(\Angle^{\Regarding 2}, \Radius^{\Regarding 2})$.
 Note, that both tuples represent the same point in global space.

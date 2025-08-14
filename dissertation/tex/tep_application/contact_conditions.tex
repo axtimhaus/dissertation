@@ -33,7 +33,7 @@ The total node displacement includes contributions from particle displacement (i
     \end{align}
 \end{subequations}
 
-As can be seen from \autoref{fig:model_development/node_shift_global}, the angles of projection of the normal and tangential node shifting to the global cartesian axes are as follows:
+As can be seen from \cref{fig:model_development/node_shift_global}, the angles of projection of the normal and tangential node shifting to the global cartesian axes are as follows:
 \begin{subequations}
     \begin{align}
         \eta_{\Normal} &= \RotationAngle + \Angle + \left( \SurfaceRadiusAngle_{\Lower} + \SurfaceVectorAngle_{\Normal\Lower} - \PI \right)
@@ -57,7 +57,7 @@ With these and further identities on the trigonometric functions the displacemen
     \end{align}
 \end{subequations}
 
-Inserted in \autoref{eq:absolute-displacement-contact-constraints} this leads to two additional constraints for each contact node (grain boundary or neck node), which define the particle displacements $\Step\X_{\Particle i}$ and $\Step\Y_{\Particle i}$ of each particle except one.
+Inserted in \cref{eq:absolute-displacement-contact-constraints} this leads to two additional constraints for each contact node (grain boundary or neck node), which define the particle displacements $\Step\X_{\Particle i}$ and $\Step\Y_{\Particle i}$ of each particle except one.
 Given one grain boundary node (only normal displacement allowed) and two neck nodes per contact, the equation system is unambiguously defined as we have 6 additional constraints (2 per node) for 2 particle displacements and 4 tangential neck node displacements.
 Introducing more grain boundary nodes creates more constraints but no additional unknowns (as their normal displacement and flux are covered by the volume balance respectively the optimization).
 This leads to an overdetermined system which forces the solution to zero shrinkage (contact nodes are not able to be displaced at all).

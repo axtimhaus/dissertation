@@ -1,6 +1,6 @@
 \section{Study on the Influence of the Time Step Size}\label{sec:study-step-size}
 
-In \autoref{subsec:time-integration-scheme} the limit of the time step width to use during time integration was given.
+In \cref{subsec:time-integration-scheme} the limit of the time step width to use during time integration was given.
 As currently no theoretical limit for stability can be given, the free parameter has to be chosen empirically.
 This study aims at investigating the numerical behavior of the simulation with different maximum displacement angles per time step and fix one for the remains of this work.
 
@@ -39,7 +39,7 @@ As measure for precision, their agreement in shrinkage and the overall volume lo
     \caption{Numerical Behavior of the Simulation in Dependence on the Maximum Displacement Angle}
 \end{figure}
 
-\autoref{fig:two_particle/studies/time_step/step_count} shows the count of calculated time steps alongside with the total time consumption for the simulations.
+\Cref{fig:two_particle/studies/time_step/step_count} shows the count of calculated time steps alongside with the total time consumption for the simulations.
 The most striking point is that the step count does not directly correlate with the duration.
 The step count shows a minimum around \qty{0.02}{\radian}, whereas the time consumption is constantly low till \qty{0.02}{\radian} and then rises rapidly.
 This is explained through the superimposed influence of the time needed to calculate one time step.
@@ -47,25 +47,25 @@ With small time steps, the solution of the current time step is close to the one
 Thus, the routine needs fewer iterations to determine the solution.
 With large time steps the new solution is more distant, especially when fluctuations of even surfaces occur in later stages.
 This means slower convergence of equation solving.
-Moreover, from the calculation logs can be observed that the convergence to the trivial solution (as described in \autoref{subsec:step-system-solution}) more frequently occurs when the parameter takes higher values.
+Moreover, from the calculation logs can be observed that the convergence to the trivial solution (as described in \cref{subsec:step-system-solution}) more frequently occurs when the parameter takes higher values.
 
-\autoref{fig:two_particle/studies/time_step/shrinkage} shows the shrinkage curves obtained from the parameter variation.
+\Cref{fig:two_particle/studies/time_step/shrinkage} shows the shrinkage curves obtained from the parameter variation.
 Except for the highest \qty{0.1}{\radian} they are all in well agreement.
 This indicates, that the latter is definitely to high to obtain accurate results.
 In the initial stage, the differences are larger than in the final stages, since the conditions change faster there and so a smaller step width could be desirable.
 However, these differences are equalized so that the results are in well agreement in the later stages nevertheless.
 
-\autoref{fig:two_particle/studies/time_step/volume_loss} shows the loss of volume in the system during simulation in dependence on the time step parameter.
+\Cref{fig:two_particle/studies/time_step/volume_loss} shows the loss of volume in the system during simulation in dependence on the time step parameter.
 For the values below \qty{0.01}{\radian} the major source of error are the remeshing steps (jumps in the shown curves), between which the error does not alter very much.
 For the higher values the error originating in the actual time integration is much more pronounced.
 Especially for \qty{0.05}{\rad} and above the error escalates in the later stages.
 This can be explained by the occurrence of significant fluctuations on the particle surface (numerical instabilities).
 
-\autoref{fig:two_particle/studies/time_step/time_step_width} shows the evolution of the time step width used in the simulations for the distinct cases.
+\Cref{fig:two_particle/studies/time_step/time_step_width} shows the evolution of the time step width used in the simulations for the distinct cases.
 It is conspicuous that simulations with the parameter values that were noticed as instable previously, also a high variance in time step width is present.
 For lower values the time step width follows the general trend that after neck remeshing has deleted a surface node, the step jumps up and than decreases quite continuously till the next remeshing as the neck node approaches the next surface node.
 This indicates, that an early neck remeshing would be desirable for efficient computation.
-This issue will be addressed in detail in \autoref{sec:study-neck-remeshing}.
+This issue will be addressed in detail in \cref{sec:study-neck-remeshing}.
 
 \subsection{Summary}
 

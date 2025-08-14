@@ -2,7 +2,7 @@
 
 As stated previously, the procedure of remeshing near the neck is absolutely necessary to make the simulation work.
 However, there is a free parameter determining at which distance a surface node near the neck may be deleted.
-Targeting numerical efficiency it is desirable to have this parameter as large as possible as the time step decreases as already noticed in \autoref{sec:study-step-size}.
+Targeting numerical efficiency it is desirable to have this parameter as large as possible as the time step decreases as already noticed in \cref{sec:study-step-size}.
 Too large limits, however, are expected to decrease the precision especially in regard on geometrical features near the neck.
 In the previous studies the limit was arbitrarily chosen as \num{0.5}.
 In this study the parameter will be altered to get an idea of it's effects.
@@ -12,7 +12,7 @@ In this study the parameter will be altered to get an idea of it's effects.
 The case matrix of the study has two dimensions.
 The first is the count of nodes per particle in the initial state, which is inverse proportional to the discretization width.
 The levels used are \numlist{50;100;200} nodes per particle.
-The second is the parameterization of the neck remeshing procedure (\autoref{sec:neck-neighborhood-remeshing}).
+The second is the parameterization of the neck remeshing procedure (\cref{sec:neck-neighborhood-remeshing}).
 The levels of the distance limit parameter used are \numlist{0.3;0.5;0.7}.
 Surface remeshing is deactivated as before.
 
@@ -45,23 +45,23 @@ As measure for precision, their agreement in shrinkage and the overall volume lo
     \caption{Numerical Behavior of the Simulation in Dependence on the Neck Remeshing Limit}
 \end{figure}
 
-\autoref{fig:two_particle/studies/neck_remeshing/step_count} shows the count of calculated time steps alongside with the total time consumption for the simulations.
+\Cref{fig:two_particle/studies/neck_remeshing/step_count} shows the count of calculated time steps alongside with the total time consumption for the simulations.
 In general, the step count and time consumption show an exponential dependence on the node count.
 Aggressive remeshing (higher limit values) is able to decrease the effort by factors from \numrange{2}{5}.
 
-\autoref{fig:two_particle/studies/neck_remeshing/shrinkage} shows the shrinkage curves obtained from the parameter variation.
+\Cref{fig:two_particle/studies/neck_remeshing/shrinkage} shows the shrinkage curves obtained from the parameter variation.
 In late stages the distinct simulations are in good agreement.
 Especially depending on the node count, the agreement in early stages is much weaker.
 This can be explained by the disregardance of local geometrical features near the neck when using coarse discretization.
 When the gradients are smaller in late stages this influence has less effect.
 However, within the node count groups the agreement is good, with low influence of the neck limit parameter.
 
-\autoref{fig:two_particle/studies/time_step/volume_loss} shows the loss of volume in the system during simulation in dependence on the parameters.
+\Cref{fig:two_particle/studies/time_step/volume_loss} shows the loss of volume in the system during simulation in dependence on the parameters.
 As has to be expected, the numerical volume loss shows significant dependence on the node count and remeshing regime.
 Coarse discretization and aggressive remeshing lead to higher volume losses.
 All stay in the order of \num{1e-3} and thus far below the shrinkage by diffusional flows observed and can therefore be tolerated.
 
-\autoref{fig:two_particle/studies/neck_remeshing/time_step_width} shows the evolution of the time step width used in the simulations for the distinct cases.
+\Cref{fig:two_particle/studies/neck_remeshing/time_step_width} shows the evolution of the time step width used in the simulations for the distinct cases.
 The achievable time step size is, as expected, increasing with the reduction of node count.
 Aggressive remeshing generally allows higher time steps in later stages and avoids the mentioned decrease in time step width when neck node and the next surface node approach.
 
