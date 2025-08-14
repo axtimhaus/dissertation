@@ -19,10 +19,11 @@ However, $\DissipationFunction$ is formulated in terms of the kinetic conditions
 The actual form of $\DissipationFunction$ heavily depends on the regarded process, but it commonly includes empirical kinetic material parameters such as diffusion coefficients or mobilities.
 
 \begin{subequations}
+    \label[pleq]{eq:tep-classic}
     \begin{align}
         \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) = -\frac{\partial\GibbsEnergy(\Vect\ExternalStateVariable, \Vect\InternalStateVariable)}{\partial \Vect\InternalStateVariable} \cdot \Vect{\InternalStateVelocity} &\rightarrow \max_{\Vect{\InternalStateVelocity}} \label{eq:dissipation} \\
         \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) - \DissipationFunction(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) &= 0 \label{eq:dissipation-function}
-    \end{align} \label{eq:tep-classic}
+    \end{align}
 \end{subequations}
 
 The constrained optimization problem in \cref{eq:tep-classic} can be solved using the Lagrange formalism.
@@ -37,10 +38,11 @@ Setting the gradient of $\LagrangeFunction$ with respect to $\Vect{\InternalStat
 Note that the derivative with respect to $\LagrangeParameter$ is always identical to the constraint equation.
 
 \begin{subequations}
+    \label[pleq]{eq:tep-classic-gradient}
     \begin{align}
         &\LagrangeFunction_{\Vect\InternalStateVelocity} &&= -\left(1 + \LagrangeParameter \right) \frac{\partial\GibbsEnergy(\Vect\ExternalStateVariable, \Vect\InternalStateVariable)}{\partial \Vect\InternalStateVariable} - \LagrangeParameter \frac{\partial\DissipationFunction(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity})}{\partial \Vect{\InternalStateVelocity}} &&\stackrel{!}{=} 0 \\
         &\LagrangeFunction_{\LagrangeParameter} &&= \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) - \DissipationFunction(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) &&\stackrel{!}{=} 0
-    \end{align} \label{eq: tep-classic-gradient}
+    \end{align}
 \end{subequations}
 
 For the simple case of $\DissipationFunction$ being quadratic in $\Vect{\InternalStateVelocity}$ the solution of the system is given in \cref{eq:tep-classic-solution}, which is a linear system of equations of the same size as $\Vect{\InternalStateVelocity}$.

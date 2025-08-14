@@ -54,13 +54,13 @@ The partial derivatives of volume will be derived in \cref{sec:surface-evolution
 \end{equation}
 
 To pin a group of particles' position in space, one of them has to be constrained at a fixed position, so that the other ones are able to move relatively to this one.
-This is done by constraints setting it's displacement to zero as in \cref{eq:fixed-particle-constraints}.
+This is done by constraints setting it's displacement to zero as in the \cref{eq:fixed-particle-constraints}.
 \begin{subequations}
+    \label[pleq]{eq:fixed-particle-constraints}
     \begin{align}
         \Step\X_{\Particle} = 0 \\
         \Step\Y_{\Particle} = 0
     \end{align}
-    \label{eq:fixed-particle-constraints}
 \end{subequations}
 
 To ensure the validity of the grain boundaries, so that neither voids or overlaps occur, contact constraints are to be applied to each pair of contact nodes.

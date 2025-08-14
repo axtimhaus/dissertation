@@ -13,6 +13,8 @@
 
 \usepackage{graphicx}
 \usepackage{subcaption}
+\renewcommand*{\figureformat}{\figurename~\thefigure}
+\renewcommand*{\tableformat}{\tablename~\thetable}
 
 \usepackage{tabularray}
 \UseTblrLibrary{booktabs}
@@ -28,7 +30,8 @@
 \DeclareMathOperator{\sign}{sign}
 
 \usepackage[hidelinks]{hyperref}
-\usepackage{cleveref}
+\usepackage[noabbrev]{cleveref}
+\crefformat{pleq}{equations~(#2#1#3)}
 
 \usepackage[record=nameref,abbreviations]{glossaries-extra}
 \usepackage{glossaries}

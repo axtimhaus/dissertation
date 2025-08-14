@@ -56,13 +56,13 @@ The normal vector points under an angle of $\SurfaceVectorAngle_\Normal$ acc.~to
     \label{eq:delta-surface-normal}
 \end{equation}
 
-With a certain normal shift ${\Step\Shift}_\Normal$, the surface lengths after shifting are calculated by \cref{eq:surface-distance-shifted-normal}.
+With a certain normal shift ${\Step\Shift}_\Normal$, the surface lengths after shifting are calculated by the \cref{eq:surface-distance-shifted-normal}.
 \begin{subequations}
+    \label[pleq]{eq:surface-distance-shifted-normal}
     \begin{align}
         \SurfaceDistance_{\Upper}' & = \sqrt{\SurfaceDistance_{\Upper}^2 + \Step\Shift_{\Normal}^2 - 2 \SurfaceDistance_{\Upper} \Step\Shift_{\Normal} \cos \SurfaceVectorAngle_{\Normal}} \label{eq:surface-distance-shifted-normal-upper}         \\
         \SurfaceDistance_{\Lower}' & = \sqrt{{\SurfaceDistance}_{\Lower}^2 + {\Step\Shift}_{\Normal}^2 - 2 {\SurfaceDistance}_{\Lower} {\Step\Shift}_{\Normal} \cos \SurfaceVectorAngle_{\Normal}} \label{eq:surface-distance-shifted-normal-lower}
     \end{align}
-    \label{eq:surface-distance-shifted-normal}
 \end{subequations}
 
 \Cref{fig:model_development/plot_normal_potential} shows the change in Gibbs energy due to normal shifting with use of \crefrange{eq:gibbs-diff-surface-normal}{eq:surface-distance-shifted-normal} with different values of $\SurfaceVectorAngle_{\Normal}$ and $\InterfaceEnergy$, alongside the linear approximation around ${\Step\Shift}_{\Normal} = 0$.
@@ -79,11 +79,11 @@ The partial derivative of Gibbs energy is obtained as the limit of $\Step\GibbsE
 
 The volume derivative is obtained by calculating the area of the triangles formed by $\SurfaceDistance$, $\SurfaceDistance'$ and $\Step\Shift_{\Normal}$ on the upper and lower side.
 \begin{subequations}
+    \label[pleq]{eq:volume-diff-surface-normal}
     \begin{align}
         \Step\Volume_{\Normal\Upper} &= \frac12 \SurfaceDistance_{\Upper} \Step\Shift_{\Normal} \sin \SurfaceVectorAngle_{\Normal} \\
         \Step\Volume_{\Normal\Lower} &= \frac12 \SurfaceDistance_{\Lower} \Step\Shift_{\Normal} \sin \SurfaceVectorAngle_{\Normal}
     \end{align}
-    \label{eq:volume-diff-surface-normal}
 \end{subequations}
 
 The partial derivative of volume is obtained as the limit of $\Step\Volume_{\Normal\Upper} + \Step\Volume_{\Normal\Lower}$ when ${\Step\Shift}_{\Normal} \rightarrow 0$ as in \cref{eq:volume-partial-surface-normal}.
@@ -100,18 +100,18 @@ Regarding the tangential shifting, the direction vector is under an angle of $\S
     \label{eq:delta-surface-tangential}
 \end{equation}
 
-The change in Gibbs energy is calculated similarly as in the normal case according to \cref{eq:gibbs-diff-surface-tangential}, but the shifted surface lengths are calculated as in \cref{eq:surface-distance-shifted-tangential} in dependence on the tangential shift ${\Step\Shift}_{\Tangential}$.
+The change in Gibbs energy is calculated similarly as in the normal case according to \cref{eq:gibbs-diff-surface-tangential}, but the shifted surface lengths are calculated as in the \cref{eq:surface-distance-shifted-tangential} in dependence on the tangential shift ${\Step\Shift}_{\Tangential}$.
 Note especially the signs in front of the cosine terms.
 \begin{equation}
     \Step\GibbsEnergy_{\Tangential} = \left( \SurfaceDistance_{\Upper}' - \SurfaceDistance_{\Upper} \right) \InterfaceEnergy_{\Upper} +  \left(\SurfaceDistance_{\Lower}' - \SurfaceDistance_{\Lower} \right) \InterfaceEnergy_{\Lower}
     \label{eq:gibbs-diff-surface-tangential}
 \end{equation}
 \begin{subequations}
+    \label[pleq]{eq:surface-distance-shifted-tangential}
     \begin{align}
         \SurfaceDistance_{\Upper}' & = \sqrt{{\SurfaceDistance}_{\Upper}^2 + {\Step\Shift}_{\Tangential}^2 - 2 {\SurfaceDistance}_{\Upper} {\Step\Shift}_{\Tangential} \cos \SurfaceVectorAngle_{\Tangential}} \label{eq:surface-distance-shifted-tangential-upper} \\
         \SurfaceDistance_{\Lower}' & = \sqrt{{\SurfaceDistance}_{\Lower}^2 + {\Step\Shift}_{\Tangential}^2 + 2 {\SurfaceDistance}_{\Lower} {\Step\Shift}_{\Tangential} \cos \SurfaceVectorAngle_{\Tangential}} \label{eq:surface-distance-shifted-tangential-lower}
     \end{align}
-    \label{eq:surface-distance-shifted-tangential}
 \end{subequations}
 
 \Cref{fig:model_development/plot_tangential_potential} shows the change in Gibbs energy due to tangential shifting with different values of $\InterfaceEnergy$.
