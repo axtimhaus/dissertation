@@ -12,8 +12,8 @@ The main aim of this procedure is lowering the surface node count were possible 
 It is not required to make the simulation work, but significantly accelarates the solution progress.
 Surfaces with even profile (low curvature) need less points to be sufficiently approximated as surfaces with high curvatures.
 The flatness of a surface at a node is measured by the angle between its adjacent surface lines.
-At surface is flat, if this angle equals \qty{180}{\degree} and is curved if this angle deviates from that.
-Positive and regative curvatures are treated equally.
+A surface is flat, if this angle equals \qty{180}{\degree}, and is curved, if this angle deviates from that.
+Positive and negative curvatures are treated equally.
 So, with an threshold chosen by the user, the criterion for considering a node for deletion is:
 \begin{equation}
     \Abs{\SurfaceRadiusAngle_{\Upper} + \SurfaceRadiusAngle_{\Lower} - \PI} < \qtyrange{0.01}{0.05}{\radian}
@@ -22,7 +22,8 @@ So, with an threshold chosen by the user, the criterion for considering a node f
 Too low values of the threshold lead to fluctuating surfaces in flat regions were surface transport is numerially performed by alternatingly shifting the nodes outwards and inwards in each time step.
 This mechanism typically limits the time step width to avoid instable escalation of the fluctuation.
 
-To avoid to fast coarsening and lack of incluence of the chosen initial discretization width, a second check is applied if the deletion would not lead to too large distance between the remaining nodes.
+A second check is applied that the deletion would not lead to too large distance between the remaining nodes.
+So, too fast coarsening and lack of incfluence of the chosen initial discretization width is avoided.
 $\Mean\SurfaceDistance$ is the current mean distance between the surface nodes of the regarded particle.
 The allowed relative distance can be chosen to control the speed of discretization coarsening during simulation.
 \begin{equation}

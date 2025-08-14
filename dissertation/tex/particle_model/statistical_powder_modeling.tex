@@ -74,7 +74,7 @@ we obtain, when inserting \autoref{eq:ellipse-a-b-by-ovality}, the equation for 
 \autoref{fig:model_development/particle_shape_function_o} displays the influence of the ovality parameter on the resulting shape.
 
 First order waves shall be modeled using a cosine function.
-With a relative height of the peaks $\WaveHeight_1 \in [0, 1)$, a count of peaks $\WaveCount_1 \in [1 \To)$ and a relative phase shift $\WaveShift_1 \in [0, 0.5)$ we define
+With a relative height of the wave peaks $\WaveHeight_1 \in [0, 1)$, a count of waves $\WaveCount_1 \in [1 \To)$ and a relative phase shift $\WaveShift_1 \in [0, 0.5)$ we define
 \begin{equation}
     \ShapeFunction_1 = \WaveHeight_1 \cdot \cos \left( \WaveCount_1\Angle + 2\PI \WaveShift_1\right) + 1
     \label{eq:f-first-order-waves}
@@ -84,7 +84,7 @@ the only way to deactivate this feature is to set $\WaveHeight_1=0$, since $\Wav
 Note especially the influence of the phase shift in \autoref{fig:model_development/particle_shape_function_p}.
 The phase shift enables moving the waves relative to the ovality but has a major numerical flaw.
 Due to it's nature as an argument to the cosine function, it's effect is periodic with a period of \num{1}.
-If also bringing particle rotation in consideration, also values $\WaveShift_1 \ge \num{0.5}$ are ambiguous, as the same effect can be achieved by using $\WaveShift_1 - \num{0.5}$ and rotating the whole particle by \ang{180}.
+If also taking particle rotation in consideration, values $\WaveShift_1 \ge \num{0.5}$ are ambiguous, too, as the same effect can be achieved by using $\WaveShift_1 - \num{0.5}$ and rotating the whole particle by \ang{180}.
 So the allowed value range given above must be ensured to avoid ambiguity.
 
 \subsection{Modeling of Powders and Powder Mixtures}\label{subsec:powders-powder-mixtures}
@@ -108,4 +108,5 @@ Conversion between volume fraction $\MixtureFraction_{\Volume}$ and count fracti
     \label{eq:equivalent-particle-volume}
 \end{equation}
 This assumes that all powder fractions have the same packing density.
-The influence of varying particle shape on the packing density is neglected here, as it's estimation from theory is complicated, an unsolved problem out of the scope of this work.
+The influence of varying particle shape on the packing density is neglected here, as it's estimation from theory is complicated.
+This currently unsolved problem is out of the scope of this work.

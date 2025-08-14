@@ -11,7 +11,7 @@ Each node of the surface line forms an element with its neighbors, not to be con
 Its geometry and important quantities are displayed in \autoref{fig:model_development/element_geometry}.
 Their relations used in following calculations will be derived in this section.
 
-To avoid writing numeric indices everywhere, the quantities belonging to the currently regarded node will be written without any index.
+To avoid cluttering the equations with numeric indices, the quantities belonging to the currently regarded node will be written without any index.
 The indices $\ldots_{\Upper}$ and $\ldots_{\Lower}$ are used to denote the upper and lower neighbor of this node.
 
 The surface distance between the adjacent nodes is calculated using the cosine law as in \autoref{eq:surface-distance}, with the angle distances $\Diff\Angle_{\Upper} = \Angle_{\Upper} - \Angle$ and $\Diff\Angle_{\Lower} = \Angle - \Angle_{\Lower}$.
@@ -24,7 +24,7 @@ The distances are always positive.
     \label{eq:surface-distance}
 \end{subequations}
 
-The angles between the surface lines and the radius vector (surface-radius-angles) are calculated given the node coordinates using the cosine law \autoref{eq:surface-radius-angles}.
+The angles between the surface lines and the radius vector (surface-radius-angles $\SurfaceRadiusAngle_{\Upper}$ and $\SurfaceRadiusAngle_{\Lower}$) are calculated given the node coordinates using the cosine law as in \autoref{eq:surface-radius-angles}.
 Cosine law has been chosen over sine law due to its support for angles from 0 to $\PI$ rather than $-\frac\PI2$ to $\frac\PI2$.
 However, when undercuts occur in the particle surface $\Diff\Angle_{\Upper}$ or $\Diff\Angle_{\Lower}$ may be negative, then the sign of the surface radius angle must equal that of the angle distances.
 This negative angle is required for the volume partial differential to change its sign accordingly as derived in \autoref{sec:surface-evolution}.
@@ -48,7 +48,7 @@ The shift vector is for now arbitrary, but will be concretized in \autoref{sec:s
     \label{eq:new-node-coordinates}
 \end{subequations}
 
-For the sake of sintering behavior analysis and evaluation of numerical error the volume of a particle has to be determined (actually area due to 2D).
+For sintering behavior analysis and evaluation of numerical error the volume of a particle has to be determined (actually area due to 2D).
 This is done by summing over all element triangles as in \autoref{eq:particle-volume}, where $\Nodes$ is the set of all nodes the particle consists of.
 Note, that if undercuts occur this equation is still correct since the respective elements will be counted negative as then $\sin \Diff\Angle_{\Upper} < 0$.
 \begin{equation}

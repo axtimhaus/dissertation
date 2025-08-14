@@ -4,7 +4,7 @@ In the following the necessary equations shall be composed.
 This includes the definition of the dissipation $\Dissipation$, the dissipation function $\DissipationFunction$, required constraints and additional constraints.
 The resulting components of the Lagrangian gradient and the respective Jacobian matrix are omitted here for brevity, but their general structure is discussed in \autoref{sec:solution}.
 
-\minisec{Dissipation $\Dissipation$}
+\subsection{Dissipation $\Dissipation$}
 
 The dissipation at one node is given by the product of node shifts and the respective Gibbs energy derivatives as in \autoref{eq:dissipation-node}.
 The Gibbs energy derivatives are derived in \autoref{sec:surface-evolution} for the different node types.
@@ -15,7 +15,7 @@ Shifting of particles alone does not follow a thermodynamic force, but is determ
     \label{eq:dissipation-node}
 \end{equation}
 
-\minisec{Dissipation Function $\DissipationFunction$}
+\subsection{Dissipation Function $\DissipationFunction$}
 
 The dissipation function as formulation of the dissipation in terms of fluxes is defined in \autoref{eq:dissipation-function-nodes-def} as the sum of the product of all fluxes with their corresponding potential difference,
 with $\ChemicalPotential$ as the (unknown) chemical potential at a respective node, $\Flux_{\Upper}$ as the diffusive flux to the upper node and the molar volume $\MolarVolume$ of the particle substance.
@@ -39,17 +39,11 @@ and the absolute temperature $\Temperature$.
 
 Inserting \autoref{eq:chemical-potential-by-flux} in \autoref{eq:dissipation-function-nodes-def} leads to the final formulation of the dissipation function in \autoref{eq:dissipation-function-node} which is a quadratic form of $\Flux_{\Upper}$.
 \begin{equation}
-    \DissipationFunction = \sum^{\Nodes} \frac{\GasConstant\Temperature}{\MolarVolume{\VacancyConcentration}^\Standard} \frac{\SurfaceDistance_{\Upper} {\Flux}_{\Upper}^2}{\InterfaceThickness_{\Upper}\DiffusionCoefficient_{\Upper}}
+    \DissipationFunction = \sum^{\Nodes} \frac{\GasConstant\Temperature}{\MolarVolume\VacancyConcentration^{\Standard}} \frac{\SurfaceDistance_{\Upper} {\Flux}_{\Upper}^2}{\InterfaceThickness_{\Upper}\DiffusionCoefficient_{\Upper}}
     \label{eq:dissipation-function-node}
 \end{equation}
 
-The Langrangian multiplicator for the equality constraint of both dissipation formulations (\autoref{eq:constraint-dissipation-equality}) will be denoted as $\LagrangeParameter_{\Dissipation}$ in the following.
-\begin{equation}
-    \Dissipation = \DissipationFunction
-    \label{eq:constraint-dissipation-equality}
-\end{equation}
-
-\minisec{Constraints $\Vect\Constraint$}
+\subsection{Constraints $\Vect\Constraint$}
 
 The required constraints needed to link node displacements and fluxes are given by the constancy of volume respectively mass at each node.
 The volume change at the node given by its displacement must be equal to the divergence of fluxes from and to this node.
@@ -58,7 +52,6 @@ The partial derivatives of volume will be derived in \autoref{sec:surface-evolut
     \frac{\partial\Volume}{\partial{\Shift}_{\Normal}} {\dot\Shift}_{\Normal} + \frac{\partial\Volume}{\partial{\Shift}_{\Tangential}} {\dot\Shift}_{\Tangential} = \dot\Volume = \left( {\Flux}_{\Upper} + {\Flux}_{\Lower} \right)
     \label{eq:required-constraint-flux-shift}
 \end{equation}
-The Langrangian multiplicator for this constraint will be denoted as $\LagrangeParameter_\Volume$ in the following.
 
 To pin a group of particles' position in space, one of them has to be constrained at a fixed position, so that the other ones are able to move relatively to this one.
 This is done by constraints setting it's displacement to zero as in \autoref{eq:fixed-particle-constraints}.
@@ -70,7 +63,8 @@ This is done by constraints setting it's displacement to zero as in \autoref{eq:
     \label{eq:fixed-particle-constraints}
 \end{subequations}
 
-To ensure the validity of the grain boundaries (lack of voids and overlaps), contact constraints are to be applied to each pair of contact nodes, which must retain the identical position in global space as discussed in \autoref{sec:particle-representation}.
+To ensure the validity of the grain boundaries, so that neither voids or overlaps occur, contact constraints are to be applied to each pair of contact nodes.
+This is equivalent to that the node must have the identical position in global space when viewn from either of the involved particles, as already noted in \autoref{sec:particle-representation}.
 These constraints are developed in \autoref{sec:contact-conditions}.
 
 Further constraints of the like are possible, for example to enforce a certain particle movement or apply an external load on a particle to simulate assisted compaction.

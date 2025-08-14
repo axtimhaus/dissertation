@@ -21,7 +21,7 @@ The spline of those lines is defining the surface of the particle.
 
 The location of each node in space is defined by a tuple of polar coordinates $(\Angle, \Radius)$, where $\Angle$ is the angle coordinate and $\Radius$ the radius resp.~distance from origin.
 The origin of the polar coordinates is distinct for each particle and is considered as the center of the particle, although it is generally not identical with the barycenter of the particle.
-But the center of the particle is used as an anchor for defining a particles postions in space.
+The center of the particle is used as an anchor for defining a particle's postion in space.
 With this concept the particle can be moved in space without translating the surface node coordinates and the description of node evolution is simplified, since only the local geometry must be regarded.
 Particle movement occurs due to diffusional fluxes in the grain boundaries, which is macroscopically observed as shrinkage.
 The location of a particle is defined by the cartesian coordinates of its center $\X$ and $\Y$, as well as a rotation angle $\RotationAngle$ with the center as pole.
@@ -41,6 +41,6 @@ Until here, three types of nodes can be identified:
 \end{description}
 Details on the conditions at those nodes are given in the following sections.
 Since every particle has its own polar coordinate system, the node coordinates involved can be regarded in either the one's or the other's coordinate system.
-The coordinate system used shall be denoted hereinafter by $\ldots^{|\ldots}$ superscripts where necessary as done in the figure.
-The coordinates of one neck node are shown in the figure as $(\Angle^{\Regarding 1}, \Radius^{\Regarding 1})$ and $(\Angle^{\Regarding 2}, \Radius^{\Regarding 2})$.
+The coordinate system used shall be denoted hereinafter by $\ldots^{|\ldots}$ superscripts where necessary as done in \autoref{fig:model_development/two_particle_contact}.
+As example, the coordinates of one neck node are shown in the figure as $(\Angle^{\Regarding 1}, \Radius^{\Regarding 1})$ and $(\Angle^{\Regarding 2}, \Radius^{\Regarding 2})$.
 Note, that both tuples represent the same point in global space.
