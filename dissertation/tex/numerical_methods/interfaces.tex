@@ -188,4 +188,17 @@ If the constraint is violated, they calculate and apply an advection vector to r
 The underlying numerical method to solve the field equations is usually a \gls{FDM}~\cite{Wang2006, Hotzer2019, Jing2003, Kumar2010, Kumar2011, Zhang2014} or \gls{FEM}~\cite{Asp2006, Chockalingam2016, Biswas2016, Biswas2017, Greenquist2020, Ivannikov2021} scheme.
 Most models are formulated in 2D, only a few in 3D space~\cite{Greenquist2020, Termuhlen2021}.
 
-\todo{Review remeshing in phase field.}
+Using an \gls{FEM} discretization offers the advantage of being able to use locally refined meshes according to the needs of the phase field gradient.
+Such methods are commonly referred to as adaptive meshing or remeshing.
+Especially in sintering models there are regions where the phase field function is almost constant (in the inner of particles, in the void) and regions with large gradients (near the interface).
+Using a fine discretization as required to decribe the gradient correctly in the whole domain means a huge waste of computational efficiency.
+However on sintering models, remeshing procedures applied are poorly discussed.
+Some authors~\cite{Asp2006, Greenquist2020, Ivannikov2021} just claim that they have used it, without any further specification.
+\textcite{Chockalingam2016} and \textcite{Biswas2016, Biswas2017} adopted a method of \textcite{Tonks2012} on quadrilateral elements to refine near the interface based on the current gradient of the phase field variables.
+\textcite{Moelans2008} recommend a spectral moving mesh method of \textcite{Feng2006}, but without any own results supporting this recommendation.
+Larger efforts on this topic have been conducted in the field of fracture respectively crack propagation modeling, which generally has the same caveats as the damage variable is widely constant except in the crack region.
+Several approaches~\cite{Burke2010, Artina2015, Ferro2018, Micheletti2018, Hirshikesh2019, Goswami2019} use the estimated discretization error effected by the current mesh to determine the required refinement.
+Others~\cite{Heister2015, Badnava2018, Tian2019} use a predictor-corrector scheme which ensures a finer discretization in the crack region, which is determined by the predicted value of the phase field variable in the next time step.
+\textcite{Klinsmann2015} used an procedure that keeps the product of the phase field gradient and the discretization width approaximately constant.
+In this field some authors~\cite{Burke2010, Artina2015, Ferro2018, Micheletti2018} favor triangular elements over quadrilateral, since the remeshing procedure does not create hanging nodes there.
+All authors agree on the general computational benefit when applying adaptive meshes, although the performance of the remeshing procedure can have a significant impact on computational effort, especially when applied in each time step or even in each step of the weak form minimization procedure.

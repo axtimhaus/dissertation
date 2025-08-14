@@ -9,7 +9,9 @@ Additional requirements such as contact conditions are to be formulated as equal
 The numerical behavior of the model has been examined to define feasible parameters for numerical routines such as time step control and remeshing procedures.
 The computational effort for time integration of the model equation can be heavily lowered by feasible time step control and rigorous remeshing procedures.
 In early stages of the simulation remeshing has to be done with care to keep the fine details of geometry, in later stages however remeshing can be aggressive to reduce the system size and accelerate the solution procedure.
-The latter is an significant improvement counter state-of-the-art phase field approaches, which usually have larger system sizes in general and may not reduce the system size during the simulation, as the discretization sizes are determined by the phase field gradient requirements, rather than the interface geometry as in the current case.
+The latter is an significant improvement counter state-of-the-art \gls{PFM} approaches, which usually have larger system sizes in general and may not reduce the system size during the simulation.
+Although remeshing procedures are applied there, too, the discretization sizes are determined by the phase field gradient requirements, rather than the interface geometry as in the current case.
+So in the current case the requirements on discretization fineness decrease during the simulation, where in \gls{PFM} they do not.
 
 The model has then be used to conduct extensive parameter studies on two-particle configurations.
 The varied parameters include classic ones like the ratio of surface energy to grain boundary energy or the ratio of surface and grain boundary diffusion rate, for which previous results have been confirmed and the new model has been validated.
