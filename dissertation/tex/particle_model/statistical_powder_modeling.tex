@@ -79,7 +79,7 @@ With a relative height of the wave peaks $\WaveHeight_1 \in [0, 1)$, a count of 
     \ShapeFunction_1 = \WaveHeight_1 \cdot \cos \left( \WaveCount_1\Angle + 2\PI \WaveShift_1\right) + 1
     \label{eq:f-first-order-waves}
 \end{equation}
-As can be seen in \cref{fig:model_development/particle_shape_function_n, fig:model_development/particle_shape_function_h},
+As can be seen in \cref{fig:model_development/particle_shape_function_n,fig:model_development/particle_shape_function_h},
 the only way to deactivate this feature is to set $\WaveHeight_1=0$, since $\WaveCount_1=0$ is not allowed as it would introduce an ambiguity by adding a constant contribution to the radius depending on $\WaveHeight_1$ and $\WaveShift_1$.
 Note especially the influence of the phase shift in \cref{fig:model_development/particle_shape_function_p}.
 The phase shift enables moving the waves relative to the ovality but has a major numerical flaw.

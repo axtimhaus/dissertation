@@ -54,7 +54,7 @@ For this work the Mersenne Twister \cite{Matsumoto1998} was chosen as recommende
 Evaluation of the function $f$ multiple times with the previously obtained samples $x_i$ as input produces the observations $y_i$ of the variable $Y$.
 These observations are then investigated using classical descriptive statistics.
 Special values of interest are often the expectation $\Expectation(Y)$ and the standard deviation or variance $\StandardDeviation(Y)$ resp. $\StandardDeviation(Y)^2$.
-Those can be estimated from the sample by \cref{eq:estimator-expectation, eq:estimator-variance}.
+Those can be estimated from the sample by \cref{eq:estimator-expectation,eq:estimator-variance}.
 Note the $N-1$ in \cref{eq:estimator-variance} for the sample standard deviation, because the naive approach with just $N$ would introduce a bias into the estimation caused by the linking to the estimated expectation $\Estimated\Expectation(Y)$.
 There are several other possibilities to construct estimators for those properties, which may be more efficient (converge to required precision with fewer computational effort) depending on the characteristics of the problem.
 Such estimators are known under the term variance reduction techniques, see again \textcite{Lemieux2009} for a overview on these.
