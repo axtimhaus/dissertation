@@ -13,14 +13,6 @@ The latter is an significant improvement counter state-of-the-art \gls{PFM} appr
 Although remeshing procedures are applied there, too, the discretization sizes are determined by the phase field gradient requirements, rather than the interface geometry as in the current case.
 So in the current case the requirements on discretization fineness decrease during the simulation, where in \gls{PFM} they do not.
 
-The model has then be used to conduct extensive parameter studies on two-particle configurations.
-The varied parameters include classic ones like the ratio of surface energy to grain boundary energy or the ratio of surface and grain boundary diffusion rate, for which previous results have been confirmed and the new model has been validated.
-Other parameters, for which no previous results could be found in literature, have been investigated regarding the influence of asymmetric substance pairings and particle geometries.
-As validation against findings from the literature was not possible here, explanations of the observed behavior have been attempted.
-
-In a third step, the behavior of powder mixtures has been investigated by simulating the sintering of random arrangements of three particles.
-\todo{Conclude about randomized simulations.}
-
 \begin{figure}
     \includegraphics{img/conclusions/shrinkage_influences}
     \caption{Influence of Dimensionless Parameters and Packing Properties on Shrinkage Summarized from Investigations in This Work}
@@ -33,8 +25,24 @@ In a third step, the behavior of powder mixtures has been investigated by simula
     \label{fig:conclusions/neck_size_influences}
 \end{figure}
 
-The dimensionless parameter studies, as well as the investigations of crafted and random packings have lead to several general statements about the influence on shrinkage and neck size evolution during sintering.
+The model has then be used to conduct extensive parameter studies on two-particle configurations.
+The varied parameters include classic ones like the ratio of surface energy to grain boundary energy or the ratio of surface and grain boundary diffusion rate, for which previous results have been confirmed and the new model has been validated.
+Other parameters, for which no previous results could be found in literature, have been investigated regarding the influence of asymmetric substance pairings and particle geometries.
+As validation against findings from the literature was not possible here, explanations of the observed behavior have been attempted.
+
+Some special crafted packings of more than two particles have been investigated regarding the characteristics of pore closing, without and with inert particles present.
+The distinct packings without inert particles were found to behave similarly until pore closing happens.
+The point of pore closing is dependent on the type of packing, respectively the size of the initial pore.
+Inert particles have direct retarding influence on shrinkage and neck evolution, but also keep the pore open so that the previously discussed effects happen later or are prevented at all.
+
+The dimensionless parameter studies, as well as the investigations of crafted packings have lead to several general statements about the influence on shrinkage and neck size evolution during sintering.
 The results are summarized graphically in \cref{fig:conclusions/shrinkage_influences} for the shrinkage and \cref{fig:conclusions/neck_size_influences} for the neck size.
+
+In a fourth step, the behavior of powder mixtures has been investigated by simulating the sintering of random arrangements of three particles.
+The randomized simulations were found to incorporate the effects of subsequent pore closing and to be in accordance with models of large volume cells with high counts of particles.
+Shape features of the particles were found to have especially impact on the pore closing and therefore on the formation of the final stationary state.
+Findings from the parameter studies have been used to explain the observations in the radnomized simulations.
+So, classic particle size averaging was found to be incorrect regarding neck size prediction, as the neck size influence of particle size is determined mainly by the smaller of the particles in contact, so a bias is introduced.
 
 In the current state of the model, several incompletenesses have been observed during the investigations conducted:
 \begin{enumerate}
@@ -45,12 +53,14 @@ In the current state of the model, several incompletenesses have been observed d
         This is an numerical effect due to the removal of volume from a node, where in fact no volume is left.
     \item The grain boundary can currently only consist of a single node (plus the two neck nodes) as was discussed in \cref{sec:contact-conditions},
         as otherwise the contact conditions create collinear rows in the system matrix.
-    \item Transfer between particles was neglected, which disallowed the occurrence of grain growth in the parameter studies of asymmetric geometry (\cref{subsec:parameter-study-particle-size-ratio,subsec:parameter-study-ovality}),
+    \item Transfer between particles was neglected, which disallowed the occurrence of grain growth in the parameter studies of asymmetric geometry (\cref{subsec:parameter-study-particle-size-ratio,subsec:parameter-study-ovality}) and the randomized simulations (\cref{ch:randomized-simulations}),
         but allowed to disregard concentration gradients within the particle volume for the case of unequal substances.
 \end{enumerate}
 
 Beside fixing those, further development of the model can include in the future:
 \begin{enumerate}
     \item Introduction of an multi-scale approach that models fine-grained powder fractions as a solid continuum of viscoelastic behavior filling the pores with ability to apply a pressure on the large particles' surfaces and transfer mass to them.
-    \item Transfer the approach for simulation of microstructure evolution of compact polycrystals regarding recrystallization, but also possibly with phase transformations.
+    \item Extension of the approach to 3D space.
+    \item Application of the randomized approach to development of powder mixtures with differing size, shape and material properties.
+    \item Transfer the approach to simulation of microstructure evolution of compact polycrystals regarding recrystallization, but also possibly with phase transformations.
 \end{enumerate}
