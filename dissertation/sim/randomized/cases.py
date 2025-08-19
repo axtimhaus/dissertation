@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
-from typing import ClassVar
+from typing import Any, ClassVar
 from uuid import uuid5
 
 import numpy as np
@@ -57,7 +57,7 @@ class Case(BaseModel):
     display: str
     samples: list[Input]
 
-    LINE_STYLE: ClassVar[dict]
+    LINE_STYLE: ClassVar[dict[str, Any]]
 
     def dir(self, sample: int | None = None) -> Path:
         path = in_build_dir(THIS_DIR / "cases") / self.key
@@ -65,7 +65,7 @@ class Case(BaseModel):
 
 
 class NominalCase(Case):
-    LINE_STYLE = dict(color="C0")
+    LINE_STYLE = dict(color="black")
 
     @classmethod
     def create_input(cls, sample: int):
@@ -81,10 +81,24 @@ class NominalCase(Case):
                 },
                 node_count=NODE_COUNT,
             )
-            for i, (x, y) in zip(range(PARTICLE_COUNT), particle_coords(1.1 * REFERENCE_PARTICLE.radius), strict=True)
+            for i, (x, y) in zip(range(PARTICLE_COUNT), particle_coords(2.1 * REFERENCE_PARTICLE.radius), strict=True)
         ]
 
         return Input(particles=particles)
+
+    def dir(self, sample: int | None = None) -> Path:
+        return in_build_dir(THIS_DIR / "cases") / self.key
+
+    @property
+    def input(self):
+        return self.samples[0]
+
+
+NOMINAL = NominalCase(
+    key="nominal",
+    display="Nominal",
+    samples=[NominalCase.create_input(0)],
+)
 
 
 class CircularCase(Case):
@@ -95,7 +109,7 @@ class CircularCase(Case):
 
     @classmethod
     def create_input(cls, sample: int):
-        radii = cls.PARTICLE_SIZE_DIST.sample((PARTICLE_COUNT,), rng=cls.RNG) / 1e6
+        radii = np.sort(cls.PARTICLE_SIZE_DIST.sample((PARTICLE_COUNT,), rng=cls.RNG) / 1e6)[::-1]
         distance = 2 * np.max(radii)
 
         particles = [
@@ -125,7 +139,7 @@ class OvalCase(Case):
 
     @classmethod
     def create_input(cls, sample: int):
-        radii = cls.PARTICLE_SIZE_DIST.sample((PARTICLE_COUNT,), rng=cls.RNG) / 1e6
+        radii = np.sort(cls.PARTICLE_SIZE_DIST.sample((PARTICLE_COUNT,), rng=cls.RNG) / 1e6)[::-1]
         ovalities = cls.OVALITY_DIST.sample((PARTICLE_COUNT,), rng=cls.RNG)
         rotations = ROTATION_DIST.sample((PARTICLE_COUNT,), rng=cls.RNG)
         distance = 2 * np.max(radii * ovalities)
@@ -162,7 +176,7 @@ class ShapeCase(Case):
 
     @classmethod
     def create_input(cls, sample: int):
-        radii = cls.PARTICLE_SIZE_DIST.sample((PARTICLE_COUNT,), rng=cls.RNG) / 1e6
+        radii = np.sort(cls.PARTICLE_SIZE_DIST.sample((PARTICLE_COUNT,), rng=cls.RNG) / 1e6)[::-1]
         ovalities = cls.OVALITY_DIST.sample((PARTICLE_COUNT,), rng=cls.RNG)
         rotations = ROTATION_DIST.sample((PARTICLE_COUNT,), rng=cls.RNG)
         heights = cls.HEIGHT_DIST.sample((PARTICLE_COUNT,), rng=cls.RNG)
@@ -210,3 +224,5 @@ CASES = [
         samples=[ShapeCase.create_input(i) for i in range(SAMPLE_COUNT)],
     ),
 ]
+
+MEAN_LINE_STYLE: dict[str, Any] = dict(color="red")

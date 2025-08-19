@@ -1,2 +1,158 @@
+\section{Simulation Results}\label{sec:randomized/results}
 
-\section{Results and Discussion}\label{sec:randomized/results}
+The \crefrange{fig:randomized/cases/circular/shrinkage}{fig:randomized/cases/shape/neck_size} show the shrinkage respectively neck size evolution of the randomized simulations.
+The distinct samples are drawn as a partially transparent lines, so that the density of samples can be estimated visually by the intensity of the color.
+For comparison the arithmetic mean of the samples and the result of the nominal case are drawn alongside.
+The arithmetic mean curve is calculated by interpolating the sample curves at the respective time.
+When the respective sample curve was does not provide a value for the respective time, because the simulation was already canceled due to pore closing, than the last value of the curve it taken.
+This is equivalent to the assumption that the particle group is inert (does not evolve any further) after pore closing has happened.
+This assumption has to be taken as simulation after pore closing is not supported in the current state of the model (see \cref{sec:contact-study}).
+Extrapolation of the curves is not feasible, as they approach a singularity (approach infinite slope) when the pore is almost closed.
+In each figure, also two histograms at the normalized times $\Time/\TimeNorm_{\Surface} = \num[print-unity-mantissa=false]{1e-6}$ and $\Time/\TimeNorm_{\Surface} = \num[print-unity-mantissa=false]{1e-6}$ are drawn, which also show the respective mean value and the standard deviation.
+The histograms are calculated using the same assumption on pore closing.
+
+To measure the size of an effect, the absolute effect~$\EffectSize$ (difference of means) is often not sufficient, as it neglects the spread of the data within each group.
+\textcite{Cohen1988} defined a relative effect size~$\RelativeEffectSize$, also known after the author as Cohen's effect size.
+It is given as the absolute effect size $\EffectSize$ divided by the standard deviation $\StandardDeviation$ as in \cref{eq:relative-effect-size}.
+Which standard deviation to take is an issue, especially when sample sizes are different.
+For equal sample sizes \textcite{Cohen1988} gave the expression in \cref{eq:combined-standard-deviation}.
+Here, the case is simpler, as the comparison is done between each randomized and the nominal case, which is fully certain.
+So, the reference standard deviation is just that of the randomized case.
+\Cref{tab:randomized-effects} lists the obtained means and standard deviation for the respective cases alongside with the absolute and relative effect sizes.
+For rating the value of Cohen's effect size, \textcite{Sawilowsky2009} gave rules of thumb, according to which an effect of $\RelativeEffectSize \approx \num{0.2}$ is to be classified as small, $\RelativeEffectSize \approx \num{0.5}$ as medium, $\RelativeEffectSize \approx \num{0.8}$ as large and  $\RelativeEffectSize \approx \num{1.2}$ as very large.
+\begin{equation}
+    \RelativeEffectSize = \frac{\EffectSize}{\StandardDeviation} = \frac{\Estimated\Expectation_1 - \Estimated\Expectation_2}{\StandardDeviation}
+    \label{eq:relative-effect-size}
+\end{equation}
+\begin{equation}
+    \bar\StandardDeviation = \sqrt{\frac12 \left( \StandardDeviation_1^2 + \StandardDeviation_2^2 \right) }
+    \label{eq:combined-standard-deviation}
+\end{equation}
+
+In the following, the results of shrinkage and neck size will be discussed with respect to the plots and the calculated effect sizes under consideration of the effect size thumb rules.
+A remarkable feature that all cases and times have in common for shrinkage as well neck size is, that the effect is negative.
+
+\begin{table}
+    \caption{Comparison of Means and Standard Deviations and their Effect Sizes for the Distinct Cases of Randomized Simulations}
+    \label{tab:randomized-effects}
+    \begin{tblr}{
+            colspec={lXXXXXXXX},
+            column{2-9} = {r}
+        }
+        \toprule
+        & \SetCell[c=2]{c} Nominal & & \SetCell[c=2]{c} Circular & & \SetCell[c=2]{c} Oval & & \SetCell[c=2]{c} Waves & \\ \cmidrule[lr]{2-3} \cmidrule[lr]{4-5} \cmidrule[lr]{6-7} \cmidrule[lr]{8-9}
+        $\Time / \TimeNorm_{\Surface}$ & \num[print-unity-mantissa=false]{1e-6} & \num[print-unity-mantissa=false]{1e-4} & \num[print-unity-mantissa=false]{1e-6} & \num[print-unity-mantissa=false]{1e-4} & \num[print-unity-mantissa=false]{1e-6} & \num[print-unity-mantissa=false]{1e-4} & \num[print-unity-mantissa=false]{1e-6} & \num[print-unity-mantissa=false]{1e-4} \\
+        \midrule
+        Shrinkage \\ \cmidrule[lr]{1}
+        $\Estimated\Expectation$ in \unit{\percent} & \num{1.189} & \num{5.502} & \num{1.156} & \num{4.843} & \num{1.139} & \num{4.778} & \num{1.185} & \num{4.377} \\
+        $\Estimated\StandardDeviation$ in \unit{\percent} & -- & -- & \num{0.428} & \num{1.038} & \num{0.364} & \num{1.063} & \num{0.468} & \num{1.559} \\
+        $\EffectSize$ in \unit{\percent} & -- & -- & \num{-0.033} & \num{-0.659} & \num{-0.050} & \num{-0.724} & \num{-0.004} & \num{-1.125} \\
+        $\RelativeEffectSize$ in \unit{\percent} & -- & -- & \num{-0.077} & \num{-0.635} & \num{-0.137} & \num{-0.681} & \num{-0.009} & \num{-0.722} \\
+        Neck Size \\ \cmidrule[lr]{1}
+        $\Estimated\Expectation$ in \unit{\percent} & \num{24.861} & \num{45.734} & \num{23.664} & \num{41.792} & \num{23.267} & \num{41.782} & \num{21.502} & \num{38.138} \\
+        $\Estimated\StandardDeviation$ in \unit{\percent} & -- & -- & \num{3.856}  & \num{8.670} & \num{3.215} & \num{7.427} & \num{4.017} & \num{9.369} \\
+        $\EffectSize$ in \unit{\percent} & -- & -- & \num{-1.197} & \num{-3.942} & \num{-1.594} & \num{-3.952} & \num{-3.359} & \num{-7.596} \\
+        $\RelativeEffectSize$ in \unit{\percent} & -- & -- & \num{-0.310} & \num{-0.458} & \num{-0.496} & \num{-0.532} & \num{-0.836} & \num{-0.811} \\
+        \bottomrule
+    \end{tblr}
+\end{table}
+
+\subsection{Observations on Shrinkage}
+
+\begin{figure}
+    \includegraphics{sim/randomized/cases/circular/shrinkage}
+    \caption{Shrinkage of the Circular Case}
+    \label{fig:randomized/cases/circular/shrinkage}
+\end{figure}
+
+\begin{figure}
+    \includegraphics{sim/randomized/cases/oval/shrinkage}
+    \caption{Shrinkage of the Oval Case}
+    \label{fig:randomized/cases/oval/shrinkage}
+\end{figure}
+
+\begin{figure}
+    \includegraphics{sim/randomized/cases/shape/shrinkage}
+    \caption{Shrinkage of the First-Order Waves Case}
+    \label{fig:randomized/cases/shape/shrinkage}
+\end{figure}
+
+The \crefrange{fig:randomized/cases/circular/shrinkage}{fig:randomized/cases/shape/shrinkage} show the shrinkage results of the randomized simulations.
+
+Regarding the early stages, the following observations are to be noted:
+\begin{enumerate}
+    \item The deviations between the nominal and the randomized cases is very small and both curves are visually in well agreement.
+    \item The relative effect sizes can be classified as small or less.
+        The effect size of the waved case is even much lower than of the other ones, which is related to the fact that in this case the time section at $\Time/\TimeNorm_{\Surface} = \num[print-unity-mantissa=false]{1e-6}$ is accidentally near an intersection of the mean and nominal curves.
+    \item The standard deviation of the oval case is slightly smaller compared to the circular case, whereas that of the waved case is slightly higher.
+    \item The histograms show an approximately symmetric shape when plotted in logarithmic scale.
+\end{enumerate}
+
+Regarding the late stages, the following observations are to be noted:
+\begin{enumerate}
+    \item The deviations between the nominal and the randomized cases is much larger than in early stages.
+    \item The relative effect size has to be classified between medium and large, where the effect slightly increases from circular, over oval, to waved.
+    \item The circular and oval case have comparable standard deviation, whereas that of the the waved case is remarkably higher.
+    \item The waved case has a drastically higher absolute effect, but the relative effect, although higher than that of the oval case, is not that pronounced due to the higher standard deviation.
+    \item  The histograms show a heavy tail on the left side, formed by samples with early pore closing.
+        The heavy tail is especially pronounced in the waved case.
+        This is in accordance with the smoother transition into the stationary state.
+\end{enumerate}
+
+Regarding the overall trends with time, the following observations are to be noted:
+\begin{enumerate}
+    \item The nominal curve shows the typical behavior of a closing pore with increasing slope as already observed in \cref{sec:contact-study} and in the individual samples.
+    \item The mean curve shows a flattening characteristic with transition into a stationary state.
+        The transition into the stationary state is more sudden in the circular case over the oval and the waved case, in this order.
+    \item In all cases the standard deviation increases with time.
+\end{enumerate}
+
+\subsection{Observations on Neck Size}
+
+\begin{figure}
+    \includegraphics{sim/randomized/cases/circular/neck_size}
+    \caption{Neck Size of the Circular Case}
+    \label{fig:randomized/cases/circular/neck_size}
+\end{figure}
+
+\begin{figure}
+    \includegraphics{sim/randomized/cases/oval/neck_size}
+    \caption{Neck Size of the Oval Case}
+    \label{fig:randomized/cases/oval/neck_size}
+\end{figure}
+
+\begin{figure}
+    \includegraphics{sim/randomized/cases/shape/neck_size}
+    \caption{Neck Size of the First-Order Waves Case}
+    \label{fig:randomized/cases/shape/neck_size}
+\end{figure}
+
+The \crefrange{fig:randomized/cases/circular/neck_size}{fig:randomized/cases/shape/neck_size} show the neck size results of the randomized simulations.
+
+Regarding the early stages, the following observations are to be noted:
+\begin{enumerate}
+    \item In contrast to shrinkage, neck size is also in early stages significantly affected by the randomized consideration of size and shape features.
+    \item The absolute effect heavily increases from the circular, over the oval to the waved case.
+    \item The standard deviation of the oval case is smaller compared to the circular case, whereas this of the waved case is higher.
+    \item The relative effect sizes are to be classified as small to medium for the circular, medium for the oval case and large for the waved case.
+    \item The histogram of the circular case (\cref{fig:randomized/cases/circular/neck_size}) has a heavily right skewed shape when plotted in logarithmic scale, which corresponds to a symmetric shape in linear scale.
+        This skew vanishes over the oval case to the waved case.
+\end{enumerate}
+
+Regarding the late stages, the following observations are to be noted:
+\begin{enumerate}
+    \item The absolute effect is similar for the circular and the oval case.
+        The waved case has a remarkably higher effect.
+    \item The standard deviation follows the same trend as in early stages.
+    \item The relative effect sizes are similar for the circular and oval cases, both to be classified as medium.
+        The waved case has a higher effect, to be classified as large.
+    \item The histograms show a heavily right skewed shape when plotted in logarithmic scale.
+        The tail gets heavier from the circular, over the oval, to the waved case.
+\end{enumerate}
+
+Regarding the overall trends with time, the following observations are to be noted:
+\begin{enumerate}
+    \item Similarly to shrinkage, the nominal curve shows the typical pore closing behavior, whereas the mean curve transits into a staionary states with the same trends observed before.
+    \item As in shrinkage, the standard deviation increases with time.
+    \item In contrast to the shrinkage, the relative effect sizes are not remarkably increasing with time, the larger absolute effect is canceled out by the increase in standard deviation.
+\end{enumerate}

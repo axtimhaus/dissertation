@@ -112,13 +112,15 @@ Reals = '\symbb{R}'                # set of integer numbers
 Stress = '\sigma' # normal stress
 
 # Statistics and Monte Carlo
-Expectation = '\mu'               # stochastic expectation
-StandardDeviation = '\sigma'      # standard deviation
-Variance = '\StandardDeviation^2' # variance
-Estimated = '\hat'                # estimation of the respected value
-Probability = 'p'                 # probability
-CumulativeProbability = 'P'       # cumulative probability
-GammaFunction = '\symrm{\Gamma}'  # gamma function
+Expectation = '\mu'                            # stochastic expectation
+StandardDeviation = '\sigma'                   # standard deviation
+Variance = '\StandardDeviation^2'              # variance
+Estimated = '\hat'                             # estimation of the respected value
+Probability = 'p'                              # probability
+CumulativeProbability = 'P'                    # cumulative probability
+GammaFunction = '\symrm{\Gamma}'               # gamma function
+EffectSize = 'e'
+RelativeEffectSize = '\EffectSize_{\symrm{r}}'
 
 # Features
 Shrinkage = '\varepsilon'

@@ -101,7 +101,11 @@ var solver = new SinteringSolver(
             new NeckNeighborhoodRemesher(),
             new LastSurfaceNodeRemesher(),
         ],
-        BreakConditions = [new PoreClosedCondition(20e-6 / input.Particles[0].Radius)],
+        BreakConditions =
+        [
+            new PoreClosedCondition(20e-6 / input.Particles[0].Radius),
+            new SolutionStuckBreakCondition(1e-4),
+        ],
     },
     remeshingEverySteps: 50
 );

@@ -1,0 +1,52 @@
+\section{Discussion and Conclusions}\label{sec:randomized/discussion}
+
+The main reason for the observations is suspected in the effects of pore closing, where the sintering behavior significantly deviates from the straight linear one (in double logarithmic scale).
+As denoted before in \cref{sec:contact-study}, the shrinkage and neck size evolution of a particle group, forming a single pore, features a singularity with the slope tending to infinity when the pore volume approaches zero.
+Macroscopical sintering bodies in contrast, exhibit a transition into a stationary state, in accordance to the flattening behavior shown by the mean curve.
+This flattening behavior is created numerically due to the increasing proportion of closed pores at later times, which do not contribute to sintering anymore as they are considered to be fully inert by assumption (see above).
+Principally, if the model would support regard on a triple junction of grain boundaries, further neck growth and shrinkage may occur due to volume displacement from the inner to the free surfaces on the outside of the particle group.
+It is questionable, if this would be a major improvement to the predictions of the model, as in a real powder compact this outer surface does not really exist (except on the body surface), instead there is another pore.
+The quantitative validity of the prediction by this numerical effect is an outstanding task, but at least the qualitative behavior seems valid.
+
+A similar effect is reported in simulations of the \gls{kMCM} type, which are able to work with large counts of particles in complex microstructures.
+\textcite{Braginsky2005} compared the two cases of a regular circle packing and a random packaging of unequally sized circular particles.
+In the first case they obtained a sharp transition into stationary state, since pore closing happens (approximately) at the same time for all pores.
+In the second case the transition was much smoother, due to distributed pore closing.
+\textcite{Tikare2010} obtained similar results for a 3D model.
+
+Many models, except for the simplest ones, principally show a stationary state in later stages.
+The reasons and mechanisms behind this are manifold.
+Classic two-particle~\cite{Svoboda1995} or single-pore models~\cite{Pan1995} do show a flattening of the sintering curves, but at drastically later times, when a stationary state is reached du to vanishing driving force.
+This is also the case for the current model in a two-particle arrangement for very large sintering times up to $\Time/\TimeNorm_{\Surface} = \numrange[print-unity-mantissa=false]{1e-1}{1e0}$ (not displayed here).
+Two-particle models with unequal sized particles feature first a steady state and than a sudden drop in neck size due to the consumption of the smaller particle \cite{Ahmed2013, Biswas2016, Biswas2017}.
+Some heavily simplified models of two particles seem to show this behavior, too, but this is due to an accompanying grain growth model which increases the mean grain size and thus reduces the predicted sintering rate~\cite{Kang2004, Gouvea2024}.
+
+The circular particles behave more uniformly in their pore closing compared to the waved ones.
+The behavior of the oval ones lies in between, but more similar to the circular ones.
+Pores formed initially between circular or oval particles are always of concave shape, as the particle surfaces between the necks are always convex.
+When considering first-order waves, the initial pore shape may be complex: being partially or fully concave and featuring narrow channels of varying width.
+So there are much more possible varieties of behavior present in this case.
+This is suspected to be the reason of the more sudden transition into stationary state of the circular case, as the pore closing happens more concentrated in time.
+
+In accordance with the results of \cref{sec:parameter-study}, the shape features' influences on shrinkage average out except for pore closing.
+Therefore, the shrinkage behavior is well described by the nominal case in the early stages.
+The validity of circular two-particle models was stated up to a neck size of $\Radius_{\Neck} / \Radius_0 \approx \num{0.2}$ \cite{Kang2004}.
+This is supported by the current results.
+
+\textcite{Bjork2012} reported from \gls{kMCM} results a decrease in densification when assuming normal and log-normal distributed particles over monosized ones, densification decreased further when increasing the standard deviation.
+In contrast, \textcite{Termuhlen2021} reported an increase in densification from 3D \gls{PFM} simulation results, with a volume cell filled with randomly sized spherical particles in comparison to one with equally sized particles.
+The reasons for this contradiction are unclear.
+Both authors used linear time scale plots, so the early stages are not visually distinguishable.
+But for late stages, the results of \textcite{Bjork2012} support the current findings.
+
+The picture is different for the neck size results.
+The influence of circular particle size distribution is remarkable, and even higher under consideration of shape features.
+With regard on the results on the particle size ratio of \cref{subsec:parameter-study-particle-size-ratio}, the reason is suspected in the asymmetry of the particle size influence.
+The neck growth is affected mainly by the size of the smaller of two particles in contact, not by their average size.
+This introduces a bias in averaging, because small particles have higher weight in the average influence.
+So when taking the particle size distribution in consideration, the mean neck size achieved will be lower than that predicted by a model regarding particles of equal mean size.
+
+In contrast to their shrinkage results, the neck size prediction of \textcite{Termuhlen2021} supports the current findings.
+They found a higher neck size for the monosized particles, although only at later stages.
+In early stages monosized and multiszed particles were approximately equivalent.
+The reported microstructural state images suggest that the final state of their simulation is at far earlier time than in the current case, as only small necks and still connected pore networks are present.

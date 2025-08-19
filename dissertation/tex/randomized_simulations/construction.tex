@@ -2,11 +2,12 @@
 
 The study will stick to three-particle arrangements to avoid major difficulties in construction of the initial state.
 As the size and shape of the particles will now be variable, the initial position can not be given a-priori but must be determined numerically.
-The study will compare three cases: three powders with equal particle size distribution but one assumed to have circular particles,
+The study will compare four cases: the nominal case, with three circular particles of equal size, and three powders with equal particle size distribution but one assumed to have circular particles,
 one where only an ovality according to \cref{eq:f-ovality} is considered
 and one where also first order waves according to \cref{eq:f-first-order-waves} are considered.
-The differences and similarities of the three cases will be investigated to rate the need for inclusion of this data into sintering simulations.
-The core question is if the first order waves have major influence or if regard on ovality is enough, since ovality is a parameter that can be measured without problems using state of the art automatic particle classifiers.
+The differences and similarities of the cases will be investigated to rate the need for inclusion of this data into sintering simulations.
+The core question is if the inclusion of size distribution and shape data in the simulation leads to significantly different results and if those differences are in accordance with experimental experience and theoretical expectations.
+Regarding shape data, it is investigated if the first order waves have major influence or if regard on ovality is enough, since ovality is a parameter that can be measured without problems using state of the art automatic particle classifiers.
 First order waves, however, require an high amount of manual work.
 The author has already published a paper describing a method to obtain these for aggregate particles via laser scanning microscopy images and leat-square fitting in \textcite{Weiner2022a}, but there another approach of sintering model is used.
 The data obtained there will be reused in this study.
@@ -19,7 +20,7 @@ The choice and fitting will be discussed in \cref{sec:randomized/data_aquisition
 
 \subsection{Creation of the Initial State}
 
-The intial state generation starts by sampling three particles randomly.
+The initial state generation starts by sampling three particles randomly.
 For each a radius $\Radius_0$ and one of every shape parameter is sampled from the given distribution.
 Also, the rotation of each particle is sampled from a uniform distribution with value range $\RotationAngle \in [0, 2\PI)$.
 The initial positions of the particles are created in sufficient distance to each other, so that it is impossible for them to be in contact.

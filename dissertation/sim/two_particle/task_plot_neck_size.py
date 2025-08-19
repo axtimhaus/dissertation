@@ -12,7 +12,7 @@ from dissertation.sim.two_particle.helper import ashby_grid
 from dissertation.sim.two_particle.studies import PARTICLE1_ID, STUDIES, DimlessParameterStudy, StudyBase
 
 RESAMPLE_COUNT = 100
-NECK_SIZE_LIMITS = (2e-1, 1)
+NECK_SIZE_LIMITS = (2e-1, 1.3)
 
 for t in STUDIES:
 
@@ -44,7 +44,6 @@ for t in STUDIES:
         ax.set_ylabel(r"Relative Neck Size $\Radius_{\Neck} / \Radius_0$")
         ax.set_xlim(1e-6, 10**upper_mag)
         ax.set_ylim(*NECK_SIZE_LIMITS)
-        fig.tight_layout()
 
         for p in produces:
             fig.savefig(p)

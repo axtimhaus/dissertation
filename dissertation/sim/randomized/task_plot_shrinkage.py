@@ -8,11 +8,12 @@ from matplotlib.gridspec import GridSpec
 from pytask import mark, task
 
 from dissertation.config import FIGSIZE_INCH, image_produces
-from dissertation.sim.randomized.cases import CASES
+from dissertation.sim.randomized.cases import CASES, MEAN_LINE_STYLE, NOMINAL
+from dissertation.sim.randomized.helper import read_parquet_output_files
 from dissertation.sim.randomized.input import TIME_NORM_SURFACE, Input
 from dissertation.sim.two_particle.task_plot_shrinkage import distance
 
-SHRINKAGE_LIMITS = (1e-3, 1e-1)
+SHRINKAGE_LIMITS = (1e-3, 2e-1)
 CUTS = [1e-6, 1e-4]
 CUT_COLORS = ["C3", "C4"]
 
@@ -23,11 +24,13 @@ for case in CASES:
     def task_plot_shrinkage_randomized(
         produces=image_produces(case.dir() / "shrinkage"),
         results_files=[case.dir(i) / "output.parquet" for i, _ in enumerate(case.samples)],
+        nominal_result=NOMINAL.dir() / "output.parquet",
         case=case,
     ):
-        data_frames = (pq.read_table(f).flatten().flatten() for f in results_files)
+        nominal_df = pq.read_table(nominal_result).flatten().flatten()
+        data_frames = read_parquet_output_files(results_files)
 
-        fig = plt.figure(figsize=(FIGSIZE_INCH[0], FIGSIZE_INCH[1] * 1.5))
+        fig = plt.figure(figsize=(FIGSIZE_INCH[0], FIGSIZE_INCH[1] * 1.3))
         gs = GridSpec(3, 2, figure=fig)
         axs = [
             fig.add_subplot(gs[0:2, :]),
@@ -41,28 +44,54 @@ for case in CASES:
         axs[0].grid(True, "both")
 
         cuts = {t: np.zeros_like(results_files) for t in CUTS}
+        mean_supports = {t: np.zeros_like(results_files) for t in np.geomspace(1e-7, 1e-3, 100)}
 
-        for i, df in enumerate(data_frames):
+        for i, df in data_frames:
             sample = case.samples[i]
             times, values = get_shrinkages_shoelace(sample, df)
-            axs[0].plot(times, values, **case.LINE_STYLE, alpha=0.3)
+            axs[0].plot(times, values, **case.LINE_STYLE, alpha=0.1)
 
             for t, arr in cuts.items():
+                arr[i] = np.interp(t, times, values)
+
+            for t, arr in mean_supports.items():
                 arr[i] = np.interp(t, times, values)
 
         for i, (t, arr) in enumerate(cuts.items()):
             axs[0].axvline(t, color=CUT_COLORS[i])
             axs[i + 1].set_title(f"$\\Time / \\TimeNorm_{{\\Surface}} = \\num[print-unity-mantissa=false]{{{t:.0e}}}$")
             axs[i + 1].hist(arr, bins=np.geomspace(*SHRINKAGE_LIMITS, 51), density=True, color=CUT_COLORS[i], alpha=0.5)
-            axs[i + 1].axvline(np.mean(arr), color=CUT_COLORS[i])
+            mean = np.mean(arr)
+            std = np.std(arr)
+            axs[i + 1].axvline(
+                mean, color=CUT_COLORS[i], label=f"$\\Estimated\\Expectation = \\qty{{{mean * 100:.3f}}}{{\\percent}}$"
+            )
+            axs[i + 1].axvline(
+                mean + std,
+                color=CUT_COLORS[i],
+                ls="--",
+                label=f"$\\Estimated\\StandardDeviation = \\qty{{{std * 100:.3f}}}{{\\percent}}$",
+            )
+            axs[i + 1].axvline(mean - std, color=CUT_COLORS[i], ls="--")
+
+        times, values = get_shrinkages_shoelace(NOMINAL.input, nominal_df)
+        axs[0].plot(times, values, **NOMINAL.LINE_STYLE, label="nominal")
+
+        for i, v in enumerate(np.interp(t, times, values) for t in CUTS):
+            axs[i + 1].axvline(v, **NOMINAL.LINE_STYLE, label=f"$\\text{{nom.}} = \\qty{{{v * 100:.3f}}}{{\\percent}}$")
+
+        times, values = np.asarray(list(mean_supports.keys())), np.mean(list(mean_supports.values()), axis=-1)
+        axs[0].plot(times, values, **MEAN_LINE_STYLE, label="mean")
 
         axs[0].set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
         axs[0].set_ylabel("Shrinkage $\\Shrinkage$")
+        axs[0].legend()
 
         for ax in axs[1:]:
             ax.set_xlabel("Shrinkage $\\Shrinkage$")
             ax.set_ylabel("Probability Density")
             ax.set_xscale("log")
+            ax.legend()
 
         for p in produces:
             fig.savefig(p)

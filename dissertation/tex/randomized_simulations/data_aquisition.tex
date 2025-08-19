@@ -24,7 +24,7 @@ For particle size distributions it is common to use a Weibull distribution (\cre
 The support of the distribution is $x \in [L, \infty)$.
 As particle sizes must always be $> 0$, the location $L=0$ is used here.
 \begin{equation}
-    \Probability(x) = \frac{k}{S} (\frac{x - L}{S})^{k-1} \exp -(\frac{x - L}{T})^k
+    \Probability(x) = \frac{k}{S} \left(\frac{x - L}{S}\right)^{k-1} \exp \left[ -\left(\frac{x - L}{T}\right)^k \right]
     \label{eq:weibull}
 \end{equation}
 The expectation $\Expectation$ of the Weibull distribution is given by \cref{eq:weibull-expectation} with the gamma function $\GammaFunction$.
@@ -113,6 +113,7 @@ The wave shift $\WaveShift$ is suprisingly close to a uniform distribution, so n
 The obtained particle size distributions from the three aproaches are quite similar, despite the changes in the shape descriptions.
 Due to improved shape accuracy, the mean of particle size $\Radius_0$ is slightly decreasing from \qtyrange{1386}{1357}{\micro\meter}.
 To ensure comparability, the reference radius for normalization will be fixed to the approximate mean value of \qty{1370}{\micro\meter} for the rest of this chapter.
+This radius ist also used as the radius of the nominal case particles.
 
 \Cref{fig:comparison-particle-shape-fits} shows a typical particle from the dataset, which has been fitted by the three distinct approaches.
 One could clearly observe the improved shape representation when adding the additional terms.

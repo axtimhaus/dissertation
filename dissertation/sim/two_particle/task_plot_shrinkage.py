@@ -45,7 +45,6 @@ for t in STUDIES:
         ax.set_xlim(1e-6, 10**upper_mag)
         ax.set_ylim(*SHRINKAGE_LIMITS)
         ax.set_ylim(auto=True)
-        fig.tight_layout()
 
         for p in produces:
             fig.savefig(p)
