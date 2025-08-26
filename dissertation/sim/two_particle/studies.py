@@ -375,9 +375,9 @@ class SurfaceBoundaryDiffusionStudy(DimlessParameterStudy):
     KEY = "surface_boundary_diffusion"
     TITLE = r"Diffusion Coefficient Ratio $\DiffusionCoefficient_{\GrainBoundary} / \DiffusionCoefficient_{\Surface}$"
     MIN = 0.01
-    MAX = 10
+    MAX = 100
     SCALE = "geom"
-    COUNT = 16
+    COUNT = 21
 
     @property
     def input(self) -> Input:

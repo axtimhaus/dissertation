@@ -4,7 +4,7 @@ import pandas as pd
 import pyarrow as pa
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
-from matplotlib import ticker
+from matplotlib import contour, ticker
 from pytask import mark, task
 
 from dissertation.config import image_produces, integer_log_space125
@@ -12,7 +12,8 @@ from dissertation.sim.two_particle.helper import ashby_grid
 from dissertation.sim.two_particle.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES, DimlessParameterStudy, StudyBase
 
 RESAMPLE_COUNT = 100
-SHRINKAGE_LIMITS = (1e-3, 1)
+TIME_MIN = 1e-6
+SHRINKAGE_MIN = 1e-3
 
 for t in STUDIES:
 
@@ -31,20 +32,36 @@ for t in STUDIES:
         ax.set_xscale("log")
         ax.set_yscale("log")
         ax.grid(True, "both")
-        upper_mag = -6
+        max_time = TIME_MIN
+        max_shrinkage = SHRINKAGE_MIN
 
         for key, df in data_frames:
             study = studies[key]
             times, values = get_shrinkages(study, df)
             ax.plot(times, values, label=study.display, **study.line_style)
-            upper_mag = max(upper_mag, int(np.floor(np.log10(np.max(times)))))
+            max_time = max(max_time, np.max(times))
+            max_shrinkage = max(max_shrinkage, np.max(values))
 
-        ax.legend(title=study_type.TITLE, ncols=3)
+        if issubclass(study_type, DimlessParameterStudy):
+            cb = fig.colorbar(
+                contour.ContourSet(
+                    ax,
+                    [s.value for s in studies.values()],
+                    [[[(0, 0)]]] * len(studies),
+                    norm=study_type.axis_scale,
+                    cmap=study_type.CMAP,
+                ),
+                label=study_type.TITLE,
+                orientation="horizontal",
+            )
+            cb.minorticks_on()
+        else:
+            ax.legend(title=study_type.TITLE, ncols=3)
+
         ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
         ax.set_ylabel("Shrinkage $\\Shrinkage$")
-        ax.set_xlim(1e-6, 10**upper_mag)
-        ax.set_ylim(*SHRINKAGE_LIMITS)
-        ax.set_ylim(auto=True)
+        ax.set_xlim(TIME_MIN, max_time)
+        ax.set_ylim(SHRINKAGE_MIN, min(10 ** np.ceil(np.log10(max_shrinkage)), 0.3))
 
         for p in produces:
             fig.savefig(p)
@@ -61,7 +78,7 @@ for t in STUDIES:
             studies: dict[str, DimlessParameterStudy] = {str(study): study for study in t.INSTANCES},  # type: ignore
             results_files={str(study): study.dir / "output.parquet" for study in t.INSTANCES},
         ):
-            data_frames = [(k, pq.read_table(f).flatten().flatten()) for k, f in results_files.items()]
+            data_frames = ((k, pq.read_table(f).flatten().flatten()) for k, f in results_files.items())
 
             fig = plt.figure(dpi=600)
             ax = fig.subplots()
@@ -73,13 +90,12 @@ for t in STUDIES:
             params = (np.linspace if study_type.axis_scale == "linear" else np.geomspace)(
                 study_params.min(), study_params.max(), RESAMPLE_COUNT
             )
-            shrinkages = np.geomspace(*SHRINKAGE_LIMITS, RESAMPLE_COUNT)
             shrinkage_curves = [get_shrinkages(studies[key], df) for key, df in data_frames]
+            max_shrinkage = np.max([np.max(s) for _, s in shrinkage_curves])
+            shrinkages = np.geomspace(SHRINKAGE_MIN, min(10 ** np.ceil(np.log10(max_shrinkage)), 0.3), RESAMPLE_COUNT)
             grid_x, grid_y, times = ashby_grid(study_params, shrinkage_curves, params, shrinkages)
 
-            lower_mag = -6
-            upper_mag = int(np.floor(np.log10(np.max(times))))
-            locs = integer_log_space125(lower_mag, upper_mag)
+            locs = integer_log_space125(int(np.floor(np.log10(TIME_MIN))), int(np.floor(np.log10(np.max(times)))))
             formatter = ticker.LogFormatterSciNotation()
 
             cs = ax.contour(
@@ -90,8 +106,13 @@ for t in STUDIES:
                 norm="log",
                 cmap=study_type.CMAP,
             )
-            # ax.clabel(cs, fmt=lambda level: formatter(level))
-            fig.colorbar(cs, format=formatter, label="Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
+            cb = fig.colorbar(
+                cs,
+                format=formatter,
+                label="Normalized Time $\\Time / \\TimeNorm_{\\Surface}$",
+                orientation="horizontal",
+            )
+            cb.minorticks_on()
 
             ax.set_xlabel(study_type.TITLE)
             ax.set_ylabel("Shrinkage $\\Shrinkage$")

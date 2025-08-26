@@ -21,7 +21,7 @@ Four different packings, displayed in \cref{fig:parameter_study/packings}, shall
     \item[Pair] the usual two-particle packing as a reference
     \item[Triangle] the densest possible packing of circles with particles at the corners of an equal sided triangle, resembles a $\left\{ 111 \right\}$ cut through a face-centered cubic cell
     \item[Square] the loosest regular packing with particles at the corners of a square, resembles a $\left\{ 100 \right\}$ cut through a simple cubic cell
-    \item[Rhombus] an intermediate packing with particles at the corners of a rhombus of \angle{70}, resembles a $\left\{ 110 \right\}$ cut through a body centered cubic cell
+    \item[Rhombus] an intermediate packing with particles at the corners of a rhombus of \ang{70}, resembles a $\left\{ 110 \right\}$ cut through a body centered cubic cell
 \end{description}
 The main difference between these packings is the size and the shape of the pore formed by them.
 
@@ -31,7 +31,7 @@ The term inert shall be used here for a particle with remarkably lower diffusion
 This particle is shown with brown stroke in \cref{fig:parameter_study/packings}.
 The other ones will be referred as active ones.
 
-\subsection{Discussion of the Results}
+\subsection{Results and Discussion}
 
 \begin{figure}
     \begin{subfigure}{0.5\linewidth}
@@ -135,6 +135,7 @@ this is in accordance with experimental observations \cite{German2014}.
 The numerical behavior of all cases with an inert is remarkably worse than of the pure active cases, as can be seen from the kinks in the result curves.
 A look into the detailed logs of the simulation suggest the reason to lie in the neck remeshing being more erratic on the inert particle.
 The pore closing is delayed to later times as the pore is kept open by the inert particle's surface.
+The statements on model limitation given in \cref{subsec:parameter-study-asymmetric-surface-diffusion-ratio} also apply here.
 The three multiple-particle packings with an inert behave similarly, show equal behavior in early stages and pore closing occurs in the same order as for the pure active ones.
 The pair with an inert shows a distinct behavior an even lower shrinkage.
 An correlation with the count of active particles present seems unlikely, since the two-particle case is the only one behaving differently.

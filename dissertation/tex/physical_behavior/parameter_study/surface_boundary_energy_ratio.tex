@@ -17,20 +17,6 @@
 
 \begin{figure}[p]
     \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/shrinkage}
-        \caption{Evolution Curves}
-        \label{fig:two_particle/studies/surface_boundary_energy/shrinkage}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/shrinkage_map}
-        \caption{Time Isolines}
-        \label{fig:two_particle/studies/surface_boundary_energy/shrinkage_map}
-    \end{subfigure}
-    \caption{Shrinkage in Dependence on Surface-Boundary Energy Ratio}
-\end{figure}
-
-\begin{figure}[p]
-    \begin{subfigure}{0.5\linewidth}
         \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/neck_size}
         \caption{Evolution Curves}
         \label{fig:two_particle/studies/surface_boundary_energy/neck_size}
@@ -41,6 +27,20 @@
         \label{fig:two_particle/studies/surface_boundary_energy/neck_size_map}
     \end{subfigure}
     \caption{Neck Size in Dependence on Surface-Boundary Energy Ratio}
+\end{figure}
+
+\begin{figure}[p]
+    \begin{subfigure}{0.5\linewidth}
+        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/shrinkage}
+        \caption{Evolution Curves}
+        \label{fig:two_particle/studies/surface_boundary_energy/shrinkage}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\linewidth}
+        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/shrinkage_map}
+        \caption{Time Isolines}
+        \label{fig:two_particle/studies/surface_boundary_energy/shrinkage_map}
+    \end{subfigure}
+    \caption{Shrinkage in Dependence on Surface-Boundary Energy Ratio}
 \end{figure}
 
 This study investigates the effect of the ratio between grain boundary and surface energy.
@@ -57,13 +57,14 @@ With high energy ratio (large dihedral angle), the particle surface around the n
 With low energy ratio (small dihedral angle) the surface near the neck appears almost flat with transition into the convex surface on the backside of the particles.
 The large dihedral angle also corresponds with large achievable neck sizes.
 
-\Cref{fig:two_particle/studies/surface_boundary_energy/shrinkage} shows the dependence of the shrinkage on the interface energy ratio.
-With increasing energy ratio the shrinkage is decreasing.
-A sudden decrease as the energy ratio approaches \num{2}.
-Two counteracting influences can be identified.
-Shrinkage is accelerated by the increase in driving force (decrease of $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface}$), but it is decelerated by the longer diffusion path along the larger neck.
+\Cref{fig:two_particle/studies/surface_boundary_energy/neck_size} shows the dependence of the neck size on the interface energy ratio.
+The neck size decreases notably with the energy ratio.
+A larger decrease appears as the energy ratio approaches \num{2}.
+The main influences suspected here are the decrease in driving force (decrease of $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface}$) in conjunction with the geometric effect of the smaller dihedral angle which have additive effect.
 As $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface} \rightarrow \num{2}$, the driving force vanishes completely, as there is no energetic benefit in growing the neck in all possible geometric configurations.
-The neck size decreases notably with the energy ratio as is shown in \cref{fig:two_particle/studies/surface_boundary_energy/neck_size}.
-The main influences suspected here are the decrease in driving force in conjunction with the geometric effect of the smaller dihedral angle which have additive effect.
+
+\Cref{fig:two_particle/studies/surface_boundary_energy/shrinkage} shows the dependence of the shrinkage on the interface energy ratio.
+The dependence of shrinkage on the energy ratio is similar to that of neck size.
+In addition of the previously described driving force effect, there is a counter-acting influence of a longer diffusion path and a larger volume displacement needed, when the neck is larger.
 
 These findings are in accordance to several other studies on the influence of the grain boundary energy ratio such as \cite{Pask1975, Cannon1989, Kellett1989, Lange1989, Delannay2015, Gouvea2024}.

@@ -4,14 +4,14 @@ import pandas as pd
 import pyarrow as pa
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
-from matplotlib.lines import Line2D
 from pytask import mark
 
 from dissertation.config import image_produces, in_build_dir
 from dissertation.sim.packings.cases import CASES, THIS_DIR, Case
 from dissertation.sim.two_particle.task_plot_shrinkage import distance
 
-RESAMPLE_COUNT = 500
+TIME_MIN = 1e-6
+SHRINKAGE_MIN = 1e-3
 
 
 @mark.plot
@@ -27,16 +27,21 @@ def task_plot_shrinkage_packings(
     ax.set_xscale("log")
     ax.set_yscale("log")
     ax.grid(True, "both")
+    max_time = TIME_MIN
+    max_shrinkage = SHRINKAGE_MIN
 
     for key, df in data_frames:
         case = cases[key]
-        times, shrinkages = get_shrinkages(case, df)
-        ax.plot(times, shrinkages, **case.line_style, label=case.display)
+        times, values = get_shrinkages(case, df)
+        ax.plot(times, values, **case.line_style, label=case.display)
+        max_time = max(max_time, np.max(times))
+        max_shrinkage = max(max_shrinkage, np.max(values))
 
     ax.legend()
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
     ax.set_ylabel("Shrinkage $\\Shrinkage$")
-    fig.tight_layout()
+    ax.set_xlim(TIME_MIN, max_time)
+    ax.set_ylim(SHRINKAGE_MIN, min(10 ** np.ceil(np.log10(max_shrinkage)), 0.3))
 
     for p in produces:
         fig.savefig(p)
@@ -62,7 +67,7 @@ def get_shrinkages(case: Case, df: pa.Table):
         for p in case.input.particles
     ]
     times = particles[0]["State.Time_one"].to_numpy()
-    mask = (times > 1) & (np.diff(times, prepend=[0]) > 0)
+    mask = np.diff(times, prepend=[0]) > 0
     times = times[mask] / case.input.time_norm_surface
 
     if len(particles) > 2:

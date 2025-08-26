@@ -13,7 +13,7 @@ Neck remeshing is necessarily activated with a distance limit parameter of \num{
 Targets of investigation are the time consumption (duration) of the differently parametrized simulations, the step count needed and the evolution of the step width's during the simulation.
 As measure for precision, their agreement in shrinkage and the overall volume loss are regarded.
 
-\subsection{Discussion of the Results}
+\subsection{Results and Discussion}
 
 \begin{figure}
     \begin{subfigure}{0.5\linewidth}
@@ -66,8 +66,6 @@ It is conspicuous that simulations with the parameter values that were noticed a
 For lower values the time step width follows the general trend that after neck remeshing has deleted a surface node, the step jumps up and than decreases quite continuously till the next remeshing as the neck node approaches the next surface node.
 This indicates, that an early neck remeshing would be desirable for efficient computation.
 This issue will be addressed in detail in \cref{sec:study-neck-remeshing}.
-
-\subsection{Summary}
 
 The discussed results show, that lower values of the maximum displacement angle are generally preferable.
 Higher values lead, as expected, to numerical errors, however do not improve the time consumption of the solution due to convergence issues of the Newton procedure.

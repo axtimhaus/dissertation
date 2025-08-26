@@ -4,7 +4,7 @@ import pandas as pd
 import pyarrow as pa
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
-from matplotlib import ticker
+from matplotlib import contour, ticker
 from pytask import mark, task
 
 from dissertation.config import image_produces, integer_log_space125
@@ -12,7 +12,8 @@ from dissertation.sim.two_particle.helper import ashby_grid
 from dissertation.sim.two_particle.studies import PARTICLE1_ID, STUDIES, DimlessParameterStudy, StudyBase
 
 RESAMPLE_COUNT = 100
-NECK_SIZE_LIMITS = (2e-1, 1.3)
+TIME_MIN = 1e-6
+NECK_SIZE_MIN = 2e-1
 
 for t in STUDIES:
 
@@ -31,19 +32,36 @@ for t in STUDIES:
         ax.set_xscale("log")
         ax.set_yscale("log")
         ax.grid(True, "both")
-        upper_mag = -6
+        max_time = TIME_MIN
+        max_neck_size = NECK_SIZE_MIN
 
         for key, df in data_frames:
             study = studies[key]
             times, values = get_neck_sizes(study, df)
             ax.plot(times, values, label=study.display, **study.line_style)
-            upper_mag = max(upper_mag, int(np.floor(np.log10(np.max(times)))))
+            max_time = max(max_time, np.max(times))
+            max_neck_size = max(max_neck_size, np.max(values))
 
-        ax.legend(title=study_type.TITLE, ncols=3)
+        if issubclass(study_type, DimlessParameterStudy):
+            cb = fig.colorbar(
+                contour.ContourSet(
+                    ax,
+                    [s.value for s in studies.values()],
+                    [[[(0, 0)]]] * len(studies),
+                    norm=study_type.axis_scale,
+                    cmap=study_type.CMAP,
+                ),
+                label=study_type.TITLE,
+                orientation="horizontal",
+            )
+            cb.minorticks_on()
+        else:
+            ax.legend(title=study_type.TITLE, ncols=3)
+
         ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
         ax.set_ylabel(r"Relative Neck Size $\Radius_{\Neck} / \Radius_0$")
-        ax.set_xlim(1e-6, 10**upper_mag)
-        ax.set_ylim(*NECK_SIZE_LIMITS)
+        ax.set_xlim(TIME_MIN, max_time)
+        ax.set_ylim(NECK_SIZE_MIN, min(10 ** np.ceil(np.log10(max_neck_size)), 1.3))
 
         for p in produces:
             fig.savefig(p)
@@ -72,8 +90,9 @@ for t in STUDIES:
             params = (np.linspace if study_type.axis_scale == "linear" else np.geomspace)(
                 study_params.min(), study_params.max(), RESAMPLE_COUNT
             )
-            neck_sizes = np.geomspace(*NECK_SIZE_LIMITS, RESAMPLE_COUNT)
             neck_size_curves = [get_neck_sizes(studies[key], df) for key, df in data_frames]
+            max_neck_size = np.max([np.max(n) for _, n in neck_size_curves])
+            neck_sizes = np.geomspace(NECK_SIZE_MIN, min(10 ** np.ceil(np.log10(max_neck_size)), 1.3), RESAMPLE_COUNT)
             grid_x, grid_y, times = ashby_grid(study_params, neck_size_curves, params, neck_sizes)
 
             lower_mag = -6
@@ -81,9 +100,21 @@ for t in STUDIES:
             locs = integer_log_space125(lower_mag, upper_mag)
             formatter = ticker.LogFormatterSciNotation()
 
-            cs = ax.contour(grid_x, grid_y, times, levels=locs, norm="log", cmap=study_type.CMAP)
-            # ax.clabel(cs, fmt=lambda level: formatter(level))
-            fig.colorbar(cs, format=formatter, label="Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
+            cs = ax.contour(
+                grid_x,
+                grid_y,
+                times,
+                levels=locs,
+                norm="log",
+                cmap=study_type.CMAP,
+            )
+            cb = fig.colorbar(
+                cs,
+                format=formatter,
+                label="Normalized Time $\\Time / \\TimeNorm_{\\Surface}$",
+                orientation="horizontal",
+            )
+            cb.minorticks_on()
 
             ax.set_xlabel(study_type.TITLE)
             ax.set_ylabel(r"Relative Neck Size $\Radius_{\Neck} / \Radius_0$")
