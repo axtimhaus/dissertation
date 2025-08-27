@@ -33,7 +33,7 @@ for t in STUDIES:
             log_time_min = np.log(1 / study.input.time_norm_surface)
             log_time_max = np.log(study.input.duration / study.input.time_norm_surface)
 
-            for j, t in enumerate(times_to_plot):
+            for t in times_to_plot:
                 color = viridis((np.log(t) - log_time_min) / (log_time_max - log_time_min))
                 i = np.searchsorted(times, t)
                 ax.fill(particle1_x[i], particle1_y[i], label=f"{times[i]:.2f}", edgecolor=color, fill=False, lw=1)
@@ -51,7 +51,6 @@ for t in STUDIES:
             ax.set_xlim(0, max_x)
             ax.set_ylim(-5, max_y)
             ax.grid(True)
-            fig.tight_layout()
 
             for p in produces:
                 fig.savefig(p)

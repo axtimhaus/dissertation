@@ -7,16 +7,16 @@
     \caption{Classification of Interface Description Methods}\label{fig:classification}
 \end{figure}
 
-Since the tracking of the interfaces is a key problem in modelling of sintering, a classfication by the approach taken for that is feasible.
+Since the tracking of the interfaces is a key problem in modelling of sintering, the numerical methods shall be classified by this feature.
 See \cref{fig:classification} for a visualization of this classification.
-The approach taken there is also crucial for the used numerical integration procedure, the needed material data and the feasibility of the obtained simulation results.
+The approach taken there is also crucial for the used numerical integration procedure, the required material data and the reliability of the obtained simulation results.
 
 The first distinction can be made into approaches with direct and indirect interface tracking.
 Direct tracking means that the location of the interface is directly defined by discrete points in space, which are moved during the integration procedure to describe the shape evolution of the interface.
 So in this family of approaches there is a sharp interface definition.
 A sharp interface means that the interface is considered as a defined line, where the two phases exist on the one resp.~the other side of the line.
 The curvature of such an interface can directly be calculated by interpolation of its coordinates, for example to be used in \cref{eq:stress-surface-curvature}.
-Direct interface approaches usually use the \glsfirst{FDM} or the \glsfirst{FEM} to represent the particles shape.
+Direct interface approaches usually use the \glsfirst{FDM} or the \glsfirst{FEM} to represent the particle shape.
 
 Indirect tracking, however, means that the interface location is defined by the value of an auxiliary function.
 The discretization is there connected to the solution space, the points are fixed in space and the motion of the interface is just realized by changes in the auxiliary function values.
@@ -47,15 +47,15 @@ The problem therefore reduced to determining the evolution of the surface geomet
 An advanced \gls{FDM}-based model was published by \textcite{Klinger2013, Klinger2012, Klinger2011} which supports curved grain boundaries.
 
 \textcite{Jagota1988a} published a direct FE model for two-particle sintering, however, based on viscous constitutive equations.
-So this some is merely useful for amorphous material rather than crystalline ones.
+So this is merely feasible for amorphous materials rather than crystalline ones.
 \textcite{Lechelle2014} built a direct FE model in the tradition of classic mechanical FE approaches.
 It regards surface and grain boundary diffusion considering the interfacial stresses as outer load and applying contact conditions in the grain boundary.
-This model seems to be basically able to work with particles of arbitrary shape, but was only evaluated for two spherical particles.
+This model appears to be basically able to work with particles of arbitrary shape, but was only evaluated for two spherical particles.
 
 There is a free and open-source program by \textcite{Brakke1992} aimed at modelling the evolution of different surfaces in time by minimizing the energy stepwise.
 However, it lacks direct support for time-coupled simulation, as the kinetics are solely determined by use of a global constant.
 \textcite{Wakai2022} recently built a 3D multiple-particle sintering simulation based on this program, an older version of the approach is published in \cite{Wakai2011, Wakai2018}.
-Their implementation includes rigid body motion but only for symmetric cases, as all motion is directed towards the center point.
+Their implementation includes rigid body motion only for symmetric cases, as all motion is directed towards the center point.
 
 \subsection{Indirect Sharp Interface Approaches Using the Level-Set Method}\label{subsec:interfaces-level-set}
 
@@ -80,13 +80,13 @@ The curvature is obtained from the gradient of the level-set function by \cref{e
 \end{equation}
 
 The solution of \cref{eq:level-set-elementary}, however, is usually only conducted in a certain region near the interface.
-Outside this region the solution is roughly approaximated, but this does not preserve the signed distance character of the level-set functions.
-For this reason a renormalization procedure is applied to restore this character.
+Outside this region the solution is roughly approximated, but this does not preserve the signed distance character of the level-set function.
+For this reason, a renormalization procedure is applied to restore this character.
 
 Level-set approaches give a clean indirect description of a sharp interface.
-This approach circumvents the logical problems inherent in diffuse interfaces, gives a smooth interface line in contrast to cellular approaches and nevertheless  has the advantage of easy indirect interface tracking.
+This approach circumvents the logical problems inherent in diffuse interfaces, gives a smooth interface line in contrast to cellular approaches (\cref{subsec:interfaces-cellular-automata}) and nevertheless has the advantage of easy indirect interface tracking.
 The main disadvantage of this method is the restriction to only two phases, at least no extension to multiple phases has been published yet.
-This seems the main reason, why the adoption of this method for sintering problems is currently rather low.
+This is likely the main reason, why the adoption of this method for sintering problems is currently rather low.
 Especially, there is no numeric distinction between the particles, just between solid and void.
 Therefore, also the boundary between the particles is inexistent, so grain boundary diffusion cannot be described.
 
@@ -97,14 +97,16 @@ The state of these cells (or sometimes voxels), for example the belonging to a p
 In each time step the state variables' values are changed in dependence on the governing model equations.
 For sintering, these governing equations are usually randomized, which leads to the \glsfirst{kMCM}, which will be discussed in \cref{subsec:monte-carlo-kinetic-sintering}.
 In this type of model there is usually no continuous or almost continuous interface, as the interface is just the outer boundary of coherent cells belonging to the same phase or grain.
-This is similar to a low resolution pixel graphic with discrete colors.
+This can be imagined as a low resolution pixel graphic with discrete colors.
 
 \subsection{Indirect Diffuse Interface Approaches Using the Phase Field Method}\label{subsec:interfaces-phase-field}
 
 The phase field method is based on the idea to describe the phase distribution in a regarded solution space by the value of an auxiliary variable, usually referred to as phase field variable or order parameter.
 The task of tracking the interface is reduced to the task of describing the time evolution of the order parameter by use of differential equations.
+There are several excellent review articles on basics and application of the \gls{PFM}~\cite{Chen2022, Qin2010, Chen2002, Steinbach2009, Steinbach2013, Wang2010, Tonks2019}.
+
 The method resides on a grand energy potential, either written in terms of Gibbs energy $\GibbsEnergy$ or Helmholtz energy $\HelmholtzEnergy$, which describes the thermodynamic evolution of the system.
-For the example of a coupled thermal and diffusional system consisting of two phases the total differential of the specific Helmholtz free energy $\SpecificHelmholtzEnergy$ can be stated as \cref{eq:phase-field-helmholtz-functional}, with the specific entropy $\SpecificEntropy$, the temperature $\Temperature$, the chemical potential $\ChemicalPotential$ and concentration $\Concentration_i$ of species $i$, as well as the order parameter for the phase $\xi$ and the thermodynamic driving force of phase transition $\beta$, which includes both, the driving force of bulk transformation and of interface generation or destruction.
+For the example of a coupled thermal and diffusional system consisting of two phases, the total differential of the specific Helmholtz free energy $\SpecificHelmholtzEnergy$ can be stated as \cref{eq:phase-field-helmholtz-functional}, with the specific entropy $\SpecificEntropy$, the temperature $\Temperature$, the chemical potential $\ChemicalPotential$ and concentration $\Concentration_i$ of species $i$, as well as the order parameter for the phase $\xi$ and the thermodynamic driving force of phase transition $\beta$, which includes both the driving force of bulk transformation and of interface generation or destruction.
 \begin{equation}
     \Deriv f = - \SpecificEntropy \Deriv \Temperature + \ChemicalPotential_i \Deriv \Concentration_i - \beta \Deriv \xi
     \label{eq:phase-field-helmholtz-functional}
@@ -136,7 +138,7 @@ For conserved order parameters, the Cahn-Hillard equation \cite{Cahn1961} can be
     \label{eq:cahn-hillard}
 \end{equation}
 
-Additional kinetic equations must be found in a similar way for the other state variables $\Temperature$ and $\Concentration_i$.
+Additional kinetic equations are required for the other state variables $\Temperature$ and $\Concentration_i$.
 Temperature kinetics are usually described by \cref{eq:phase-field-kinetic-temperature} with the specific heat capacity $c_\Volume$ and the heat conductivity $k$, which is in fact just Fourier's heat conduction law.
 Diffusion kinetics, however, can be described by \cref{eq:phase-field-kinetic-concentration} with a law similar to the classic description of diffusion using Fick's law (see \cref{sec:diffusion}).
 Note that the mobility coefficient $\Mobility_{ij}$ is here not identical to the diffusion coeffcient $\DiffusionCoefficient$, since it relates the flux to the gradient of chemical potential $\ChemicalPotential$, instead of the concentration gradient.
@@ -157,22 +159,21 @@ The numerical treatment of all state variables in the system is very similar, th
 Numerical difficulties occur due to the varying magnitude of the involved gradients.
 Influence of crystal orientation can also be introduced into the system by directionally dependent material parameters~\cite{Deng2012}.
 For sintering problems the influence of temperature gradients is usually neglected, except for \textcite{Yang2020}.
-There are several excellent review articles on basics and application of the \gls{PFM}~\cite{Chen2022, Qin2010, Chen2002, Steinbach2009, Steinbach2013, Wang2010, Tonks2019}.
 Today, the \gls{PFM} is the most used approach for simulation of sintering, but also applied in other fields of materials modelling and beyond.
-The main reason for this seems to be its flexibility and clean and easy formulation of multiple coupled mechanisms.
+The main reason for this appears to be its flexibility and clean and easy formulation of multiple coupled mechanisms.
 
 The main disadvantage of phase field models is the unphysical wide interface caused by the continuous description of phase composition by the order parameters.
 Therefore, material parameters in energy and kinetic functions are not directly identifiable with actual physical quantities.
 They depend not only on the actual material properties, but also on the numerical properties of the model, such as interface width and discretization width.
-This is natural, since the local characteristics of the (approximately) sharp real interface must be transformed to the diffuse interface while maintaining the globally observable behavior.
+The local characteristics of the (approximately) sharp real interface must be transformed to the diffuse interface while maintaining the globally observable behavior.
 Applications of this method to sintering problems often target on general observations on sintering behavior far from any real material data~\cite{Deng2012, Wang2006, Asp2006, Jing2003, Kumar2010, Kumar2011, Shinagawa2014}.
 \textcite{Biswas2016, Biswas2017} determined the mobilities $\Mobility$ from the corresponding diffusion coefficients by use of a method by \textcite{Moelans2008}.
 Several authors~\cite{Chockalingam2016, Biswas2016, Biswas2017, Choudhuri2021} used an equation system developed by \textcite{Ahmed2013} to determine the gradient coefficients $\kappa$ and from actual material data, however still including the numerical properties.
 
 A major difficulty in application to sintering problems is the description of rigid body motion.
 For modeling dense microstructures, the only possible changes are due to phase transformations and diffusional flows, since the space is fully occupied by matter.
-In sintering, however, the is usually a significant amount of void (or atmosphere), which is not able to withstand the motion of a solid body.
-The distinct grains may (and do) move relative to each other due to changes in their contact geometry effected by diffusional flows along the grain boundaries.
+In sintering, however, there is usually a significant amount of void (or atmosphere), which is not able to withstand the motion of a solid body.
+The distinct grains move relative to each other due to changes in their contact geometry effected by diffusional flows along the grain boundaries.
 This is observed macroscopically as shrinkage, a main phenomenon of sintering processes.
 The movement is not directly driven by diffusional flows or phase transformations, so it cannot be included directly in the grand energy functional.
 Some phase-field-based sintering model neglect this mechanism, therefore not regarding the phenomenon of shrinkage \cite{Asp2006, Chockalingam2016, Hotzer2019, Jing2003, Kumar2010, Kumar2011, Deng2012, Zhang2014, Yang2020, Choudhuri2021}.
@@ -192,7 +193,7 @@ Using an \gls{FEM} discretization offers the advantage of being able to use loca
 Such methods are commonly referred to as adaptive meshing or remeshing.
 Especially in sintering models there are regions where the phase field function is almost constant (in the inner of particles, in the void) and regions with large gradients (near the interface).
 Using a fine discretization as required to decribe the gradient correctly in the whole domain means a huge waste of computational efficiency.
-However on sintering models, remeshing procedures applied are poorly discussed.
+However on sintering models, the applied remeshing procedures are poorly discussed.
 Some authors~\cite{Asp2006, Greenquist2020, Ivannikov2021} just claim that they have used it, without any further specification.
 Others~\cite{Chockalingam2016, Biswas2016, Biswas2017} adopted a method of \textcite{Tonks2012} on quadrilateral elements to refine near the interface based on the current gradient of the phase field variables.
 \textcite{Moelans2008} recommend a spectral moving mesh method of \textcite{Feng2006}, but without any own results supporting this recommendation.

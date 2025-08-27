@@ -6,17 +6,18 @@ docstring-code-line-length = 80
 
 [lint]
 ignore = [
-    "B006", # mutable data structures in task arguments
-    "B008", # function calls in task arguments
-    "E501", # long lines (string literals)
+  "B006", # mutable data structures in task arguments
+  "B008", # function calls in task arguments
+  "E501", # long lines (string literals)
+  "E741", # ambiguous variable names
 ]
 select = [
-    "E",   # pycodestyle
-    "F",   # Pyflakes
-    "UP",  # pyupgrade
-    "B",   # flake8-bugbear
-    "SIM", # flake8-simplify
-    "I",   # isort
+  "E",   # pycodestyle
+  "F",   # Pyflakes
+  "UP",  # pyupgrade
+  "B",   # flake8-bugbear
+  "SIM", # flake8-simplify
+  "I",   # isort
 ]
 
 [lint.flake8-pytest-style]

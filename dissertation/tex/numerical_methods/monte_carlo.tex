@@ -17,11 +17,11 @@ These methods will be briefly discussed in \cref{subsec:monte-carlo-kinetic-sint
 
 The basic idea behind classic \glspl{MCM} is to use randomly sampled values as input to a function and analyzing the distribution of result values afterwards using the methods of descriptive statistics.
 A classic application is the integration of multidimensional functions.
-Especially for higher dimensional functions, \glspl{MCM} are much more effective than deterministic, raster-based integration methods like the Newton-Cotes or Gaussian formulae \cite{Lemieux2009}.
-\glspl{MCM} need fewer function evaluations to obtain a certain precision than the deterministic raster methods.
+Especially for higher dimensional functions, \glspl{MCM} are much more effective than deterministic, grid-based integration methods like the Newton-Cotes or Gaussian formulae \cite{Lemieux2009}.
+\glspl{MCM} need fewer function evaluations to obtain a certain precision than the deterministic grid methods.
 The principle is to calculate the average of the function in the regarded interval by estimating the expectation value of the result observations.
 
-Let us consider a function $f$ which is deterministic, but is feeded with a stochastic variable $X$ and maps this to another stochastic variable $Y$ as shown in \cref{eq:monte-carlo-function}.
+Let us consider a function $f$ which is deterministic, but is fed with a stochastic variable $X$ and maps this to another stochastic variable $Y$ as shown in \cref{eq:monte-carlo-function}.
 \begin{equation}
     Y = f(X)
     \label{eq:monte-carlo-function}
@@ -56,7 +56,7 @@ These observations are then investigated using classical descriptive statistics.
 Special values of interest are often the expectation $\Expectation(Y)$ and the standard deviation or variance $\StandardDeviation(Y)$ resp. $\StandardDeviation(Y)^2$.
 Those can be estimated from the sample by \cref{eq:estimator-expectation,eq:estimator-variance}.
 Note the $N-1$ in \cref{eq:estimator-variance} for the sample standard deviation, because the naive approach with just $N$ would introduce a bias into the estimation caused by the linking to the estimated expectation $\Estimated\Expectation(Y)$.
-There are several other possibilities to construct estimators for those properties, which may be more efficient (converge to required precision with fewer computational effort) depending on the characteristics of the problem.
+There are several other possibilities to construct estimators for those properties, which may be more efficient (converge to required precision with less computational effort) depending on the characteristics of the problem.
 Such estimators are known under the term variance reduction techniques, see again \textcite{Lemieux2009} for a overview on these.
 \begin{equation}
     \Estimated\Expectation(Y) = \frac{1}{N} \sum_i^N y_i
@@ -90,17 +90,17 @@ The energy change is then correlated to the probability by \cref{eq:kinetic-mont
 
 Another way correlates the probability to the local surface geometry, which resembles classic sintering theory.
 \textcite{Luque2010} (although for liquid phase sintering) evaluate the number of neighboring voxels with the same or different state and correlate the probability with that count.
-High count of non-solid (in this case liquid, but void also imaginable) voxels beneath a solid mean a high convex curvature at this point.
+High count of non-solid (liquid or void) voxels beneath a solid imply a high convex curvature at this point.
 In contrast, a high count of solid voxels beneath a non-solid one mean a high concave curvature.
 In \textcite{Luque2005}, they evaluate a number of different approaches for the correlation between these counts and the probability.
-They remark, that although lots of different approaches could be chosen, only few are feasible due to the danger of generating numerical artifacts in the system state.
+They remark that although lots of different approaches could be chosen, only few are feasible due to the danger of generating numerical artifacts in the system state.
 A similar approach was taken by \textcite{Wang2018}.
 
 This type of models is especially useful for liquid phase sintering, since there are no voids, so state change from liquid to solid or vice versa does not violate the mass conservation law.
-In solid state sintering one has to make sure, that for every solid voxel appearing there is one removed.
-Especially to model densification void voxels have to be transported to the outer surface.
+In solid state sintering one has to make sure that for every solid voxel appearing another one is removed.
+Especially to model densification, void voxels have to be transported to the outer surface.
 \textcite{Braginsky2005} remove a solid voxel at the outer surface for every vacancy anhilated at a grain boundary.
-This approach, although conserving the mass, appears like teleportation of mass from the surface to the inner and lacks therefore in physical justification.
+This approach, although conserving the mass, appears like teleportation of mass from the surface to the inner volume and lacks therefore in physical justification.
 
 The main difficulty of these models is the mapping of the internal time of the algorithm, often referred to as Monte Carlo steps (MCS), to the actual time of the real process.
 The models usually do not involve any kinetic parameters like diffusion coefficients or mobilities, as they are not required for the solution of the model.

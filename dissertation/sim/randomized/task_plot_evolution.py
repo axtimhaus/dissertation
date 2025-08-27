@@ -48,8 +48,6 @@ for case in CASES:
             ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
             ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")
 
-            fig.tight_layout()
-
             for p in produces:
                 fig.savefig(p)
 

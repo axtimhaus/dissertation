@@ -1,21 +1,21 @@
 \section{The Thermodynamic Extremal Principle}\label{sec:extremal-principle}
 
 The classic formulation of the \gls{TEP} was basically formulated by \textcite{Svoboda1991}, however dependent on the works of \textcite{Ziegler1983, Ziegler1963, Onsager1931}.
-It is based on the assumption, that the dissipation in the system is always maximized with respect to thermodynamic and kinetic constraints.
+It is based on the assumption that the dissipation rate in the system is always maximized with respect to thermodynamic and kinetic constraints.
 This is equivalent to the statement, that the system always tries to approach the equilibrium as fast as possible.
 There are several distinct formulations of the \gls{TEP}, they differ mainly in details of their formulation and the conditions of validity.
-\textcite{Fischer2014} pointed out, that Ziegler's principle is the most general one.
-The other's can be derived from that.
-The following elaborations are based on Ziegler's priciple in the formulation by \textcite{Svoboda1991} with own modifications to meet the requirements of the current work.
+\textcite{Fischer2014} pointed out that Ziegler's principle is the most general one.
+The other can be derived from that.
+The following elaborations are based on Ziegler's principle in the formulation by \textcite{Svoboda1991} with own modifications to meet the requirements of the current work.
 
-The dissipation $\Dissipation$ can be formulated as in \cref{eq:dissipation} in dependence on the vector of \gls{EVS} $\Vect\ExternalStateVariable$, the vector of \gls{IVS} $\Vect\InternalStateVariable$ and the velocity vector of \gls{IVS} $\Vect{\InternalStateVelocity}$, see \cref{subsec:internal-variables-of-state} for a brief introduction on \gls{IVS}.
+The dissipation $\Dissipation$ can be formulated as in \cref{eq:dissipation} in dependence on the vector of \glsfirst{EVS} $\Vect\ExternalStateVariable$, the vector of \glsfirst{IVS} $\Vect\InternalStateVariable$ and the velocity vector of \gls{IVS} $\Vect{\InternalStateVelocity}$ (see \cref{subsec:internal-variables-of-state} for a brief introduction on \gls{IVS}).
 It is a bilinear form in the velocity vector of internal state variables and the vector of thermodynamic forces.
 The latter can be expressed as $\partial\GibbsEnergy(\Vect\ExternalStateVariable, \Vect\InternalStateVariable)/\partial \Vect\InternalStateVariable$, where $\GibbsEnergy$ is the Gibbs energy of the system.
 Note the minus sign, as the dissipation is being maximized, where the change in Gibbs energy is defined negative for spontaneous processes.
-The Gibbs energy is as state function only dependent on the current state of the system, thus the thermodynamic forces do not include any kinetic constraints.
+The Gibbs energy is as a state function only dependent on the current state of the system, thus the thermodynamic forces do not include any kinetic constraints.
 Since $\Dissipation$ is linear in $\Vect{\InternalStateVelocity}$, maximizing without further constraints is not meaningful.
 Therefore, an additional dissipation function $\DissipationFunction$ is introduced, which must be always equal to $\Dissipation$, since both describe the dissipation of the process (compare \cref{eq:dissipation-function}).
-However, $\DissipationFunction$ is formulated in terms of the kinetic conditions of the process and is generally and non-linear form in $\Vect{\InternalStateVelocity}$, often a quadratic form.
+However, $\DissipationFunction$ is formulated in terms of the kinetic conditions of the process and is generally a non-linear form in $\Vect{\InternalStateVelocity}$, often a quadratic form.
 The actual form of $\DissipationFunction$ heavily depends on the regarded process, but it commonly includes empirical kinetic material parameters such as diffusion coefficients or mobilities.
 \begin{subequations}
     \label[pleq]{eq:tep-classic}

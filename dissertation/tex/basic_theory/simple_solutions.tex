@@ -1,21 +1,22 @@
 \section{Simplified Quantitative Descriptions of Sintering Processes}\label{sec:simple-solutions}
 
-As the mathematical description of diffusion phenomena based on potentials and empirical kinetic diffusion coefficients is quite simple,
-the real complexity of modelling sintering processes arises in the geometrical state and evolution of the system.
-Early models on particle level therefore posed heavy assumptions on the geometry of the initial particles, as well as of the sinter neck, to be able to obtain a concise and efficient formulation, especially as powerful computer systems were not available.
-Such models shall be regarded in the following, more elaborated approaches, however, are regarded in \cref{ch:numerical-methods}.
+The mathematical description of diffusion phenomena based on potentials and empirical kinetic diffusion coefficients as discussed in \cref{sec:diffusion} does not encounter major difficulties.
+The real complexity of modelling sintering processes arises in the geometrical state and evolution of the system.
+Early models on particle level therefore imposed heavy assumptions on the geometry of the initial particles and of the sinter neck, to be able to obtain a concise and efficient formulations.
+This was especially required as powerful computer systems were not available.
+Such models shall be regarded in the following, more advanced approaches, however, are regarded in \cref{ch:numerical-methods}.
 
 The most common simplification applied is the assumption of a circular (2D) or spherical (3D) geometry of the particles before sintering.
 This has the following main benefits:
 \begin{itemize}
-    \item simple characterization of particles using a single parameter (radius or diameter)
-    \item absence of diffusional flows on large parts of the particle surface due to constant curvature, the only gradients are present near the neck
-    \item symmetry of the particle contact with respect to the approaching axis and thus also invariance of particle rotation
+    \item Simple characterization of particles using a single parameter (radius or diameter).
+    \item Absence of diffusional flows on large parts of the particle surface due to constant curvature, the only gradients are present near the neck.
+    \item Symmetry of the particle contact with respect to the approaching axis and thus also invariance of particle rotation.
 \end{itemize}
-Such a system's state is sufficiently described by the radii of involved particles, their distance (or positions) and the current size of the necks between the particles.
-Often, only a single pair of particles of the same size and material properties is regarded which introduces another degree of symmetry.
+Such a system's state is sufficiently described by the radii of the involved particles, their distances (or positions) and the current size of the necks between the particles.
+Often, only a single pair of particles of the same size and material properties is regarded, which introduces another degree of symmetry.
 
-These simplifications allow the analytical solution of the governing differential equations and lead to equation of potential type as in \cref{eq:inital-stage-neck-size} for neck radius and \cref{eq:inital-stage-shrinkage} for shrinkage.
+These simplifications allow the analytical solution of the governing differential equations and lead to equations of the type in \cref{eq:inital-stage-neck-size} for neck radius and \cref{eq:inital-stage-shrinkage} for shrinkage.
 Therein, $\Time$ denotes the sinter duration, $\NeckRadius$ the neck radius, $\Radius_{\Particle}$ the particle radius and $B$, $m$ and $n$ are parameters depending on the acting transport mechanisms.
 Notable examples of such models are given by \textcite{Kuczynski1949, Johnson1963, Kingery1955, Coblenz1980, German2017}.
 \begin{align}
@@ -25,7 +26,7 @@ Notable examples of such models are given by \textcite{Kuczynski1949, Johnson196
     \label{eq:inital-stage-shrinkage}
 \end{align}
 
-A common result, also influencing more advanced approaches, from these models alongside with dimensionless parameter studies is the definition of the dimensionless time scale for two-particle-sintering processes as given in \cref{eq:normalized_time}.
+A common result from these models, alongside with dimensionless parameter studies, is the definition of the dimensionless timescale for two-particle-sintering processes as given in \cref{eq:normalized_time}.
 Often the surface energy $\InterfaceEnergy_{\Surface}$ and surface diffusion coefficient $\DiffusionCoefficient_{\Surface}$ are referenced, but the equal is possible using the properties of the grain boundary.
 \begin{equation}
     \Normalized\Time = \frac{\MolarVolume\VacancyConcentration^\Standard\DiffusionCoefficient_{\Surface}\InterfaceEnergy_{\Surface}}{\GasConstant\Temperature\Radius_{\Particle}^4} \cdot \Time

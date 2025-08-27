@@ -3,24 +3,25 @@
 Sintering processes are by their nature non-equilibrium thermodynamical processes which drive the system state towards an equilibrium state.
 The major problem of non-equilibrium thermodynamics is that the common thermodynamical quantities temperature and entropy are only defined in equilibrium state.
 Therefore, the second law of thermodynamics (entropy must always increase) only holds for transitions between equilibrium states and may thus not describe the pathway between these states, but only the whole step as one.
-To circumvent this problem, several approaches have been taken, from which the \gls{CIT} (sometimes referred to as \gls{TIP}) and the thermodynamics of \gls{IVS} shall be discussed here in particular.
+To circumvent this problem, several approaches have been developed, from which the \gls{CIT} (sometimes referred to as \gls{TIP}) and the thermodynamics of \gls{IVS} shall be discussed here in particular.
 The following elaborations are based on textbooks of \textcite{deGroot1962, Maugin1999, Lebon2008} and a review article of \textcite{Maugin1994}.
 
 \subsection{Classical Theory of Irreversible Thermodynamics}
 
 A non-equilibrium state is characterized by inhomogeneity and thus gradients of its major state variables.
-The central assumption of the classic treatment of non-equilibrium irreversible processes is the assumption of a local equilibrium, which is that in a certain small volume of the system, the equilibrium state is present despite the gradient to the next neighboring volume.
+The central assumption of the classic treatment of non-equilibrium irreversible processes is that of a local equilibrium.
+It is postulated that in a certain small volume of the system, the equilibrium state is present despite the gradient to the next neighboring volume.
 This means that the characteristic time of local equilibration is much smaller than the characteristic time of the macroscopic process, expressed by the Deborah number $\DeborahNumber = \TimeNorm_{\text{local}} / \TimeNorm_{\text{global}} << 1$.
-The volume cell must be small enough to fulfill this time scale condition, but large enough to be described sufficiently well as a continuum.
-So in fact the time needed for restoration of a local equilibrium state can be neglected in comparison to the macroscopical evolution of the system.
+The volume cell must be small enough to fulfill this timescale condition, but large enough to be described sufficiently well as a continuum.
+The time needed for restoration of a local equilibrium state can be neglected in comparison to the macroscopical evolution of the system.
 This allows to grant the usual meaning to temperature and entropy.
 On the other hand, processes with a Deborah number $\DeborahNumber >> 1$ can be regarded as quasi-static.
 Those assumptions hold true for most thermodynamical processes in question, especially for the here regarded sintering.
-So the irreversible process reduces to a sequence in time of local equilibria.
+So, the irreversible process reduces to a sequence in time of local equilibria.
 
 The system's state at a certain point in time is defined by the vector of state variables $\ExternalStateVariable$.
 As sintering is a process at constant temperature and pressure, the thermodynamic condition of equilibrium is to be formulated in terms of Gibbs' energy $\GibbsEnergy(\ExternalStateVariable)$, which is a function of the state.
-Temperature can be assumed constant, as the energy dissipated due to dissipative processes is small compared to the thermal energy stored in the system (sintering body and surrounding furnace), so the system does not heat up significantly due to the energy dissipated.
+Temperature can be assumed constant, as the energy dissipated is small compared to the thermal energy stored in the system (sintering body and surrounding furnace), so the system does not heat up significantly.
 Temperature changes during the process are external changes to the system and not due to its internal evolution.
 Conventional sintering processes are conducted under constant atmospheric pressure, whereas in pressure-assisted sintering the applied pressure is usually kept constant by control.
 
@@ -47,13 +48,13 @@ This corresponds to the empirical description of diffusion by Fick's law (\cref{
 
 \subsection{Internal Variables of State}\label{subsec:internal-variables-of-state}
 
-As the microscopic nature of thermodynamical systems is often to complex to be described alone by the macroscopical observable and controllable \gls{EVS} $\Vect\ExternalStateVariable$ (such as temperature, pressure, internal energy and entropy), approaches only considering those neglect large amounts of internal processes and specifics of the state.
-An enormously successfully applied approach is that of the introduction of \gls{IVS} $\Vect\InternalStateVariable$ which represent dissipative quantities in the system and can be freely chosen dependent on the desired precision and particularity of the model.
+As the microscopic nature of thermodynamical systems is often too complex to be described alone by the macroscopical observable and controllable \glspl{EVS} $\Vect\ExternalStateVariable$ (such as temperature, pressure, internal energy and entropy), approaches only considering those neglect large amounts of internal processes and specifics of the state.
+An approach applied enormously successfully is that of the introduction of \glspl{IVS} $\Vect\InternalStateVariable$ which represent dissipative quantities in the system and can be freely chosen dependent on the desired precision and particularity of the model.
 In contrast to external variables of state, which define the macroscopic response of the system and are thus relatively easy to measure and control, internal variables of state may be measurable, but are usually out of control when setting up an experiment.
 The approach was mainly developed by authors like \textcite{Bataille1979}, \textcite{Kestin1990, Kestin1992}, \textcite{Muschik1990} and \textcite{Maugin1994, Maugin1994a}.
 \textcite{Maugin2015} gives an extensive review and history.
 
-The formalism axiomatically associates an local accompanying equilibrium state in dependence on the local non-equilibrium \gls{EVS} and the \gls{IVS} to a volume cell at a respective point in time.
+The formalism axiomatically associates a local accompanying equilibrium state dependent on the local non-equilibrium \glspl{EVS} and the \glspl{IVS} to a volume cell at a respective point in time.
 This is an extension of the former assumption of local equilibrium in \gls{CIT}.
 The local change in Gibbs' energy is then given by:
 \begin{equation}
@@ -65,12 +66,12 @@ The physical meaning and applicability of this system to describe the real proce
 Principally, one is free to choose the internal variables depending on requirements on precision, model depth and computational effort.
 However, they must fulfill some conditions to be appropriate.
 Similar to the requirements of local equilibrium in \gls{CIT}, an \gls{IVS} can be considered to always have their local equilibrium value if $\DeborahNumber << 1$ holds.
-On the other hand, if $\DeborahNumber >> 1$, the variable can be assumed constant in regard on the equilibrium condition.
+On the other hand, if $\DeborahNumber >> 1$, the variable can be assumed constant in regard to the equilibrium condition.
 If neither is valid, the variable is considered to be a bad choice and another one should be selected to describe the internal state.
 
 Another important type of variables in this notion is that of \glspl{IDF}, which are not of pure dissipative nature.
-They show some kind of inertia within the respective time scale, which is equivalent to $\DeborahNumber \approx 1$.
-Internal degrees of freedom must be accompanied with their own kinetic law in terms of a differential equation to be included in the simulation.
+They show relevant inertia within the respective timescale, which is equivalent to $\DeborahNumber \approx 1$.
+\glspl{IDF} must be accompanied by their own kinetic law in terms of a differential equation to be included in the simulation.
 They may, but do not have to, include a dissipative contribution as \gls{IVS} do.
 
 A numerical approach to obtain a system of ordinary differential equations from this formalism will be discussed in \cref{sec:extremal-principle}.

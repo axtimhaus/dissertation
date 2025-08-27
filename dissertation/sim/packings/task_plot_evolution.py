@@ -54,8 +54,6 @@ for case in CASES:
         max_y = max(p.y for p in case.input.particles) * 1e6
         ax.set_ylim(min_y, max_y if not np.isclose(max_y, min_y) else None)
 
-        fig.tight_layout()
-
         for p in produces:
             fig.savefig(p)
 

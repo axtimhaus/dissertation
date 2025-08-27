@@ -1,9 +1,9 @@
 from pathlib import Path
+from uuid import UUID
 
 import jinja2
 import matplotlib as mpl
 import numpy as np
-from uuid import UUID
 
 ROOT_DIR = Path(__file__).parent
 BUILD_DIR = ROOT_DIR / ".build"

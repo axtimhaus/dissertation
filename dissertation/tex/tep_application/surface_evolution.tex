@@ -59,13 +59,14 @@ The normal vector points under an angle of $\SurfaceVectorAngle_\Normal$ acc.~to
 With a certain normal shift ${\Step\Shift}_\Normal$, the surface lengths after shifting are calculated by the \cref{eq:surface-distance-shifted-normal}.
 \begin{subequations}
     \label[pleq]{eq:surface-distance-shifted-normal}
+    \label{eq:surface-distance-shifted-normal-sg}
     \begin{align}
         \SurfaceDistance_{\Upper}' & = \sqrt{\SurfaceDistance_{\Upper}^2 + \Step\Shift_{\Normal}^2 - 2 \SurfaceDistance_{\Upper} \Step\Shift_{\Normal} \cos \SurfaceVectorAngle_{\Normal}} \label{eq:surface-distance-shifted-normal-upper}         \\
         \SurfaceDistance_{\Lower}' & = \sqrt{{\SurfaceDistance}_{\Lower}^2 + {\Step\Shift}_{\Normal}^2 - 2 {\SurfaceDistance}_{\Lower} {\Step\Shift}_{\Normal} \cos \SurfaceVectorAngle_{\Normal}} \label{eq:surface-distance-shifted-normal-lower}
     \end{align}
 \end{subequations}
 
-\Cref{fig:model_development/plot_normal_potential} shows the change in Gibbs energy due to normal shifting with use of \crefrange{eq:gibbs-diff-surface-normal}{eq:surface-distance-shifted-normal} with different values of $\SurfaceVectorAngle_{\Normal}$ and $\InterfaceEnergy$, alongside the linear approximation around ${\Step\Shift}_{\Normal} = 0$.
+\Cref{fig:model_development/plot_normal_potential} shows the change in Gibbs energy due to normal shifting with use of \crefrange{eq:gibbs-diff-surface-normal}{eq:surface-distance-shifted-normal-sg} with different values of $\SurfaceVectorAngle_{\Normal}$ and $\InterfaceEnergy$, alongside the linear approximation around ${\Step\Shift}_{\Normal} = 0$.
 Note, that the slope is dependent on the sum of ${\InterfaceEnergy}_{\Upper}$ and ${\InterfaceEnergy}_{\Lower}$ and the sign is only dependent on $\SurfaceVectorAngle_{\Normal}$.
 $\SurfaceVectorAngle_{\Normal} > \qty{90}{\degree}$ means a convex surface, thus energy gain when inward shifting (negative ${\Step\Shift}_{\Normal}$).
 $\SurfaceVectorAngle_{\Normal} < \qty{90}{\degree}$ means a concave surface, thus energy gain when outward shifting (positive ${\Step\Shift}_{\Normal}$).
@@ -77,7 +78,7 @@ The partial derivative of Gibbs energy is obtained as the limit of $\Step\GibbsE
     \label{eq:gibbs-partial-surface-normal}
 \end{equation}
 
-The volume derivative is obtained by calculating the area of the triangles formed by $\SurfaceDistance$, $\SurfaceDistance'$ and $\Step\Shift_{\Normal}$ on the upper and lower side.
+The volume derivative is obtained by calculating the area of the triangles formed by $\SurfaceDistance$, $\SurfaceDistance'$ and $\Step\Shift_{\Normal}$ on the upper and lower side as given in \cref{eq:volume-diff-surface-normal}.
 \begin{subequations}
     \label[pleq]{eq:volume-diff-surface-normal}
     \begin{align}

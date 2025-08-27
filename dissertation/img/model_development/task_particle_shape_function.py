@@ -1,9 +1,8 @@
-import itertools
 from pathlib import Path
-import pytask
-import numpy as np
+
 import matplotlib.pyplot as plt
-from matplotlib.lines import Line2D
+import numpy as np
+import pytask
 from matplotlib import colormaps
 
 from dissertation.config import image_produces, in_build_dir

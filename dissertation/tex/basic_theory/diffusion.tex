@@ -1,16 +1,16 @@
 \section{Mathematical Description of Diffusion}\label{sec:diffusion}
 
-The classic description of diffusional processes is done by Fick's laws \cite{Fick1855}, which have the same mathematical form as the heat conduction laws by \textcite{Fourier1888}.
-\Cref{eq:fick-first} shows Fick's first law as description of the diffusional flux $\Flux$ for the one-dimensional case.
-It proposes a linear relationship between the concentration gradient and the flux.
-For the concentration here the vacancy concentration $\VacancyConcentration$ is taken, as we assume only one diffusing species.
+The classic description of diffusional processes is accomplished by Fick's laws \cite{Fick1855}, which have the same mathematical form as the heat conduction laws by \textcite{Fourier1888}.
+\Cref{eq:fick-first} shows Fick's first law for the one-dimensional diffusion along an interface.
+It proposes a linear relationship between the concentration gradient and the diffusional flux $\Flux$.
+For the concentration, here the vacancy concentration $\VacancyConcentration$ is taken, as we assume only one diffusing species.
 The flux of vacancies equals the negative flux of atoms.
-The law includes an empirical scaling coefficient commonly referred to as the diffusion coefficient $\DiffusionCoefficient$ which has the dimension of $[\DiffusionCoefficient] = \DimLength^2\DimTime^{-1}$.
-$\InterfaceThickness$ is the thickness of the diffusion layer resp.~the interface.
-In some publications $\InterfaceThickness$ is directly included in the diffusion coefficient for interface diffusion as $\DiffusionCoefficient' = \DiffusionCoefficient\InterfaceThickness$ with the dimension $[\DiffusionCoefficient'] = \DimLength^3\DimTime^{-1}$.
-The interface thickness $\InterfaceThickness$ is hard to determine, often it is estimated by the size of one or two atom layers.
+The law includes an empirical scaling coefficient, commonly referred to as the diffusion coefficient $\DiffusionCoefficient$, which has the dimension of $[\DiffusionCoefficient] = \DimLength^2\DimTime^{-1}$.
+$\InterfaceThickness$ is the thickness of the diffusion layer or the interface, respectively.
+In some publications, $\InterfaceThickness$ is directly included in the diffusion coefficient for interface diffusion as $\DiffusionCoefficient' = \DiffusionCoefficient\InterfaceThickness$ with the dimension $[\DiffusionCoefficient'] = \DimLength^3\DimTime^{-1}$.
+The interface thickness $\InterfaceThickness$ is hard to determine, often it is estimated as the size of one or two atom layers.
 \begin{equation}
-    \Flux = - \DiffusionCoefficient\InterfaceThickness \frac{\Deriv\VacancyConcentration}{\Deriv\X}
+    \Flux = \DiffusionCoefficient\InterfaceThickness \frac{\Deriv\VacancyConcentration}{\Deriv\X}
     \label{eq:fick-first}
 \end{equation}
 
@@ -27,20 +27,20 @@ The local vacancy concentration $\VacancyConcentration$, however, depends on the
     \label{eq:vacancy-concentration}
 \end{equation}
 
-The main factor influencing the chemical potential in the regarded sintering processes are stresses, especially stresses originating from curved surfaces or interfaces (also known as surface tensions). The local chemical potential by a stress $\Stress$ is given as in \cref{eq:potential-stress} with the molar volume $\MolarVolume$.
+The main factor influencing the chemical potential in the regarded sintering processes are mechanical stresses, especially stresses originating from curved surfaces or interfaces (also known as surface tensions). The local chemical potential by a stress $\Stress$ is given as in \cref{eq:potential-stress} with the molar volume $\MolarVolume$.
 \begin{equation}
     \ChemicalPotential = \ChemicalPotential^\Standard + \Stress \MolarVolume
     \label{eq:potential-stress}
 \end{equation}
 
-The stress by a curved surface is given as in \cref{eq:stress-surface-curvature} with the surface resp.\ interface energy $\InterfaceEnergy$ and the curvature $\Curvature$.
+The stress by a curved surface is given as in \cref{eq:stress-surface-curvature} with the surface resp.~interface energy $\InterfaceEnergy$ and the curvature $\Curvature$.
 \begin{equation}
     \Stress = \InterfaceEnergy \Curvature
     \label{eq:stress-surface-curvature}
 \end{equation}
 
-Other stresses present affect the progress of sintering nevertheless.
-The reason for pressure assisted sintering can directly be seen from these equations, since the applied pressure drives the diffusion from the inner of the grain boundaries to the necks.
+Other stresses present affect the progress of sintering, too.
+The benefit of pressure assisted sintering is apparent from these equations, since the applied external pressure drives the diffusion from the inner of the grain boundaries to the necks.
 
 In the triple point, where three interfaces meet, the dihedral angles between the interfaces $\DihedralAngle_i$ will follow Young's equation (\cref{eq:youngs-dihedral}) in equilibrium with $\DihedralAngle_1 + \DihedralAngle_2 + \DihedralAngle_3 = 2\PI$,
 where the $\InterfaceEnergy_i$ are the interface energies of the interface opposed to the angle with the same index.
@@ -50,5 +50,5 @@ where the $\InterfaceEnergy_i$ are the interface energies of the interface oppos
 \end{equation}
 This is equivalent to a triangle with side lengths $\InterfaceEnergy_i$ and the respective opposite angles $\PI - \DihedralAngle_i$, as \textcite{Hoffman1972} explains.
 This leads to the condition that the sum of either two surface energies must be larger than the third, or this triangle does not exist and \cref{eq:youngs-dihedral} can not be solved.
-The non-existence of the triangle implies that such a junction can never be in equilibrium, if no other forces on the junction are present (like pinning forces), as was investigated by \textcite{King1999}.
-So in this case, it is always beneficial from energetic point of view to consume the boundary with the largest interface energy while enlarging the others.
+The non-existence of the triangle implies that such a junction can never be in equilibrium, if no other forces on the junction are present (f.e.~pinning forces).
+It is then always beneficial from energetic point of view to consume the boundary with the largest interface energy while enlarging the others~\cite{King1999}.
