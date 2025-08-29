@@ -7,7 +7,7 @@
     \caption{Classification of Interface Description Methods}\label{fig:classification}
 \end{figure}
 
-Since the tracking of the interfaces is a key problem in modelling of sintering, the numerical methods shall be classified by this feature.
+Since the tracking of the interfaces is a key problem in modeling of sintering, the numerical methods shall be classified by this feature.
 See \cref{fig:classification} for a visualization of this classification.
 The approach taken there is also crucial for the used numerical integration procedure, the required material data and the reliability of the obtained simulation results.
 
@@ -52,7 +52,7 @@ So this is merely feasible for amorphous materials rather than crystalline ones.
 It regards surface and grain boundary diffusion considering the interfacial stresses as outer load and applying contact conditions in the grain boundary.
 This model appears to be basically able to work with particles of arbitrary shape, but was only evaluated for two spherical particles.
 
-There is a free and open-source program by \textcite{Brakke1992} aimed at modelling the evolution of different surfaces in time by minimizing the energy stepwise.
+There is a free and open-source program by \textcite{Brakke1992} aimed at modeling the evolution of different surfaces in time by minimizing the energy stepwise.
 However, it lacks direct support for time-coupled simulation, as the kinetics are solely determined by use of a global constant.
 \textcite{Wakai2022} recently built a 3D multiple-particle sintering simulation based on this program, an older version of the approach is published in \cite{Wakai2011, Wakai2018}.
 Their implementation includes rigid body motion only for symmetric cases, as all motion is directed towards the center point.
@@ -61,7 +61,7 @@ Their implementation includes rigid body motion only for symmetric cases, as all
 
 Tracking of interfaces using a sharp interface is possible by application of the \gls{LSM}.
 An auxiliary function (or level-set function) $\phi$ is introduced which is positive inside the regarded phase and negative outside, so $\phi = 0$ defines the location of the interface.
-Usually the value of the function corresponds to the signed euclidic distance of the current point from the boundary.
+Usually the value of the function corresponds to the signed Euclidean distance of the current point from the boundary.
 This enables the use of the gradient $\nabla \phi$ for example for calculation of the interface curvature.
 The time evolution of the auxiliary function is described by \cref{eq:level-set-elementary}, with the interface velocity vector $\Vect v$.
 \begin{equation}

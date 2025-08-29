@@ -39,7 +39,7 @@ In the following, the Gibbs energy and volume gradients when shifting nodes will
 \subsection{Normal Shifting}
 
 The main mode of node shifting on free surfaces and grain boundaries is along the interface normal vector.
-\Cref{fig:model_development/surface_normal} shows the principal geometry of a surface node and it's normal mode of shifting.
+\Cref{fig:model_development/surface_normal} shows the principal geometry of a surface node and its normal mode of shifting.
 
 If a node is displaced in space, a change in Gibbs energy occurs due to the change in surface respectively interface area.
 The amount of energy bound in a surface or interface is described by the interface energy $\InterfaceEnergy$.
@@ -67,7 +67,7 @@ With a certain normal shift ${\Step\Shift}_\Normal$, the surface lengths after s
 \end{subequations}
 
 \Cref{fig:model_development/plot_normal_potential} shows the change in Gibbs energy due to normal shifting with use of \crefrange{eq:gibbs-diff-surface-normal}{eq:surface-distance-shifted-normal-sg} with different values of $\SurfaceVectorAngle_{\Normal}$ and $\InterfaceEnergy$, alongside the linear approximation around ${\Step\Shift}_{\Normal} = 0$.
-Note, that the slope is dependent on the sum of ${\InterfaceEnergy}_{\Upper}$ and ${\InterfaceEnergy}_{\Lower}$ and the sign is only dependent on $\SurfaceVectorAngle_{\Normal}$.
+Note that the slope is dependent on the sum of ${\InterfaceEnergy}_{\Upper}$ and ${\InterfaceEnergy}_{\Lower}$ and the sign is only dependent on $\SurfaceVectorAngle_{\Normal}$.
 $\SurfaceVectorAngle_{\Normal} > \qty{90}{\degree}$ means a convex surface, thus energy gain when inward shifting (negative ${\Step\Shift}_{\Normal}$).
 $\SurfaceVectorAngle_{\Normal} < \qty{90}{\degree}$ means a concave surface, thus energy gain when outward shifting (positive ${\Step\Shift}_{\Normal}$).
 $\SurfaceVectorAngle_{\Normal} = \qty{90}{\degree}$ means an even surface, thus energy loss in both shifting directions.
@@ -95,7 +95,7 @@ The partial derivative of volume is obtained as the limit of $\Step\Volume_{\Nor
 
 \subsection{Tangential Shifting}
 
-Regarding the tangential shifting, the direction vector is under an angle of $\SurfaceVectorAngle_{\Tangential}$ acc.~to.~\cref{eq:delta-surface-tangential} to the upper surface line.
+Regarding the tangential shifting, the direction vector is under an angle of $\SurfaceVectorAngle_{\Tangential}$ to the upper surface line, given by \cref{eq:delta-surface-tangential}.
 \begin{equation}
     \SurfaceVectorAngle_{\Tangential} = \SurfaceVectorAngle_{\Normal} - \frac{\PI}{2}
     \label{eq:delta-surface-tangential}

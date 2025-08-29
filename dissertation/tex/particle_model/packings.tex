@@ -6,7 +6,7 @@ In the following, the equations to calculate these in the current model will be 
 
 For two-particle models, the classic way to determine a measure for shrinkage is to calculate the decrease in distance between the particles.
 Most simple approaches directly include the particle distance as a state variable.
-For the current case it is calculated as the Euclidian distance between the centers of two particles as in \cref{eq:eucliadian-particle-distance}.
+For the current case it is calculated as the Euclidean distance between the centers of two particles as in \cref{eq:eucliadian-particle-distance}.
 \begin{equation}
     \Distance = \sqrt{\left( \X_2 - \X_1 \right)^2 + \left( \Y_2 - \Y_1 \right)^2}
     \label{eq:eucliadian-particle-distance}
@@ -38,7 +38,7 @@ Then the shrinkage calculates as in \cref{eq:shrinkage-multiple-particle}, with 
 Comparability of these two approaches will be discussed in \cref{sec:contact-study}.
 
 Neck size as the second key property is commonly described by the radius of the neck for circular or spherical models.
-In the current case, non-circular particle shapes will be investigated and asymmetrical contacts will form curved neck shapes.
+In the current case, non-circular particle shapes will be investigated, and asymmetrical contacts will form curved neck shapes.
 The neck size is here defined as the half of the grain boundary length between two particles to be comparable to classic two-sphere results.
 \Cref{eq:neck-size} formulates this approach as the sum over the set of all grain boundary nodes in the neck $\Nodes_{\GrainBoundary}$ (excluding the neck nodes).
 Note that each surface distance is counted twice in this formula (therefore the factor $\frac14$), but this avoids special casing of either the lower or upper neck node limiting the regarded grain boundary.

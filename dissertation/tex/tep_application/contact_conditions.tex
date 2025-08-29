@@ -61,6 +61,6 @@ Inserted in \cref{eq:absolute-displacement-contact-constraints} this leads to tw
 Given one grain boundary node (only normal displacement allowed) and two neck nodes per contact, the equation system is unambiguously defined as we have 6 additional constraints (2 per node) for 2 particle displacements and 4 tangential neck node displacements.
 Introducing more grain boundary nodes creates more constraints but no additional unknowns (as their normal displacement and flux are covered by the volume balance respectively the optimization).
 This leads to an overdetermined system which forces the solution to zero shrinkage (contact nodes are not able to be displaced at all).
-Also allowing the grain boundary nodes to be displaced tangentially, leads to an underdetermined system as the contact conditions are not able to determine the particle position anymore.
+Also allowing the grain boundary nodes to be displaced tangentially leads to an underconstrained system as the contact conditions are not able to determine the particle position anymore.
 A solution to this issue has not been found at the time writing this work, so the following applications will be restricted to two neck nodes and one grain boundary node per particle per contact.
 This also forbids multiple contacts between the same particles, which is impossible for circular particle geometries but may be for arbitrarily shaped ones.

@@ -5,7 +5,7 @@ However, there is a free parameter determining at which distance a surface node 
 Targeting numerical efficiency it is desirable to have this parameter as large as possible as the time step decreases as already noticed in \cref{sec:study-step-size}.
 Too large limits, however, are expected to decrease the precision especially in regard on geometrical features near the neck.
 In the previous studies the limit was arbitrarily chosen as \num{0.5}.
-In this study the parameter will be altered to get an idea of it's effects.
+In this study the parameter will be altered to get an idea of its effects.
 
 \subsection{Construction of the Study}
 
@@ -52,7 +52,7 @@ Aggressive remeshing (higher limit values) is able to decrease the effort by fac
 \Cref{fig:two_particle/studies/neck_remeshing/shrinkage} shows the shrinkage curves obtained from the parameter variation.
 In late stages the distinct simulations are in good agreement.
 Especially depending on the node count, the agreement in early stages is much weaker.
-This can be explained by the disregardance of local geometrical features near the neck when using coarse discretization.
+This can be explained by disregarding of local geometrical features near the neck when using coarse discretization.
 When the gradients are smaller in late stages this influence has less effect.
 However, within the node count groups the agreement is good, with low influence of the neck limit parameter.
 
@@ -66,6 +66,6 @@ The achievable time step size is, as expected, increasing with the reduction of 
 Aggressive remeshing generally allows higher time steps in later stages and avoids the mentioned decrease in time step width when neck node and the next surface node approach.
 
 The obtained results show, that if one is interested in the behavior in early stages, a high node count has to be used.
-If the regard is only payed on late stages, low node counts lead to equivalent results.
+If the regard is only paid on late stages, low node counts lead to equivalent results.
 The aggressiveness of neck remeshing is of minor importance regarding the simulation accuracy, but is able to significantly decrease the computational effort.
 For the sake of efficiency, as to be expected, node counts as low as possible are preferred, as the effort increases exponentially with the node count.

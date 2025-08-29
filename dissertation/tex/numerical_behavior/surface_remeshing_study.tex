@@ -1,11 +1,11 @@
 \section{Study on the Influence of Surface Remeshing}\label{sec:study-surface-remeshing}
 
-The choice of discretization width is always a trade-off between precision of the numerical procedure and it's computational cost.
+The choice of discretization width is always a trade-off between precision of the numerical procedure, and its computational cost.
 Usually one aims at the finest discretization required and the coarsest possible.
 Often in simulation tasks, this choice has to be made one time before running the simulation.
 In the current case, these needs and possibilities highly vary during progress of simulation.
 So in the beginning of the sintering process, where curvatures are high a fine discretization is desirable to not miss the details.
-In later stages, curvatures have decreased and fine discretization leads to unnecessarily high effort.
+In later stages, curvatures have decreased, and fine discretization leads to unnecessarily high effort.
 
 This study aims on evaluating the influence of the surface remeshing procedure described in \cref{sec:remeshing-procedures} on the precision of time integration and providing a decent choice of the parameters to use in the following investigations.
 
@@ -59,7 +59,7 @@ So this case is roughly equivalent to the \num{100} nodes/\qty{0.05}{\radian} li
 \Cref{fig:two_particle/studies/surface_remeshing/shrinkage} shows the shrinkage curves obtained from the parameter variation.
 As above, the trend is generally equivalent to the neck remeshing.
 The low count runs show the same errors in the early stages, whereas the good agreement in late stages is present, too.
-Note that the \num{200} nodes/\qty{0.05}{\radian} still shows the accurate results of the other \num{200} nodes runs, despite the agressive remeshing.
+Note that the \num{200} nodes/\qty{0.05}{\radian} still shows the accurate results of the other \num{200} nodes runs, despite the aggressive remeshing.
 
 \Cref{fig:two_particle/studies/time_step/volume_loss} shows the loss of volume in the system during simulation in dependence on the parameters.
 As to be expected, the general trends are similar to the neck remeshing, too.
@@ -67,8 +67,8 @@ The special \num{200} nodes/\qty{0.05}{\radian} case shows an extraordinarily lo
 
 \Cref{fig:two_particle/studies/surface_remeshing/time_step_width} shows the evolution of the time step width used in the simulations for the distinct cases.
 As to be expected, the general trends are similar to the neck remeshing, too.
-The special \num{200} nodes/\qty{0.05}{\radian} case shows the same bahvior as the other \num{200} nodes cases in the early stages but much higher time steps than those in later stages.
+The special \num{200} nodes/\qty{0.05}{\radian} case shows the same behavior as the other \num{200} nodes cases in the early stages but much higher time steps than those in later stages.
 
 The results regarding surface remeshing generally show the same trends as with the neck remeshing.
-The case of high initial node counts and agressive surface remeshing shows that it could be preferable to use high initial node counts and use an aggressive remeshing step to create the initial state.
+The case of high initial node counts and aggressive surface remeshing shows that it could be preferable to use high initial node counts and use an aggressive remeshing step to create the initial state.
 With this procedure fine discretization is only maintained in regions where it is necessary (high curvatures).

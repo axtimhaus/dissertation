@@ -4,9 +4,9 @@ The \crefrange{fig:randomized/cases/circular/shrinkage}{fig:randomized/cases/sha
 The distinct samples are drawn as a partially transparent lines, so that the density of samples can be estimated visually by the intensity of the color.
 For comparison the arithmetic mean of the samples and the result of the nominal case are drawn alongside.
 The arithmetic mean curve is calculated by interpolating the sample curves at the respective time.
-When the respective sample curve was does not provide a value for the respective time, because the simulation was already canceled due to pore closing, than the last value of the curve it taken.
+When the respective sample curve was does not provide a value for the respective time, because the simulation was already canceled due to pore closing, than the last value of the curve is taken.
 This is equivalent to the assumption that the particle group is inert (does not evolve any further) after pore closing has happened.
-This assumption has to be taken as simulation after pore closing is not supported in the current state of the model (see \cref{sec:contact-study}).
+This assumption has to be imposed, as simulation after pore closing is not supported in the current state of the model (see \cref{sec:contact-study}).
 Extrapolation of the curves is not feasible, as they approach a singularity (approach infinite slope) when the pore is almost closed.
 In each figure, also two histograms at the normalized times $\Time/\TimeNorm_{\Surface} = \num[print-unity-mantissa=false]{1e-6}$ and $\Time/\TimeNorm_{\Surface} = \num[print-unity-mantissa=false]{1e-6}$ are drawn, which also show the respective mean value and the standard deviation.
 The histograms are calculated using the same assumption on pore closing.
@@ -81,7 +81,7 @@ The \crefrange{fig:randomized/cases/circular/shrinkage}{fig:randomized/cases/sha
 
 Regarding the early stages, the following observations are to be noted:
 \begin{enumerate}
-    \item The deviations between the nominal and the randomized cases is very small and both curves are visually in well agreement.
+    \item The deviations between the nominal and the randomized cases is very small, and both curves are visually in well agreement.
     \item The relative effect sizes can be classified as small or less.
         The effect size of the waved case is even much lower than of the other ones, which is related to the fact that in this case the time section at $\Time/\TimeNorm_{\Surface} = \num[print-unity-mantissa=false]{1e-6}$ is accidentally near an intersection of the mean and nominal curves.
     \item The standard deviation of the oval case is slightly smaller compared to the circular case, whereas that of the waved case is slightly higher.
@@ -92,7 +92,7 @@ Regarding the late stages, the following observations are to be noted:
 \begin{enumerate}
     \item The deviations between the nominal and the randomized cases is much larger than in early stages.
     \item The relative effect size has to be classified between medium and large, where the effect slightly increases from circular, over oval, to waved.
-    \item The circular and oval case have comparable standard deviation, whereas that of the the waved case is remarkably higher.
+    \item The circular and oval case have comparable standard deviation, whereas that of the waved case is remarkably higher.
     \item The waved case has a drastically higher absolute effect, but the relative effect, although higher than that of the oval case, is not that pronounced due to the higher standard deviation.
     \item  The histograms show a heavy tail on the left side, formed by samples with early pore closing.
         The heavy tail is especially pronounced in the waved case.
@@ -152,7 +152,7 @@ Regarding the late stages, the following observations are to be noted:
 
 Regarding the overall trends with time, the following observations are to be noted:
 \begin{enumerate}
-    \item Similarly to shrinkage, the nominal curve shows the typical pore closing behavior, whereas the mean curve transits into a staionary states with the same trends observed before.
+    \item Similarly to shrinkage, the nominal curve shows the typical pore closing behavior, whereas the mean curve transits into a stationary states with the same trends observed before.
     \item As in shrinkage, the standard deviation increases with time.
     \item In contrast to the shrinkage, the relative effect sizes are not remarkably increasing with time, the larger absolute effect is canceled out by the increase in standard deviation.
 \end{enumerate}

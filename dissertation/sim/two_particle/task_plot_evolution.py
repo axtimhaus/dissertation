@@ -1,10 +1,11 @@
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pyarrow as pa
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
+from matplotlib.contour import ContourSet
+from matplotlib.ticker import LogLocator
 from pytask import mark, task
 
 from dissertation.config import FIGSIZE_INCH, image_produces
@@ -25,22 +26,41 @@ for t in STUDIES:
             fig = plt.figure(figsize=(FIGSIZE_INCH[0], 4))
             ax = fig.subplots()
             ax.set_aspect("equal", adjustable="datalim")
-            viridis = mpl.colormaps["viridis"]
 
             times, particle1_x, particle1_y, particle2_x, particle2_y = get_states(df, study)
 
-            times_to_plot = np.geomspace(times[0], times[-1], 10)
-            log_time_min = np.log(1 / study.input.time_norm_surface)
-            log_time_max = np.log(study.input.duration / study.input.time_norm_surface)
+            times_to_plot = np.geomspace(1e-6, times[-1], 10)
+            time_indices = [np.searchsorted(times, t) for t in times_to_plot]
 
-            for t in times_to_plot:
-                color = viridis((np.log(t) - log_time_min) / (log_time_max - log_time_min))
-                i = np.searchsorted(times, t)
-                ax.fill(particle1_x[i], particle1_y[i], label=f"{times[i]:.2f}", edgecolor=color, fill=False, lw=1)
-                ax.fill(particle2_x[i], particle2_y[i], edgecolor=color, fill=False, lw=1)
+            cs = ContourSet(
+                ax,
+                times_to_plot,
+                [
+                    [
+                        np.pad(np.transpose([particle1_x[i], particle1_y[i]]), [(0, 1), (0, 0)], mode="wrap"),
+                        np.pad(np.transpose([particle2_x[i], particle2_y[i]]), [(0, 1), (0, 0)], mode="wrap"),
+                    ]
+                    for i, t in zip(time_indices, times_to_plot, strict=True)
+                ],
+                cmap="viridis",
+                norm="log",
+                linewidths=1,
+            )
+            cb = fig.colorbar(
+                cs,
+                orientation="horizontal",
+                ticks=LogLocator(),
+                label="Normalized Time $\\Time / \\TimeNorm_{\\Surface}$",
+                aspect=50,
+            )
+            cb.minorticks_on()
+            range = np.log10(times_to_plot[-1]) - np.log10(times_to_plot[0])
+            cb.ax.set_xlim(
+                10 ** (np.log10(times_to_plot[0]) - 0.01 * range),
+                10 ** (np.log10(times_to_plot[-1]) + 0.01 * range),
+                auto=False,
+            )
 
-            # ax.set_title(f"{study.TITLE}\n{study.display}")
-            ax.axhline(0, color="red", lw=0.5)
             ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
             ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")
 

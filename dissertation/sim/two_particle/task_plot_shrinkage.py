@@ -27,7 +27,7 @@ for t in STUDIES:
     ):
         data_frames = ((k, pq.read_table(f).flatten().flatten()) for k, f in results_files.items())
 
-        fig = plt.figure(dpi=600)
+        fig = plt.figure()
         ax = fig.subplots()
         ax.set_xscale("log")
         ax.set_yscale("log")
@@ -43,18 +43,29 @@ for t in STUDIES:
             max_shrinkage = max(max_shrinkage, np.max(values))
 
         if issubclass(study_type, DimlessParameterStudy):
+            locs = [s.value for s in studies.values()]
             cb = fig.colorbar(
                 contour.ContourSet(
                     ax,
-                    [s.value for s in studies.values()],
+                    locs,
                     [[[(0, 0)]]] * len(studies),
                     norm=study_type.axis_scale,
                     cmap=study_type.CMAP,
                 ),
                 label=study_type.TITLE,
                 orientation="horizontal",
+                aspect=50,
             )
             cb.minorticks_on()
+
+            if study_type.axis_scale == "log":
+                range = np.log10(locs[-1]) - np.log10(locs[0])
+                cb.ax.set_xlim(
+                    10 ** (np.log10(locs[0]) - 0.01 * range), 10 ** (np.log10(locs[-1]) + 0.01 * range), auto=False
+                )
+            else:
+                range = locs[-1] - locs[0]
+                cb.ax.set_xlim(locs[0] - 0.01 * range, locs[-1] + 0.01 * range, auto=False)
         else:
             ax.legend(title=study_type.TITLE, ncols=3)
 

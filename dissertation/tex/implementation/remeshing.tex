@@ -8,22 +8,22 @@ They will be discussed in the following.
 
 \subsection{Free Surface Remeshing}\label{sec:free-surface-remeshing}
 
-The main aim of this procedure is lowering the surface node count were possible and increase it were necessary to be able to choose a time step size as large as possible and lower computational effort.
+The main aim of this procedure is lowering the surface node count where possible and increase it where necessary to be able to choose a time step size as large as possible and lower computational effort.
 It is not required to make the simulation work, but significantly accelarates the solution progress.
 Surfaces with even profile (low curvature) need less points to be sufficiently approximated as surfaces with high curvatures.
 The flatness of a surface at a node is measured by the angle between its adjacent surface lines.
-A surface is flat, if this angle equals \qty{180}{\degree}, and is curved, if this angle deviates from that.
+A surface is flat if this angle equals \qty{180}{\degree}, and is curved if this angle deviates from that.
 Positive and negative curvatures are treated equally.
 So, with an threshold chosen by the user, the criterion for considering a node for deletion is:
 \begin{equation}
     \Abs{\SurfaceRadiusAngle_{\Upper} + \SurfaceRadiusAngle_{\Lower} - \PI} < \qtyrange{0.01}{0.05}{\radian}
     \label{eq:free-surface-remeshing-deletion-criterion-angle}
 \end{equation}
-Too low values of the threshold lead to fluctuating surfaces in flat regions were surface transport is numerially performed by alternatingly shifting the nodes outwards and inwards in each time step.
+Too low thresholds lead to fluctuating surfaces in flat regions were surface transport is numerically performed by alternatingly shifting the nodes outwards and inwards in each time step.
 This mechanism typically limits the time step width to avoid instable escalation of the fluctuation.
 
 A second check is applied that the deletion would not lead to too large distance between the remaining nodes.
-So, too fast coarsening and lack of incfluence of the chosen initial discretization width is avoided.
+So, too fast coarsening and lack of influence of the chosen initial discretization width is avoided.
 $\Mean\SurfaceDistance$ is the current mean distance between the surface nodes of the regarded particle.
 The allowed relative distance can be chosen to control the speed of discretization coarsening during simulation.
 \begin{equation}
@@ -31,7 +31,7 @@ The allowed relative distance can be chosen to control the speed of discretizati
     \label{eq:free-surface-remeshing-deletion-criterion-distance}
 \end{equation}
 
-Additionally, it is checked that never two adjacent nodes are deleted in the same run.
+Additionally, it is checked that adjacent nodes are never deleted in the same run.
 Surface nodes directly adjacent to a neck are excluded, since they are treated by the neck remeshing procedure.
 
 If the local curvature is high, new nodes are inserted in the middle of the adjacent surface lines above and below.
@@ -44,7 +44,7 @@ Lower values of the control parameter lead to finer discretization of curved sur
 \subsection{Neck Neighborhood Remeshing}\label{sec:neck-neighborhood-remeshing}
 
 This procedure is required to make the simulation work as the neck nodes approach their adjacent surface nodes when the neck is growing.
-If they come to close, the respective surface node must be deleted or the simulation gets stuck in an singularity.
+If they come too close, the respective surface node must be deleted or the simulation gets stuck in a singularity.
 The surface node is deleted if the distance between it and the neck node falls below an adjustable fraction of the mean surface distance $\Mean\SurfaceDistance$.
 \begin{equation}
     \SurfaceDistance_{\Neck\Surface} < (\numrange{0.3}{0.5}) \Mean\SurfaceDistance

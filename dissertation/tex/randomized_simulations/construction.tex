@@ -2,14 +2,12 @@
 
 The study will stick to three-particle arrangements to avoid major difficulties in construction of the initial state.
 As the size and shape of the particles will now be variable, the initial position can not be given a-priori but must be determined numerically.
-The study will compare four cases: the nominal case, with three circular particles of equal size, and three powders with equal particle size distribution but one assumed to have circular particles,
-one where only an ovality according to \cref{eq:f-ovality} is considered
-and one where also first order waves according to \cref{eq:f-first-order-waves} are considered.
+The study will compare four cases: the nominal case, with three circular particles of equal size, and three powders with equal particle size distribution, but one assumed to have circular particles, one where only an ovality according to \cref{eq:f-ovality} is considered and one where also first order waves according to \cref{eq:f-first-order-waves} are considered.
 The differences and similarities of the cases will be investigated to rate the need for inclusion of this data into sintering simulations.
 The core question is if the inclusion of size distribution and shape data in the simulation leads to significantly different results and if those differences are in accordance with experimental experience and theoretical expectations.
-Regarding shape data, it is investigated if the first order waves have major influence or if regard on ovality is enough, since ovality is a parameter that can be measured without problems using state of the art automatic particle classifiers.
-First order waves, however, require an high amount of manual work.
-The author has already published a paper describing a method to obtain these for aggregate particles via laser scanning microscopy images and leat-square fitting in \textcite{Weiner2022a}, but there another approach of sintering model is used.
+Regarding shape data, it is investigated if the first order waves have major influence or if regard on ovality is enough, since ovality is a parameter that can be measured without problems using state-of-the-art automatic particle classifiers.
+First order waves, however, require a high amount of manual work.
+The author has already published a paper describing a method to obtain these for aggregate particles via laser scanning microscopy images and least-square fitting in \textcite{Weiner2022a}, but there has been used another approach of sintering model.
 The data obtained there will be reused in this study.
 
 \subsection{Statistical Description of the Example Powder}
@@ -27,6 +25,6 @@ The initial positions of the particles are created in sufficient distance to eac
 
 The first particle is kept fixed in space.
 Then, the second is moved along the vector towards the center of the first in small steps until contact is created by a defined minimum intersection of the two surfaces.
-Then the third is moved along the sum of of the vectors from the thirds center to the others' centers.
+Then the third is moved along the sum of the vectors from the thirds center to the others' centers.
 If contact with one is created, then the vector towards this particle is counted negative to allow sideward movement.
 When the third particle has contact to both, the procedure is completed.

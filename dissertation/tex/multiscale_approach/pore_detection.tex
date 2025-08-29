@@ -7,10 +7,10 @@
     \label{fig:model_development/matrix_pore_detection}
 \end{figure}
 
-To be able to model the influence of a pore filled with fine-grained material on the large skeleton-particles, first the pores in a multi-particle conatact must be found.
+To be able to model the influence of a pore filled with fine-grained material on the large skeleton-particles, first the pores in a multi-particle contact must be found.
 The procedure used is displayed in \cref{fig:model_development/matrix_pore_detection}.
-This is done by choosing an arbitrary node and following it's surface line to the next node (follow the arrows in the figure).
-If a neck node is encountered, the procedures switches to the contacted particle and follows again the surface line (not in direction where the grain boundary is).
+This is done by choosing an arbitrary node and following its surface line to the next node (follow the arrows in the figure).
+If a neck node is encountered, the procedure switches to the contacted particle and follows again the surface line (not in direction where the grain boundary is).
 The procedure must always come back to the node where it has started, at which point the pore has been fully explored.
 To find more pores, a new node, which has not been visited yet, is chosen arbitrarily and the procedure is repeated until all nodes have been visited.
 

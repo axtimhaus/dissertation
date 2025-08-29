@@ -48,9 +48,9 @@ The shift vector is for now arbitrary, but will be concretized in \cref{sec:surf
     \end{align}
 \end{subequations}
 
-For sintering behavior analysis and evaluation of numerical error the volume of a particle has to be determined (actually area due to 2D).
-This is done by summing over all element triangles as in \cref{eq:particle-volume}, where $\Nodes$ is the set of all nodes the particle consists of.
-Note, that if undercuts occur this equation is still correct since the respective elements will be counted negative as then $\sin \Diff\Angle_{\Upper} < 0$.
+For sintering behavior analysis and evaluation of numerical error the volume of a particle has to be determined.
+In the present 2D case the volume reduces to the area enclosed by the surface line, which is calculated by summing over all element triangles as in \cref{eq:particle-volume}, where $\Nodes$ is the set of all nodes the particle consists of.
+Note that if undercuts occur this equation is still correct since the respective elements will be counted negative, due to $\sin \Diff\Angle_{\Upper} < 0$.
 \begin{equation}
     \Volume_{\Particle} = \frac12 \sum^{\Nodes} \Radius\Radius_{\Upper} \sin \Diff\Angle_{\Upper}
     \label{eq:particle-volume}
