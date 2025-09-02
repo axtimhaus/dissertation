@@ -1,13 +1,14 @@
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pyarrow as pa
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
+from matplotlib.contour import ContourSet
+from matplotlib.ticker import LogLocator
 from pytask import mark, task
 
-from dissertation.config import FIGSIZE_INCH, image_produces
+from dissertation.config import image_produces
 from dissertation.sim.packings.cases import CASES, Case
 
 for case in CASES:
@@ -21,29 +22,42 @@ for case in CASES:
     ):
         df = pq.read_table(results_file).flatten().flatten()
 
-        fig = plt.figure(figsize=(FIGSIZE_INCH[0], 4))
+        fig = plt.figure()
         ax = fig.subplots()
         ax.set_aspect("equal", adjustable="datalim")
         ax.grid(True)
-        viridis = mpl.colormaps["viridis"]
 
         particles = [get_states(df, case, i) for i in range(len(case.input.particles))]
         times = particles[0][0]
 
-        num = 10
+        times_to_plot = np.geomspace(1e-6, times[-1], 10)
+        time_indices = [np.searchsorted(times, t) for t in times_to_plot]
 
-        times_to_plot = np.geomspace(times[0], times[-1], 10)
+        cs = ContourSet(
+            ax,
+            times_to_plot,
+            [
+                [np.pad(np.transpose([p[1][i], p[2][i]]), [(0, 1), (0, 0)], mode="wrap") for p in particles]
+                for i, t in zip(time_indices, times_to_plot, strict=True)
+            ],
+            cmap="viridis",
+            norm="log",
+        )
+        cb = fig.colorbar(
+            cs,
+            orientation="vertical",
+            ticks=LogLocator(),
+            label="Normalized Time $\\Time / \\TimeNorm_{\\Surface}$",
+            aspect=30,
+        )
+        cb.minorticks_on()
+        t_range = np.log10(times_to_plot[-1]) - np.log10(times_to_plot[0])
+        cb.ax.set_ylim(
+            10 ** (np.log10(times_to_plot[0]) - 0.01 * t_range),
+            10 ** (np.log10(times_to_plot[-1]) + 0.01 * t_range),
+            auto=False,
+        )
 
-        for j, t in enumerate(times_to_plot):
-            color = viridis(float(j) / num)
-            i = np.searchsorted(times, t)
-            label = f"{i}/{len(times)}"
-
-            for p in particles:
-                ax.fill(p[1][i], p[2][i], label=label, edgecolor=color, fill=False, lw=0.5)
-                label = None
-
-        # ax.set_title(f"{case.display}")
         ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
         ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")
 

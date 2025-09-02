@@ -7,7 +7,7 @@ import pyarrow.parquet as pq
 from matplotlib.gridspec import GridSpec
 from pytask import mark, task
 
-from dissertation.config import FIGSIZE_INCH, image_produces
+from dissertation.config import DEFAULT_FIGSIZE, image_produces
 from dissertation.sim.randomized.cases import CASES, MEAN_LINE_STYLE, NOMINAL
 from dissertation.sim.randomized.helper import read_parquet_output_files
 from dissertation.sim.randomized.input import TIME_NORM_SURFACE, Input
@@ -30,7 +30,7 @@ for case in CASES:
         nominal_df = pq.read_table(nominal_result).flatten().flatten()
         data_frames = read_parquet_output_files(results_files)
 
-        fig = plt.figure(figsize=(FIGSIZE_INCH[0], FIGSIZE_INCH[1] * 1.3))
+        fig = plt.figure(figsize=tuple(DEFAULT_FIGSIZE * [1, 2]))
         gs = GridSpec(3, 2, figure=fig)
         axs = [
             fig.add_subplot(gs[0:2, :]),

@@ -7,7 +7,7 @@ import pyarrow.compute as pc
 import pyarrow.parquet as pq
 from pytask import mark, task
 
-from dissertation.config import FIGSIZE_INCH, image_produces
+from dissertation.config import image_produces
 from dissertation.sim.randomized.cases import CASES, Case
 from dissertation.sim.randomized.input import TIME_NORM_SURFACE, Input
 
@@ -24,7 +24,7 @@ for case in CASES:
         ):
             df = pq.read_table(results_file).flatten().flatten()
 
-            fig = plt.figure(figsize=(FIGSIZE_INCH[0], 4))
+            fig = plt.figure()
             ax = fig.subplots()
             ax.set_aspect("equal", adjustable="datalim")
             viridis = mpl.colormaps["viridis"]

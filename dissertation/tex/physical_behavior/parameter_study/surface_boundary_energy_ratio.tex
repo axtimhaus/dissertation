@@ -1,13 +1,15 @@
 \subsection{Surface-Boundary Energy Ratio \texorpdfstring{$\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface}$}{γGB/γS}}\label{subsec:parameter-study-surface-boundary-energy}
 
-\begin{figure}[p]
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/0.10000/evolution}
+\begin{figure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/surface_boundary_energy/0.10000/evolution}
         \caption{$\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface} = \num{0.1}$}
         \label{fig:two_particle/studies/surface_boundary_energy/0.10000/evolution}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/0.90000/evolution}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/surface_boundary_energy/0.90000/evolution}
         \caption{$\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface} = \num{0.9}$}
         \label{fig:two_particle/studies/surface_boundary_energy/0.90000/evolution}
     \end{subfigure}
@@ -15,28 +17,32 @@
     \label{fig:two_particle/studies/surface_boundary_energy/evolution}
 \end{figure}
 
-\begin{figure}[p]
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/neck_size}
+\begin{figure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/surface_boundary_energy/neck_size}
         \caption{Evolution Curves}
         \label{fig:two_particle/studies/surface_boundary_energy/neck_size}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/neck_size_map}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/surface_boundary_energy/neck_size_map}
         \caption{Time Isolines}
         \label{fig:two_particle/studies/surface_boundary_energy/neck_size_map}
     \end{subfigure}
     \caption{Neck Size in Dependence on Surface-Boundary Energy Ratio}
 \end{figure}
 
-\begin{figure}[p]
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/shrinkage}
+\begin{figure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/surface_boundary_energy/shrinkage}
         \caption{Evolution Curves}
         \label{fig:two_particle/studies/surface_boundary_energy/shrinkage}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_energy/shrinkage_map}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/surface_boundary_energy/shrinkage_map}
         \caption{Time Isolines}
         \label{fig:two_particle/studies/surface_boundary_energy/shrinkage_map}
     \end{subfigure}
@@ -50,7 +56,7 @@ In reality, usually $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surf
 The initial particle geometry and the material parameters are taken equal on both particles.
 
 \Cref{fig:two_particle/studies/surface_boundary_energy/evolution} shows two selected evolutions of the contact geometry.
-Note the large dihedral angle at low interface energy ratios and the small one at high ratios, since in the latter case the local stationary state around the neck is reached earlier.
+Note the large dihedral angle between the surfaces at low interface energy ratios and the small one at high ratios, since in the latter case the local stationary state around the neck is reached earlier.
 When $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface} \rightarrow \num{1}$ the dihedral angle approaches \ang{120} as is proposed by \cref{eq:youngs-dihedral}.
 Accordingly, when $\InterfaceEnergy_{\GrainBoundary} / \InterfaceEnergy_{\Surface} \rightarrow \num{0}$ the dihedral angle approaches \ang{180}.
 With high energy ratio (large dihedral angle), the particle surface around the neck has a smooth concavely curved shape.

@@ -3,13 +3,13 @@
 Remeshing plays a central role in maintaining the solution procedure's stability and lowering computational effort.
 As discussed in \cref{subsec:time-integration-scheme} the time step size achievable without producing instabilities is related to the displacement angle of a node and thus to the discretization width of the surface.
 
-In the current implementation two distict types of remeshing procedures are used: remeshing the free surface and remeshing near a neck node.
-They will be discussed in the following.
+In the current implementation two distinct types of remeshing procedures are used: remeshing the free surface and remeshing near a neck node.
+They will be discussed below.
 
 \subsection{Free Surface Remeshing}\label{sec:free-surface-remeshing}
 
 The main aim of this procedure is lowering the surface node count where possible and increase it where necessary to be able to choose a time step size as large as possible and lower computational effort.
-It is not required to make the simulation work, but significantly accelarates the solution progress.
+It is not required to make the simulation work, but significantly accelerates the solution progress.
 Surfaces with even profile (low curvature) need less points to be sufficiently approximated as surfaces with high curvatures.
 The flatness of a surface at a node is measured by the angle between its adjacent surface lines.
 A surface is flat if this angle equals \qty{180}{\degree}, and is curved if this angle deviates from that.

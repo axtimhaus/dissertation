@@ -30,7 +30,7 @@ def dg_lin(ds, delta, gamma_u, gamma_l):
 def task_plot_normal_potential(
     produces: list[Path] = [in_build_dir(THIS_DIR / f"plot_normal_potential.{e}") for e in IMAGE_FILE_FORMATS],
 ):
-    fig: plt.Figure = plt.figure(figsize=(6, 4), dpi=600)
+    fig: plt.Figure = plt.figure()
     ax: plt.Axes = fig.subplots()
 
     ds = np.linspace(-0.1, 0.1, 50)

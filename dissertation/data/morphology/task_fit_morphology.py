@@ -6,7 +6,7 @@ from scipy.optimize import least_squares
 from shapely import Polygon
 from shapely.affinity import translate
 
-from dissertation.config import in_build_dir
+from dissertation.config import DEFAULT_FIGSIZE, in_build_dir
 from dissertation.data.morphology.batches import BATCHES, BATCHES_DIR
 from dissertation.data.morphology.shape_function import particle_shape_function
 
@@ -215,7 +215,8 @@ for b, files in BATCHES.items():
 
 
 def plot_fit(file, orig_geom, model_geom, param_text):
-    fig, ax = plt.subplots()
+    fig = plt.figure(figsize=tuple(DEFAULT_FIGSIZE / [2, 1]))
+    ax = fig.subplots()
     ax.set_aspect("equal", adjustable="datalim")
     ax.plot(orig_geom.exterior.xy[0], orig_geom.exterior.xy[1])
     ax.plot(model_geom.exterior.xy[0], model_geom.exterior.xy[1])

@@ -16,27 +16,28 @@ As measure for precision, their agreement in shrinkage and the overall volume lo
 \subsection{Results and Discussion}
 
 \begin{figure}
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/time_step/step_count}
-        \caption{Step Counts and Simulation Time Consumption}
-        \label{fig:two_particle/studies/time_step/step_count}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/time_step/shrinkage}
-        \caption{Shrinkage}
-        \label{fig:two_particle/studies/time_step/shrinkage}
-    \end{subfigure}
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/time_step/volume_loss}
-        \caption{Volume Loss}
-        \label{fig:two_particle/studies/time_step/volume_loss}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/time_step/time_step_width}
-        \caption{Time Step Width}
-        \label{fig:two_particle/studies/time_step/time_step_width}
-    \end{subfigure}
-    \caption{Numerical Behavior of the Simulation in Dependence on the Maximum Displacement Angle}
+    \centering
+    \includegraphics{sim/two_particle/studies/time_step/step_count}
+    \caption{Step Counts and Simulation Time Consumption in Dependence on the Maximum Displacement Angle}
+    \label{fig:two_particle/studies/time_step/step_count}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics{sim/two_particle/studies/time_step/shrinkage}
+    \caption{Shrinkage in Dependence on the Maximum Displacement Angle}
+    \label{fig:two_particle/studies/time_step/shrinkage}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics{sim/two_particle/studies/time_step/volume_loss}
+    \caption{Volume Loss in Dependence on the Maximum Displacement Angle}
+    \label{fig:two_particle/studies/time_step/volume_loss}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics{sim/two_particle/studies/time_step/time_step_width}
+    \caption{Time Step Width in Dependence on the Maximum Displacement Angle}
+    \label{fig:two_particle/studies/time_step/time_step_width}
 \end{figure}
 
 \Cref{fig:two_particle/studies/time_step/step_count} shows the count of calculated time steps alongside with the total time consumption for the simulations.
@@ -70,5 +71,5 @@ This issue will be addressed in detail in \cref{sec:study-neck-remeshing}.
 The discussed results show, that lower values of the maximum displacement angle are generally preferable.
 Higher values lead, as expected, to numerical errors, however do not improve the time consumption of the solution due to convergence issues of the Newton procedure.
 Small time steps allow faster solution due to fewer iterations per step and provide better precision in general.
-With regard to the high memory usage for result data storing the maximum displacement angle \qty{0.005}{\radian} is chosen for the following investigation as it provides the best trade-off.
-Lower values did not provide better performance in the test case but produce significantly higher amounts of data.
+With regard to the high memory usage for result data storing the maximum displacement angle \qty{0.005}{\radian} is chosen for the followings investigation as it provides the best trade-off.
+Lower values did not provide notable better performance in the test case but produce significantly higher amounts of data.

@@ -65,7 +65,7 @@ class Case(BaseModel):
         return in_build_dir(THIS_DIR / "cases") / self.key
 
 
-_COMMON_STYLE = dict(linewidth=1)
+_COMMON_STYLE = dict()
 
 PAIR_INPUT = BASE_INPUT.model_copy(deep=True)
 PAIR_INPUT.particles = [

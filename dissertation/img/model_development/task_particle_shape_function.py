@@ -27,7 +27,7 @@ for key, values in [("o", O), ("h", H), ("n", N), ("p", P)]:
     def task_plot_particle_shape_function(
         key=key, values=values, produces=image_produces(in_build_dir(THIS_DIR / f"particle_shape_function_{key}"))
     ):
-        fig = plt.figure(figsize=(6, 4), dpi=600)
+        fig = plt.figure()
         ax = fig.subplots()
 
         angles = np.linspace(0, 2 * np.pi, endpoint=True, num=200)
@@ -42,7 +42,6 @@ for key, values in [("o", O), ("h", H), ("n", N), ("p", P)]:
             ax.plot(
                 r * np.cos(angles),
                 r * np.sin(angles),
-                lw=1,
                 label=f"\\num{{{v}}}",
                 c=cmap((v - cmap_min) / (cmap_max - cmap_min)),
             )

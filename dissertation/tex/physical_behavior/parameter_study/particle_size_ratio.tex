@@ -1,13 +1,15 @@
 \subsection{Particle Size Ratio \texorpdfstring{$\Radius_2 / \Radius_1$}{r2/r1}}\label{subsec:parameter-study-particle-size-ratio}
 
-\begin{figure}[p]
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/particle_size_ratio/2.00000/evolution}
+\begin{figure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/particle_size_ratio/2.00000/evolution}
         \caption{$\Radius_2 / \Radius_1 = \num{2}$}
         \label{fig:two_particle/studies/particle_size_ratio/2.00000/evolution}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/particle_size_ratio/4.00000/evolution}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/particle_size_ratio/4.00000/evolution}
         \caption{$\Radius_2 / \Radius_1 = \num{4}$}
         \label{fig:two_particle/studies/particle_size_ratio/4.00000/evolution}
     \end{subfigure}
@@ -15,14 +17,16 @@
     \label{fig:two_particle/studies/particle_size_ratio/evolution}
 \end{figure}
 
-\begin{figure}[p]
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/particle_size_ratio/neck_size}
+\begin{figure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/particle_size_ratio/neck_size}
         \caption{Evolution Curves}
         \label{fig:two_particle/studies/particle_size_ratio/neck_size/a}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/particle_size_ratio/neck_size_map}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/particle_size_ratio/neck_size_map}
         \caption{Time Isolines}
         \label{fig:two_particle/studies/particle_size_ratio/neck_size/b}
     \end{subfigure}
@@ -30,14 +34,16 @@
     \label{fig:two_particle/studies/particle_size_ratio/neck_size}
 \end{figure}
 
-\begin{figure}[p]
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/particle_size_ratio/shrinkage}
+\begin{figure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/particle_size_ratio/shrinkage}
         \caption{Evolution Curves}
         \label{fig:two_particle/studies/particle_size_ratio/shrinkage/a}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/particle_size_ratio/shrinkage_map}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/particle_size_ratio/shrinkage_map}
         \caption{Time Isolines}
         \label{fig:two_particle/studies/particle_size_ratio/shrinkage/b}
     \end{subfigure}
@@ -48,20 +54,20 @@
 This study investigates the effect of sintering unequally sized circular particles.
 The material parameters are taken equal on both particles with a grain boundary energy of $\InterfaceEnergy_{\GrainBoundary} = \num{0.5}\InterfaceEnergy_{\Surface}$.
 
-\Cref{fig:two_particle/studies/particle_size_ratio/evolution} shows two selected evolutions of the contact geometry.
-At particle size ratio of \num{1} the contact is and stays symmetrical during the whole process, as expected.
-When increasing the size ratio, the contact becomes asymmetric and the grain boundary between the particles shows a curvature.
+As expected and observed in the previous studies, at particle size ratio of \num{1} the contact is and stays symmetrical during the whole process.
+\Cref{fig:two_particle/studies/particle_size_ratio/evolution} shows two selected evolutions of the contact geometry of higher particle size ratios.
+When increasing the size ratio, the contact becomes asymmetric and the grain boundary between the particles exhibits a curvature.
 This curvature is what would drive the consumption of the smaller particle by the larger, what is generally referred to as grain growth.
 However, the present model does not include diffusional fluxes cross the grain boundary.
-\Cref{fig:two_particle/studies/particle_size_ratio/4.00000/evolution} shows in later stages the limitation of the achievable neck size by the size of the smaller particle.
 
 \Cref{fig:two_particle/studies/particle_size_ratio/neck_size} shows the dependence of the neck size on the particle size ratio.
 Until ratios of \num{3} the neck growth is accelerated, as the gap between the particles is narrowed by the less curved surface of the large particle, thus fewer volume is necessary to grow the neck.
 Above, the acceleration is remarkably smaller, as the neck size is strongly limited by the size of the smaller particle.
-The same limitation was reported by \textcite{Kumar2016}, whose model does however take volume fluxes cross the boundary into account.
+Compare therefor the geometry of the neck in \Cref{fig:two_particle/studies/particle_size_ratio/evolution}.
+The same limitation was reported by \textcite{Pan1998} and \textcite{Kumar2016}, whose models however take volume fluxes cross the boundary into account.
 
 \Cref{fig:two_particle/studies/particle_size_ratio/shrinkage} shows the dependence of the shrinkage on the particle size ratio.
-Generally, the shrinkage observed decreases with the size ratio, where the influence is higher at low ratios than on high ones.
-Both can be explained by the higher proportion of inner particle volume in the distance between the particle centers, which decreases the relative shrinkage created by equal absolute particle displacement.
-A counter-acting influence of a longer grain boundary diffusion path a higher volume to displace, due to the larger neck, is to be suspected.
-Altering the particle size ratio causes approximately a parallel shift of the evolution curves in double logarithmic space.
+Generally, the shrinkage observed decreases with the size ratio, where the influence is higher at low ratios.
+Several contributions are present here.
+The higher proportion of inner particle volume in the distance between the particle centers decreases the relative shrinkage created by equal absolute particle displacement.
+The larger neck means a longer grain boundary diffusion path and a higher volume to displace.

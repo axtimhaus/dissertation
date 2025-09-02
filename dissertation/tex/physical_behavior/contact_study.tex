@@ -10,6 +10,7 @@ This study shall demonstrate and evaluate this issue on the example of regular s
 \subsection{Construction of the Study}
 
 \begin{figure}
+    \centering
     \includegraphics{img/parameter_study/packings}
     \caption{Particle Packings Regarded in this Investigation}
     \label{fig:parameter_study/packings}
@@ -34,13 +35,15 @@ The other ones will be referred as active ones.
 \subsection{Results and Discussion}
 
 \begin{figure}
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/packings/shrinkage}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/packings/shrinkage}
         \caption{Shrinkage}
         \label{fig:packings/shrinkage}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/packings/neck_size}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/packings/neck_size}
         \caption{Average Neck Size}
         \label{fig:packings/neck_size}
     \end{subfigure}%
@@ -48,14 +51,16 @@ The other ones will be referred as active ones.
 \end{figure}
 
 \begin{figure}
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/packings/cases/pair/evolution}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/packings/cases/pair/evolution}
         \caption{Pure Active}
         \label{fig:packings/pair/evolution}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/packings/cases/pair_inert/evolution}
-        \caption{With Inert Second}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/packings/cases/pair_inert/evolution}
+        \caption{With Inert Right}
         \label{fig:packings/pair_inert/evolution}
     \end{subfigure}
     \caption{Geometry Evolution of the Pair Cases}
@@ -63,13 +68,15 @@ The other ones will be referred as active ones.
 \end{figure}
 
 \begin{figure}
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/packings/cases/triangle/evolution}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/packings/cases/triangle/evolution}
         \caption{Pure Active}
         \label{fig:packings/triangle/evolution}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/packings/cases/triangle_inert/evolution}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/packings/cases/triangle_inert/evolution}
         \caption{With Inert Upper}
         \label{fig:packings/triangle_inert/evolution}
     \end{subfigure}
@@ -78,13 +85,15 @@ The other ones will be referred as active ones.
 \end{figure}
 
 \begin{figure}
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/packings/cases/square/evolution}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/packings/cases/square/evolution}
         \caption{Pure Active}
         \label{fig:packings/square/evolution}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/packings/cases/square_inert/evolution}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/packings/cases/square_inert/evolution}
         \caption{With Inert Upper-Right}
         \label{fig:packings/square_inert/evolution}
     \end{subfigure}
@@ -93,13 +102,15 @@ The other ones will be referred as active ones.
 \end{figure}
 
 \begin{figure}
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/packings/cases/rhombus/evolution}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/packings/cases/rhombus/evolution}
         \caption{Pure Active}
         \label{fig:packings/rhombus/evolution}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/packings/cases/rhombus_inert/evolution}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/packings/cases/rhombus_inert/evolution}
         \caption{With Inert Upper}
         \label{fig:packings/rhombus_inert/evolution}
     \end{subfigure}
@@ -127,15 +138,14 @@ This enhances the driving force.
 \Cref{fig:packings/neck_size} shows the neck sizes for the distinct packings obtained from the simulations.
 The curve drawn represents the average of all necks for the multiple-particle cases.
 The general trends are the same as for shrinkage.
-The beginning of pore closing can be noticed earlier in the neck size evolution by an deviation to the lower from the straight line.
-As the pore closes further the neck growth rate increases drastically so that the neck size curve crosses the straight again.
+The beginning of pore closing is first noticed by an deviation to the lower from the straight line.
+As the pore closes further, the neck growth rate increases drastically so that the neck size curve crosses the straight again.
 
-The cases with an inert particle show a significantly lower shrinkage and neck size compared to the equal material ones, since the contribution of volume removed from the grain boundary of the inert particle is missing,
+The cases with an inert particle show a remarkably lower shrinkage and neck size, since the contribution of volume removed from the grain boundary of the inert particle is missing,
 this is in accordance with experimental observations \cite{German2014}.
-The numerical behavior of all cases with an inert is remarkably worse than of the pure active cases, as can be seen from the kinks in the result curves.
-A look into the detailed logs of the simulation suggest the reason to lie in the neck remeshing being more erratic on the inert particle.
+The numerical behavior of all cases with an inert is remarkably worse than of the pure active cases, as is apparent from the kinks in the result curves.
+The detailed logs of the simulation suggest the reason to lie in the neck remeshing being more erratic on the inert particle.
 The pore closing is delayed to later times as the pore is kept open by the inert particle's surface.
-The statements on model limitation given in \cref{subsec:parameter-study-asymmetric-surface-diffusion-ratio} also apply here.
 The three multiple-particle packings with an inert behave similarly, show equal behavior in early stages and pore closing occurs in the same order as for the pure active ones.
 The pair with an inert shows a distinct behavior an even lower shrinkage.
 A correlation with the count of active particles present seems unlikely, since the two-particle case is the only one behaving differently.

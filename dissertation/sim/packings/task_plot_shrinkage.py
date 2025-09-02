@@ -37,7 +37,7 @@ def task_plot_shrinkage_packings(
         max_time = max(max_time, np.max(times))
         max_shrinkage = max(max_shrinkage, np.max(values))
 
-    ax.legend()
+    ax.legend(ncols=2)
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
     ax.set_ylabel("Shrinkage $\\Shrinkage$")
     ax.set_xlim(TIME_MIN, max_time)

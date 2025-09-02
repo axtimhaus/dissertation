@@ -2,11 +2,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from matplotlib.gridspec import GridSpec
+from matplotlib.ticker import MultipleLocator
 from pytask import task
 from scipy.optimize import least_squares
 from scipy.stats import Mixture, beta, make_distribution, uniform, weibull_min
 
-from dissertation.config import FIGSIZE_INCH, image_produces, in_build_dir
+from dissertation.config import DEFAULT_FIGSIZE, image_produces, in_build_dir
 from dissertation.data.morphology.batches import BATCHES, BATCHES_DIR
 
 DENSITY_COLOR = "C0"
@@ -21,7 +22,7 @@ for b in BATCHES:
     ):
         df = pd.read_csv(fits_file, header=0, index_col=0)
 
-        fig = plt.figure(figsize=(FIGSIZE_INCH[0], FIGSIZE_INCH[1] / 2))
+        fig = plt.figure(figsize=tuple(DEFAULT_FIGSIZE * [1, 0.75]))
         ax = fig.subplots()
         twin = ax.twinx()
 
@@ -52,7 +53,8 @@ for b in BATCHES:
     ):
         df = pd.read_csv(fits_file, header=0, index_col=0)
 
-        fig, axs = plt.subplots(2, 1)
+        fig = plt.figure(figsize=tuple(DEFAULT_FIGSIZE * [1, 1.5]))
+        axs = fig.subplots(2, 1)
         twins = [ax.twinx() for ax in axs]
 
         r0_dist, r0_dist_text = fit_weibull_mix2(df["r0"], 0, bins=100)
@@ -90,7 +92,7 @@ for b in BATCHES:
     ):
         df = pd.read_csv(fits_file, header=0, index_col=0)
 
-        fig = plt.figure(figsize=(FIGSIZE_INCH[0], 1.5 * FIGSIZE_INCH[1]))
+        fig = plt.figure(figsize=tuple(DEFAULT_FIGSIZE * [1, 2.25]))
         gs = GridSpec(3, 2, figure=fig)
         axs = [
             fig.add_subplot(gs[0, :]),
@@ -142,6 +144,10 @@ for b in BATCHES:
 
         axs[-1].set_ylabel(r"relative frequency")
         twins[-1].set_ylabel(r"cumulative frequency")
+
+        axs[4].xaxis.set_major_locator(MultipleLocator(1))
+        axs[4].set_ylim(0, 0.78)
+        twins[4].set_ylim(0, 1.13)
 
         for p in produces:
             fig.savefig(p)

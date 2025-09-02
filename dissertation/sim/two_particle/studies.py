@@ -123,7 +123,6 @@ class TimeStepStudy(StudyBase):
     @property
     def line_style(self) -> dict:
         return dict(
-            linewidth=1,
             color=TimeStepStudy.COLORS[self.step_angle_limit],
         )
 
@@ -166,7 +165,6 @@ class SurfaceRemeshingStudy(StudyBase):
     @property
     def line_style(self) -> dict:
         return dict(
-            linewidth=1,
             linestyle=SurfaceRemeshingStudy.NODE_COUNT_STYLES[self.node_count],
             color=SurfaceRemeshingStudy.LIMIT_COLORS[self.limit],
         )
@@ -212,7 +210,6 @@ class NeckRemeshingStudy(StudyBase):
     @property
     def line_style(self) -> dict:
         return dict(
-            linewidth=1,
             linestyle=NeckRemeshingStudy.NODE_COUNT_STYLES[self.node_count],
             color=NeckRemeshingStudy.LIMIT_COLORS[self.limit],
         )
@@ -249,9 +246,7 @@ class LongRunStudy(StudyBase):
 
     @property
     def line_style(self) -> dict:
-        return dict(
-            linewidth=1,
-        )
+        return dict()
 
 
 LongRunStudy.INSTANCES = [LongRunStudy()]
@@ -289,12 +284,10 @@ class DimlessParameterStudy(StudyBase, ABC):
     def line_style(self) -> dict:
         if self.SCALE == "lin" or self.SCALE == "log":
             return dict(
-                linewidth=1,
                 color=type(self).CMAP((self.value - self.MIN) / (self.MAX - self.MIN)),
             )
         if self.SCALE == "geom":
             return dict(
-                linewidth=1,
                 color=type(self).CMAP((np.log(self.value) - np.log(self.MIN)) / (np.log(self.MAX) - np.log(self.MIN))),
             )
         raise ValueError()

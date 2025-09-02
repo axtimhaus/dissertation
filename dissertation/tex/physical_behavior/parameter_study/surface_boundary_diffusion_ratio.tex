@@ -1,42 +1,55 @@
 \subsection{Surface-Boundary Diffusion Ratio \texorpdfstring{$\DiffusionCoefficient_{\GrainBoundary} / \DiffusionCoefficient_{\Surface}$}{DGB/DS}}\label{subsec:parameter-study-surface-boundary-diffusion}
 
-\begin{figure}[p]
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_diffusion/0.01000/evolution}
+\begin{figure}
+    \centering
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/surface_boundary_diffusion/0.01000/evolution}
         \caption{$\DiffusionCoefficient_{\GrainBoundary} / \DiffusionCoefficient_{\Surface} = \num{0.01}$}
         \label{fig:two_particle/studies/surface_boundary_diffusion/0.01000/evolution}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_diffusion/1.00000/evolution}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/surface_boundary_diffusion/1.00000/evolution}
         \caption{$\DiffusionCoefficient_{\GrainBoundary} / \DiffusionCoefficient_{\Surface} = \num{1.0}$}
         \label{fig:two_particle/studies/surface_boundary_diffusion/1.00000/evolution}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/surface_boundary_diffusion/100.00000/evolution}
+        \caption{$\DiffusionCoefficient_{\GrainBoundary} / \DiffusionCoefficient_{\Surface} = \num{100.0}$}
+        \label{fig:two_particle/studies/surface_boundary_diffusion/100.00000/evolution}
     \end{subfigure}
     \caption{Geometry Evolutions for Selected Surface-Boundary Diffusion Ratios}
     \label{fig:two_particle/studies/surface_boundary_diffusion/evolution}
 \end{figure}
 
-\begin{figure}[p]
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_diffusion/neck_size}
+\begin{figure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/surface_boundary_diffusion/neck_size}
         \caption{Evolution Curves}
         \label{fig:two_particle/studies/surface_boundary_diffusion/neck_size}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_diffusion/neck_size_map}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/surface_boundary_diffusion/neck_size_map}
         \caption{Time Isolines}
         \label{fig:two_particle/studies/surface_boundary_diffusion/neck_size_map}
     \end{subfigure}
     \caption{Neck Size in Dependence on Surface-Boundary Diffusion Ratio}
 \end{figure}
 
-\begin{figure}[p]
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_diffusion/shrinkage}
+\begin{figure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/surface_boundary_diffusion/shrinkage}
         \caption{Evolution Curves}
         \label{fig:two_particle/studies/surface_boundary_diffusion/shrinkage}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_boundary_diffusion/shrinkage_map}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics{sim/two_particle/studies/surface_boundary_diffusion/shrinkage_map}
         \caption{Time Isolines}
         \label{fig:two_particle/studies/surface_boundary_diffusion/shrinkage_map}
     \end{subfigure}
@@ -47,17 +60,19 @@ This study investigates the effect of the ratio between grain boundary and surfa
 This parameter is the key factor on the relation between neck size evolution and shrinkage, as grain boundary diffusion is the only mechanism present in this model able to remove volume from between the particles and thus effect the shrinkage.
 The initial particle geometry and the material parameters are taken equal on both particles.
 
-\Cref{fig:two_particle/studies/surface_boundary_diffusion/evolution} shows two selected evolutions of the contact geometry.
+\Cref{fig:two_particle/studies/surface_boundary_diffusion/evolution} shows three selected evolutions of the contact geometry.
 One may directly observe the lack of noticeable particle movement at low diffusion ratios and the difference in neck size obtained depending on the contribution of boundary diffusion.
 
 \Cref{fig:two_particle/studies/surface_boundary_diffusion/neck_size} shows the dependence of the neck size on the diffusion ratio.
+The diffusion ratio has principally an accelerating effect on neck growth.
 The neck growth is accelerated by the additional volume fluxes via grain boundary diffusion.
-Also, as shrinkage occurs due to boundary diffusion, the volume needed to fill the neck is lowered due to the particles' approaching, which increases the speed of neck growth.
-When grain boundary diffusion is faster than surface diffusion, .
-The evolution curves do principally show a parallel displacement with the diffusion ratio, but with a noticeable approach in later stages.
+Additionally, as shrinkage occurs due to boundary diffusion, the volume needed to fill the neck is lowered due to the particles' approaching.
+However, this effect is limited at both sides symmetrically at ratios of \num{0.01} and \num{10}, respectively.
+If either diffusion rate is much larger than the other, neck growth rate appears to be limited by the other mechanisms.
+Simulation results of \textcite{Svoboda1995} and \textcite{Wakai2011} appear to support these findings, although this issue was not discussed in those publications.
 
 \Cref{fig:two_particle/studies/surface_boundary_diffusion/shrinkage} shows the dependence of the shrinkage on the diffusion ratio.
-The shrinkage largely varies with the diffusion ratio as the grain boundary diffusion is the only mechanism able to effect shrinkage.
-The higher the boundary diffusion coefficient, the higher the shrinkage.
-Although, the benefit from accelerated grain boundary diffusion decreases at higher ratios (when grain boundary diffusion is faster than surface diffusion).
-Both are likely due to the increased neck size (larger diffusion distance) when boundary diffusion is present.
+The shrinkage largely increases with the diffusion ratio as the grain boundary diffusion is the only mechanism able to effect shrinkage.
+Although, the benefit from accelerated grain boundary diffusion decreases and appears to reach a limit at higher ratios, when grain boundary diffusion is much faster than surface diffusion.
+A first influence on this is the larger diffusion path at high neck sizes, which also increase with the diffusion ratio as states above.
+Also, shrinkage progress at high boundary diffusion rates appears to be limited by the rate of surface diffusion, too, as then volume is distributed from the neck along the surface.

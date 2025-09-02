@@ -36,7 +36,7 @@ def task_plot_neck_size_packings(
         max_time = max(max_time, np.max(times))
         max_neck_size = max(max_neck_size, np.max(values))
 
-    ax.legend()
+    ax.legend(ncols=2)
     ax.set_xlabel("Normalized Time $\\Time / \\TimeNorm_{\\Surface}$")
     ax.set_ylabel("Average Relative Neck Size $\\Radius_{\\Neck} / \\Radius_0$")
     ax.set_xlim(TIME_MIN, max_time)

@@ -7,7 +7,7 @@ In the current case, these needs and possibilities highly vary during progress o
 So in the beginning of the sintering process, where curvatures are high a fine discretization is desirable to not miss the details.
 In later stages, curvatures have decreased, and fine discretization leads to unnecessarily high effort.
 
-This study aims on evaluating the influence of the surface remeshing procedure described in \cref{sec:remeshing-procedures} on the precision of time integration and providing a decent choice of the parameters to use in the following investigations.
+This study aims at evaluating the influence of the surface remeshing procedure described in \cref{sec:remeshing-procedures} on the precision of time integration and providing a decent choice of the parameters to use in the following investigations.
 
 \subsection{Construction of the Study}
 
@@ -26,27 +26,28 @@ As measure for precision, their agreement in shrinkage and the overall volume lo
 \subsection{Results and Discussion}
 
 \begin{figure}
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_remeshing/step_count}
-        \caption{Step Counts and Simulation Time Consumption}
-        \label{fig:two_particle/studies/surface_remeshing/step_count}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_remeshing/shrinkage}
-        \caption{Shrinkage}
-        \label{fig:two_particle/studies/surface_remeshing/shrinkage}
-    \end{subfigure}
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_remeshing/volume_loss}
-        \caption{Volume Loss}
-        \label{fig:two_particle/studies/surface_remeshing/volume_loss}
-    \end{subfigure}%
-    \begin{subfigure}{0.5\linewidth}
-        \includegraphics[scale=0.5]{sim/two_particle/studies/surface_remeshing/time_step_width}
-        \caption{Time Step Width}
-        \label{fig:two_particle/studies/surface_remeshing/time_step_width}
-    \end{subfigure}
-    \caption{Numerical Behavior of the Simulation in Dependence on the Surface Remeshing Limit}
+    \centering
+    \includegraphics{sim/two_particle/studies/surface_remeshing/step_count}
+    \caption{Step Counts and Simulation Time Consumption in Dependence on the Surface Remeshing Limit}
+    \label{fig:two_particle/studies/surface_remeshing/step_count}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics{sim/two_particle/studies/surface_remeshing/shrinkage}
+    \caption{Shrinkage in Dependence on the Surface Remeshing Limit}
+    \label{fig:two_particle/studies/surface_remeshing/shrinkage}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics{sim/two_particle/studies/surface_remeshing/volume_loss}
+    \caption{Volume Loss in Dependence on the Surface Remeshing Limit}
+    \label{fig:two_particle/studies/surface_remeshing/volume_loss}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics{sim/two_particle/studies/surface_remeshing/time_step_width}
+    \caption{Time Step Width in Dependence on the Surface Remeshing Limit}
+    \label{fig:two_particle/studies/surface_remeshing/time_step_width}
 \end{figure}
 
 \Cref{fig:two_particle/studies/surface_remeshing/step_count} shows the count of calculated time steps alongside with the total time consumption for the simulations.

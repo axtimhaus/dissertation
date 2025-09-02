@@ -8,7 +8,7 @@ from matplotlib.contour import ContourSet
 from matplotlib.ticker import LogLocator
 from pytask import mark, task
 
-from dissertation.config import FIGSIZE_INCH, image_produces
+from dissertation.config import DEFAULT_FIGSIZE, image_produces
 from dissertation.sim.two_particle.studies import PARTICLE1_ID, PARTICLE2_ID, STUDIES, StudyBase
 
 for t in STUDIES:
@@ -22,10 +22,14 @@ for t in STUDIES:
             produces=image_produces(study.dir / "evolution"),
         ):
             df = pq.read_table(results_file).flatten().flatten()
-
-            fig = plt.figure(figsize=(FIGSIZE_INCH[0], 4))
+            if "tip_tip" in study.KEY:
+                fig = plt.figure(figsize=tuple(DEFAULT_FIGSIZE * [1, 0.8]))
+            elif "flank_flank" in study.KEY:
+                fig = plt.figure(figsize=tuple(DEFAULT_FIGSIZE * [1, 1.4]))
+            else:
+                fig = plt.figure()
             ax = fig.subplots()
-            ax.set_aspect("equal", adjustable="datalim")
+            ax.set_aspect("equal", adjustable="datalim", anchor="S")
 
             times, particle1_x, particle1_y, particle2_x, particle2_y = get_states(df, study)
 
@@ -44,18 +48,17 @@ for t in STUDIES:
                 ],
                 cmap="viridis",
                 norm="log",
-                linewidths=1,
             )
             cb = fig.colorbar(
                 cs,
-                orientation="horizontal",
+                orientation="vertical",
                 ticks=LogLocator(),
                 label="Normalized Time $\\Time / \\TimeNorm_{\\Surface}$",
-                aspect=50,
+                aspect=30,
             )
             cb.minorticks_on()
             range = np.log10(times_to_plot[-1]) - np.log10(times_to_plot[0])
-            cb.ax.set_xlim(
+            cb.ax.set_ylim(
                 10 ** (np.log10(times_to_plot[0]) - 0.01 * range),
                 10 ** (np.log10(times_to_plot[-1]) + 0.01 * range),
                 auto=False,
@@ -64,12 +67,13 @@ for t in STUDIES:
             ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
             ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")
 
-            min_x = np.max(particle1_x[0]) - 100
-            max_x = min_x + 200
-            max_y = np.max(particle2_y[0][particle2_x[0] < max_x])
-
-            ax.set_xlim(0, max_x)
-            ax.set_ylim(-5, max_y)
+            fig.draw_without_rendering()
+            yx_ratio = (ax.get_ylim()[1] - ax.get_ylim()[0]) / (ax.get_xlim()[1] - ax.get_xlim()[0])
+            mid_x = np.max(particle1_x[0])
+            x_dist = 100
+            ax.set_xlim(mid_x - x_dist, mid_x + x_dist)
+            print(yx_ratio)
+            ax.set_ylim(0, yx_ratio * 2 * x_dist)
             ax.grid(True)
 
             for p in produces:

@@ -39,7 +39,7 @@ The system is solved in each step by LU-factorization using an algorithm special
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.6]{img/implementation/sparse_structure}
+    \includegraphics[scale=0.7]{img/implementation/sparse_structure}
     \caption{General Structure of the Systems Jacobian Matrix}
     \label{fig:implementation/sparse_structure}
 \end{figure}
@@ -86,7 +86,7 @@ With this the total dissipation on the neck node is given by:
 \end{equation}
 
 Using the form of the dissipation function in \cref{eq:dissipation-function-node} the new flux is obtained as in \cref{eq:estimated-neck-new-flux}.
-The signum term is required to support negative dissipations, which occur when the system reaches a quasi-stationary state of the surface near the neck in later stages characterized by small fluctuations.
+The sign term is required to support negative dissipations, which occur when the system reaches a quasi-stationary state of the surface near the neck in later stages characterized by small fluctuations.
 
 \begin{equation}
     \Estimated{\Flux_{i+1}} =

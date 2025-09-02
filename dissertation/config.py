@@ -35,7 +35,13 @@ if PREAMBLE_FILE.exists():
     preamble = PREAMBLE_FILE.read_text()
     mpl.rcParams.update({"pgf.preamble": preamble, "text.latex.preamble": preamble})
 
-FIGSIZE_INCH = (6.299212598, 4.724409449)
+
+def mm_to_inch(v):
+    return np.asarray(v) / 25.4
+
+
+DEFAULT_FIGSIZE = mm_to_inch([160, 70])
+EVOLUTION_FIGSIZE = mm_to_inch([160, 80])
 
 mpl.rcParams.update(
     {
@@ -43,7 +49,11 @@ mpl.rcParams.update(
         "pgf.rcfonts": False,
         "figure.constrained_layout.use": True,
         "figure.dpi": 600,
-        "figure.figsize": FIGSIZE_INCH,
+        "figure.figsize": DEFAULT_FIGSIZE,
+        "lines.linewidth": 1,
+        "patch.linewidth": 1,
+        "contour.linewidth": 1,
+        "savefig.transparent": True,
     }
 )
 

@@ -1,6 +1,6 @@
 \chapter{Aim and Scope}\label{ch:aim-and-scope}
 
-The work aims on the following goals:
+The work aims at the following goals:
 \begin{enumerate}
     \item Develop a model for the microscopic sintering behavior of multiple particles.
     \item Implement a reusable software framework for its application.
@@ -9,7 +9,7 @@ The work aims on the following goals:
     \item Develop a method for statistical representation of powders using the sintering model to allow design of powder mixtures.
 \end{enumerate}
 
-\section{Integration of the Work Within the Refrabund Project}
+\section{Integration of the Work Within the RefraBund Project}
 
 \begin{table}
     \caption{Material Data of Alumina, Niobium and Tantalum from Literature}
@@ -42,8 +42,8 @@ The work aims on the following goals:
             \bottomrule
         \end{tblr}
     \end{subtable}
-    \\
 
+    \vspace{1em}
     \begin{subtable}{\linewidth}
         \caption{Interface Diffusion Coefficients}
         \label{tab:material-data-diffusion}
@@ -82,8 +82,8 @@ The work aims on the following goals:
     \end{subtable}
 \end{table}
 
-In the research group FOR3010 Refrabund funded by the German Research Foundation (DFG), a novel refractory composite material is developed, which consists of alumina and metallic niobium respectively tantalum.
-The current work was conducted with a project part aimed on developing fast physically based model approaches of sintering, which are able to describe specialties of the investigated material system.
+In the research group FOR3010 RefraBund funded by the German Research Foundation (DFG), a novel refractory composite material is developed, which consists of alumina and metallic niobium respectively tantalum.
+The current work was conducted with a project part aimed at developing fast physically based model approaches of sintering, which are able to describe specialties of the investigated material system.
 These specialties are as follows:
 \begin{description}
     \item[Multi-Material-Powder]
@@ -92,9 +92,9 @@ These specialties are as follows:
         Especially the metallic components are prone to oxidization at high temperatures, but this atmospheric influence is out of the scope of this work.
     \item[Multi-Scale Powder]
         Some of the developed process routes use aggregate particles which itself are alumina-metal composites \cite{Zienert2022, Zienert2022a}.
-        For the final sintering, fine grained binder and filler powder must be added to achieve sufficient density and bonding.
-        These large scale differences (aggregates $\sim$\qty{1}{\milli\meter}, binder $\sim$\qty{10}{\micro\meter}) have drastic numerical implications in terms of appropriate discetization.
-        There is a multi-scale approach in development to model these fine grained fractions counter the aggregates as a continuum, but this work was not finished at the time writing this document.
+        For the final sintering, fine-grained binder and filler powder must be added to achieve sufficient density and bonding.
+        These large scale differences (aggregates $\sim$\qty{1}{\milli\meter}, binder $\sim$\qty{10}{\micro\meter}) have drastic numerical implications in terms of appropriate discretization.
+        There is a multiscale approach in development to model these fine-grained fractions counter the aggregates as a continuum, but this work was not finished at the time writing this document.
         This approach will be published in later publications.
     \item[Complex Particle Shape]
         Aggregate particles produced by crushing and sieving show complex irregular shapes \cite{Zienert2022, Zienert2022a}.
@@ -102,7 +102,7 @@ These specialties are as follows:
         Experimentally, differences in their sintering behavior have been noticed as can be explained by varying driving forces due to local geometry, but also by their surface condition.
     \item[Chemical Interactions]
         Investigation in other project parts have shown that the components form ternary oxides at interfaces \cite{Eusterholz2022, Eusterholz2023, Eusterholz2024}.
-        This influence will be neglected in the current model as this would require an enormous dataset about the thermodynamics of those reactions and would therfore be far beyond the scope of this work.
+        This influence will be neglected in the current model as this would require an enormous dataset about the thermodynamics of those reactions and would therefore be far beyond the scope of this work.
         However, the same investigation showed negligible solubility of the components in each other, so that absence of mass transfer between particle of different substance can be assumed.
 \end{description}
 
@@ -120,7 +120,7 @@ The latter result was explained by \textcite{Doremus2006} by the occurrence of g
 For this work, diffusion coefficients of \ch{Al} and \ch{O} in alumina will be considered equivalent.
 Diffusion rates for the metal-metal and the metal-alumina interfaces are missing.
 Generally, diffusion of niobium appears to be several magnitudes faster that of alumina.
-The picture on tantalum is contradictive, depending on the regarded reference, it diffuses faster, equivalently or slower than alumina, also depending on temperature.
+The picture on tantalum is contradictory, depending on the regarded reference, it diffuses faster, equivalently or slower than alumina, also depending on temperature.
 
 The surface energies of the metals are approximately twice as high as of alumina at sintering temperature.
 Grain boundary energies for the metal-alumina interfaces are missing.
@@ -142,7 +142,7 @@ From these circumstances the following requirements and assumptions are derived:
         Size differences are to be limited to one or two orders of magnitude to avoid major numerical complications in terms of discretization widths.
         These requirements preclude the use of any symmetry assumptions which are commonly applied in previously published models.
     \item[Asymmetric Material Contacts]
-        The investigated material consists of alumina powder as well as metallic niobium resp.~tantalum powder.
+        The investigated material consists of alumina powder as well as metallic niobium or tantalum powder.
         The model must therefore be able to respect different material properties on particles in contact to each other with their implication of grain boundary shape and kinetic behavior.
         However, the materials are assumed to be insoluble in each other to avoid regard on concentration gradients within the particles.
         Mass transfer between particles is therefore also disregarded.
@@ -152,7 +152,7 @@ From these circumstances the following requirements and assumptions are derived:
     \item[Powder Mixture]
         The production process involves mixing of different powder fractions to obtain optimal properties in processing and application.
         The development of a sintered material and its processing heavily resides on determining the ideal mixture to be used for the regarded application.
-        The model shall be able to regard different mixtures and investigate their bahvior in simulation instead of laboratory.
+        The model shall be able to regard different mixtures and investigate their behavior in simulation instead of laboratory.
 \end{description}
 The model shall be restricted to 2D-space as a proof of concept, but may be extended to 3D-space as well.
 The latter is out of scope of this work.
@@ -161,7 +161,7 @@ The latter is out of scope of this work.
 
 The model development of the current work shall reside on a direct and sharp interface description by using the \glsfirst{FDM}.
 The main reason for this is the avoidance of a non-physically wide diffuse interface, as would come with the application of the major competitor: the \glsfirst{PFM}.
-The work shall explore the influence of concrete physical material parameters, which are included in sharp interface approaches directly, rather then requiring an additional mapping to fit into the numeric scheme.
+The work shall explore the influence of concrete physical material parameters, which are included in sharp interface approaches directly, rather than requiring an additional mapping to fit into the numeric scheme.
 The latter would introduce additional and avoidable errors.
 Discretization of the bulk material is not needed, as volume diffusion is disregarded.
 Therefore, choosing a \gls{FEM} discretization instead of \gls{FDM} for the surface line only would be excessive.
