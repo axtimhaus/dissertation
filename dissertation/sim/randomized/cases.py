@@ -225,4 +225,4 @@ CASES = [
     ),
 ]
 
-MEAN_LINE_STYLE: dict[str, Any] = dict(color="red")
+MEAN_LINE_STYLE: dict[str, Any] = dict(color="C3")

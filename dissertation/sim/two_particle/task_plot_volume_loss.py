@@ -49,7 +49,7 @@ for t in STUDIES:
         )
         ax.set_xlabel(r"Normalized Time $\Time / \TimeNorm_{\Surface}$")
         ax.set_ylabel(r"Relative Volume Loss $(\Volume - \Volume_0) / \Volume_0$")
-        ax.set_ylim(-1e-2, 1e-2)
+        ax.set_ylim(-1e-3, 1e-3)
 
         for p in produces:
             fig.savefig(p)

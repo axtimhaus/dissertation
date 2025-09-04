@@ -54,6 +54,10 @@ mpl.rcParams.update(
         "patch.linewidth": 1,
         "contour.linewidth": 1,
         "savefig.transparent": True,
+        "xtick.direction": "in",
+        "ytick.direction": "in",
+        "font.size": 8,
+        "grid.linewidth": 0.5,
     }
 )
 

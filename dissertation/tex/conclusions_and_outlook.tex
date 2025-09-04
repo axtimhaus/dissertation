@@ -4,12 +4,12 @@ A novel approach to model sintering behavior of two or multiple particles in 2D 
 The approach uses sharp interfaces and a finite difference approximation of the particle surfaces.
 The model was based on the \gls{TEP} to obtain a concise and flexible formulation of the evolution equations.
 The model allows direct identification of physical interface properties due to the sharp interface formulation.
-Additional requirements such as contact conditions are to be formulated as equality constraints and can be implicitly ensured by the solution procedure.
+Additional requirements such as contact conditions can be formulated as equality constraints and are implicitly ensured by the solution procedure.
 
 The numerical behavior of the model has been examined to define feasible parameters for numerical routines such as time step control and remeshing procedures.
 The computational effort for time integration of the model equation can be heavily lowered by feasible time step control and rigorous remeshing procedures.
 In early stages of the simulation remeshing has to be done with care to keep the fine details of geometry, in later stages however remeshing can be aggressive to reduce the system size and accelerate the solution procedure.
-The latter is an significant improvement counter state-of-the-art \gls{PFM} approaches, which usually have larger system sizes in general and may not reduce the system size during the simulation.
+The latter is an significant improvement over state-of-the-art \gls{PFM} approaches, which usually have larger system sizes and may not reduce the system size during the simulation.
 Although remeshing procedures are applied there, too, the discretization sizes are determined by the phase field gradient requirements, rather than the interface geometry as in the current case.
 So in the current case the requirements on discretization fineness decrease during the simulation, where in \gls{PFM} they do not.
 
@@ -27,10 +27,10 @@ So in the current case the requirements on discretization fineness decrease duri
     \label{fig:conclusions/neck_size_influences}
 \end{figure}
 
-The model has then be used to conduct extensive parameter studies on two-particle configurations.
+The model has then be used for extensive parameter studies on two-particle configurations.
 The varied parameters include classic ones like the ratio of surface energy to grain boundary energy or the ratio of surface and grain boundary diffusion rate, for which previous results have been confirmed and the new model has been validated.
 Other parameters, for which no previous results could be found in literature, have been investigated regarding the influence of asymmetric substance pairings and particle geometries.
-As validation against findings from the literature was not possible here, explanations of the observed behavior have been attempted.
+Explanations of the observed behavior have been attempted.
 
 Some special crafted packings of more than two particles have been investigated regarding the characteristics of pore closing, without and with inert particles present.
 The distinct packings without inert particles were found to behave similarly until pore closing happens.
@@ -44,25 +44,25 @@ In a fourth step, the behavior of powder mixtures has been investigated by simul
 The randomized simulations were found to incorporate the effects of subsequent pore closing and to be in accordance with models of large volume cells with high counts of particles.
 Shape features of the particles were found to have especially impact on the pore closing and therefore on the formation of the final stationary state.
 Findings from the parameter studies have been used to explain the observations in the randomized simulations.
-So, classic particle size averaging was found to be incorrect regarding neck size prediction, as the neck size influence of particle size is determined mainly by the smaller of the particles in contact, so a bias is introduced.
+So, classic particle size averaging was found to introduce a bias regarding neck size prediction, as the influence of particle size on neck size is determined mainly by the smaller of the particles in contact.
 
-In the current state of the model, several incompletenesses have been observed during the investigations conducted:
+In the current state of the model, several limitations have been observed during the investigations conducted:
 \begin{enumerate}
     \item Triple points where three grain boundaries meet are currently not supported.
         This limits the applicability till the closing of the first pore present in the system.
-    \item In contacts between particles with high difference in surface energy, a drastic undercut near the neck occurs as discussed in \cref{subsec:parameter-study-asymmetric-surface-energy-ratio},
-        which eventually leads to a crossing between grain boundary and surface, which is obviously not physical.
-        This is a numerical effect due to the removal of volume from a node, where in fact no volume is left.
-    \item The grain boundary can currently only consist of a single node (plus the two neck nodes) as was discussed in \cref{sec:contact-conditions},
-        as otherwise the contact conditions create collinear rows in the system matrix.
+    \item In contacts between particles with high difference in surface energy, a drastic undercut near the neck occurs as discussed in \cref{subsec:parameter-study-asymmetric-surface-energy-ratio}.
+        This eventually leads to a crossing between grain boundary and surface, which is obviously not physical.
+        This is a numerical effect due to the removal of volume from a node, where in fact no volume is left between the respective surface and the grain boundary.
+    \item The grain boundary can currently only consist of a single node (plus the two neck nodes) as discussed in \cref{sec:contact-conditions},
+        since otherwise the contact conditions create collinear rows in the system matrix.
     \item Transfer between particles was neglected, which disallowed the occurrence of grain growth in the parameter studies of asymmetric geometry (\cref{subsec:parameter-study-particle-size-ratio,subsec:parameter-study-ovality}) and the randomized simulations (\cref{ch:randomized-simulations}),
         but allowed to disregard concentration gradients within the particle volume for the case of unequal substances.
 \end{enumerate}
 
-Beside fixing those, further development of the model can include in the future:
+Beside resolving these, further development of the model can include:
 \begin{enumerate}
     \item Introduction of a multiscale approach that models fine-grained powder fractions as a solid continuum of viscoelastic behavior filling the pores with ability to apply a pressure on the large particles' surfaces and transfer mass to them.
     \item Extension of the approach to 3D space.
     \item Application of the randomized approach to development of powder mixtures with differing size, shape and material properties.
-    \item Transfer the approach to simulation of microstructure evolution of compact polycrystals regarding recrystallization, but also possibly with phase transformations.
+    \item Transfer the approach to simulation of microstructure evolution of compact polycrystals regarding recrystallization, possibly also with phase transformations.
 \end{enumerate}

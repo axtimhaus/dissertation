@@ -1,70 +1,27 @@
-\documentclass[
-    DIV=13,
-    listof=totoc,
-    bibliography=totoc,
-    % twoside,
-    % open=right,
-]{tubaf-thesis}
-\usepackage[sans]{tubaf-fonts}
-\usepackage[footmark=author-subject]{tubaf-marks}
-\usepackage{tubaf-logoext-faculty-five}
-
-\usepackage[ngerman,english]{babel}
-
-\usepackage[mode=match, separate-uncertainty=true]{siunitx}
-
-\usepackage{graphicx}
-\usepackage{subcaption}
-\renewcommand*{\figureformat}{\figurename~\thefigure}
-\renewcommand*{\tableformat}{\tablename~\thetable}
-
-\usepackage{tabularray}
-\UseTblrLibrary{booktabs}
-\UseTblrLibrary{varwidth}
-\UseTblrLibrary{amsmath}
-
-\usepackage{enumitem}
-
-\usepackage[sorting=none,style=numeric,autolang=hyphen]{biblatex}
-
-\addbibresource{refs.bib}
-\usepackage{symbols}
-\DeclareMathOperator{\sign}{sign}
-
-\usepackage[hidelinks]{hyperref}
-\usepackage[noabbrev]{cleveref}
-\crefformat{pleq}{equations~(#2#1#3)}
-
-\usepackage[record=nameref,abbreviations]{glossaries-extra}
-\usepackage{glossaries}
-\GlsXtrLoadResources[src=abbreviations]
-
-\addtokomafont{chapterentry}{\normalfont\large}
-\renewcommand\topfraction{0.9}
-\renewcommand\bottomfraction{0.5}
-\renewcommand\textfraction{0.1}
-\renewcommand\floatpagefraction{0.85}
-
-\renewcommand\emph[1]{\textcolor{darkgray}{#1}}
-
-\usepackage{chemmacros}
+\documentclass{diss}
 
 \begin{document}
+
 \title{Microscopic Simulation of Solid State Sintering Regarding Irregularly Shaped Powder Particles}
 \author{Max Weiner}
-\birthdate{22.03.1996}
 \birthplace{Meißen}
-\faculty{Fakultät für Werkstoffwissenschaft und Werkstofftechnologie\\der Technischen Universität Bergakademie Freiberg}
-\date{\today}
 \subject{Dissertation}
 \currentdegree{Dipl.-Ing.}
 \attaineddegree[Dr.-Ing.]{Doktor-Ingenieur}
+\supervisors{Prof. Dr.-Ing. Ulrich Prahl}
+\reviewers{Prof. Dr.-Ing. Ulrich Prahl \and Prof. Dr.-Ing. Christoph Broeckmann}
 \logo{\tubaflogoimf{2cm}{!}}
 
 \selectlanguage{ngerman}
+\date{05.~September~2025}
+\birthdate{22.~März~1996}
+\faculty{Fakultät für Werkstoffwissenschaft und Werkstofftechnologie\\der Technischen Universität Bergakademie Freiberg}
 \maketitle
 
 \selectlanguage{english}
+\date{September~05,~2025}
+\birthdate{March~22,~1996}
+\faculty{Faculty of Materials Science and Technology\\of the Technical University Bergakademie Freiberg}
 \maketitle
 
 \pagenumbering{arabic}
@@ -72,6 +29,7 @@
 \tableofcontents
 
 % \input{tex/preface}
+\input{tex/independence}
 
 \input{tex/summary}
 

@@ -1,10 +1,11 @@
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pyarrow as pa
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
+from matplotlib.contour import ContourSet
+from matplotlib.ticker import LogLocator
 from pytask import mark, task
 
 from dissertation.config import image_produces
@@ -27,23 +28,37 @@ for case in CASES:
             fig = plt.figure()
             ax = fig.subplots()
             ax.set_aspect("equal", adjustable="datalim")
-            viridis = mpl.colormaps["viridis"]
 
             particles = [get_states(df, sample, i) for i in range(len(sample.particles))]
             times = particles[0][0]
 
-            num = 10
+            times_to_plot = np.geomspace(1e-6, times[-1], 10)
+            time_indices = [np.searchsorted(times, t) for t in times_to_plot]
 
-            times_to_plot = np.geomspace(times[0], times[-1], 10)
-
-            for j, t in enumerate(times_to_plot):
-                color = viridis(float(j) / num)
-                i = np.searchsorted(times, t)
-                label = f"{i}/{len(times)}"
-
-                for p in particles:
-                    ax.fill(p[1][i], p[2][i], label=label, edgecolor=color, fill=False, lw=0.5)
-                    label = None
+            cs = ContourSet(
+                ax,
+                times_to_plot,
+                [
+                    [np.pad(np.transpose([p[1][i], p[2][i]]), [(0, 1), (0, 0)], mode="wrap") for p in particles]
+                    for i, t in zip(time_indices, times_to_plot, strict=True)
+                ],
+                cmap="viridis",
+                norm="log",
+            )
+            cb = fig.colorbar(
+                cs,
+                orientation="vertical",
+                ticks=LogLocator(),
+                label="Normalized Time $\\Time / \\TimeNorm_{\\Surface}$",
+                aspect=30,
+            )
+            cb.minorticks_on()
+            t_range = np.log10(times_to_plot[-1]) - np.log10(times_to_plot[0])
+            cb.ax.set_ylim(
+                10 ** (np.log10(times_to_plot[0]) - 0.01 * t_range),
+                10 ** (np.log10(times_to_plot[-1]) + 0.01 * t_range),
+                auto=False,
+            )
 
             ax.set_xlabel("$x$ in \\unit{\\micro\\meter}")
             ax.set_ylabel("$y$ in \\unit{\\micro\\meter}")

@@ -15,7 +15,7 @@ from dissertation.sim.two_particle.task_plot_shrinkage import distance
 
 SHRINKAGE_LIMITS = (1e-3, 2e-1)
 CUTS = [1e-6, 1e-4]
-CUT_COLORS = ["C3", "C4"]
+CUT_COLORS = ["C2", "C4"]
 
 for case in CASES:
 
@@ -45,11 +45,13 @@ for case in CASES:
 
         cuts = {t: np.zeros_like(results_files) for t in CUTS}
         mean_supports = {t: np.zeros_like(results_files) for t in np.geomspace(1e-7, 1e-3, 100)}
+        sample_label = "individual samples"
 
         for i, df in data_frames:
             sample = case.samples[i]
             times, values = get_shrinkages_shoelace(sample, df)
-            axs[0].plot(times, values, **case.LINE_STYLE, alpha=0.1)
+            axs[0].plot(times, values, **case.LINE_STYLE, alpha=0.1, label=sample_label)
+            sample_label = None
 
             for t, arr in cuts.items():
                 arr[i] = np.interp(t, times, values)

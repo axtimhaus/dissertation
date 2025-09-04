@@ -14,7 +14,7 @@ from dissertation.sim.randomized.input import REFERENCE_PARTICLE, TIME_NORM_SURF
 
 NECK_SIZE_LIMITS = (1e-1, 1e-0)
 CUTS = [1e-6, 1e-4]
-CUT_COLORS = ["C3", "C4"]
+CUT_COLORS = ["C2", "C4"]
 
 for case in CASES:
 
@@ -44,10 +44,12 @@ for case in CASES:
 
         cuts = {t: np.zeros_like(results_files) for t in CUTS}
         mean_supports = {t: np.zeros_like(results_files) for t in np.geomspace(1e-7, 1e-3, 100)}
+        sample_label = "individual samples"
 
         for i, df in data_frames:
             times, values = get_neck_sizes(df)
-            axs[0].plot(times, values, **case.LINE_STYLE, alpha=0.1)
+            axs[0].plot(times, values, **case.LINE_STYLE, alpha=0.1, label=sample_label)
+            sample_label = None
 
             for t, arr in cuts.items():
                 arr[i] = np.interp(t, times, values)
