@@ -63,7 +63,10 @@ for t in STUDIES:
                 cb.ax.set_ylim(10 ** (np.log10(locs[0]) - 0.01 * range), 10 ** (np.log10(locs[-1]) + 0.01 * range))
             else:
                 range = locs[-1] - locs[0]
+                print(cb.ax.get_ylim(), (locs[0] - 0.01 * range, locs[-1] + 0.01 * range))
+                cb.ax.set_yscale("linear")
                 cb.ax.set_ylim(locs[0] - 0.01 * range, locs[-1] + 0.01 * range)
+                print(cb.ax.get_ylim())
 
         else:
             ax.legend(title=study_type.TITLE, ncols=3)

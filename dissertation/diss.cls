@@ -1,23 +1,13 @@
 \ProvidesClass{diss}
 
-\DeclareKeys{
-    print.if=@diss@print,
-    print.usage=load
-}
-
 \LoadClass[
     DIV=13,
     listof=totoc,
     bibliography=totoc,
+    twoside,
+    open=right,
 ]{tubaf-thesis}
 \publishers{}
-
-\if@diss@print
-\SetKeys[tubaf-thesis]{twoside, open=right}
-\setKeys[tubaf-color]{purpose=print}
-\else
-\SetKeys[tubaf-color]{purpose=digital}
-\fi
 
 \usepackage[sans]{tubaf-fonts}
 \usepackage[footmark=author-subject]{tubaf-marks}
