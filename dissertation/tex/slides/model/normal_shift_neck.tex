@@ -1,0 +1,16 @@
+\begin{frame}{Normal Node Shifting -- Neck}
+    \centering
+    \includegraphics[width=\linewidth]{img/model_development/node_shift_normal_neck}
+    \begin{columns}
+        \begin{column}{0.5\linewidth}
+            \begin{equation*}
+                \frac{\partial \GibbsEnergy}{\partial {\Shift}_{\Normal}} = -\left( {\InterfaceEnergy}_{\Upper} \cos \SurfaceVectorAngle_{\Normal\Upper} - {\InterfaceEnergy}_{\Lower} \cos \SurfaceVectorAngle_{\Normal\Lower} \right)
+            \end{equation*}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+            \begin{equation*}
+                \frac{\partial \Volume}{\partial {\Shift}_{\Normal}} = \frac{1}{2} \left( \SurfaceDistance_{\Upper} \sin \SurfaceVectorAngle_{\Normal\Upper} + \SurfaceDistance_{\Lower} \sin \SurfaceVectorAngle_{\Normal\Lower}\right)
+            \end{equation*}
+        \end{column}
+    \end{columns}
+\end{frame}

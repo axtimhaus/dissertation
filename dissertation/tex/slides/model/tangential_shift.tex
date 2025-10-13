@@ -1,0 +1,16 @@
+\begin{frame}{Tangential Node Shifting}
+    \centering
+    \includegraphics[width=\linewidth]{img/model_development/node_shift_tangential}
+    \begin{columns}
+        \begin{column}{0.5\linewidth}
+            \begin{equation*}
+                \frac{\partial \GibbsEnergy}{\partial {\Shift}_{\Tangential}} = \lim_{\Step\Shift_{\Tangential} \rightarrow 0} \frac{\Step\GibbsEnergy_{\Tangential}}{\Step\Shift_{\Tangential}} = -\left({\InterfaceEnergy}_{\Upper} - {\InterfaceEnergy}_{\Lower}\right) \cos \SurfaceVectorAngle_{\Tangential}
+            \end{equation*}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+            \begin{equation*}
+                \frac{\partial \Volume}{\partial {\Shift}_{\Tangential}} = \lim_{\Step\Shift_{\Tangential} \rightarrow 0} \frac{\Step\Volume_{\Tangential\Upper} - \Step\Volume_{\Tangential\Lower}}{\Step\Shift_{\Tangential}} = \frac{1}{2} \left( \SurfaceDistance_{\Upper} - \SurfaceDistance_{\Lower} \right) \sin \SurfaceVectorAngle_{\Tangential}
+            \end{equation*}
+        \end{column}
+    \end{columns}
+\end{frame}
