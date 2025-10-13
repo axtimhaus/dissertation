@@ -1,0 +1,19 @@
+\begin{frame}{Surface Node Shifting}
+    \centering
+    \includegraphics[width=\linewidth]{img/model_development/node_shift_normal}
+
+    \begin{columns}
+        \begin{column}{0.5\linewidth}
+            \begin{equation*}
+                \frac{\partial \GibbsEnergy}{\partial {\Shift}_{\Normal}} = -\left({\InterfaceEnergy}_{\Upper} + {\InterfaceEnergy}_{\Lower}\right) \cos \SurfaceVectorAngle_{\Normal}
+                \label{eq:gibbs-partial-surface-normal}
+            \end{equation*}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+            \begin{equation*}
+                \frac{\partial \Volume}{\partial {\Shift}_{\Normal}} = \frac{1}{2} \left( \SurfaceDistance_{\Upper} + \SurfaceDistance_{\Lower} \right) \sin \SurfaceVectorAngle_{\Normal}
+                \label{eq:volume-partial-surface-normal}
+            \end{equation*}
+        \end{column}
+    \end{columns}
+\end{frame}

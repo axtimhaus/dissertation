@@ -1,0 +1,105 @@
+\documentclass[title-dark, color-primary=tubaf-primary-dark]{tubaf-beamer}
+
+\usepackage[sans]{tubaf-fonts}
+\usepackage[english]{babel}
+\usepackage{imf-logo}
+\usepackage{tikz}
+\usepackage{tabularray}
+\usepackage[style=authoryear, maxnames=1]{biblatex}
+\addbibresource{refs.bib}
+\usepackage{symbols}
+\usepackage{qrcode}
+\usepackage[mode=match]{siunitx}
+
+\contact{%
+    \begin{columns}[b]
+        \begin{column}{0.72\textwidth}
+            Max Weiner\\
+            Institute of Metal Forming\\
+            TU Bergakademie Freiberg\\
+            Bernhard-von-Cotta-Str. 4\\
+            DE-09599 Freiberg\\
+            Phone: 049 3731 39 2952\\
+            Mail: max.weiner@imf.tu-freiberg.de
+        \end{column}
+        \begin{column}{0.28\textwidth}
+            \qrcode[height=\linewidth]{MECARD:N:Weiner,Max;TEL:+49\ 3731\ 392952;EMAIL:max.weiner@imf.tu-freiberg.de;;}
+            \vspace{0pt}
+        \end{column}
+    \end{columns}
+}
+
+\begin{document}
+\title{Microscopic Simulation of Solid State Sintering Regarding Irregularly Shaped Powder Particles}
+\subtitle{\sout{Defense of Doctoral Thesis} IMF Kolloquium}
+\author[Max Weiner]{Dipl.-Ing. Max Weiner}
+\logo{\imflogo}
+\logowhite{\imflogomono[fill=white]}
+\titlegraphic{\includegraphics{img/title}}
+\date{2025-10-13}
+\institute{Institute of Metal Forming, TU Bergakademie Freiberg}
+
+\begin{frame}[plain,noframenumbering]
+    \maketitle
+\end{frame}
+
+\begin{frame}{Contents}
+    \tableofcontents
+
+    % \begin{tikzpicture}[overlay, remember picture]
+    %     \useasboundingbox (current page.south west) rectangle(current page.north east);
+    %     \begin{scope}[on background layer]
+    %         \tubaftrapezoidright*[path picture={
+    %                 \node at (path picture bounding box.center) {
+    %                     \includegraphics[height=1.1\paperheight]{img/title}
+    %             };}
+    %         ]{8cm};
+    %     \end{scope}
+    % \end{tikzpicture}
+\end{frame}
+
+\section{State of the Art}
+\frame[noframenumbering]{\sectionpage}
+
+\input{tex/slides/micro_vs_macro}
+\input{tex/slides/overview_two_particle}
+\input{tex/slides/overview_approaches_chart}
+\input{tex/slides/overview_approaches_features}
+
+\section{Sintering Model Development}
+\frame[noframenumbering]{\sectionpage}
+
+\input{tex/slides/model/reasoning}
+\input{tex/slides/model/particles}
+\input{tex/slides/model/tep}
+\input{tex/slides/model/surface}
+\input{tex/slides/model/contact}
+
+\section{Two-Particle Contacts}
+\frame[noframenumbering]{\sectionpage}
+
+\section{Multi-Particle Contacts}
+\frame[noframenumbering]{\sectionpage}
+
+\section{Statistical Powder Modeling}
+\frame[noframenumbering]{\sectionpage}
+
+\input{tex/slides/mc/particle_shape_function}
+\input{tex/slides/mc/powder_stats_aggregates}
+\input{tex/slides/mc/approach}
+\input{tex/slides/mc/plot_explain}
+
+\subsection{Shrinkage}
+\frame[noframenumbering]{\subsectionpage}
+
+\input{tex/slides/mc/neck_size/all}
+
+\subsection{Neck Size}
+\frame[noframenumbering]{\subsectionpage}
+
+\input{tex/slides/mc/shrinkage/all}
+
+\appendix
+\section*{Appendix}
+
+\end{document}

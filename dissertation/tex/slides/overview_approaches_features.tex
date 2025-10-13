@@ -1,0 +1,47 @@
+\begin{frame}{Overview on Sintering Modelling Approaches}
+    \begin{columns}
+        \begin{column}{.5\textwidth}
+            \begin{block}{Direct Representation}
+                \begin{itemize}
+                        \small
+                    \item discretization of interface line
+                    \item points move with evolving interface
+                    \item interface tracked by point position
+                \end{itemize}
+            \end{block}
+        \end{column}
+        \begin{column}{.5\textwidth}
+            \begin{block}{Indirect Representation}
+                \begin{itemize}
+                        \small
+                    \item discretization of solution space
+                    \item points fixed (except remeshing)
+                    \item interface tracked by state function value
+                \end{itemize}
+            \end{block}
+        \end{column}
+    \end{columns}
+    \vspace{.5em}
+    \begin{columns}
+        \begin{column}{.5\textwidth}
+            \begin{block}{Sharp Interface}
+                \begin{itemize}
+                        \small
+                    \item interface is sharp and unsteady jump
+                    \item interface energy is localized
+                    \item discretization depends on shape requirements
+                \end{itemize}
+            \end{block}
+        \end{column}
+        \begin{column}{.5\textwidth}
+            \begin{block}{Diffuse Interface}
+                \begin{itemize}
+                        \small
+                    \item interface is smooth and steady transition
+                    \item interface energy is blurred
+                    \item discretization depends on gradient requirements
+                \end{itemize}
+            \end{block}
+        \end{column}
+    \end{columns}
+\end{frame}

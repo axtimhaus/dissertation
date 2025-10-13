@@ -1,0 +1,26 @@
+\begin{frame}{Particle Description Using Shape Function}
+    \begin{columns}
+        \begin{column}{0.4\linewidth}
+            \begin{description}
+                \item[Base Function]
+                    \begin{equation*}
+                        \Radius\left( \Angle \right) = \Radius_0 \cdot \left[ \prod_i \ShapeFunction_i\left( \Angle \right) \right]
+                        \label{eq:shape-function-general-form}
+                    \end{equation*}
+                \item[Ovality Shape Function]
+                    \begin{equation*}
+                        \ShapeFunction_{\Ovality} = \sqrt{\frac{\Ovality}{\Ovality^2 \sin^2 \Angle + \cos^2 \Angle}}
+                        \label{eq:f-ovality}
+                    \end{equation*}
+                \item[First-Order Wave Function]
+                    \begin{equation*}
+                        \ShapeFunction_1 = \WaveHeight_1 \cdot \cos \left( \WaveCount_1\Angle + 2\PI \WaveShift_1\right) + 1
+                        \label{eq:f-first-order-waves}
+                    \end{equation*}
+            \end{description}
+        \end{column}
+        \begin{column}{0.6\linewidth}
+            \includegraphics[width=\linewidth]{img/randomized/1694_48_shape}
+        \end{column}
+    \end{columns}
+\end{frame}

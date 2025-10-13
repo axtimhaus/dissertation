@@ -1,0 +1,21 @@
+\begin{frame}[fragile]{Thermodynamic Extremal Principle}
+    \begin{block}{Thermodynamic Extremal Principle}
+        System evolution will follow the path of maximum dissipation with respect to all constraints.
+    \end{block}
+
+    \begin{tblr}[
+            label=none,
+            entry=none,
+        ]{
+            colspec={lX[c]},
+        }
+        Thermodynamic Dissipation &
+        $\displaystyle \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) = -\frac{\partial\GibbsEnergy(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect\InternalDegreeOfFreedom)}{\partial \Vect\InternalStateVariable} \cdot \Vect{\InternalStateVelocity} \rightarrow \max_{\Vect{\InternalStateVelocity}}$ \\
+        Kinetic Dissipation       &
+        $\displaystyle \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) - \DissipationFunction(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\Flux}) = 0$  \\
+        Constraints      &
+        $\displaystyle \Vect\Constraint(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\InternalDegreeOfFreedom) = 0 $
+    \end{tblr}
+
+    \footreference{\cite{Onsager1931, Ziegler1963, Svoboda1991, Fischer2014, Hackl2020a}, \ldots}
+\end{frame}
