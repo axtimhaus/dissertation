@@ -68,6 +68,7 @@ ExternalStateVariable = 'X'                         # external variable of state
 Constraint = 'g'                                    # constraint to TEP
 InternalDegreeOfFreedom = '\xi'                     # internal degree of freedom in TEP
 DeborahNumber = '\symrm{De}'                        # Deborah number
+Substance = 'n'                                     # amount of substance
 
 # Energy
 GibbsEnergy = 'G'                     # Gibbs energy (free enthalpy)
