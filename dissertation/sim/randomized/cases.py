@@ -101,6 +101,48 @@ NOMINAL = NominalCase(
 )
 
 
+class NominalModifiedAverageCase(Case):
+    PARTICLE_SIZE_DIST: ClassVar = Weibull2(1.819, 1281.114, 6.858, 1671.525, 0.413)
+    RNG: ClassVar = np.random.default_rng(42)
+    RADIUS_SAMPLES: ClassVar = PARTICLE_SIZE_DIST.sample((500, 2), rng=RNG) / 1e6
+    MODIFIED_AVERAGE_RADIUS: ClassVar = np.apply_along_axis(np.min, 1, RADIUS_SAMPLES).mean()
+
+    LINE_STYLE = dict(color="purple")
+
+    @classmethod
+    def create_input(cls, sample: int):
+        particles = [
+            ParticleInput(
+                id=uuid5(NAMESPACE, f"{sample}/{i}"),
+                x=x,
+                y=y,
+                radius=cls.MODIFIED_AVERAGE_RADIUS,
+                material=REFERENCE_MATERIAL,
+                grain_boundaries={
+                    uuid5(NAMESPACE, f"{sample}/{j}"): REFERENCE_GRAIN_BOUNDARY for j in range(PARTICLE_COUNT) if j != i
+                },
+                node_count=NODE_COUNT,
+            )
+            for i, (x, y) in zip(range(PARTICLE_COUNT), particle_coords(2.1 * cls.MODIFIED_AVERAGE_RADIUS), strict=True)
+        ]
+
+        return Input(particles=particles)
+
+    def dir(self, sample: int | None = None) -> Path:
+        return in_build_dir(THIS_DIR / "cases") / self.key
+
+    @property
+    def input(self):
+        return self.samples[0]
+
+
+NOMINAL_MODIFIED_AVERAGE = NominalModifiedAverageCase(
+    key="nominal_modified_average",
+    display="Nominal Modified Average",
+    samples=[NominalModifiedAverageCase.create_input(0)],
+)
+
+
 class CircularCase(Case):
     PARTICLE_SIZE_DIST: ClassVar = Weibull2(1.819, 1281.114, 6.858, 1671.525, 0.413)
     RNG: ClassVar = np.random.default_rng(42)

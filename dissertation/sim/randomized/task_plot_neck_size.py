@@ -8,7 +8,7 @@ from matplotlib.gridspec import GridSpec
 from pytask import mark, task
 
 from dissertation.config import DEFAULT_FIGSIZE, image_produces
-from dissertation.sim.randomized.cases import CASES, MEAN_LINE_STYLE, NOMINAL, SAMPLE_COUNT
+from dissertation.sim.randomized.cases import CASES, MEAN_LINE_STYLE, NOMINAL, NOMINAL_MODIFIED_AVERAGE, SAMPLE_COUNT
 from dissertation.sim.randomized.helper import read_parquet_output_files
 from dissertation.sim.randomized.input import REFERENCE_PARTICLE, TIME_NORM_SURFACE
 
@@ -25,10 +25,12 @@ for case in CASES:
             produces=image_produces(case.dir() / "neck_size" / (f"{frame:02}" if frame else "")),
             results_files=[case.dir(i) / "output.parquet" for i, _ in enumerate(case.samples)][:count],
             nominal_result=NOMINAL.dir() / "output.parquet",
+            nominal_mod_result=NOMINAL_MODIFIED_AVERAGE.dir() / "output.parquet",
             case=case,
             alpha=0.5 - (count / SAMPLE_COUNT) * 0.4,
         ):
             nominal_df = pq.read_table(nominal_result).flatten().flatten()
+            nominal_mod_df = pq.read_table(nominal_mod_result).flatten().flatten()
             data_frames = read_parquet_output_files(results_files)
 
             fig = plt.figure(figsize=tuple(DEFAULT_FIGSIZE * [1, 2]))
@@ -84,6 +86,9 @@ for case in CASES:
 
             times, values = get_neck_sizes(nominal_df)
             axs[0].plot(times, values, **NOMINAL.LINE_STYLE, label=NOMINAL.display)
+
+            times, values = get_neck_sizes(nominal_mod_df)
+            axs[0].plot(times, values, **NOMINAL_MODIFIED_AVERAGE.LINE_STYLE, label=NOMINAL_MODIFIED_AVERAGE.display)
 
             for i, v in enumerate(np.interp(t, times, values) for t in CUTS):
                 axs[i + 1].axvline(
