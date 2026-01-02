@@ -14,7 +14,10 @@
         Kinetic Dissipation       &
         $\displaystyle \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) - \DissipationFunction(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\Flux}) = 0$  \\
         Constraints      &
-        $\displaystyle \Vect\Constraint(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\InternalDegreeOfFreedom) = 0 $
+        {
+            $\displaystyle \Vect\Constraint(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux, \Vect\InternalDegreeOfFreedom) = 0$ \\
+            (volume balance, contact conditions, \ldots)
+        }
     \end{tblr}
 
     \footreference{\cite{Onsager1931, Ziegler1963, Svoboda1991, Fischer2014, Hackl2020a}, \ldots}

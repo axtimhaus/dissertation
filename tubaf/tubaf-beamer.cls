@@ -299,6 +299,22 @@
     \end{tikzpicture}
 }
 
+\setbeamerfont{part title}{size=\huge}
+
+\setbeamertemplate{part page}{
+    \begin{tikzpicture}[remember picture, overlay]
+        \usebeamercolor{part title}
+        \node[
+            anchor=south west,
+            font=\usebeamerfont{part title},
+            color=fg
+        ] at ($(current page.west) + (\Gm@lmargin, 0)$) {\insertpart};
+
+        \usebeamercolor{separation line}
+        \draw[color=fg] ($(current page.west) + (\Gm@lmargin, 0)$) -- ($(current page.east) - (\Gm@rmargin, 0)$);
+    \end{tikzpicture}
+}
+
 \setbeamerfont{section title}{size=\Large}
 
 \setbeamertemplate{section page}{
@@ -307,8 +323,16 @@
         \node[
             anchor=south west,
             font=\usebeamerfont{section title},
-            color=fg
+            color=fg,
+            name=section title
         ] at ($(current page.west) + (\Gm@lmargin, 0)$) {\insertsection};
+        \usebeamercolor{part title}
+        \node[
+            anchor=south west,
+            font=\usebeamerfont{part title},
+            color=fg,
+            inner ysep=3em
+        ] at (section title.north west) {\insertpart};
 
         \usebeamercolor{separation line}
         \draw[color=fg] ($(current page.west) + (\Gm@lmargin, 0)$) -- ($(current page.east) - (\Gm@rmargin, 0)$);
@@ -324,8 +348,16 @@
         \node[
             anchor=south west,
             font=\usebeamerfont{section title},
-            color=fg
+            color=fg,
+            name=section title
         ] at ($(current page.west) + (\Gm@lmargin, 0)$) {\insertsection};
+        \usebeamercolor{part title}
+        \node[
+            anchor=south west,
+            font=\usebeamerfont{part title},
+            color=fg,
+            inner ysep=3em
+        ] at (section title.north west) {\insertpart};
 
         \usebeamercolor{subsection title}
         \node[

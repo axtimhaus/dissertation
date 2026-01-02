@@ -12,6 +12,16 @@
 \usepackage{symbols}
 \usepackage{qrcode}
 \usepackage[mode=match]{siunitx}
+\usepackage{multicol}
+\usepackage{animate}
+
+\AtBeginPart{\frame{\partpage}}
+\AtBeginSection{\frame{\sectionpage}}
+\AtBeginSubsection{\frame{\subsectionpage}}
+\setbeamercolor*{button}{parent=palette primary}
+\setbeamercolor*{button border}{parent=palette primary}
+\addtobeamertemplate{headline}{}{\hfill\hyperlink{contents}{\beamerbutton{CNT}} \hyperlink{appendix-contents}{\beamerbutton{APP}}}
+\newenvironment{alertblockenv}{\only{\setbeamercolor*{block title}{fg=white,bg=palette secondary.fg,use=palette secondary}\setbeamercolor*{block body}{bg=block title.bg!15!white,use=block title}}}{}
 
 \contact{%
     \begin{columns}[b]
@@ -45,7 +55,7 @@
     \maketitle
 \end{frame}
 
-\begin{frame}{Contents}
+\begin{frame}[label=contents]{Contents}
     \tableofcontents
 
     % \begin{tikzpicture}[overlay, remember picture]
@@ -61,74 +71,48 @@
 \end{frame}
 
 \section{Introduction}
-\frame[noframenumbering]{\sectionpage}
 
 \input{tex/slides/sintering/definition}
-\input{tex/slides/thermodynamics/quote_laws}
+% \input{tex/slides/thermodynamics/quote_laws}
 \input{tex/slides/thermodynamics/equilibrium_vs_non_equilibrium}
 \input{tex/slides/thermodynamics/internal_state_variables}
 \input{tex/slides/thermodynamics/quote_wise}
 
 \section{State of the Art}
-\frame[noframenumbering]{\sectionpage}
 
 \input{tex/slides/sintering/micro_vs_macro}
 \input{tex/slides/sintering/overview_two_particle}
-\input{tex/slides/sintering/overview_approaches_chart}
+% \input{tex/slides/sintering/overview_approaches_chart}
 \input{tex/slides/sintering/overview_approaches_features}
 
 \section{Sintering Model Development}
-\frame[noframenumbering]{\sectionpage}
 
-\input{tex/slides/model/reasoning}
+% \input{tex/slides/model/reasoning}
 \input{tex/slides/model/particles}
 \input{tex/slides/model/tep}
-\input{tex/slides/model/element}
+% \input{tex/slides/model/element}
 \input{tex/slides/model/normal_shift}
-\input{tex/slides/model/normal_shift_neck}
-\input{tex/slides/model/normal_potential}
 \input{tex/slides/model/tangential_shift}
-\input{tex/slides/model/tangential_shift_neck}
-\input{tex/slides/model/tangential_potential}
 \input{tex/slides/model/contact}
 
-\section{Model Implementation}
-\frame[noframenumbering]{\sectionpage}
-
-\input{tex/slides/implementation/system_structure}
-
 \section{Two-Particle Contacts}
-\frame[noframenumbering]{\sectionpage}
 
-\input{tex/slides/two_particle/evolution/surface_boundary_energy}
-\input{tex/slides/two_particle/evolution/surface_boundary_diffusion}
+% \subsection{Surface-Boundary-Energy-Ratio}
+% \input{tex/slides/two_particle/evolution/surface_boundary_energy}
+% \input{tex/slides/two_particle/shrinkage_map/surface_boundary_energy}
+% \input{tex/slides/two_particle/neck_size_map/surface_boundary_energy}
+
+% \subsection{Surface-Boundary-Diffusion-Ratio}
+% \input{tex/slides/two_particle/evolution/surface_boundary_diffusion}
+% \input{tex/slides/two_particle/shrinkage_map/surface_boundary_diffusion}
+% \input{tex/slides/two_particle/neck_size_map/surface_boundary_diffusion}
+
+\subsection{Particle-Size-Ratio}
 \input{tex/slides/two_particle/evolution/particle_size_ratio}
-\input{tex/slides/two_particle/evolution/surface_energy_asymmetric}
-\input{tex/slides/two_particle/evolution/diffusion_asymmetric}
-\input{tex/slides/two_particle/evolution/ovality_tip_tip}
-\input{tex/slides/two_particle/evolution/ovality_tip_flank}
-\input{tex/slides/two_particle/evolution/ovality_flank_flank}
-
-\input{tex/slides/two_particle/shrinkage/surface_boundary_energy}
-\input{tex/slides/two_particle/shrinkage/surface_boundary_diffusion}
-\input{tex/slides/two_particle/shrinkage/particle_size_ratio}
-\input{tex/slides/two_particle/shrinkage/surface_energy_asymmetric}
-\input{tex/slides/two_particle/shrinkage/diffusion_asymmetric}
-\input{tex/slides/two_particle/shrinkage/ovality_tip_tip}
-\input{tex/slides/two_particle/shrinkage/ovality_tip_flank}
-\input{tex/slides/two_particle/shrinkage/ovality_flank_flank}
-
-\input{tex/slides/two_particle/neck_size/surface_boundary_energy}
-\input{tex/slides/two_particle/neck_size/surface_boundary_diffusion}
-\input{tex/slides/two_particle/neck_size/particle_size_ratio}
-\input{tex/slides/two_particle/neck_size/surface_energy_asymmetric}
-\input{tex/slides/two_particle/neck_size/diffusion_asymmetric}
-\input{tex/slides/two_particle/neck_size/ovality_tip_tip}
-\input{tex/slides/two_particle/neck_size/ovality_tip_flank}
-\input{tex/slides/two_particle/neck_size/ovality_flank_flank}
+\input{tex/slides/two_particle/shrinkage_map/particle_size_ratio}
+\input{tex/slides/two_particle/neck_size_map/particle_size_ratio}
 
 \section{Multi-Particle Contacts}
-\frame[noframenumbering]{\sectionpage}
 
 \input{tex/slides/multi_particle/triangle}
 \input{tex/slides/multi_particle/square}
@@ -137,17 +121,118 @@
 \input{tex/slides/multi_particle/neck_size}
 
 \section{Statistical Powder Modeling}
-\frame[noframenumbering]{\sectionpage}
 
 \input{tex/slides/mc/particle_shape_function}
 \input{tex/slides/mc/powder_stats_aggregates}
 \input{tex/slides/mc/approach}
 \input{tex/slides/mc/plot_explain}
 
-\input{tex/slides/mc/neck_size/all}
-\input{tex/slides/mc/shrinkage/all}
+\subsection{Shrinkage}
+\input{tex/slides/mc/shrinkage/circular}
+\input{tex/slides/mc/shrinkage/oval}
+\input{tex/slides/mc/shrinkage/shape}
+
+\subsection{Neck Size}
+\input{tex/slides/mc/neck_size/circular}
+\input{tex/slides/mc/neck_size/oval}
+\input{tex/slides/mc/neck_size/shape}
+
+\frame[plain]{\makeclosing}
 
 \appendix
-\section*{Appendix}
+
+\begin{frame}[label=appendix-contents]{Appendix Contents}
+    \begin{multicols}{2}
+        \tableofcontents
+    \end{multicols}
+\end{frame}
+
+\section{Sintering Model Development}
+
+\input{tex/slides/model/normal_potential}
+\input{tex/slides/model/tangential_potential}
+
+\input{tex/slides/model/normal_shift_neck}
+\input{tex/slides/model/tangential_shift_neck}
+
+\section{Model Implementation}
+
+\input{tex/slides/implementation/system_structure}
+
+\section{Two-Particle Contacts}
+
+\subsection{Surface-Boundary-Energy-Ratio}
+\input{tex/slides/two_particle/evolution/surface_boundary_energy}
+\input{tex/slides/two_particle/shrinkage/surface_boundary_energy}
+\input{tex/slides/two_particle/neck_size/surface_boundary_energy}
+\input{tex/slides/two_particle/shrinkage_map/surface_boundary_energy}
+\input{tex/slides/two_particle/neck_size_map/surface_boundary_energy}
+
+\subsection{Surface-Boundary-Diffusion-Ratio}
+\input{tex/slides/two_particle/evolution/surface_boundary_diffusion}
+\input{tex/slides/two_particle/shrinkage/surface_boundary_diffusion}
+\input{tex/slides/two_particle/neck_size/surface_boundary_diffusion}
+\input{tex/slides/two_particle/shrinkage_map/surface_boundary_diffusion}
+\input{tex/slides/two_particle/neck_size_map/surface_boundary_diffusion}
+
+\subsection{Particle-Size-Ratio}
+\input{tex/slides/two_particle/evolution/particle_size_ratio}
+\input{tex/slides/two_particle/shrinkage/particle_size_ratio}
+\input{tex/slides/two_particle/neck_size/particle_size_ratio}
+\input{tex/slides/two_particle/shrinkage_map/particle_size_ratio}
+\input{tex/slides/two_particle/neck_size_map/particle_size_ratio}
+
+\subsection{Surface-Energy-Asymmetry}
+\input{tex/slides/two_particle/evolution/surface_energy_asymmetric}
+\input{tex/slides/two_particle/shrinkage/surface_energy_asymmetric}
+\input{tex/slides/two_particle/neck_size/surface_energy_asymmetric}
+\input{tex/slides/two_particle/shrinkage_map/surface_energy_asymmetric}
+\input{tex/slides/two_particle/neck_size_map/surface_energy_asymmetric}
+
+\subsection{Diffusion-Asymmetry}
+\input{tex/slides/two_particle/evolution/diffusion_asymmetric}
+\input{tex/slides/two_particle/shrinkage/diffusion_asymmetric}
+\input{tex/slides/two_particle/neck_size/diffusion_asymmetric}
+\input{tex/slides/two_particle/shrinkage_map/diffusion_asymmetric}
+\input{tex/slides/two_particle/neck_size_map/diffusion_asymmetric}
+
+\subsection{Ovality -- Tip-Tip-Configuration}
+\input{tex/slides/two_particle/evolution/ovality_tip_tip}
+\input{tex/slides/two_particle/shrinkage/ovality_tip_tip}
+\input{tex/slides/two_particle/neck_size/ovality_tip_tip}
+\input{tex/slides/two_particle/shrinkage_map/ovality_tip_tip}
+\input{tex/slides/two_particle/neck_size_map/ovality_tip_tip}
+
+\subsection{Ovality -- Tip-Flank-Configuration}
+\input{tex/slides/two_particle/evolution/ovality_tip_flank}
+\input{tex/slides/two_particle/shrinkage/ovality_tip_flank}
+\input{tex/slides/two_particle/neck_size/ovality_tip_flank}
+\input{tex/slides/two_particle/shrinkage_map/ovality_tip_flank}
+\input{tex/slides/two_particle/neck_size_map/ovality_tip_flank}
+
+\subsection{Ovality -- Flank-Flank-Configuration}
+\input{tex/slides/two_particle/evolution/ovality_flank_flank}
+\input{tex/slides/two_particle/shrinkage/ovality_flank_flank}
+\input{tex/slides/two_particle/neck_size/ovality_flank_flank}
+\input{tex/slides/two_particle/shrinkage_map/ovality_flank_flank}
+\input{tex/slides/two_particle/neck_size_map/ovality_flank_flank}
+
+\section{Multi-Particle Contacts}
+
+\input{tex/slides/multi_particle/triangle_inert}
+\input{tex/slides/multi_particle/square_inert}
+\input{tex/slides/multi_particle/rhombus_inert}
+
+\section{Statistical Powder Modeling}
+
+\subsection{Shrinkage}
+\input{tex/slides/mc/shrinkage/circular_hist}
+\input{tex/slides/mc/shrinkage/oval_hist}
+\input{tex/slides/mc/shrinkage/shape_hist}
+
+\subsection{Neck Size}
+\input{tex/slides/mc/neck_size/circular_hist}
+\input{tex/slides/mc/neck_size/oval_hist}
+\input{tex/slides/mc/neck_size/shape_hist}
 
 \end{document}
