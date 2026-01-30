@@ -6,12 +6,12 @@ Below, the equations to calculate these in the current model will be derived.
 
 For two-particle models, the classic way to determine a measure for shrinkage is to calculate the decrease in distance between the particles.
 Most simple approaches directly include the particle distance as a state variable.
-For the current case it is calculated as the Euclidean distance between the centers of two particles as in \cref{eq:eucliadian-particle-distance}.
+For the current case it is calculated as the Euclidean distance between the centers of two particles:
 \begin{equation}
     \Distance = \sqrt{\left( \X_2 - \X_1 \right)^2 + \left( \Y_2 - \Y_1 \right)^2}
-    \label{eq:eucliadian-particle-distance}
+    \label{eq:euclidean-particle-distance}
 \end{equation}
-The shrinkage is then directly obtained via \cref{eq:shrinkage-two-particle} with $\Distance_0$ as the distance in the initial state.
+With $\Distance_0$ as the distance in the initial state, the shrinkage is then directly obtained via
 \begin{equation}
     \Shrinkage = \frac{\Distance - \Distance_0}{\Distance_0}
     \label{eq:shrinkage-two-particle}
@@ -29,8 +29,9 @@ Note that the points have to be ordered in mathematical rotation direction or th
     \Area = \frac12 \sum_i^{\Particles} \left( \Y_i + \Y_{i+1} \right) \left( \X_i - \X_{i+1} \right)
     \label{eq:polygon-shoelace}
 \end{equation}
+
 To be able to compare this approach to shrinkages obtained by distance reduction, the square root of the polygon area is used as a measure of characteristic length in the system.
-Then the shrinkage calculates as in \cref{eq:shrinkage-multiple-particle}, with $\Area_0$ as the polygon area in the initial state.
+Then, with $\Area_0$ as the polygon area in the initial state, the shrinkage is calculated by
 \begin{equation}
     \Shrinkage = \frac{\sqrt{\Area} - \sqrt{\Area_0}}{\sqrt{\Area_0}}
     \label{eq:shrinkage-multiple-particle}

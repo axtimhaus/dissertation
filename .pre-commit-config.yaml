@@ -9,7 +9,7 @@ repos:
           - id: check-yaml
           - id: check-xml
           - id: check-toml
-          - id: check-added-large-files
+          # - id: check-added-large-files
     - repo: local
       hooks:
           - id: dotnet-tool-restore

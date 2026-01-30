@@ -19,12 +19,12 @@ For the current work, the concept of a node shall be introduced.
 A node is here considered as a discrete point of the particle surface connected with its neighbors by straight lines.
 The spline of those lines is defining the surface of the particle.
 
-The location of each node in space is defined by a tuple of polar coordinates $(\Angle, \Radius)$, where $\Angle$ is the angle coordinate and $\Radius$ the radius resp.~distance from origin.
+The location of each node in space is defined by a tuple of polar coordinates $(\Angle, \Radius)$, where $\Angle$ is the angle coordinate and $\Radius$ the radius (distance from origin).
 The origin of the polar coordinates is distinct for each particle and is considered as the center of the particle, although it is generally not identical with the barycenter of the particle.
 The center of the particle is used as an anchor for defining a particle's position in space.
 With this concept the particle can be moved in space without translating the surface node coordinates and the description of node evolution is simplified, since only the local geometry must be regarded.
 Particle movement occurs due to diffusional fluxes in the grain boundaries, which is macroscopically observed as shrinkage.
-The location of a particle is defined by the cartesian coordinates of its center $\X$ and $\Y$, as well as a rotation angle $\RotationAngle$ with the center as pole.
+The location of a particle is defined by the Cartesian coordinates of its center $\X$ and $\Y$, as well as a rotation angle $\RotationAngle$ with the center as pole.
 The rotation angle always counts from the $\X$-axis on in mathematical direction.
 The rotation angle also defines the origin axis of the particles local coordinate system.
 See \cref{fig:model_development/particle_coordinates} for illustration on this.

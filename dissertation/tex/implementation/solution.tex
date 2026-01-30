@@ -7,7 +7,7 @@ This method however, is prone to numerical instabilities, which are often observ
 Therefore, the time step width must be limited.
 As the normal or tangential displacements of a node in one step are bad measures due to the varying distances between the nodes, it was chosen to use the surface angles (which are a measure for curvature) as indicator for time step width.
 
-The angle difference is calculated in accordance to the equations in \cref{sec:surface-evolution} with $\Step\Shift = \dot\Shift \Step\Time$.
+The angle difference is calculated in accordance to the equations in \cref{sec:surface-evolution} with $\Step\Shift = \dot\Shift \Step\Time$ via
 \begin{equation}
     \max_i^{\Nodes} \max_j^{[\Upper, \Lower]} \max_k^{[\Normal, \Tangential]} \arcsin \left( \frac{\SurfaceDistance_{ij}}{\SurfaceDistance'_{ij}} \sin \SurfaceVectorAngle_{ijk} \right)  < \qtyrange{0.01}{0.1}{\radian}
     \label{eq:maximum-angle-difference}
@@ -47,15 +47,13 @@ The system is solved in each step by LU-factorization using an algorithm special
 \subsubsection{Solution Estimation}\label{subsubsec:solution-estimation}
 
 The estimation of the step solution is a crucial point to ensure fast and reliable convergence of the Newton procedure.
-
-The solution on free surfaces is easily obtained with high precision by first estimating the vacancy concentrations using \cref{eq:vacancy-concentration}, but expressing the chemical potential by the Gibbs energy gradient of \cref{eq:gibbs-partial-surface-normal} as in \cref{eq:chemical-potential-by-gibbs-gradient}.
+The solution on free surfaces is easily obtained with high precision by first estimating the vacancy concentrations using \cref{eq:vacancy-concentration}, but expressing the chemical potential by the Gibbs energy gradient of \cref{eq:gibbs-partial-surface-normal} as:
 \begin{equation}
     \Estimated{\Diff\ChemicalPotential} = \frac{\partial\GibbsEnergy}{\partial\Step_{\Normal}} \cdot \frac{2\MolarVolume}{\SurfaceDistance_{\Upper} + \SurfaceDistance_{\Lower}}
     \label{eq:chemical-potential-by-gibbs-gradient}
 \end{equation}
-
-Next the fluxes are obtained using Fick's first law (\cref{eq:fick-first}).
-By balancing the fluxes and dividing by the volume gradient, the normal displacement of a node is obtained:
+Next, the fluxes are obtained using Fick's first law (\cref{eq:fick-first}).
+By balancing the fluxes and dividing by the volume gradient, the normal displacement of a node is obtained as:
 \begin{equation}
     \Estimated{\Step\Shift_{\Normal}} = \left( \Flux_{\Upper} - \Flux_{\Lower} \right) \left( \frac{\partial\Volume}{\partial\Shift_{\Normal}} \right)^{-1}
     \label{eq:estimate-normal-displacement}
@@ -68,26 +66,24 @@ The issue is solved using a fixed-point iteration procedure, whose starting poin
 The target variable is the flux between the neck node and the central grain boundary node, denoted here as $\Estimated\Flux$.
 
 In the first approximation, the normal displacement of the neck nodes must be equal to that of the grain boundary node to fulfill contact conditions.
-Then, the tangential displacement of the neck node is calculated as in \cref{eq:estimate-neck-tangetial-displacement} using the flux balance, with $\Flux_{\Surface}$ as the estimated flux to the adjacent surface node calculated as above and $i$ as the iteration index.
+Then, using the flux balance, the tangential displacement of the neck node is calculated as in \cref{eq:estimate-neck-tangential-displacement},
+with $\Flux_{\Surface}$ as the estimated flux to the adjacent surface node calculated as above and $i$ as the iteration index.
 \begin{equation}
     \Estimated{\Step\Shift_{\Tangential i}} =
     \left( \Estimated{\Flux_i} - \Flux_{\Surface} - \frac{\partial\Volume}{\partial\Shift_{\Normal}} \Estimated{\Step\Shift_{\Normal i}} \right)
     \left( \frac{\partial\Volume}{\partial\Shift_{\Tangential}} \right)^{-1}
-    \label{eq:estimate-neck-tangetial-displacement}
+    \label{eq:estimate-neck-tangential-displacement}
 \end{equation}
-
-With this the total dissipation on the neck node is given by:
-
+The estimated total dissipation on the neck node is then given by:
 \begin{equation}
     \Estimated{\Dissipation_i}
     = \frac{\partial\GibbsEnergy}{\partial\Shift_{\Normal}} \Estimated{\Step\Shift_{\Normal i}}
     + \frac{\partial\GibbsEnergy}{\partial\Shift_{\Tangential}} \Estimated{\Step\Shift_{\Tangential i}}
     \label{eq:estimated-neck-dissipation}
 \end{equation}
-
-Using the form of the dissipation function in \cref{eq:dissipation-function-node} the new flux is obtained as in \cref{eq:estimated-neck-new-flux}.
+Using the form of the dissipation function in \cref{eq:dissipation-function-node} the new flux estimate is obtained as in \cref{eq:estimated-neck-new-flux}.
 The sign term is required to support negative dissipations, which occur when the system reaches a quasi-stationary state of the surface near the neck in later stages characterized by small fluctuations.
-
+This flux is then inserted in the iteration again in \cref{eq:estimate-normal-displacement} for the grain boundary nodes and \cref{eq:estimate-neck-tangential-displacement} for the neck node till the fixed point is reached.
 \begin{equation}
     \Estimated{\Flux_{i+1}} =
     \sign \Estimated{\Dissipation_i} \cdot
@@ -98,5 +94,3 @@ The sign term is required to support negative dissipations, which occur when the
     }
     \label{eq:estimated-neck-new-flux}
 \end{equation}
-
-This flux is then inserted in the iteration again in \cref{eq:estimate-normal-displacement} for the grain boundary nodes and \cref{eq:estimate-neck-tangetial-displacement} for the neck node till the fixed point is reached.

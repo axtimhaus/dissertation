@@ -1,11 +1,13 @@
 \ProvidesClass{diss}
 
 \LoadClass[
-    DIV=13,
+    DIV=14,
+    % DIV=14,
     listof=totoc,
     bibliography=totoc,
-    twoside,
-    open=right,
+    % twoside,
+    % open=right,
+    % BCOR=5mm
 ]{tubaf-thesis}
 \publishers{}
 
@@ -30,8 +32,10 @@
 \usepackage{enumitem}
 
 \usepackage[sorting=none,style=numeric,autolang=hyphen]{biblatex}
-
 \addbibresource{refs.bib}
+\setcounter{biburlucpenalty}{1000}
+\setcounter{biburllcpenalty}{1000}
+
 \usepackage{symbols}
 \DeclareMathOperator{\sign}{sign}
 
@@ -50,5 +54,9 @@
 \renewcommand\floatpagefraction{0.85}
 
 % \renewcommand\emph[1]{\textcolor{darkgray}{#1}}
+
+\NewDocumentCommand{\mpunct}{m}{\,\text{#1}}
+% OR
+% \NewDocumentCommand{\mpunct}{m}{}
 
 \usepackage{chemmacros}

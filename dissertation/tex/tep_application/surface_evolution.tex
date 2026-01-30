@@ -56,13 +56,15 @@ The normal vector points under an angle of $\SurfaceVectorAngle_\Normal$ acc.~to
     \label{eq:delta-surface-normal}
 \end{equation}
 
-With a certain normal shift ${\Step\Shift}_\Normal$, the surface lengths after shifting are calculated by the \cref{eq:surface-distance-shifted-normal}.
+With a certain normal shift ${\Step\Shift}_\Normal$, the surface lengths after shifting are calculated by:
 \begin{subequations}
     \label[pleq]{eq:surface-distance-shifted-normal}
     \label{eq:surface-distance-shifted-normal-sg}
     \begin{align}
-        \SurfaceDistance_{\Upper}' & = \sqrt{\SurfaceDistance_{\Upper}^2 + \Step\Shift_{\Normal}^2 - 2 \SurfaceDistance_{\Upper} \Step\Shift_{\Normal} \cos \SurfaceVectorAngle_{\Normal}} \label{eq:surface-distance-shifted-normal-upper}         \\
-        \SurfaceDistance_{\Lower}' & = \sqrt{{\SurfaceDistance}_{\Lower}^2 + {\Step\Shift}_{\Normal}^2 - 2 {\SurfaceDistance}_{\Lower} {\Step\Shift}_{\Normal} \cos \SurfaceVectorAngle_{\Normal}} \label{eq:surface-distance-shifted-normal-lower}
+        \SurfaceDistance_{\Upper}' & = \sqrt{\SurfaceDistance_{\Upper}^2 + \Step\Shift_{\Normal}^2 - 2 \SurfaceDistance_{\Upper} \Step\Shift_{\Normal} \cos \SurfaceVectorAngle_{\Normal}}
+        \label{eq:surface-distance-shifted-normal-upper} \\
+        \SurfaceDistance_{\Lower}' & = \sqrt{{\SurfaceDistance}_{\Lower}^2 + {\Step\Shift}_{\Normal}^2 - 2 {\SurfaceDistance}_{\Lower} {\Step\Shift}_{\Normal} \cos \SurfaceVectorAngle_{\Normal}}
+        \label{eq:surface-distance-shifted-normal-lower}
     \end{align}
 \end{subequations}
 
@@ -72,13 +74,13 @@ $\SurfaceVectorAngle_{\Normal} > \qty{90}{\degree}$ means a convex surface, thus
 $\SurfaceVectorAngle_{\Normal} < \qty{90}{\degree}$ means a concave surface, thus energy gain when outward shifting (positive ${\Step\Shift}_{\Normal}$).
 $\SurfaceVectorAngle_{\Normal} = \qty{90}{\degree}$ means an even surface, thus energy loss in both shifting directions.
 
-The partial derivative of Gibbs energy is obtained as the limit of $\Step\GibbsEnergy_{\Normal}$ when ${\Step\Shift}_{\Normal} \rightarrow 0$ as in \cref{eq:gibbs-partial-surface-normal}.
+The partial derivative of Gibbs energy is obtained as the limit of $\Step\GibbsEnergy_{\Normal}$ when ${\Step\Shift}_{\Normal} \rightarrow 0$:
 \begin{equation}
     \frac{\partial \GibbsEnergy}{\partial {\Shift}_{\Normal}} = \lim_{\Step\Shift_{\Normal} \rightarrow 0} \frac{\Step\GibbsEnergy_{\Normal}}{\Step\Shift_{\Normal}} = -\left({\InterfaceEnergy}_{\Upper} + {\InterfaceEnergy}_{\Lower}\right) \cos \SurfaceVectorAngle_{\Normal}
     \label{eq:gibbs-partial-surface-normal}
 \end{equation}
 
-The volume derivative is obtained by calculating the area of the triangles formed by $\SurfaceDistance$, $\SurfaceDistance'$ and $\Step\Shift_{\Normal}$ on the upper and lower side as given in \cref{eq:volume-diff-surface-normal}.
+The volume derivative is obtained by calculating the area of the triangles formed by $\SurfaceDistance$, $\SurfaceDistance'$ and $\Step\Shift_{\Normal}$ on the upper and lower side:
 \begin{subequations}
     \label[pleq]{eq:volume-diff-surface-normal}
     \begin{align}
@@ -87,7 +89,7 @@ The volume derivative is obtained by calculating the area of the triangles forme
     \end{align}
 \end{subequations}
 
-The partial derivative of volume is obtained as the limit of $\Step\Volume_{\Normal\Upper} + \Step\Volume_{\Normal\Lower}$ when ${\Step\Shift}_{\Normal} \rightarrow 0$ as in \cref{eq:volume-partial-surface-normal}.
+The partial derivative of volume is obtained as the limit of $\Step\Volume_{\Normal\Upper} + \Step\Volume_{\Normal\Lower}$ when ${\Step\Shift}_{\Normal} \rightarrow 0$:
 \begin{equation}
     \frac{\partial \Volume}{\partial {\Shift}_{\Normal}} = \lim_{\Step\Shift_{\Normal} \rightarrow 0} \frac{\Step\Volume_{\Normal\Upper} + \Step\Volume_{\Normal\Lower}}{\Step\Shift_{\Normal}} = \frac{1}{2} \left( \SurfaceDistance_{\Upper} + \SurfaceDistance_{\Lower} \right) \sin \SurfaceVectorAngle_{\Normal}
     \label{eq:volume-partial-surface-normal}
@@ -95,7 +97,7 @@ The partial derivative of volume is obtained as the limit of $\Step\Volume_{\Nor
 
 \subsection{Tangential Shifting}
 
-Regarding the tangential shifting, the direction vector is under an angle of $\SurfaceVectorAngle_{\Tangential}$ to the upper surface line, given by \cref{eq:delta-surface-tangential}.
+Regarding the tangential shifting, the direction vector is under an angle of $\SurfaceVectorAngle_{\Tangential}$ to the upper surface line, given by
 \begin{equation}
     \SurfaceVectorAngle_{\Tangential} = \SurfaceVectorAngle_{\Normal} - \frac{\PI}{2}
     \label{eq:delta-surface-tangential}
@@ -122,13 +124,13 @@ Whether the interface with higher $\InterfaceEnergy$ is located on the upper or 
 In the special case when ${\InterfaceEnergy}_{\Upper} = {\InterfaceEnergy}_{\Lower}$, the curve has a minimum in ${\Step\Shift}_{\Tangential} = 0$, meaning that any shift will produce an energy loss.
 This is the case on all nodes except neck nodes.
 
-Again, the partial derivative of Gibbs energy is found by the limit when ${\Step\Shift}_{\Tangential} \rightarrow 0$.
+Again, the partial derivative of Gibbs energy is found by the limit when ${\Step\Shift}_{\Tangential} \rightarrow 0$:
 \begin{equation}
     \frac{\partial \GibbsEnergy}{\partial {\Shift}_{\Tangential}} = \lim_{\Step\Shift_{\Tangential} \rightarrow 0} \frac{\Step\GibbsEnergy_{\Tangential}}{\Step\Shift_{\Tangential}} = -\left({\InterfaceEnergy}_{\Upper} - {\InterfaceEnergy}_{\Lower}\right) \cos \SurfaceVectorAngle_{\Tangential}
     \label{eq:gibbs-partial-surface-tangential}
 \end{equation}
 
-The partial derivative of volume is found similarly as in the normal case, but the contribution of the lower side must be here counted negatively, as can be seen from \cref{fig:model_development/surface_tangential}.
+The partial derivative of volume is found similarly as in the normal case, but the contribution of the lower side must be here counted negatively, as can be seen from
 \begin{equation}
     \frac{\partial \Volume}{\partial {\Shift}_{\Tangential}} = \lim_{\Step\Shift_{\Tangential} \rightarrow 0} \frac{\Step\Volume_{\Tangential\Upper} - \Step\Volume_{\Tangential\Lower}}{\Step\Shift_{\Tangential}} = \frac{1}{2} \left( \SurfaceDistance_{\Upper} - \SurfaceDistance_{\Lower} \right) \sin \SurfaceVectorAngle_{\Tangential}
     \label{eq:volume-partial-surface-tangential}
@@ -164,7 +166,7 @@ For the shown case the angles are as in \cref{eq:shift-neck-angles}, if the grai
     \label{eq:shift-neck-angles}
 \end{align}
 
-The respective partial derivatives are slightly modified with the distinct angles as below.
+The respective partial derivatives are slightly modified with the distinct angles as:
 \begin{align}
     \frac{\partial \GibbsEnergy}{\partial {\Shift}_{\Normal}} &= -\left( {\InterfaceEnergy}_{\Upper} \cos \SurfaceVectorAngle_{\Normal\Upper} - {\InterfaceEnergy}_{\Lower} \cos \SurfaceVectorAngle_{\Normal\Lower} \right)
     \label{eq:gibbs-partial-neck-normal} \\
