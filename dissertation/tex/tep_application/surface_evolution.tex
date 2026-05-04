@@ -51,12 +51,11 @@ The change of Gibbs energy due to normal node shifting is described by \cref{eq:
 \end{equation}
 
 The normal vector points under an angle of $\SurfaceVectorAngle_\Normal$ acc.~to~\cref{eq:delta-surface-normal} to both surface lines.
+With a certain normal shift ${\Step\Shift}_\Normal$, the surface lengths after shifting are then given by \cref{eq:surface-distance-shifted-normal}.
 \begin{equation}
     \SurfaceVectorAngle_{\Normal} = \PI - \frac{1}{2} \left(\SurfaceRadiusAngle_{\Upper} + \SurfaceRadiusAngle_{\Lower} \right)
     \label{eq:delta-surface-normal}
 \end{equation}
-
-With a certain normal shift ${\Step\Shift}_\Normal$, the surface lengths after shifting are calculated by:
 \begin{subequations}
     \label[pleq]{eq:surface-distance-shifted-normal}
     \label{eq:surface-distance-shifted-normal-sg}
@@ -74,13 +73,13 @@ $\SurfaceVectorAngle_{\Normal} > \qty{90}{\degree}$ means a convex surface, thus
 $\SurfaceVectorAngle_{\Normal} < \qty{90}{\degree}$ means a concave surface, thus energy gain when outward shifting (positive ${\Step\Shift}_{\Normal}$).
 $\SurfaceVectorAngle_{\Normal} = \qty{90}{\degree}$ means an even surface, thus energy loss in both shifting directions.
 
-The partial derivative of Gibbs energy is obtained as the limit of $\Step\GibbsEnergy_{\Normal}$ when ${\Step\Shift}_{\Normal} \rightarrow 0$:
+The partial derivative of Gibbs energy is obtained as the limit of $\Step\GibbsEnergy_{\Normal}$ when ${\Step\Shift}_{\Normal} \rightarrow 0$ as in \cref{eq:gibbs-partial-surface-normal}.
 \begin{equation}
     \frac{\partial \GibbsEnergy}{\partial {\Shift}_{\Normal}} = \lim_{\Step\Shift_{\Normal} \rightarrow 0} \frac{\Step\GibbsEnergy_{\Normal}}{\Step\Shift_{\Normal}} = -\left({\InterfaceEnergy}_{\Upper} + {\InterfaceEnergy}_{\Lower}\right) \cos \SurfaceVectorAngle_{\Normal}
     \label{eq:gibbs-partial-surface-normal}
 \end{equation}
 
-The volume derivative is obtained by calculating the area of the triangles formed by $\SurfaceDistance$, $\SurfaceDistance'$ and $\Step\Shift_{\Normal}$ on the upper and lower side:
+The partial derivative of volume is obtained by the limit of $\Step\Volume_{\Normal\Upper} + \Step\Volume_{\Normal\Lower}$ when ${\Step\Shift}_{\Normal} \rightarrow 0$ as in \cref{eq:volume-partial-surface-normal}, where $\Step\Volume_{\Normal\Upper}$ and $\Step\Volume_{\Normal\Lower}$ are the areas of the triangles formed by $\SurfaceDistance$, $\SurfaceDistance'$ and $\Step\Shift_{\Normal}$ on the upper and lower side as given by \cref{eq:volume-diff-surface-normal}.
 \begin{subequations}
     \label[pleq]{eq:volume-diff-surface-normal}
     \begin{align}
@@ -88,8 +87,6 @@ The volume derivative is obtained by calculating the area of the triangles forme
         \Step\Volume_{\Normal\Lower} &= \frac12 \SurfaceDistance_{\Lower} \Step\Shift_{\Normal} \sin \SurfaceVectorAngle_{\Normal}
     \end{align}
 \end{subequations}
-
-The partial derivative of volume is obtained as the limit of $\Step\Volume_{\Normal\Upper} + \Step\Volume_{\Normal\Lower}$ when ${\Step\Shift}_{\Normal} \rightarrow 0$:
 \begin{equation}
     \frac{\partial \Volume}{\partial {\Shift}_{\Normal}} = \lim_{\Step\Shift_{\Normal} \rightarrow 0} \frac{\Step\Volume_{\Normal\Upper} + \Step\Volume_{\Normal\Lower}}{\Step\Shift_{\Normal}} = \frac{1}{2} \left( \SurfaceDistance_{\Upper} + \SurfaceDistance_{\Lower} \right) \sin \SurfaceVectorAngle_{\Normal}
     \label{eq:volume-partial-surface-normal}
@@ -97,14 +94,13 @@ The partial derivative of volume is obtained as the limit of $\Step\Volume_{\Nor
 
 \subsection{Tangential Shifting}
 
-Regarding the tangential shifting, the direction vector is under an angle of $\SurfaceVectorAngle_{\Tangential}$ to the upper surface line, given by
+Regarding the tangential shifting, the direction vector is under an angle of $\SurfaceVectorAngle_{\Tangential}$ to the upper surface line, given by \cref{eq:delta-surface-tangential}.
+The change in Gibbs energy is calculated similarly as in the normal case according to \cref{eq:gibbs-diff-surface-tangential}, but the shifted surface lengths are calculated as in the \cref{eq:surface-distance-shifted-tangential} in dependence on the tangential shift ${\Step\Shift}_{\Tangential}$.
+Note especially the signs in front of the cosine terms.
 \begin{equation}
     \SurfaceVectorAngle_{\Tangential} = \SurfaceVectorAngle_{\Normal} - \frac{\PI}{2}
     \label{eq:delta-surface-tangential}
 \end{equation}
-
-The change in Gibbs energy is calculated similarly as in the normal case according to \cref{eq:gibbs-diff-surface-tangential}, but the shifted surface lengths are calculated as in the \cref{eq:surface-distance-shifted-tangential} in dependence on the tangential shift ${\Step\Shift}_{\Tangential}$.
-Note especially the signs in front of the cosine terms.
 \begin{equation}
     \Step\GibbsEnergy_{\Tangential} = \left( \SurfaceDistance_{\Upper}' - \SurfaceDistance_{\Upper} \right) \InterfaceEnergy_{\Upper} +  \left(\SurfaceDistance_{\Lower}' - \SurfaceDistance_{\Lower} \right) \InterfaceEnergy_{\Lower}
     \label{eq:gibbs-diff-surface-tangential}
@@ -124,13 +120,12 @@ Whether the interface with higher $\InterfaceEnergy$ is located on the upper or 
 In the special case when ${\InterfaceEnergy}_{\Upper} = {\InterfaceEnergy}_{\Lower}$, the curve has a minimum in ${\Step\Shift}_{\Tangential} = 0$, meaning that any shift will produce an energy loss.
 This is the case on all nodes except neck nodes.
 
-Again, the partial derivative of Gibbs energy is found by the limit when ${\Step\Shift}_{\Tangential} \rightarrow 0$:
+Again, the partial derivative of Gibbs energy is found by the limit when ${\Step\Shift}_{\Tangential} \rightarrow 0$ as in \cref{eq:gibbs-partial-surface-tangential}.
+The partial derivative of volume in \cref{eq:volume-partial-surface-tangential} is found similarly as in the normal case, but the contribution of the lower side must here be counted negatively.
 \begin{equation}
     \frac{\partial \GibbsEnergy}{\partial {\Shift}_{\Tangential}} = \lim_{\Step\Shift_{\Tangential} \rightarrow 0} \frac{\Step\GibbsEnergy_{\Tangential}}{\Step\Shift_{\Tangential}} = -\left({\InterfaceEnergy}_{\Upper} - {\InterfaceEnergy}_{\Lower}\right) \cos \SurfaceVectorAngle_{\Tangential}
     \label{eq:gibbs-partial-surface-tangential}
 \end{equation}
-
-The partial derivative of volume is found similarly as in the normal case, but the contribution of the lower side must be here counted negatively, as can be seen from
 \begin{equation}
     \frac{\partial \Volume}{\partial {\Shift}_{\Tangential}} = \lim_{\Step\Shift_{\Tangential} \rightarrow 0} \frac{\Step\Volume_{\Tangential\Upper} - \Step\Volume_{\Tangential\Lower}}{\Step\Shift_{\Tangential}} = \frac{1}{2} \left( \SurfaceDistance_{\Upper} - \SurfaceDistance_{\Lower} \right) \sin \SurfaceVectorAngle_{\Tangential}
     \label{eq:volume-partial-surface-tangential}
@@ -160,13 +155,12 @@ For numerical reasons, their shifting is not taken normal and tangential to the 
 The case, where the grain boundary is located below the currently regarded node, is shown in \cref{fig:surface-node-shifting-neck}.
 Here, one must distinguish between the shift vector angles $\SurfaceVectorAngle$ to the upper and the lower surface line.
 For the shown case the angles are as in \cref{eq:shift-neck-angles}, if the grain boundary is, however, located above the node, than the values of the upper and lower angles have to be switched.
+The respective partial derivatives are slightly modified with the distinct angles as in \crefrange{eq:gibbs-partial-neck-normal}{eq:volume-partial-neck-tangential}.
 \begin{align}
     \SurfaceVectorAngle_{\Normal\Upper} = \frac32 \PI - \SurfaceRadiusAngle_{\Upper} - \SurfaceRadiusAngle_{\Lower} \qquad &\text{and} \qquad \SurfaceVectorAngle_{\Normal\Lower} = \frac\PI2 \\
     \SurfaceVectorAngle_{\Tangential\Upper} = \PI - \SurfaceRadiusAngle_{\Upper} - \SurfaceRadiusAngle_{\Lower} \qquad &\text{and} \qquad \SurfaceVectorAngle_{\Tangential\Lower} = 0
     \label{eq:shift-neck-angles}
 \end{align}
-
-The respective partial derivatives are slightly modified with the distinct angles as:
 \begin{align}
     \frac{\partial \GibbsEnergy}{\partial {\Shift}_{\Normal}} &= -\left( {\InterfaceEnergy}_{\Upper} \cos \SurfaceVectorAngle_{\Normal\Upper} - {\InterfaceEnergy}_{\Lower} \cos \SurfaceVectorAngle_{\Normal\Lower} \right)
     \label{eq:gibbs-partial-neck-normal} \\

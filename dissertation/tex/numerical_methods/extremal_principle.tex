@@ -26,13 +26,14 @@ The actual form of $\DissipationFunction$ heavily depends on the regarded proces
 \end{subequations}
 
 The constrained optimization problem in \cref{eq:tep-classic} can be solved using the Lagrange formalism.
-The problem is reformulated with the additional parameter $\LagrangeParameter$ as the Lagrange functional
+The problem is reformulated with the additional parameter $\LagrangeParameter$ as the Lagrange functional $\LagrangeFunction$ in \cref{eq:tep-classic-lagrange}.
 \begin{equation}
     \LagrangeFunction = \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) + \LagrangeParameter \left( \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) - \DissipationFunction(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) \right)
     \label{eq:tep-classic-lagrange}
 \end{equation}
 
-Setting the gradient of $\LagrangeFunction$ with respect to $\Vect{\InternalStateVelocity}$ and $\LagrangeParameter$ equal zero gives the optimum of the dissipation $\Dissipation$ under the given constraints:
+Setting the gradient of $\LagrangeFunction$ with respect to $\Vect{\InternalStateVelocity}$ and $\LagrangeParameter$ equal to zero as in \cref{eq:tep-classic-gradient} gives the optimum of the dissipation $\Dissipation$ under the given constraints.
+Note that the derivative with respect to $\LagrangeParameter$ is always identical to the constraint equation.
 \begin{subequations}
     \label[pleq]{eq:tep-classic-gradient}
     \begin{align}
@@ -40,7 +41,6 @@ Setting the gradient of $\LagrangeFunction$ with respect to $\Vect{\InternalStat
         &\LagrangeFunction_{\LagrangeParameter} &&= \Dissipation(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) - \DissipationFunction(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}) &&\stackrel{!}{=} 0
     \end{align}
 \end{subequations}
-Note that the derivative with respect to $\LagrangeParameter$ is always identical to the constraint equation.
 
 For the simple case of $\DissipationFunction$ being quadratic in $\Vect{\InternalStateVelocity}$ the solution of the system is given in \cref{eq:tep-classic-solution}, which is a linear system of equations of the same size as $\Vect{\InternalStateVelocity}$.
 Compare \textcite{Svoboda1991, Fischer2014} on this.
@@ -80,8 +80,11 @@ The vector parameter $\Vect{\LagrangeParameter_2}$ for the required constraints 
     \label{eq:tep-general-lagrange}
 \end{equation}
 
-As before, the gradient of $\LagrangeFunction$ is set equal to zero to obtain the constrained optimum:
+As before, the gradient of $\LagrangeFunction$ is set equal to zero to obtain the constrained optimum to give the system equations as in \cref{eq:tep-general-gradient}.
+The Jacobian matrix of this equation system is only invertible, if $\Vect\Constraint$ provides a number of linearly independent constraints equal to the combined size of $\Vect\InternalStateVelocity$ and $\Vect\InternalDegreeOfFreedom$.
+Finding a general simplified equation system as done above (\cref{eq:tep-classic-solution}) is here not possible due to the constraints.
 \begin{subequations}
+    \label[pleq]{eq:tep-general-gradient}
     \begin{align}
         &\LagrangeFunction_{\Vect\InternalStateVelocity} &&=
         -\frac{\partial\GibbsEnergy(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect\InternalDegreeOfFreedom)}{\partial \Vect\InternalStateVariable} \left(1 + \LagrangeParameter_1 \right)
@@ -103,5 +106,3 @@ As before, the gradient of $\LagrangeFunction$ is set equal to zero to obtain th
         &\LagrangeFunction_{\Vect\LagrangeParameter_2} &&= \Vect\Constraint(\Vect\ExternalStateVariable, \Vect\InternalStateVariable, \Vect{\InternalStateVelocity}, \Vect\Flux) &&\stackrel{!}{=} 0
     \end{align}
 \end{subequations}
-The Jacobian matrix of this equation system is only invertible, if $\Vect\Constraint$ provides a number of linearly independent constraints equal to the combined size of $\Vect\InternalStateVelocity$ and $\Vect\InternalDegreeOfFreedom$.
-Finding a general simplified equation system as done above (\cref{eq:tep-classic-solution}) is here not possible due to the constraints.

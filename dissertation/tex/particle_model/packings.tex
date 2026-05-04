@@ -5,13 +5,13 @@ Correct prediction of shrinkage plays an important role in meeting required shap
 Below, the equations to calculate these in the current model will be derived.
 
 For two-particle models, the classic way to determine a measure for shrinkage is to calculate the decrease in distance between the particles.
-Most simple approaches directly include the particle distance as a state variable.
-For the current case it is calculated as the Euclidean distance between the centers of two particles:
+Most simple approaches directly include the particle distance $\Distance$ as a state variable.
+For the current case it is calculated as the Euclidean distance between the centers of two particles (\cref{eq:euclidean-particle-distance}).
+With $\Distance_0$ as the distance in the initial state, the shrinkage is then directly obtained via \cref{eq:shrinkage-two-particle}.
 \begin{equation}
     \Distance = \sqrt{\left( \X_2 - \X_1 \right)^2 + \left( \Y_2 - \Y_1 \right)^2}
     \label{eq:euclidean-particle-distance}
 \end{equation}
-With $\Distance_0$ as the distance in the initial state, the shrinkage is then directly obtained via
 \begin{equation}
     \Shrinkage = \frac{\Distance - \Distance_0}{\Distance_0}
     \label{eq:shrinkage-two-particle}
@@ -31,12 +31,12 @@ Note that the points have to be ordered in mathematical rotation direction or th
 \end{equation}
 
 To be able to compare this approach to shrinkages obtained by distance reduction, the square root of the polygon area is used as a measure of characteristic length in the system.
-Then, with $\Area_0$ as the polygon area in the initial state, the shrinkage is calculated by
+Then, with $\Area_0$ as the polygon area in the initial state, the shrinkage is calculated by \cref{eq:shrinkage-multiple-particle}.
+Comparability of these two approaches will be discussed in \cref{sec:contact-study}.
 \begin{equation}
     \Shrinkage = \frac{\sqrt{\Area} - \sqrt{\Area_0}}{\sqrt{\Area_0}}
     \label{eq:shrinkage-multiple-particle}
 \end{equation}
-Comparability of these two approaches will be discussed in \cref{sec:contact-study}.
 
 Neck size as the second key property is commonly described by the radius of the neck for circular or spherical models.
 In the current case, non-circular particle shapes will be investigated, and asymmetrical contacts will form curved neck shapes.

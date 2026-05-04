@@ -62,7 +62,7 @@ Tracking of interfaces using a sharp interface is possible by application of the
 An auxiliary function (or level-set function) $\phi$ is introduced which is positive inside the regarded phase and negative outside, so $\phi = 0$ defines the location of the interface.
 Usually the value of the function corresponds to the signed Euclidean distance of the current point from the boundary.
 This enables the use of the gradient $\nabla \phi$ for example for calculation of the interface curvature.
-The time evolution of the auxiliary function is described with the interface velocity vector $\Vect v$ by
+The time evolution of the auxiliary function is described by \cref{eq:level-set-elementary} with the interface velocity vector $\Vect v$.
 \begin{equation}
     \frac{\partial\phi}{\partial\Time} = \Vect v \nabla\phi = 0
     \label{eq:level-set-elementary}
@@ -72,7 +72,7 @@ Overview articles of the method in general were published for example by \textci
 Applications to sintering problems have been conducted by \textcite{Bruchon2010, Bruchon2012, PinoMunoz2013}.
 The basic approach is very similar to direct interface approaches, as diffusional fluxes are directly computed by application of Fick's law with potentials obtained from surface curvature.
 The velocity $\Vect v$ is taken normal from the current surface and calculated from mass conservation incorporating the diffusional fluxes.
-The curvature is obtained from the gradient of the level-set function by
+The curvature $\Curvature$ is obtained from the gradient of the level-set function by \cref{eq:level-set-curvature}.
 \begin{equation}
     \Curvature = \nabla \cdot \frac{\nabla\phi}{\Abs{\nabla\phi}}
     \label{eq:level-set-curvature}
@@ -125,13 +125,13 @@ Assuming kinetics proportional to the driving force (as usual for small driving 
 \end{equation}
 
 To ensure numerical stability and accuracy, the discretization width of the numerical solution should be smaller than the interface width (at least four cells within the interface according to \textcite{Qin2010}).
-The width of the interface can be estimated using
+The width of the interface $l$ can be estimated using \cref{eq:phase-field-interfacial-width}~\cite{Qin2010}.
 \begin{equation}
     l = \sqrt{\frac{2\kappa_\xi \xi_\Equilibrium}{\SpecificHelmholtzEnergy(\xi) - \SpecificHelmholtzEnergy(\xi_\Equilibrium)}}
     \label{eq:phase-field-interfacial-width}
 \end{equation}
 
-For conserved order parameters, the Cahn-Hillard equation \cite{Cahn1961} can be applied instead as
+For conserved order parameters, the Cahn-Hillard equation~\cite{Cahn1961} as in \cref{eq:cahn-hillard} can be applied instead.
 \begin{equation}
     \frac{\Deriv\xi}{\Deriv\Time} = \nabla \cdot \Mobility_\xi \nabla \left( \frac{\partial\SpecificHelmholtzEnergy}{\partial\xi} - \kappa_\xi \nabla^2 \xi \right)
     \label{eq:cahn-hillard}

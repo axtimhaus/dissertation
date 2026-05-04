@@ -21,7 +21,7 @@ Especially for higher dimensional functions, \glspl{MCM} are much more effective
 \glspl{MCM} need fewer function evaluations to obtain a certain precision than the deterministic grid methods.
 The principle is to calculate the average of the function in the regarded interval by estimating the expectation value of the result observations.
 
-Let us consider a function $f$ which is deterministic, but is fed with a stochastic variable $X$ and maps this to another stochastic variable $Y$:
+Let us consider a function $f$, as in \cref{eq:monte-carlo-function}, which is itself deterministic, but takes a stochastic variable $X$ as input and therefore outputs another stochastic variable $Y$.
 \begin{equation}
     Y = f(X)
     \label{eq:monte-carlo-function}

@@ -3,7 +3,7 @@
 Sintering processes are by their nature non-equilibrium thermodynamical processes which drive the system state towards an equilibrium state.
 The major problem of non-equilibrium thermodynamics is that the common thermodynamical quantities temperature and entropy are only defined in equilibrium state.
 Therefore, the second law of thermodynamics (entropy must always increase) only holds for transitions between equilibrium states and may thus not describe the pathway between these states, but only the whole step as one.
-To circumvent this problem, several approaches have been developed, from which the \gls{CIT} (sometimes referred to as \gls{TIP}) and the thermodynamics of \gls{IVS} shall be discussed here in particular.
+To circumvent this problem, several approaches have been developed, from which the \gls{CIT} (sometimes referred to as \gls{TIP}) and the thermodynamics of \gls[postunset=true]{IVS} shall be discussed here in particular.
 The following elaborations are based on textbooks of \textcite{deGroot1962, Maugin1999, Lebon2008} and a review article of \textcite{Maugin1994}.
 
 \subsection{Classical Theory of Irreversible Thermodynamics}
@@ -26,20 +26,20 @@ Temperature changes during the process are external changes to the system and no
 Conventional sintering processes are conducted under constant atmospheric pressure, whereas in pressure-assisted sintering the applied pressure is usually kept constant by control.
 
 The thermodynamic forces driving the evolution of the system are given as the partial derivatives of Gibbs' energy with respect to the state.
-The gradient of the Gibbs' energy equals zero, when the system has reached equilibrium.
+The gradient of the Gibbs' energy equals zero as denoted by \cref{eq:cit-gibbs-equilibrium}, when the system has reached equilibrium.
 \begin{equation}
     \frac{\partial \GibbsEnergy}{\partial \Vect\ExternalStateVariable} = 0
     \label{eq:cit-gibbs-equilibrium}
 \end{equation}
 
 Changes in the state variables are obtained by the occurrence of respective fluxes $\Vect\Flux$.
-The dissipation $\Dissipation$ during evolution of the system is proportional to the product of the fluxes and their respective thermodynamic forces.
+The dissipation $\Dissipation$ during evolution of the system is proportional to the product of the fluxes and their respective thermodynamic forces as given in \cref{eq:cit-dissipation}.
 \begin{equation}
     \Dissipation \sim \frac{\partial \GibbsEnergy}{\partial \Vect\ExternalStateVariable} \cdot \Vect\Flux \ge 0
     \label{eq:cit-dissipation}
 \end{equation}
 
-A usual (and for many processes valid) assumption is linearity between the fluxes $\Vect\Flux$ and the thermodynamic driving forces $\frac{\partial \GibbsEnergy}{\partial \Vect\ExternalStateVariable}$ with a coefficient $\Vect{C}$.
+A usual (and for many processes valid) assumption is linearity between the fluxes $\Vect\Flux$ and the thermodynamic driving forces $\frac{\partial \GibbsEnergy}{\partial \Vect\ExternalStateVariable}$ with a coefficient $\Vect{C}$ as in \cref{eq:cit-flux-force-relationship}.
 This corresponds to the empirical description of diffusion by Fick's law (\cref{eq:fick-first}).
 \begin{equation}
     \Vect\Flux = \Vect{C} \cdot \frac{\partial \GibbsEnergy}{\partial \Vect\ExternalStateVariable}
@@ -56,7 +56,7 @@ The approach was mainly developed by authors like \textcite{Bataille1979}, \text
 
 The formalism axiomatically associates a local accompanying equilibrium state dependent on the local non-equilibrium \glspl{EVS} and the \glspl{IVS} to a volume cell at a respective point in time.
 This is an extension of the former assumption of local equilibrium in \gls{CIT}.
-The local change in Gibbs' energy is then given by:
+The local change in Gibbs' energy is then given by \cref{eq:ivs-local-las-gibbs-derivative}.
 \begin{equation}
     \Deriv\GibbsEnergy = \frac{\partial \GibbsEnergy}{\partial \Vect\ExternalStateVariable} \cdot \Deriv\Vect\ExternalStateVariable + \frac{\partial \GibbsEnergy}{\partial \Vect\InternalStateVariable} \cdot \Deriv\Vect\InternalStateVariable
     \label{eq:ivs-local-las-gibbs-derivative}

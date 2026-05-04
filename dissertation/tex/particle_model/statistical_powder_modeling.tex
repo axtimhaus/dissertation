@@ -37,48 +37,43 @@ As each particle is unique, direct representation by an actual contour is not pr
 The current approach will use a shape function which includes ovality and first-order waves.
 Multiple variants of this approach with varying depth of detail are imaginable and can be used instead of the one derived here.
 
-The shape function will follow the general form
+The shape function will follow the general form as in \cref{eq:shape-function-general-form}
+with $\Radius$ as the local particle radius, $\Angle$ as the angle coordinate and the $f_i$ as additional terms adding a specific shape feature.
+If there aren't any $f_i$, the model will fall back to the usual circular shape with constant radius $\Radius_0$ as the empty product has the value 1.
+The $f_i$ will generally include some unknown parameters which can be used to characterize the particle shape further.
+If the $f_i$ have a notion of neutrality or deactivation, the value of $f_i$ must be 1 in these cases.
 \begin{equation}
     \Radius\left( \Angle \right) = \Radius_0 \cdot \left[ \prod_i \ShapeFunction_i\left( \Angle \right) \right]
     \label{eq:shape-function-general-form}
 \end{equation}
-with $\Radius$ as the local particle radius, $\Angle$ as the angle coordinate and the $f_i$ as additional terms adding a specific shape feature.
-If there aren't any $f_i$, the model will fall back to the usual circular shape with constant radius $\Radius_0$ as the empty product has the value 1.
-The $f_i$ will generally include some unknown parameters which can be used to characterize the particle shape later on.
-If the $f_i$ have a notion of neutrality or deactivation, the value of $f_i$ must be 1 in these cases.
 
-For the regard of ovality, we define a parameter $\Ovality \in [ 1, \infty ) $, which shall follow the common sense that
+For the regard of ovality, we define a parameter $\Ovality \in [ 1, \infty ) $, which shall follow the common sense of \cref{eq:ovality-o},
+where $a$ and $b$ are the largest respectively the smallest measure of the particle.
+We can also understand $a$ and $b$ as the largest and smallest radii of an ellipse.
+In relation to the base radius $\Radius_0$ we can calculate them using \cref{eq:ellipse-a-b-by-ovality}, for which \cref{eq:ovality-o} holds.
 \begin{equation}
     \Ovality = \frac{a}{b}
     \label{eq:ovality-o}
 \end{equation}
-when $a$ and $b$ are the largest respectively the smallest measure of the particle.
-We can also understand $a$ and $b$ as the largest and smallest radii of an ellipse.
-In relation to the base radius $\Radius_0$ we can calculate them using
 \begin{align}
     a &= \Radius_0 \cdot \sqrt{\Ovality} \\
     b &= \Radius_0 / \sqrt{\Ovality}
     \label{eq:ellipse-a-b-by-ovality}
 \end{align}
-for which \cref{eq:ovality-o} holds.
-From the polar form of the ellipse equation
+
+From the polar form of the ellipse equation (\cref{eq:ellipse-polar}) we obtain, when inserting \cref{eq:ellipse-a-b-by-ovality}, the equation for the shape function of ovality $f_{\Ovality}$ as in \cref{eq:f-ovality}.
+\Cref{fig:model_development/particle_shape_function_o} displays the influence of the ovality parameter on the resulting shape.
 \begin{equation}
     \Radius \left( \Angle \right) = \frac{ab}{\sqrt{\left( a \sin \Angle \right)^2 + \left( b \cos \Angle \right)^2  }}
     \label{eq:ellipse-polar}
 \end{equation}
-we obtain, when inserting \cref{eq:ellipse-a-b-by-ovality}, the equation for the shape function of ovality $f_{\Ovality}$ as
 \begin{equation}
     \ShapeFunction_{\Ovality} = \sqrt{\frac{\Ovality}{\Ovality^2 \sin^2 \Angle + \cos^2 \Angle}}
     \label{eq:f-ovality}
 \end{equation}
-\Cref{fig:model_development/particle_shape_function_o} displays the influence of the ovality parameter on the resulting shape.
 
 First order waves shall be modeled using a cosine function.
-With a relative height of the wave peaks $\WaveHeight_1 \in [0, 1)$, a count of waves $\WaveCount_1 \in [1 \To)$ and a relative phase shift $\WaveShift_1 \in [0, 0.5)$ we define
-\begin{equation}
-    \ShapeFunction_1 = \WaveHeight_1 \cdot \cos \left( \WaveCount_1\Angle + 2\PI \WaveShift_1\right) + 1
-    \label{eq:f-first-order-waves}
-\end{equation}
+We define the shape function as in \cref{eq:f-first-order-waves} with a relative height of the wave peaks $\WaveHeight_1 \in [0, 1)$, a count of waves $\WaveCount_1 \in [1 \To)$ and a relative phase shift $\WaveShift_1 \in [0, 0.5)$.
 As can be seen in \cref{fig:model_development/particle_shape_function_n,fig:model_development/particle_shape_function_h},
 the only way to deactivate this feature is to set $\WaveHeight_1=0$, since $\WaveCount_1=0$ is not allowed as it would introduce an ambiguity by adding a constant contribution to the radius depending on $\WaveHeight_1$ and $\WaveShift_1$.
 Note especially the influence of the phase shift in \cref{fig:model_development/particle_shape_function_p}.
@@ -86,6 +81,10 @@ The phase shift enables moving the waves relative to the ovality but has a major
 Due to its nature as an argument to the cosine function, its effect is periodic with a period of \num{1}.
 If also taking particle rotation in consideration, values $\WaveShift_1 \ge \num{0.5}$ are ambiguous, too, as the same effect can be achieved by using $\WaveShift_1 - \num{0.5}$ and rotating the whole particle by \ang{180}.
 So the allowed value range given above must be ensured to avoid ambiguity.
+\begin{equation}
+    \ShapeFunction_1 = \WaveHeight_1 \cdot \cos \left( \WaveCount_1\Angle + 2\PI \WaveShift_1\right) + 1
+    \label{eq:f-first-order-waves}
+\end{equation}
 
 \subsection{Modeling of Powders and Powder Mixtures}\label{subsec:powders-powder-mixtures}
 
@@ -102,11 +101,11 @@ This mixing process is here modeled by categorical distributions in a second lay
 Usually, practical powder mixtures are given by volume fractions.
 However, the procedure here needs particle count fractions, as in each sampling process a fixed number of particles is generated.
 
-Conversion between volume fraction $\MixtureFraction_{\Volume}$ and count fraction $\MixtureFraction_{\ParticleCount}$ of a powder fraction $i$ is done using the equivalent volume of a particle, which is only dependent on $\Radius_0$, since the shape functions above preserve the volume.
+Conversion between volume fraction $\MixtureFraction_{\Volume}$ and count fraction $\MixtureFraction_{\ParticleCount}$ of a powder fraction $i$ is done as in \cref{eq:equivalent-particle-volume} using the equivalent volume of a particle, which is only dependent on $\Radius_0$, since the shape functions above preserve the volume.
+This assumes that all powder fractions have the same packing density.
+The influence of varying particle shape on the packing density is neglected here, as its estimation from theory is complicated.
+This currently unsolved problem is out of the scope of this work.
 \begin{equation}
     \MixtureFraction_{\ParticleCount i} = \frac{\MixtureFraction_{\Volume i}}{\PI \Radius_{0 i} ^ 2}
     \label{eq:equivalent-particle-volume}
 \end{equation}
-This assumes that all powder fractions have the same packing density.
-The influence of varying particle shape on the packing density is neglected here, as its estimation from theory is complicated.
-This currently unsolved problem is out of the scope of this work.
