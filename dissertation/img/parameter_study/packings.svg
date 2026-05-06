@@ -1,295 +1,324 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
-   width="160mm"
-   height="60mm"
-   viewBox="0 0 160 60"
-   version="1.1"
-   id="svg1"
-   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
-   sodipodi:docname="packings.svg"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:cc="http://creativecommons.org/ns#">
+    width="160mm"
+    height="60mm"
+    viewBox="0 0 160 60"
+    version="1.1"
+    id="svg1"
+    inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+    sodipodi:docname="packings.svg"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:cc="http://creativecommons.org/ns#"
+>
   <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:document-units="mm"
-     showgrid="true"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="68.766135"
-     inkscape:cy="226.27417"
-     inkscape:window-width="3840"
-     inkscape:window-height="2091"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1">
+        id="namedview1"
+        pagecolor="#ffffff"
+        bordercolor="#000000"
+        borderopacity="0.25"
+        inkscape:showpageshadow="2"
+        inkscape:pageopacity="0.0"
+        inkscape:pagecheckerboard="0"
+        inkscape:deskcolor="#d1d1d1"
+        inkscape:document-units="mm"
+        showgrid="true"
+        inkscape:zoom="2.8284271"
+        inkscape:cx="68.766135"
+        inkscape:cy="226.27417"
+        inkscape:window-width="3840"
+        inkscape:window-height="2091"
+        inkscape:window-x="0"
+        inkscape:window-y="0"
+        inkscape:window-maximized="1"
+        inkscape:current-layer="layer1"
+    >
     <inkscape:grid
-       id="grid1"
-       units="mm"
-       originx="0"
-       originy="0"
-       spacingx="0.99999997"
-       spacingy="0.99999997"
-       empcolor="#0099e5"
-       empopacity="0.30196078"
-       color="#0099e5"
-       opacity="0.14901961"
-       empspacing="5"
-       dotted="false"
-       gridanglex="30"
-       gridanglez="30"
-       visible="true" />
+            id="grid1"
+            units="mm"
+            originx="0"
+            originy="0"
+            spacingx="0.99999997"
+            spacingy="0.99999997"
+            empcolor="#0099e5"
+            empopacity="0.30196078"
+            color="#0099e5"
+            opacity="0.14901961"
+            empspacing="5"
+            dotted="false"
+            gridanglex="30"
+            gridanglez="30"
+            visible="true"
+        />
     <sodipodi:guide
-       position="0,120"
-       orientation="0,604.72441"
-       id="guide4"
-       inkscape:locked="false" />
+            position="0,120"
+            orientation="0,604.72441"
+            id="guide4"
+            inkscape:locked="false"
+        />
     <sodipodi:guide
-       position="160,0"
-       orientation="0,-604.72441"
-       id="guide6"
-       inkscape:locked="false" />
+            position="160,0"
+            orientation="0,-604.72441"
+            id="guide6"
+            inkscape:locked="false"
+        />
     <sodipodi:guide
-       position="0,0"
-       orientation="-453.54331,0"
-       id="guide7"
-       inkscape:locked="false" />
+            position="0,0"
+            orientation="-453.54331,0"
+            id="guide7"
+            inkscape:locked="false"
+        />
     <sodipodi:guide
-       position="131.44664,30"
-       orientation="196.61417,0"
-       id="guide62"
-       inkscape:locked="false" />
+            position="131.44664,30"
+            orientation="196.61417,0"
+            id="guide62"
+            inkscape:locked="false"
+        />
     <sodipodi:guide
-       position="77.455152,30"
-       orientation="168.61417,0"
-       id="guide63"
-       inkscape:locked="false" />
+            position="77.455152,30"
+            orientation="168.61417,0"
+            id="guide63"
+            inkscape:locked="false"
+        />
     <sodipodi:guide
-       position="23.463652,28.794822"
-       orientation="177.55917,0"
-       id="guide64"
-       inkscape:locked="false" />
+            position="23.463652,28.794822"
+            orientation="177.55917,0"
+            id="guide64"
+            inkscape:locked="false"
+        />
   </sodipodi:namedview>
-  <defs
-     id="defs1" />
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1">
+  <defs id="defs1" />
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1">
     <g
-       id="g59"
-       transform="matrix(0.94988951,0,0,0.94954358,-61.002782,4.1637291)"
-       style="stroke-width:1.05295">
+            id="g59"
+            transform="matrix(0.94988951,0,0,0.94954358,-61.002782,4.1637291)"
+            style="stroke-width:1.05295"
+        >
       <ellipse
-         style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
-         id="path1"
-         cx="115"
-         cy="34.999996"
-         rx="8.9977942"
-         ry="8.9955893" />
+                style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
+                id="path1"
+                cx="115"
+                cy="34.999996"
+                rx="8.9977942"
+                ry="8.9955893"
+            />
       <ellipse
-         style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
-         id="circle1"
-         cx="132.99559"
-         cy="34.999996"
-         rx="8.9977942"
-         ry="8.9955893" />
+                style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
+                id="circle1"
+                cx="132.99559"
+                cy="34.999996"
+                rx="8.9977942"
+                ry="8.9955893"
+            />
       <ellipse
-         style="fill:#cccccc;stroke:#6a5944;stroke-width:0.371456;stroke-dasharray:none"
-         id="path1-3"
-         cx="123.9978"
-         cy="19.419176"
-         rx="8.9977942"
-         ry="8.9955893" />
+                style="fill:#cccccc;stroke:#6a5944;stroke-width:0.371456;stroke-dasharray:none"
+                id="path1-3"
+                cx="123.9978"
+                cy="19.419176"
+                rx="8.9977942"
+                ry="8.9955893"
+            />
       <path
-         id="path4"
-         style="fill:none;stroke:#6d0f0e;stroke-width:0.371456;stroke-dasharray:none"
-         d="m 123.99779,19.419184 8.9978,15.580817 H 115 Z"
-         sodipodi:nodetypes="cccc" />
+                id="path4"
+                style="fill:none;stroke:#6d0f0e;stroke-width:0.371456;stroke-dasharray:none"
+                d="m 123.99779,19.419184 8.9978,15.580817 H 115 Z"
+                sodipodi:nodetypes="cccc"
+            />
     </g>
     <g
-       id="g59-3"
-       transform="matrix(0.94988951,0,0,0.94954358,-147.57012,3.2099991)"
-       style="stroke-width:1.05295">
+            id="g59-3"
+            transform="matrix(0.94988951,0,0,0.94954358,-147.57012,3.2099991)"
+            style="stroke-width:1.05295"
+        >
       <ellipse
-         style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
-         id="path1-5"
-         cx="164.53856"
-         cy="28.213995"
-         rx="8.9977942"
-         ry="8.9955893" />
+                style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
+                id="path1-5"
+                cx="164.53856"
+                cy="28.213995"
+                rx="8.9977942"
+                ry="8.9955893"
+            />
       <ellipse
-         style="fill:#cccccc;stroke:#6a5944;stroke-width:0.371456;stroke-dasharray:none"
-         id="circle1-6"
-         cx="182.53415"
-         cy="28.213995"
-         rx="8.9977942"
-         ry="8.9955893" />
+                style="fill:#cccccc;stroke:#6a5944;stroke-width:0.371456;stroke-dasharray:none"
+                id="circle1-6"
+                cx="182.53415"
+                cy="28.213995"
+                rx="8.9977942"
+                ry="8.9955893"
+            />
       <path
-         id="path4-9"
-         style="fill:none;stroke:#6d0f0e;stroke-width:0.371456;stroke-dasharray:none"
-         d="M 182.53415,28.213999 H 164.53856 Z"
-         sodipodi:nodetypes="ccc" />
+                id="path4-9"
+                style="fill:none;stroke:#6d0f0e;stroke-width:0.371456;stroke-dasharray:none"
+                d="M 182.53415,28.213999 H 164.53856 Z"
+                sodipodi:nodetypes="ccc"
+            />
     </g>
     <g
-       id="g58"
-       transform="matrix(0.94988951,0,0,0.94954358,61.998475,-55.458498)"
-       style="stroke-width:1.05295">
+            id="g58"
+            transform="matrix(0.94988951,0,0,0.94954358,61.998475,-55.458498)"
+            style="stroke-width:1.05295"
+        >
       <ellipse
-         style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
-         id="circle4"
-         cx="42.995583"
-         cy="98.995583"
-         rx="8.9977942"
-         ry="8.9955893" />
+                style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
+                id="circle4"
+                cx="42.995583"
+                cy="98.995583"
+                rx="8.9977942"
+                ry="8.9955893"
+            />
       <ellipse
-         style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
-         id="path1-1"
-         cx="25"
-         cy="98.995583"
-         rx="8.9977942"
-         ry="8.9955893" />
+                style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
+                id="path1-1"
+                cx="25"
+                cy="98.995583"
+                rx="8.9977942"
+                ry="8.9955893"
+            />
       <ellipse
-         style="fill:#cccccc;stroke:#6a5944;stroke-width:0.371456;stroke-dasharray:none"
-         id="circle1-2"
-         cx="42.995583"
-         cy="81.004402"
-         rx="8.9977942"
-         ry="8.9955893" />
+                style="fill:#cccccc;stroke:#6a5944;stroke-width:0.371456;stroke-dasharray:none"
+                id="circle1-2"
+                cx="42.995583"
+                cy="81.004402"
+                rx="8.9977942"
+                ry="8.9955893"
+            />
       <ellipse
-         style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
-         id="path1-3-7"
-         cx="25"
-         cy="81.004402"
-         rx="8.9977942"
-         ry="8.9955893" />
+                style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
+                id="path1-3-7"
+                cx="25"
+                cy="81.004402"
+                rx="8.9977942"
+                ry="8.9955893"
+            />
       <path
-         id="path5"
-         style="fill:none;stroke:#6d0f0e;stroke-width:0.371456;stroke-dasharray:none"
-         d="m 25.000002,81.004404 h 17.99559 v 17.991179 h -17.99559 z"
-         sodipodi:nodetypes="ccccc" />
+                id="path5"
+                style="fill:none;stroke:#6d0f0e;stroke-width:0.371456;stroke-dasharray:none"
+                d="m 25.000002,81.004404 h 17.99559 v 17.991179 h -17.99559 z"
+                sodipodi:nodetypes="ccccc"
+            />
     </g>
     <g
-       id="g57"
-       transform="matrix(0.94988951,0,0,0.94954358,21.33868,-54.890929)"
-       style="stroke-width:1.05295">
+            id="g57"
+            transform="matrix(0.94988951,0,0,0.94954358,21.33868,-54.890929)"
+            style="stroke-width:1.05295"
+        >
       <ellipse
-         style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
-         id="ellipse23"
-         cx="107.29482"
-         cy="89.402122"
-         rx="8.9977942"
-         ry="8.9955893" />
+                style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
+                id="ellipse23"
+                cx="107.29482"
+                cy="89.402122"
+                rx="8.9977942"
+                ry="8.9955893"
+            />
       <ellipse
-         style="fill:#cccccc;stroke:#6a5944;stroke-width:0.371456;stroke-dasharray:none"
-         id="ellipse24"
-         cx="136.79274"
-         cy="89.402122"
-         rx="8.9977942"
-         ry="8.9955893" />
+                style="fill:#cccccc;stroke:#6a5944;stroke-width:0.371456;stroke-dasharray:none"
+                id="ellipse24"
+                cx="136.79274"
+                cy="89.402122"
+                rx="8.9977942"
+                ry="8.9955893"
+            />
       <ellipse
-         style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
-         id="ellipse25"
-         cx="122.04375"
-         cy="79.083015"
-         rx="8.9977942"
-         ry="8.9955893" />
+                style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
+                id="ellipse25"
+                cx="122.04375"
+                cy="79.083015"
+                rx="8.9977942"
+                ry="8.9955893"
+            />
       <ellipse
-         style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
-         id="ellipse36"
-         cx="122.04375"
-         cy="-99.738037"
-         rx="8.9977942"
-         ry="8.9955893"
-         transform="scale(1,-1)" />
+                style="fill:#cccccc;stroke:#0069b4;stroke-width:0.371456;stroke-dasharray:none"
+                id="ellipse36"
+                cx="122.04375"
+                cy="-99.738037"
+                rx="8.9977942"
+                ry="8.9955893"
+                transform="scale(1,-1)"
+            />
       <path
-         id="path5-3"
-         style="fill:none;stroke:#6d0f0e;stroke-width:0.371456;stroke-dasharray:none"
-         d="M 122.04375,79.083015 136.79274,89.402122 122.04375,99.738037 107.29482,89.402122 Z"
-         sodipodi:nodetypes="ccccc" />
+                id="path5-3"
+                style="fill:none;stroke:#6d0f0e;stroke-width:0.371456;stroke-dasharray:none"
+                d="M 122.04375,79.083015 136.79274,89.402122 122.04375,99.738037 107.29482,89.402122 Z"
+                sodipodi:nodetypes="ccccc"
+            />
     </g>
     <text
-       xml:space="preserve"
-       style="font-size:4.23333px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';text-align:center;text-anchor:middle;vector-effect:non-scaling-stroke;fill:#000000;stroke-width:0.264583;-inkscape-stroke:hairline;stop-color:#000000"
-       x="56.819664"
-       y="54.999996"
-       id="text60"><tspan
-         sodipodi:role="line"
-         id="tspan60"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.264583"
-         x="56.819664"
-         y="54.999996">Triangle</tspan></text>
+            xml:space="preserve"
+            style="font-size:4.23333px;font-family:'TeX Gyre Heros';-inkscape-font-specification:'TeX Gyre Heros, Normal';text-align:center;text-anchor:middle;vector-effect:non-scaling-stroke;fill:#000000;stroke-width:0.264583;-inkscape-stroke:hairline;stop-color:#000000"
+            x="56.819664"
+            y="54.999996"
+            id="text60"
+        ><tspan
+                sodipodi:role="line"
+                id="tspan60"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.264583"
+                x="56.819664"
+                y="54.999996"
+            >Triangle</tspan></text>
     <text
-       xml:space="preserve"
-       style="font-size:4.23333px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';text-align:center;text-anchor:middle;vector-effect:non-scaling-stroke;fill:#000000;stroke-width:0.264583;-inkscape-stroke:hairline;stop-color:#000000"
-       x="94.285385"
-       y="54.999996"
-       id="text60-5"><tspan
-         sodipodi:role="line"
-         id="tspan60-0"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.264583"
-         x="94.285385"
-         y="54.999996">Square</tspan></text>
+            xml:space="preserve"
+            style="font-size:4.23333px;font-family:'TeX Gyre Heros';-inkscape-font-specification:'TeX Gyre Heros, Normal';text-align:center;text-anchor:middle;vector-effect:non-scaling-stroke;fill:#000000;stroke-width:0.264583;-inkscape-stroke:hairline;stop-color:#000000"
+            x="94.285385"
+            y="54.999996"
+            id="text60-5"
+        ><tspan
+                sodipodi:role="line"
+                id="tspan60-0"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.264583"
+                x="94.285385"
+                y="54.999996"
+            >Square</tspan></text>
     <text
-       xml:space="preserve"
-       style="font-size:4.23333px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';text-align:center;text-anchor:middle;vector-effect:non-scaling-stroke;fill:#000000;stroke-width:0.264583;-inkscape-stroke:hairline;stop-color:#000000"
-       x="137.18204"
-       y="54.999996"
-       id="text60-7"><tspan
-         sodipodi:role="line"
-         id="tspan60-2"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.264583"
-         x="137.18204"
-         y="54.999996">Rhombus</tspan></text>
+            xml:space="preserve"
+            style="font-size:4.23333px;font-family:'TeX Gyre Heros';-inkscape-font-specification:'TeX Gyre Heros, Normal';text-align:center;text-anchor:middle;vector-effect:non-scaling-stroke;fill:#000000;stroke-width:0.264583;-inkscape-stroke:hairline;stop-color:#000000"
+            x="137.18204"
+            y="54.999996"
+            id="text60-7"
+        ><tspan
+                sodipodi:role="line"
+                id="tspan60-2"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.264583"
+                x="137.18204"
+                y="54.999996"
+            >Rhombus</tspan></text>
     <text
-       xml:space="preserve"
-       style="font-size:4.23333px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';text-align:center;text-anchor:middle;vector-effect:non-scaling-stroke;fill:#000000;stroke-width:0.264583;-inkscape-stroke:hairline;stop-color:#000000"
-       x="17.078007"
-       y="54.999996"
-       id="text1"><tspan
-         sodipodi:role="line"
-         id="tspan1"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.264583"
-         x="17.078007"
-         y="54.999996">Pair</tspan><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.264583"
-         x="17.078007"
-         y="60.330269"
-         id="tspan2" /></text>
+            xml:space="preserve"
+            style="font-size:4.23333px;font-family:'TeX Gyre Heros';-inkscape-font-specification:'TeX Gyre Heros, Normal';text-align:center;text-anchor:middle;vector-effect:non-scaling-stroke;fill:#000000;stroke-width:0.264583;-inkscape-stroke:hairline;stop-color:#000000"
+            x="17.078007"
+            y="54.999996"
+            id="text1"
+        ><tspan
+                sodipodi:role="line"
+                id="tspan1"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.264583"
+                x="17.078007"
+                y="54.999996"
+            >Pair</tspan><tspan
+                sodipodi:role="line"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.264583"
+                x="17.078007"
+                y="60.330269"
+                id="tspan2"
+            /></text>
   </g>
-  <metadata
-     id="metadata1">
+  <metadata id="metadata1">
     <rdf:RDF>
-      <cc:Work
-         rdf:about="">
+      <cc:Work rdf:about="">
         <cc:license
-           rdf:resource="http://creativecommons.org/licenses/by/4.0/" />
+                    rdf:resource="http://creativecommons.org/licenses/by/4.0/"
+                />
       </cc:Work>
-      <cc:License
-         rdf:about="http://creativecommons.org/licenses/by/4.0/">
+      <cc:License rdf:about="http://creativecommons.org/licenses/by/4.0/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires rdf:resource="http://creativecommons.org/ns#Attribution" />
         <cc:permits
-           rdf:resource="http://creativecommons.org/ns#Reproduction" />
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#Distribution" />
-        <cc:requires
-           rdf:resource="http://creativecommons.org/ns#Notice" />
-        <cc:requires
-           rdf:resource="http://creativecommons.org/ns#Attribution" />
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+                    rdf:resource="http://creativecommons.org/ns#DerivativeWorks"
+                />
       </cc:License>
     </rdf:RDF>
   </metadata>
