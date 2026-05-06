@@ -55,7 +55,7 @@ With a certain normal shift ${\Step\Shift}_\Normal$, the surface lengths after s
 \begin{equation}
     \SurfaceVectorAngle_{\Normal} = \PI - \frac{1}{2} \left(\SurfaceRadiusAngle_{\Upper} + \SurfaceRadiusAngle_{\Lower} \right)
     \label{eq:delta-surface-normal}
-\end{equation}
+\end{equation}\vspace{-2ex}
 \begin{subequations}
     \label[pleq]{eq:surface-distance-shifted-normal}
     \label{eq:surface-distance-shifted-normal-sg}
@@ -100,11 +100,7 @@ Note especially the signs in front of the cosine terms.
 \begin{equation}
     \SurfaceVectorAngle_{\Tangential} = \SurfaceVectorAngle_{\Normal} - \frac{\PI}{2}
     \label{eq:delta-surface-tangential}
-\end{equation}
-\begin{equation}
-    \Step\GibbsEnergy_{\Tangential} = \left( \SurfaceDistance_{\Upper}' - \SurfaceDistance_{\Upper} \right) \InterfaceEnergy_{\Upper} +  \left(\SurfaceDistance_{\Lower}' - \SurfaceDistance_{\Lower} \right) \InterfaceEnergy_{\Lower}
-    \label{eq:gibbs-diff-surface-tangential}
-\end{equation}
+\end{equation}\vspace{-2ex}
 \begin{subequations}
     \label[pleq]{eq:surface-distance-shifted-tangential}
     \begin{align}
@@ -112,6 +108,10 @@ Note especially the signs in front of the cosine terms.
         \SurfaceDistance_{\Lower}' & = \sqrt{{\SurfaceDistance}_{\Lower}^2 + {\Step\Shift}_{\Tangential}^2 + 2 {\SurfaceDistance}_{\Lower} {\Step\Shift}_{\Tangential} \cos \SurfaceVectorAngle_{\Tangential}} \label{eq:surface-distance-shifted-tangential-lower}
     \end{align}
 \end{subequations}
+\begin{equation}
+    \Step\GibbsEnergy_{\Tangential} = \left( \SurfaceDistance_{\Upper}' - \SurfaceDistance_{\Upper} \right) \InterfaceEnergy_{\Upper} +  \left(\SurfaceDistance_{\Lower}' - \SurfaceDistance_{\Lower} \right) \InterfaceEnergy_{\Lower}
+    \label{eq:gibbs-diff-surface-tangential}
+\end{equation}
 
 \Cref{fig:model_development/plot_tangential_potential} shows the change in Gibbs energy due to tangential shifting with different values of $\InterfaceEnergy$.
 The slope and monotonicity of these curves is here dependent on the \emph{difference} of ${\InterfaceEnergy}_{\Upper}$ and ${\InterfaceEnergy}_{\Lower}$.
@@ -160,7 +160,7 @@ The respective partial derivatives are slightly modified with the distinct angle
     \SurfaceVectorAngle_{\Normal\Upper} = \frac32 \PI - \SurfaceRadiusAngle_{\Upper} - \SurfaceRadiusAngle_{\Lower} \qquad &\text{and} \qquad \SurfaceVectorAngle_{\Normal\Lower} = \frac\PI2 \\
     \SurfaceVectorAngle_{\Tangential\Upper} = \PI - \SurfaceRadiusAngle_{\Upper} - \SurfaceRadiusAngle_{\Lower} \qquad &\text{and} \qquad \SurfaceVectorAngle_{\Tangential\Lower} = 0
     \label{eq:shift-neck-angles}
-\end{align}
+\end{align}\vspace{-3ex}
 \begin{align}
     \frac{\partial \GibbsEnergy}{\partial {\Shift}_{\Normal}} &= -\left( {\InterfaceEnergy}_{\Upper} \cos \SurfaceVectorAngle_{\Normal\Upper} - {\InterfaceEnergy}_{\Lower} \cos \SurfaceVectorAngle_{\Normal\Lower} \right)
     \label{eq:gibbs-partial-neck-normal} \\

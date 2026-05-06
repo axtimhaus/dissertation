@@ -5,9 +5,10 @@
     % DIV=14,
     listof=totoc,
     bibliography=totoc,
-    % twoside,
-    % open=right,
-    % BCOR=5mm
+    twoside,
+    open=right,
+    BCOR=5mm,
+    approved
 ]{tubaf-thesis}
 \publishers{}
 
