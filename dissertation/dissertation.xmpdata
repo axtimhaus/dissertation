@@ -1,0 +1,27 @@
+\Title{Microscopic Simulation of Solid State Sintering Regarding Irregularly Shaped Powder Particles}
+
+\Author{Max Weiner}
+
+\Copyright{Copyright \copyright\ 2026 Max Weiner}
+
+\Keywords{sintering\sep
+    modeling\sep
+    simulation\sep
+    thermodynamics\sep
+    thermodynamic extremal principle\sep
+    tep\sep
+    internal variables of state\sep
+    particle morphology\sep
+    monte-carlo-method\sep
+    shrinkage\sep
+    neck size\sep}
+
+\Subject{A novel model for the sintering of two or a couple of particles using sharp interfaces was developed and implemented.
+    The application of the thermodynamic extremal principle allows a concise and extendable formulation.
+    The numerical behavior of the model was investigated and evaluated under application of remeshing routines.
+    Parameter studies were conducted on classical dimensionless parameters of two-particle models, as well as asymmetric material and geometry pairing, which were compared with literature knowledge and explained.
+    Contacts between multiple particles were investigated for the influence of pore closure, even in the presence of inert particles.
+    The shape characteristics of powder particles were described using a statistical shape function and used to generate powder particles as input for the simulation.
+    The average behavior of the randomly generated particles was used to describe the behavior of the powder, and differences from classical averaging methods were discussed.}
+
+\Org{Technische Universität Bergakademie Freiberg}

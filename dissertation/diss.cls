@@ -39,6 +39,8 @@
 \usepackage{symbols}
 \DeclareMathOperator{\sign}{sign}
 
+\usepackage[a-2b]{pdfx}
+
 \usepackage[hidelinks]{hyperref}
 \usepackage[noabbrev]{cleveref}
 \crefformat{pleq}{equations~(#2#1#3)}
