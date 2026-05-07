@@ -50,11 +50,11 @@ The solution on free surfaces is easily obtained with high precision by first es
 Next, the fluxes are obtained using Fick's first law (\cref{eq:fick-first}).
 By balancing the fluxes and dividing by the volume gradient, the normal displacement of a node is obtained as in \cref{eq:estimate-normal-displacement}.
 \begin{equation}
-    \Estimated{\Diff\ChemicalPotential} = \frac{\partial\GibbsEnergy}{\partial\Step_{\Normal}} \cdot \frac{2\MolarVolume}{\SurfaceDistance_{\Upper} + \SurfaceDistance_{\Lower}}
+    \Diff\Estimated{\ChemicalPotential} = \frac{\partial\GibbsEnergy}{\partial\Step_{\Normal}} \cdot \frac{2\MolarVolume}{\SurfaceDistance_{\Upper} + \SurfaceDistance_{\Lower}}
     \label{eq:chemical-potential-by-gibbs-gradient}
 \end{equation}
 \begin{equation}
-    \Estimated{\Step\Shift_{\Normal}} = \left( \Flux_{\Upper} - \Flux_{\Lower} \right) \left( \frac{\partial\Volume}{\partial\Shift_{\Normal}} \right)^{-1}
+    \Step\Estimated{\Shift}_{\Normal} = \left( \Flux_{\Upper} - \Flux_{\Lower} \right) \left( \frac{\partial\Volume}{\partial\Shift_{\Normal}} \right)^{-1}
     \label{eq:estimate-normal-displacement}
 \end{equation}
 
@@ -69,15 +69,15 @@ Then, using the flux balance, the tangential displacement of the neck node is ca
 with $\Flux_{\Surface}$ as the estimated flux to the adjacent surface node calculated as above and $i$ as the iteration index.
 The estimated total dissipation on the neck node is then given by \cref{eq:estimated-neck-dissipation}.
 \begin{equation}
-    \Estimated{\Step\Shift_{\Tangential i}} =
-    \left( \Estimated{\Flux_i} - \Flux_{\Surface} - \frac{\partial\Volume}{\partial\Shift_{\Normal}} \Estimated{\Step\Shift_{\Normal i}} \right)
+    \Step\Estimated{\Shift}_{\Tangential i} =
+    \left( \Estimated{\Flux}_i - \Flux_{\Surface} - \frac{\partial\Volume}{\partial\Shift_{\Normal}} \Step\Estimated{\Shift}_{\Normal i} \right)
     \left( \frac{\partial\Volume}{\partial\Shift_{\Tangential}} \right)^{-1}
     \label{eq:estimate-neck-tangential-displacement}
 \end{equation}
 \begin{equation}
-    \Estimated{\Dissipation_i}
-    = \frac{\partial\GibbsEnergy}{\partial\Shift_{\Normal}} \Estimated{\Step\Shift_{\Normal i}}
-    + \frac{\partial\GibbsEnergy}{\partial\Shift_{\Tangential}} \Estimated{\Step\Shift_{\Tangential i}}
+    \Estimated{\Dissipation}_i
+    = \frac{\partial\GibbsEnergy}{\partial\Shift_{\Normal}} \Step\Estimated{\Shift}_{\Normal i}
+    + \frac{\partial\GibbsEnergy}{\partial\Shift_{\Tangential}} \Step\Estimated{\Shift}_{\Tangential i}
     \label{eq:estimated-neck-dissipation}
 \end{equation}
 
@@ -85,12 +85,12 @@ Using the form of the dissipation function in \cref{eq:dissipation-function-node
 The sign term is required to support negative dissipations, which occur when the system reaches a quasi-stationary state of the surface near the neck in later stages characterized by small fluctuations.
 This flux is then inserted in the iteration again in \cref{eq:estimate-normal-displacement} for the grain boundary nodes and \cref{eq:estimate-neck-tangential-displacement} for the neck node till the fixed point is reached.
 \begin{equation}
-    \Estimated{\Flux_{i+1}} =
+    \Estimated{\Flux}_{i+1} =
     \sign \Estimated{\Dissipation_i} \cdot
     \sqrt{
         \frac{\MolarVolume{\VacancyConcentration}^\Standard}{\GasConstant\Temperature}
         \frac{\DiffusionCoefficient_{\Upper}}{\SurfaceDistance_{\Upper}}
-        \Abs{\Estimated{\Dissipation_i}}
+        \Abs{\Estimated{\Dissipation}_i}
     }
     \label{eq:estimated-neck-new-flux}
 \end{equation}

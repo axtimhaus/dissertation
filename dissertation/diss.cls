@@ -5,9 +5,9 @@
     % DIV=14,
     listof=totoc,
     bibliography=totoc,
-    twoside,
-    open=right,
-    BCOR=5mm,
+    % twoside
+    % open=right,
+    % BCOR=5mm,
     approved
 ]{tubaf-thesis}
 \publishers{}
@@ -40,9 +40,9 @@
 \usepackage{symbols}
 \DeclareMathOperator{\sign}{sign}
 
-\usepackage[a-2b]{pdfx}
-
-\usepackage[hidelinks]{hyperref}
+\usepackage[a-2b,pdf17]{pdfx}
+\newcommand\inputencodingname{utf8}
+\hypersetup{hidelinks}
 \usepackage[noabbrev]{cleveref}
 \crefformat{pleq}{equations~(#2#1#3)}
 

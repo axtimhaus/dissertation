@@ -16,7 +16,10 @@ for f in FILES:
     ):
         for t in produces:
             result = subprocess.run(
-                ["inkscape", "-D", "-d", "600", "-o", str(t), str(source)], capture_output=True, text=True, check=False
+                ["inkscape", "-D", "-T", "-d", "600", "-o", str(t), str(source)],
+                capture_output=True,
+                text=True,
+                check=False,
             )
 
             print(result.stdout)
